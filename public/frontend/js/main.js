@@ -558,3 +558,14 @@
         preloader();
     });
 })(jQuery);
+
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.confirm-navigation').forEach(function (element) {
+        element.addEventListener('click', function (event) {
+            var confirmNavigation = confirm("Are you sure you want to proceed?");
+            if (!confirmNavigation) {
+                event.preventDefault();
+            }
+        });
+    });
+});

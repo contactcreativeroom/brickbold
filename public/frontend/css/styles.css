@@ -43,7 +43,7 @@
   --Heading: #2c2e33;
   --Note: #a8abae;
   --Note-2: #8e8e93;
-  --Primary: #f1913d;
+  --Primary: #DF4234;
   --Sub-primary-1: #fef7f1;
   --Sub-primary-2: rgba(241, 145, 61, 0.15);
   --Sub-primary-3: rgba(241, 145, 61, 0.1);
@@ -3215,7 +3215,7 @@ form label {
   transition: all 0.4s ease;
 }
 .page-layout .main-content-inner {
-  padding: 111px 56px 0;
+  padding: 60px 56px 0;
 }
 .page-layout .main-content-inner.style-2 {
   width: 100%;
@@ -4427,7 +4427,7 @@ tr {
   margin-bottom: 26px;
 }
 .wg-testimonial .ratings i {
-  color: rgb(255, 168, 0);
+  color: #DF4234;
 }
 .wg-testimonial .description {
   margin-bottom: 21px;

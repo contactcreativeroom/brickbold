@@ -62,11 +62,11 @@ class Helper
     }
 
     public static function universalDateTimeFormat(){
-        return 'd/m/Y, H:i';
+        return 'F j, Y, H:i';
     }
 
     public static function universalDateFormat(){
-        return 'd/m/Y';
+        return 'F j, Y';
     }
 
     public static function uploadImage($image, $model, $directory, $isDirectoryID, $operation, $columnName ,$isColumn = false, $isThumb = false, $deletePrevImage = true, $subFolderID = false){
@@ -440,33 +440,64 @@ class Helper
         }
     }
 
-    public static function getCoverImage($folder=null, $image=null) {
-        $noImagePath = url('backend/assets/img/pages/profile-banner.png');
-        if (file_exists(public_path($folder.'/'.$image)) && !is_null($image)) {
-            return url($folder.'/'.$image);
-        } else {
-            return $noImagePath;
-        }
-    }
-
-    public static function getLogo($dark=false) {
-        if($dark){
-            return url('images/logo/logo-main.png');
+   
+    public static function getLogo($light=false) {
+        if($light){
+            return url('images/logo/logo-light.png');
         }
         return url('images/logo/logo-main.png');
     }
 
-    public static function percentage($totalNumber=0,$getNumber=0) {
-        $percentage = 0;
-        if($totalNumber > 0 && $getNumber > 0){
-            $percentage = ($getNumber*100)/$totalNumber;
+    public static function divider($number_of_digits) {
+        $tens="1";
+    
+      if($number_of_digits>8)
+        return 10000000;
+    
+      while(($number_of_digits-1)>0)
+      {
+        $tens.="0";
+        $number_of_digits--;
+      }
+      return $tens;
+    }
+
+    public static function priceFormat($num){       
+        
+        $ext="";//thousand,lac, crore
+        $number_of_digits = strlen($num); 
+        if($number_of_digits>3) {
+            if($number_of_digits%2!=0)
+                $divider = self::divider($number_of_digits-1);
+            else
+                $divider = self::divider($number_of_digits);
+                
+        } else{            
+            $divider=1;
         }
-        return round($percentage,2);
+        $fraction=$num/$divider;
+        $fraction=number_format($fraction,2);
+        if($number_of_digits==4 ||$number_of_digits==5)
+            $ext="k";
+        if($number_of_digits==6 ||$number_of_digits==7)
+            $ext="Lac";
+        if($number_of_digits==8 ||$number_of_digits==9)
+            $ext="Cr";
+        
+          
+        $priceData =  $fraction." ".$ext;
+            
+        return $priceData;
     }
 
     public static function pages() {
         $rows = Page::where('status', 1)->latest()->get();
         return $rows;
     }    
+
+    public static function propertyid($number) {
+        $formattedNumber = str_pad($number, 4, '0', STR_PAD_LEFT);
+        return $formattedNumber; 
+    }  
  
 }

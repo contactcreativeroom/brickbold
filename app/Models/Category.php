@@ -44,23 +44,5 @@ class Category extends Model
         return $count ? "{$slug}-{$count}" : $slug;
     }
 
-    public function parentCategory()
-    {
-        return $this->belongsTo(Category::class, 'p_category');
-    }
-
-    public function childCategories()
-    {
-        return $this->hasMany(Category::class, 'p_category');
-    }
-
-    public function services()
-    {
-        return $this->hasMany(Service::class, 'category_id')->with('vendor', 'rating', 'booking');
-    }
-
-    public function servicesWithLimit()
-    {
-        return $this->hasMany(Service::class, 'category_id')->with('vendor')->limit(config('constants.API_RECORDS.services'));
-    }
+     
 }

@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 //use Laravel\Sanctum\HasApiTokens;
 use Laravel\Passport\HasApiTokens;
+use Illuminate\Auth\Notifications\ResetPassword;
+use App\Notifications\AdminResetPassword;
 
 class Admin extends Authenticatable
 {
@@ -46,6 +48,9 @@ class Admin extends Authenticatable
         'password' => 'hashed',
     ];
 
-    
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new AdminResetPassword($token));
+    }
     
 }

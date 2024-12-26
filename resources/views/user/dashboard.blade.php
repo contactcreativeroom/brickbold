@@ -137,7 +137,7 @@
                                             <td>
                                                 <div class="listing-box">
                                                     <div class="images">
-                                                        <img src="images/home/house-db-1.jpg" alt="images">
+                                                        <img src="{{ url('frontend/images/home/house-db-1.jpg')}}" alt="images">
                                                     </div>
                                                     <div class="content">
                                                         <div class="title"><a href="property-detail-v1.html"
@@ -193,7 +193,7 @@
                                             <td>
                                                 <div class="listing-box">
                                                     <div class="images">
-                                                        <img src="images/home/house-db-2.jpg" alt="images">
+                                                        <img src="{{ url('frontend/images/home/house-db-2.jpg')}}" alt="images">
                                                     </div>
                                                     <div class="content">
                                                         <div class="title"><a href="property-detail-v1.html"
@@ -249,7 +249,7 @@
                                             <td>
                                                 <div class="listing-box">
                                                     <div class="images">
-                                                        <img src="images/home/house-db-3.jpg" alt="images">
+                                                        <img src="{{ url('frontend/images/home/house-db-3.jpg')}}" alt="images">
                                                     </div>
                                                     <div class="content">
                                                         <div class="title"><a href="property-detail-v1.html"
@@ -305,7 +305,7 @@
                                             <td>
                                                 <div class="listing-box">
                                                     <div class="images">
-                                                        <img src="images/home/house-db-4.jpg" alt="images">
+                                                        <img src="{{ url('frontend/images/home/house-db-4.jpg')}}" alt="images">
                                                     </div>
                                                     <div class="content">
                                                         <div class="title"><a href="property-detail-v1.html"
@@ -360,7 +360,7 @@
                                             <td>
                                                 <div class="listing-box">
                                                     <div class="images">
-                                                        <img src="images/home/house-db-5.jpg" alt="images">
+                                                        <img src="{{ url('frontend/images/home/house-db-5.jpg')}}" alt="images">
                                                     </div>
                                                     <div class="content">
                                                         <div class="title"><a href="property-detail-v1.html"
@@ -473,7 +473,7 @@
                             <li class="mess-item">
                                 <div class="user-box">
                                     <div class="avatar">
-                                        <img src="images/avatar/avt-png9.png" alt="avt">
+                                        <img src="{{ url('frontend/images/avatar/avt-png9.png')}}" alt="avt">
                                     </div>
                                     <div class="content">
                                         <div class="name fw-6">Themesflat</div>
@@ -486,7 +486,7 @@
                             <li class="mess-item">
                                 <div class="user-box">
                                     <div class="avatar">
-                                        <img src="images/avatar/avt-png10.png" alt="avt">
+                                        <img src="{{ url('frontend/images/avatar/avt-png10.png')}}" alt="avt">
                                     </div>
                                     <div class="content">
                                         <div class="name fw-6">ThemeMu</div>
@@ -500,7 +500,7 @@
                             <li class="mess-item">
                                 <div class="user-box">
                                     <div class="avatar">
-                                        <img src="images/avatar/avt-png11.png" alt="avt">
+                                        <img src="{{ url('frontend/images/avatar/avt-png11.png')}}" alt="avt">
                                     </div>
                                     <div class="content">
                                         <div class="name fw-6">Cameron Williamson</div>
@@ -512,7 +512,7 @@
                             <li class="mess-item">
                                 <div class="user-box">
                                     <div class="avatar">
-                                        <img src="images/avatar/avt-png12.png" alt="avt">
+                                        <img src="{{ url('frontend/images/avatar/avt-png12.png')}}" alt="avt">
                                     </div>
                                     <div class="content">
                                         <div class="name fw-6">Esther Howard</div>
@@ -530,7 +530,7 @@
                             <li class="mess-item">
                                 <div class="user-box">
                                     <div class="avatar">
-                                        <img src="images/avatar/avt-png13.png" alt="avt">
+                                        <img src="{{ url('frontend/images/avatar/avt-png13.png')}}" alt="avt">
                                     </div>
                                     <div class="content">
                                         <div class="name fw-6">Bessie Cooper</div>
@@ -549,7 +549,7 @@
                             <li class="mess-item">
                                 <div class="user-box">
                                     <div class="avatar">
-                                        <img src="images/avatar/avt-png14.png" alt="avt">
+                                        <img src="{{ url('frontend/images/avatar/avt-png14.png')}}" alt="avt">
                                     </div>
                                     <div class="content">
                                         <div class="name fw-6">Annette Black</div>
@@ -569,7 +569,7 @@
                             <li class="mess-item">
                                 <div class="user-box">
                                     <div class="avatar">
-                                        <img src="images/avatar/avt-png15.png" alt="avt">
+                                        <img src="{{ url('frontend/images/avatar/avt-png15.png')}}" alt="avt">
                                     </div>
                                     <div class="content">
                                         <div class="name fw-6">Ralph Edwards</div>
@@ -590,7 +590,7 @@
                             <li class="mess-item">
                                 <div class="user-box">
                                     <div class="avatar">
-                                        <img src="images/avatar/avt-png16.png" alt="avt">
+                                        <img src="{{ url('frontend/images/avatar/avt-png16.png')}}" alt="avt">
                                     </div>
                                     <div class="content">
                                         <div class="name fw-6">Jerome Bell</div>
@@ -611,7 +611,7 @@
                             <li class="mess-item">
                                 <div class="user-box">
                                     <div class="avatar">
-                                        <img src="images/avatar/avt-png17.png" alt="avt">
+                                        <img src="{{ url('frontend/images/avatar/avt-png17.png')}}" alt="avt">
                                     </div>
                                     <div class="content">
                                         <div class="name fw-6">Albert Flores</div>
@@ -636,15 +636,7 @@
             </div>
             <div class="row">
                 <div class="col-xl-9">
-                    <!-- .footer-dashboard -->
-                    <div class="footer-dashboard">
-                        <p>Copyright © 2024 Popty</p>
-                        <ul class="list">
-                            <li><a href="#">Privacy</a></li>
-                            <li><a href="#">Terms</a></li>
-                            <li><a href="#">Support</a></li>
-                        </ul>
-                    </div> <!-- .footer-dashboard -->
+                    @include('user.layouts.footer')
                 </div>
             </div>
 

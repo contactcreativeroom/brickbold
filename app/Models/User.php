@@ -23,11 +23,15 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'password',
-        'dob',
-        'country',
-        'address',
         'profile_image',
+        'dob',
+        'phone',
+        'address',
+        'country',
+        'password',
+        'password_confirmation',
+        'token',
+        'status',
     ];
 
     /**
@@ -57,55 +61,14 @@ class User extends Authenticatable
         return Helper::getProfileImage('storage/user/profile/'.$this->id, $this->profile_image);
     } 
 
-    function booked(){
-        return $this->hasMany(Booking::class)->with('service')->latest('created_at');
-    }
-
-    public function bookingLatestLimit()
+    public function Properties()
     {
-        return $this->hasMany(Booking::class)->latest('created_at')->limit(config('constants.ADMIN_RECORDS.bookings'));
-    }
-    
-    function bookedDetail(){ 
-        return $this->hasMany(Booking::class)->with('service')->latest('created_at');
+        return $this->hasMany(Property::class);
     }
 
-    public function rating()
+    public function Property()
     {
-        return $this->hasMany(Rating::class);
+        return $this->hasOne(Property::class);
     }
-    public function chats()
-    {
-        return $this->hasMany(Chat::class);
-    }
-
-    function wishlists(){
-        return $this->hasMany(Wishlist::class);
-    }
-
-    public function vendorChats($vendorId)
-    {
-        return $this->chats()->where('vendor_id', $vendorId)->get();
-    } 
-
-    public function getChatsGroupedByVendor()
-    {
-        $chatsGroupedByVendor = $this->chats()->with('vendor')->get()->groupBy('vendor_id');
-
-        $formattedChats = [];
-        foreach ($chatsGroupedByVendor as $vendorId => $chats) {
-            $vendor = $chats->first()->vendor; 
-            $formattedChats[$vendorId] = $vendor->toArray(); 
-            $formattedChats[$vendorId]["chat"] = $chats->toArray();
-
-            /*$formattedChats[$vendorId]["chat"] = $chats->map(function ($chat) {
-                return [
-                    'vendor_id' => $chat->vendor_id,
-                    'message' => $chat->message,
-                    'created_at' => $chat->created_at,
-                ];
-            })->toArray();*/
-        }
-        return $formattedChats;
-    }
+      
 }

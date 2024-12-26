@@ -88,11 +88,11 @@ class AuthController extends Controller
                     $admin->save();
                     event(new PasswordReset($admin));
                 }
-            );
+            );            
 
             if ($status === Password::PASSWORD_RESET) {
                 Helper::flashMessage(true, 'Admin password reset successfully!'); 
-                return redirect()->route('password.reset-success')->with('status', __($status));
+                return redirect()->route('admin.password.reset-success')->with('status', __($status));
             } else {
                 Helper::flashMessage(false, 'Something went wrong with the admin password reset'); 
                 return back()->withErrors(['email' => [__($status)]]);

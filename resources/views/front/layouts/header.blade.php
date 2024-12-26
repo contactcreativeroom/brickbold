@@ -6,147 +6,93 @@
                 <div class="col-12">
                     <div class="header-inner-wrap">
                         <div class="header-logo">
-                            <a href="index.html" class="site-logo">
-                                <img id="logo_header" alt="" src="{{url('frontend/images/logo/logo%402x.png')}}">
+                            <a href="{{route('home')}}" class="site-logo">
+                                <img id="logo_header" alt="" src="{{ App\Helper\Helper::getLogo(); }}">
                             </a>
                         </div>
                         <nav class="main-menu">
                             <ul class="navigation ">
-                                <li class="has-child current-menu"><a href="#">Home</a>
-                                    <ul class="submenu">
-                                        <li class="current-item"><a href="index.html">Home Page 01</a></li>
-                                        <li><a href="home02.html">Home Page 02</a></li>
-                                        <li><a href="home03.html">Home Page 03</a></li>
-                                        <li><a href="home04.html">Home Page 04</a></li>
-                                        <li><a href="home05.html">Home Page 05</a></li>
-                                    </ul>
-                                </li>
-                                <li class="has-child style-2"><a href="#">Listing</a>
+                                <li class="current-menu"><a href="{{route('about')}}">About Us</a></li>  
+
+                                <li class="has-child style-2"><a href="#">Buy</a>
                                     <ul class="submenu">
                                         <li>
-                                            <a href="#">Layout</a>
+                                            <a href="#">Popular</a>
                                             <ul class="submenu2">
                                                 <li>
-                                                    <a href="property-grid-full-width.html">Grid Style -
-                                                        Full Width </a>
+                                                    <a href="property-grid-full-width.html">Ready to Move</a>
                                                 </li>
                                                 <li>
-                                                    <a href="property-gird-top-search.html">Grid Style - Top
-                                                        Search </a>
+                                                    <a href="property-gird-top-search.html">Owner Properties</a>
                                                 </li>
                                                 <li>
-                                                    <a href="property-gird-left-sidebar.html">Grid Style -
-                                                        Sidebar Left </a>
+                                                    <a href="property-gird-left-sidebar.html">Budget Homes</a>
                                                 </li>
                                                 <li>
-                                                    <a href="property-gird-right-sidebar.html">Grid Style -
-                                                        Sidebar Right </a>
+                                                    <a href="property-gird-right-sidebar.html">Premium Homes</a>
                                                 </li>
                                                 <li>
-                                                    <a href="property-list-full-width.html">List Style -
-                                                        Full
-                                                        Width </a>
-                                                </li>
-                                                <li>
-                                                    <a href="property-list-top-search.html">List Style -
-                                                        Top
-                                                        Search
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="property-list-left-sidebar.html">List Style -
-                                                        Sidebar
-                                                        Left </a>
-                                                </li>
-                                                <li>
-                                                    <a href="property-list-right-sidebar.html">List Style -
-                                                        Sidebar
-                                                        Right </a>
-                                                </li>
+                                                    <a href="property-list-full-width.html">Newly Launched</a>
+                                                </li>                                                 
                                             </ul>
                                         </li>
                                         <li>
-                                            <a href="#">Feature</a>
+                                            <a href="#">Property Types</a>
                                             <ul class="submenu2">
                                                 <li>
-                                                    <a href="property-half-map-grid.html">Property Half Map Grid
-                                                    </a>
+                                                    <a href="property-half-map-grid.html">Residential</a>
                                                 <li>
-                                                    <a href="property-half-map-list.html">Property Half Map List
-                                                    </a>
+                                                    <a href="property-half-map-list.html">House For Sell</a>
                                                 </li>
                                                 <li>
-                                                    <a href="property-half-top-map.html">Property Half Map Top
-                                                    </a>
+                                                    <a href="property-half-top-map.html">Villa For Sell</a>
                                                 </li>
                                                 <li>
-                                                    <a href="property-filter-popup.html">Property Filter Popup
-                                                    </a>
+                                                    <a href="property-filter-popup.html">Apartment</a>
                                                 </li>
                                                 <li>
-                                                    <a href="property-filter-popup-left.html">Property Filter
-                                                        Popup Left </a>
+                                                    <a href="property-filter-popup-left.html">Commercial</a>
                                                 </li>
                                                 <li>
-                                                    <a href="property-filter-popup-right.html">Property Filter
-                                                        Popup Right </a>
+                                                    <a href="property-filter-popup-right.html">Commercial Office Space</a>
+                                                </li>
+                                                <li>
+                                                    <a href="property-filter-popup-right.html">Commercial Land</a>
                                                 </li>
 
                                             </ul>
                                         </li>
                                         <li>
-                                            <a href="#">Listing Details</a>
+                                            <a href="#">Budget</a>
                                             <ul class="submenu2">
-                                                <li><a href="property-detail-v1.html">Property Details 1</a>
+                                                <li><a href="property-detail-v1.html">Under ₹ 50 Lac</a>
                                                 </li>
-                                                <li><a href="property-detail-v2.html">Property Details 2</a>
+                                                <li><a href="property-detail-v2.html">50 Lac - ₹ 1 Cr</a>
                                                 </li>
-                                                <li><a href="property-detail-v3.html">Property Details 3</a>
+                                                <li><a href="property-detail-v3.html">1 Cr - ₹ 2 Cr</a>
                                                 </li>
-                                                <li><a href="property-detail-v4.html">Property Details 4</a>
+                                                <li><a href="property-detail-v4.html">2 Cr - ₹ 5 Cr</a>
                                                 </li>
-                                                <li><a href="property-detail-v5.html">Property Details 5</a>
+                                                <li><a href="property-detail-v5.html">Above ₹ 10 Cr</a>
                                                 </li>
                                             </ul>
                                         </li>
                                     </ul>
-                                </li>
-                                <li class="has-child"><a href="#">Pages</a>
+                                </li>  
+
+                                <li class="has-child style-2"><a href="#">Rent</a>
                                     <ul class="submenu">
-                                        <li class="has-child"><a href="#">Agents</a>
-                                            <ul class="submenu">
-                                                <li>
-                                                    <a href="agents.html">Agents</a>
-                                                </li>
-                                                <li>
-                                                    <a href="agents-details.html">Agents Details</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="has-child"><a href="#">Agencies</a>
-                                            <ul class="submenu">
-                                                <li><a href="agency-grid.html">Agencies
-                                                        Grid</a></li>
-                                                <li><a href="agency-list.html">Agencies
-                                                        List</a></li>
-                                                <li><a href="agency-details.html">Agencies
-                                                        Detail</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="home-loan-process.html">Home Loan Process</a></li>
-                                        <li><a href="career.html">Career</a></li>
-                                        <li><a href="faq.html">Faq's</a></li>
-                                        <li><a href="dashboard.html">Dashboard</a></li>
+                                        <li class="current-item"><a href="index.html">Home Page 01</a></li>
                                     </ul>
                                 </li>
-                                <li class="has-child "><a href="#">Blog</a>
+
+                                <li class="has-child style-2"><a href="#">Sell</a>
                                     <ul class="submenu">
-                                        <li><a href="blog-list.html">Blog List</a></li>
-                                        <li><a href="blog-grid.html">Blog Grid</a></li>
-                                        <li><a href="blog-details.html">Blog Detail</a></li>
+                                        <li class="current-item"><a href="index.html">Home Page 01</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="contact.html">Contact</a></li>
+
+                                <li><a href="{{route('contact')}}">Contact</a></li>
                             </ul>
                         </nav>
                         <div class="header-right">
@@ -161,8 +107,9 @@
                                     </svg>
 
                                 </div>
-                                <p>(603) 555-0123</p>
+                                <p>0161-4048145</p>
                             </div>
+                            @auth('user')
                             <div class="box-user tf-action-btns">
                                 <div class="user ">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -174,11 +121,11 @@
                                     </svg>
                                 </div>
                                 <div class="name">
-                                    Themesflat
+                                    Johan
                                     <i class="icon-CaretDown"></i>
                                 </div>
                                 <div class=" menu-user">
-                                    <a class="dropdown-item" href="dashboard.html">
+                                    <a class="dropdown-item" href="{{route('user.dashboard')}}">
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -199,7 +146,7 @@
                                                 stroke-linejoin="round" />
                                         </svg>
                                         Dashboards</a>
-                                    <a class="dropdown-item" href="my-profile.html">
+                                    <a class="dropdown-item" href="{{route('user.profile')}}">
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -240,7 +187,7 @@
                                                 stroke-linejoin="round" />
                                         </svg>
                                         My profile</a>
-                                    <a class="dropdown-item" href="my-package.html">
+                                    <a class="dropdown-item" href="{{route('user.package')}}">
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -255,7 +202,7 @@
                                                 stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
                                         My package</a>
-                                    <a class="dropdown-item" href="my-favorites.html">
+                                    <a class="dropdown-item" href="{{route('user.favorites')}}">
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -272,23 +219,8 @@
                                                 stroke-linejoin="round" />
                                         </svg>
                                         My favorites (1)</a>
-                                    <a class="dropdown-item" href="my-save-search.html">
-                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M8.91797 16.6666H3.33464C2.89261 16.6666 2.46868 16.491 2.15612 16.1785C1.84356 15.8659 1.66797 15.442 1.66797 15V4.16662C1.66797 3.7246 1.84356 3.30067 2.15612 2.98811C2.46868 2.67555 2.89261 2.49996 3.33464 2.49996H6.58464C6.86337 2.49723 7.13835 2.56445 7.38438 2.69547C7.63042 2.8265 7.83967 3.01715 7.99297 3.24996L8.66797 4.24996C8.81973 4.4804 9.02632 4.66956 9.26922 4.80046C9.51212 4.93136 9.78371 4.99991 10.0596 4.99996H16.668C17.11 4.99996 17.5339 5.17555 17.8465 5.48811C18.159 5.80067 18.3346 6.2246 18.3346 6.66662V10.0833"
-                                                stroke="#A8ABAE" stroke-width="1.4" stroke-linecap="round"
-                                                stroke-linejoin="round" />
-                                            <path d="M17.5013 17.5L15.918 15.9166" stroke="#A8ABAE"
-                                                stroke-width="1.4" stroke-linecap="round"
-                                                stroke-linejoin="round" />
-                                            <path
-                                                d="M14.168 16.6666C15.5487 16.6666 16.668 15.5473 16.668 14.1666C16.668 12.7859 15.5487 11.6666 14.168 11.6666C12.7873 11.6666 11.668 12.7859 11.668 14.1666C11.668 15.5473 12.7873 16.6666 14.168 16.6666Z"
-                                                stroke="#A8ABAE" stroke-width="1.4" stroke-linecap="round"
-                                                stroke-linejoin="round" />
-                                        </svg>
-                                        My save searches</a>
-                                    <a class="dropdown-item" href="review.html">
+                                     
+                                    <a class="dropdown-item" href="{{route('user.reviews')}}">
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -305,7 +237,7 @@
                                                 stroke-linejoin="round" />
                                         </svg>
                                         Reviews</a>
-                                    <a class="dropdown-item" href="my-property.html">
+                                    <a class="dropdown-item" href="{{route('user.properties')}}">
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -329,7 +261,7 @@
                                         </svg>
                                         My properties
                                     </a>
-                                    <a class="dropdown-item " href="add-property.html">
+                                    <a class="dropdown-item " href="{{route('user.property.add')}}">
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -343,24 +275,8 @@
                                             <path d="M6.66797 15H7.5013" stroke="#A8ABAE" stroke-width="1.4"
                                                 stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
-                                        Add property</a>
-                                    <div class="dropdown-item ">
-                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M15.749 6C15.749 6.99456 15.3539 7.94839 14.6507 8.65165C13.9474 9.35491 12.9936 9.75 11.999 9.75C11.0044 9.75 10.0506 9.35491 9.34735 8.65165C8.64409 7.94839 8.249 6.99456 8.249 6C8.249 5.00544 8.64409 4.05161 9.34735 3.34835C10.0506 2.64509 11.0044 2.25 11.999 2.25C12.9936 2.25 13.9474 2.64509 14.6507 3.34835C15.3539 4.05161 15.749 5.00544 15.749 6ZM4.5 20.118C4.53213 18.1504 5.33634 16.2742 6.73918 14.894C8.14202 13.5139 10.0311 12.7405 11.999 12.7405C13.9669 12.7405 15.856 13.5139 17.2588 14.894C18.6617 16.2742 19.4659 18.1504 19.498 20.118C17.1454 21.1968 14.5871 21.7535 11.999 21.75C9.323 21.75 6.783 21.166 4.5 20.118Z"
-                                                stroke="#A8ABAE" stroke-width="1.5" stroke-linecap="round"
-                                                stroke-linejoin="round" />
-                                        </svg>
-                                        <div class="d-flex wrap-login">
-                                            <a href="#modalLogin" data-bs-toggle="modal">
-                                                login</a>
-                                            <span>/</span>
-                                            <a href="#modalRegister" data-bs-toggle="modal">
-                                                register </a>
-                                        </div>
-                                    </div>
-                                    <a class="dropdown-item" href="index.html">
+                                        Add property</a> 
+                                    <a class="dropdown-item" href="{{route('user.logout')}}">
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -377,8 +293,28 @@
                                 </div>
                             </div>
                             <div class="btn-add">
-                                <a class="tf-btn style-border pd-23" href="add-property.html">Add property</a>
+                                <a class="tf-btn style-border pd-23" href="{{route('user.property.add')}}">Add property</a>
                             </div>
+                            @endauth
+
+                            @guest('user')
+                                <div class="box-user tf-action-btns">
+                                    <div class="user ">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M15.749 6C15.749 6.99456 15.3539 7.94839 14.6507 8.65165C13.9474 9.35491 12.9936 9.75 11.999 9.75C11.0044 9.75 10.0506 9.35491 9.34735 8.65165C8.64409 7.94839 8.249 6.99456 8.249 6C8.249 5.00544 8.64409 4.05161 9.34735 3.34835C10.0506 2.64509 11.0044 2.25 11.999 2.25C12.9936 2.25 13.9474 2.64509 14.6507 3.34835C15.3539 4.05161 15.749 5.00544 15.749 6ZM4.5 20.118C4.53213 18.1504 5.33634 16.2742 6.73918 14.894C8.14202 13.5139 10.0311 12.7405 11.999 12.7405C13.9669 12.7405 15.856 13.5139 17.2588 14.894C18.6617 16.2742 19.4659 18.1504 19.498 20.118C17.1454 21.1968 14.5871 21.7535 11.999 21.75C9.323 21.75 6.783 21.166 4.5 20.118Z"
+                                                stroke="#2C2E33" stroke-width="1.5" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                        </svg>
+                                    </div>
+                                    <div class="d-flex wrap-login">
+                                        <a href="#modalLogin" data-bs-toggle="modal">login</a>
+                                        <span>/</span>
+                                        <a href="#modalRegister" data-bs-toggle="modal">register </a>
+                                    </div>
+                                </div>
+                            @endguest
                             <div class="mobile-button" data-bs-toggle="offcanvas" data-bs-target="#menu-mobile"
                                 aria-controls="menu-mobile">
                                 <i class="icon-menu"></i>

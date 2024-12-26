@@ -34,7 +34,7 @@
 							<a href="{{route('admin.login')}}" class="link-primary fw-bolder">Sign in here</a>
 						</h6>
                         <form class="form w-100" novalidate="novalidate" id="kt_new_password_form" method="POST" 
-						action="{{ route('password.reset', ['token' => request()->token, 'email' => request()->email ]) }}">
+						action="{{ route('admin.password.reset', ['token' => request()->token, 'email' => request()->email ]) }}">
 						 
 						{{ csrf_field() }}
 							<!--begin::Heading-->
@@ -49,7 +49,7 @@
 									<!--end::Label-->
 									<!--begin::Input wrapper-->
 									<div class="position-relative mb-3">
-										<input class="form-control form-control-lg form-control-solid @if($errors->has('password')) is-invalid @endif"" type="password" placeholder="" name="password" autocomplete="off" />
+										<input class="form-control form-control-lg form-control-solid @if($errors->has('password')) is-invalid @endif" type="password" placeholder="" name="password" autocomplete="off" />
 										@if ($errors->has('password'))
 										<div class="fv-plugins-message-container invalid-feedback">
 											<div>{{ $errors->first('password') }}</div>

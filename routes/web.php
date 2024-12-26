@@ -9,8 +9,14 @@ use App\Http\Controllers\Admin\Dashboard;
 use App\Http\Controllers\Admin\MetaDetailController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\SubAdminController;
+
 use App\Http\Controllers\Front\HomeController;
+use App\Http\Controllers\Front\PropertyController as FrontPropertyController;
+use App\Http\Controllers\User\AuthController as UserAuthController;
 use App\Http\Controllers\User\DashboardController;
+use App\Http\Controllers\User\FavoriteController;
+use App\Http\Controllers\User\PropertyController;
+use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -38,19 +44,45 @@ Route::get('/trash', function () {
     echo"Cache Cleard Successfully!";
 }); 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/properties', [HomeController::class, 'properties'])->name('properties');
+Route::get('/about', [HomeController::class, 'about'])->name('about');
+Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 
+Route::get('/properties', [FrontPropertyController::class, 'properties'])->name('properties');
+Route::get('/property/{id}', [FrontPropertyController::class, 'property'])->name('property');
+
+Route::post('/login', [UserAuthController::class, 'login'])->name('login');
+Route::post('/register', [UserAuthController::class, 'register'])->name('register');
+Route::any('/forgot/password', [UserAuthController::class, 'forgotPassword'])->name('forgot.password');
+Route::match(['get','post'], '/password-reset/{token}', [UserAuthController::class, 'passwordReset'])->name('password.reset');
+Route::get('/reset/success', [UserAuthController::class, 'passwordResetSuccess'])->name('password.reset-success'); 
 Route::group(['prefix' => 'user'], function () {
+    Route::get('/logout', [UserAuthController::class, 'logout'])->name('user.logout');
+    Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
+    Route::any('/profile/edit', [UserController::class, 'editProfile'])->name('user.profile.edit');
+    Route::any('/change/password', [UserController::class, 'changePassword'])->name('user.change.password');
+
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('user.dashboard');
+    Route::get('/my-package', [UserController::class, 'package'])->name('user.package');
+    Route::get('/property/favorite/add/{id}', [FavoriteController::class, 'add'])->name('user.favorite.add');
+    Route::get('/property/favorites', [UserController::class, 'favorites'])->name('user.favorites');
+    Route::get('/my-reviews', [UserController::class, 'reviews'])->name('user.reviews');
+
+    Route::get('/properties', [PropertyController::class, 'list'])->name('user.properties');
+    Route::get('/property/add', [PropertyController::class, 'add'])->name('user.property.add');
+    Route::get('/property/{id}', [PropertyController::class, 'edit'])->name('user.property.edit');
+    Route::post('/property/image/delete', [PropertyController::class, 'deleteImage'])->name('user.property.image.delete');
+    Route::post('/property/post', [PropertyController::class, 'postData'])->name('user.property.post');
+    Route::get('/property/sold/{id}', [PropertyController::class, 'changeStatusSold'])->name('user.property.sold');
+    Route::get('/property/enquery', [PropertyController::class, 'enquery'])->name('user.property.enquery');
 });
 
 Route::group(['prefix' => 'admin'], function () {
     Route::group(['middleware' => 'admin.guest'], function () {
         Route::any('/', [AuthController::class, 'login'])->name('admin.login');
         Route::get('/login', [AuthController::class, 'login']);
-        Route::match(['get','post'], '/password-reset/{token}', [AuthController::class, 'passwordReset'])->name('password.reset');
         Route::any('/forgot/password', [AuthController::class, 'forgotPassword'])->name('admin.forgot.password');
-        Route::get('/reset/success', [AuthController::class, 'passwordResetSuccess'])->name('password.reset-success');    
+        Route::match(['get','post'], '/password-reset/{token}', [AuthController::class, 'passwordReset'])->name('admin.password.reset');
+        Route::get('/reset/success', [AuthController::class, 'passwordResetSuccess'])->name('admin.password.reset-success');    
     }); 
      
     Route::group(['middleware' => ['admin.auth']], function () {

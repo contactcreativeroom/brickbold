@@ -18,7 +18,66 @@ return [
         1 =>  'Active',
         0 =>  'In-active'
     ],
-   
+    'IS_NEGOTIABLE' => [
+        1 =>  'Negotiable',
+        2 =>  'Fixed Price'
+    ],
+    'AVAILABILITY' => [
+        1 =>  'Under Construction',
+        2 =>  'Ready to move',
+        3 =>  'Plot/Land'
+    ],
+    'OWNERSHIP' => [
+        1 =>  'Free Hold',
+        2 =>  'Lease Hold'
+    ],
+    'BUILD_YEAR' => [
+        1 =>  'Plot/Land',
+        2 =>  'Newly',
+        3 =>  'Less Then 5 Years',
+        4 =>  'Less Then 15 to 20 Years',
+        5 =>  'Less Then 10 to 15 Years',
+        6 =>  'Above 20 Years'
+    ],  
+    'IS_NEGOTIABLE' => [
+        1 =>  'Fixed Price',
+        2 =>  'Negotiable Price'
+    ], 
+    'TYPE' => [
+        1 =>  'Apartment',
+        2 =>  'Commercial',
+        3 =>  'Residential'
+    ],
+    'FOR_TYPE' => [
+        1 =>  'For Sell',
+        2 =>  'For Rent'
+    ],
+    'PROPERTY_DETAIL' => [
+        1 =>  'House',
+        2 =>  'Villa',
+        3 =>  'Flat',
+        4 =>  'Plot/Land',
+        5 =>  'PG'
+    ], 
+    'LOOP5' => ['1','2','3','4','5','5+'],
+    'FACING' => ['East','North-East','North-West','South-East','South-West'],
+    'FURNISHED_DETAIL' => [
+        'Furnished',
+        'UnFurnished',
+        'Semi-Furnished'
+    ],
+    'APPROVED_BY' => [
+        'Punjab Urban Development Authority(PUDA)',
+        'Geater Ludhiana Area Development Authority(GLADA)', 
+        'Geater Mohali Area Development Authority (GMADA)', 
+        'RWA/Co-Operative Housing Society', 
+        'City Municipal Corporation'
+    ],
+    'PROPERTY_STATUSES' => [
+        1 =>  'Approved',
+        2 =>  'Pending',
+        3 =>  'Sold',
+    ],
     'TICKET_STATUSES' => [
         'Assigned',
         'Waiting',
@@ -42,16 +101,14 @@ return [
         'name' => 'TurQuoise'
     ],
 
-
     'CONTACT' => [
-        'country_code' => '+966',
-        'phone' => '570198911',
-        'email' => 'contactcreativeroom@gmail.com',
+        'country_code' => '+0161',
+        'phone' => '4048145',
+        'email' => 'support@brickbold.com',
     ],    
 
     'SMS' => [
-        'mobile' => '+96179100381',
-        
+        'mobile' => '+96179100381',        
     ],
     
     // this array is for sending emails
@@ -62,8 +119,8 @@ return [
     ], 
 
     'CURRENCIES' => [
-        'name' => "USD", 
-        'symbol' => "$"
+        'name' => "INR", 
+        'symbol' => "₹"
     ],
 
     'DIR' => [
@@ -130,35 +187,7 @@ return [
         'Terms & Conditions' => 7,
         'FAQ' => 8,
         'Gallery' => 9,
-    ], 
-    'DURATIONS' => [
-        15 =>  '15 minutes',
-        30 =>  '30 minutes',
-        45 =>  '45 minutes',
-        60 =>  '1 hour',
-        75 =>  '1 hour 15 minutes',
-        90 =>  '1 hour 30 minutes',
-        105 =>  '1 hour 45 minutes',
-        120 =>  '2 hours',
-        135 =>  '2 hours 15 minutes',
-        150 =>  '2 hours 30 minutes',
-        165 =>  '2 hours 45 minutes',
-        180 =>  '3 hours',
-        195 =>  '3 hours 15 minutes',
-        210 =>  '3 hours 30 minutes',
-        225 =>  '3 hours 45 minutes',
-        240 =>  '4 hours',
-        255 =>  '4 hours 15 minutes',
-        270 =>  '4 hours 30 minutes',
-        285 =>  '4 hours 45 minutes',
-        300 =>  '5 hours',
     ],
-    'BOOKING_SLOTS' => 1,
-    'BOOKING_MAXIMUM_TIME_SLOTS_PER_DAY_OF_WEEK' => 2,
-    'BOOKING_SLOT_DURATION' => 30,
-    'BOOKING_SLOT_BUFFER_START_DAYS' => 0,
-    'BOOKING_SLOT_DAYS' => 30,
-    'TAX_PER' => 20,
     'GOOGLE_API_KEY' => 'AIzaSyBUkrIEQStEvADw3fBKMbeVNMjrAZdON4s'
 
 ];

@@ -5,8 +5,8 @@
                     <div class="col-12">
                         <div class="footer-top">
                             <div class="footer-logo">
-                                <a href="index.html">
-                                    <img id="logo_footer" src="{{url('frontend/images/logo/logo-2%402x.png')}}" alt="logo-footer">
+                                <a href="{{route('home')}}">
+                                    <img id="logo_footer" src="{{ App\Helper\Helper::getLogo(true); }}" alt="logo-footer">
                                 </a>
                             </div>
                             <div class="footer-contact">
@@ -25,7 +25,7 @@
                                             Call us
                                         </div>
                                         <h6>
-                                            <a href="#"> (603) 555-0123</a>
+                                            <a href="javascript:void(0)"> 0161-4048145</a>
                                         </h6>
                                     </div>
                                 </div>
@@ -48,8 +48,8 @@
                                             Nee live help
                                         </div>
                                         <h6 class="fw-4">
-                                            <a href="#">
-                                                proty-support@gmail.com
+                                            <a href="javascript:void(0)">
+                                                support@brickbold.com
                                             </a>
                                         </h6>
                                     </div>
@@ -199,8 +199,8 @@
                 </div>
                 <div class="col-12">
                     <div class="footer-bottom">
-                        <p>Copyright © 2024 <span class="fw-7">PROTY - REAL ESTATE</span> . Designed & Developed by
-                            <a href="#">Themesflat</a>
+                        <p>Copyright © 2024 <span class="fw-7">PROTY - BRICKBOLD</span> . Designed & Developed by
+                            <a href="https://www.creativeroom.in/">Creative Room</a>
                         </p>
                         <div class="wrap-social">
                             <div class="text-3  fw-6 text-white">Follow us</div>
