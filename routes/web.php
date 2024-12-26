@@ -45,6 +45,7 @@ Route::get('/trash', function () {
 }); 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
+Route::get('/faq', [HomeController::class, 'faq'])->name('faq');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 
 Route::get('/properties', [FrontPropertyController::class, 'properties'])->name('properties');
@@ -63,9 +64,12 @@ Route::group(['prefix' => 'user'], function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('user.dashboard');
     Route::get('/my-package', [UserController::class, 'package'])->name('user.package');
-    Route::get('/property/favorite/add/{id}', [FavoriteController::class, 'add'])->name('user.favorite.add');
-    Route::get('/property/favorites', [UserController::class, 'favorites'])->name('user.favorites');
     Route::get('/my-reviews', [UserController::class, 'reviews'])->name('user.reviews');
+
+    Route::get('/property/favorite/add/{id}', [FavoriteController::class, 'add'])->name('user.favorite.add');
+    Route::get('/property/favorite/toggle/{id}', [FavoriteController::class, 'toggle'])->name('user.favorite.toggle');
+    Route::get('/property/favorites', [FavoriteController::class, 'list'])->name('user.favorites');
+    Route::get('/property/favorite/delete/{favorite_id}', [FavoriteController::class, 'delete'])->name('user.favorite.delete');
 
     Route::get('/properties', [PropertyController::class, 'list'])->name('user.properties');
     Route::get('/property/add', [PropertyController::class, 'add'])->name('user.property.add');

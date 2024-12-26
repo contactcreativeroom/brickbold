@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Property extends Model
 {
@@ -20,5 +21,11 @@ class Property extends Model
     public function image()
     {
         return $this->hasOne(PropertyImage::class)->latest('id');
+    }
+
+    public function favorites()
+    {
+        //$user = Auth::guard('user')->user();
+        return $this->hasMany(Favorite::class);
     }
 }

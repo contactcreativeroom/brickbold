@@ -1,3 +1,12 @@
 .arrow.disabled a {
     opacity: 0.5;
 }
+
+.selectedClass {
+    background-color: #df4234;
+    color: #fff;
+}
+
+.selectedClass svg path{
+    stroke: #fff;
+}

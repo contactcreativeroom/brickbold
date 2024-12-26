@@ -7,36 +7,37 @@
                 <div class="button-show-hide show-mb">
                     <span class="body-1">Show Dashboard</span>
                 </div>
+                <form action="{{ route('user.properties') }}" method="get" enctype='multipart/form-data'>
+                 
                 <div class="row">
-                    <div class="col-md-3">
-                        <form>
+                        <div class="col-md-3"> 
                             <fieldset class="box-fieldset">
                                 <label>
                                     Post Status:<span>*</span>
                                 </label>
-                                <div class="nice-select" tabindex="0"><span class="current">Select</span>
-                                    <ul class="list">
-                                        <li data-value="1" class="option selected">Select</li>
-                                        <li data-value="2" class="option">Publish</li>
-                                        <li data-value="3" class="option">Pending</li>
-                                        <li data-value="3" class="option">Hidden</li>
-                                        <li data-value="3" class="option">Sold</li>
-                                    </ul>
-                                </div>
-                            </fieldset>
-                        </form>
-                    </div>
-                    <div class="col-md-9">
-                        <form>
+                                <select class="form-control form-select nice-select" name="status" id="status">
+                                    <option value="">All</option>
+                                    @foreach (config('constants.PROPERTY_STATUSES') as $key=>$value)
+                                        <option value="{{$key}}" {{ old('status', request('status')) == $key ? 'selected' : '' }} >{{$value}}</option>
+                                    @endforeach
+                                </select> 
+                            </fieldset> 
+                        </div>
+                        <div class="col-md-7">                            
                             <fieldset class="box-fieldset">
                                 <label>
                                     Search:<span>*</span>
                                 </label>
-                                <input type="text" class="form-control" placeholder="Search by title">
-                            </fieldset>
-                        </form>
-                    </div>
+                                <input type="text" class="form-control" placeholder="Search by title" name="search" value="{{ request('search', '') }}">
+                            </fieldset>                            
+                        </div>
+                        <div class="col-md-2">  
+                            <button type="submit" class="tf-btn bg-color-primary pd-3 mt-5">
+                                Search <i class="icon-MagnifyingGlass fw-6"></i>
+                            </button>  
+                        </div>
                 </div>
+                </form>
                 <div class="widget-box-2 wd-listing mt-20">
                     <h3 class="title">My Properties</h3>
                     <div class="wrap-table">
@@ -119,7 +120,10 @@
                                 </tbody>
                             </table>
                         </div>
-                        {{ $rows->links() }}
+                        <div class="wrap-pagination">
+                            <p class="text-1">Showing {{ $rows->firstItem() }}-{{ $rows->lastItem() }} of {{ $rows->total() }} results.</p>
+                            {{ $rows->links() }}
+                        </div> 
                     </div>
                 </div>
                 @include('user.layouts.footer')

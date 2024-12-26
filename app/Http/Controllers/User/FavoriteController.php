@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Favorite;
 use App\Models\Property;
 use App\Models\PropertyImage;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,16 +29,17 @@ class FavoriteController extends Controller
     }
 
     public function list(Request $request){
-        $properties = Property::paginate($this->pagerecords);
-        $data=array('rows'=>$properties);
-        return view($this->prefix.'.property.list')->with($data);
+        $user = $this->userAuth; 
+        $favorites = $user->favorites()->paginate($this->pagerecords);
+        $data=array('rows'=>$favorites);
+        return view($this->prefix.'.property.favorites')->with($data);
     }
 
     public function add(Request $request){
         $user = $this->userAuth; 
         $id = trim($request->id); 
         if (empty($id)) {
-            Helper::toastMsg(false, "Property not found.");
+            Helper::toastMsg(false, "Some error occured!");
             return back();  
         } 
         $property = Property::find($id);
@@ -50,6 +52,57 @@ class FavoriteController extends Controller
         $favorite->property_id = $id;
         $favorite->status = 1;
         $favorite->save();
-        return view($this->prefix.'.property.form');
+        return back(); 
     }
+
+    public function toggle(Request $request){         
+        $userAuth = $this->userAuth; 
+        $id = trim($request->id); 
+        if (empty($id)) {
+            Helper::toastMsg(false, "Some error occured!");
+            return back();  
+        } 
+        $property = Property::find($id);
+        if (!$property) {
+            Helper::toastMsg(false, "Property not found.");
+            return back();  
+        }  
+
+        if(!$userAuth){
+            Helper::toastMsg(false, 'Error: Forbidden 403');
+            return back(); 
+        } 
+        $user = User::find($userAuth->id);
+        $favorite = $user->favorites()->where('property_id', $id)->first();
+
+        if ($favorite) { 
+            $favorite->delete();
+            Helper::toastMsg(true, 'Removed successfully.');
+            return back(); 
+        } else {
+            $property = Property::find($id);
+            if(!$property){ 
+                Helper::toastMsg(false, 'Error: Property not found');
+                return back(); 
+            }
+            $user->favorites()->create([
+                'property_id'=>$id,
+                'status'=>1,
+            ]); 
+            Helper::toastMsg(true, 'Added successfully.');
+            return back();
+        }        
+    }
+
+    public function delete(Request $request){
+        $user = $this->userAuth; 
+        $favorite = $user->favorites->find($request->favorite_id);
+        if (!$favorite) {
+            Helper::toastMsg(false, "Some error occured!");
+            return back();  
+        }
+        $favorite->delete();
+        Helper::toastMsg(true, "Successfully!");
+        return back();
+    } 
 }

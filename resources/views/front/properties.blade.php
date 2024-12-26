@@ -11,25 +11,25 @@
                                 <li>Property Listing</li>
                             </ul>
                         </div>
+                        {{-- <form  action="{{ route('properties') }}" method="get" enctype='multipart/form-data'> --}}
+                           
                         <div class="wg-filter style-2 relative z-31">
                             <div class="form-title style-2">
+                                
                                 <form>
-                                    <fieldset>
-                                        <input type="text" placeholder="Address, City, ZIP...">
-                                    </fieldset>
+                                <fieldset>
+                                    <input type="text" placeholder="Address, City, ZIP..." name="search" value="{{ request('search', '') }}">
+                                </fieldset>
                                 </form>
-                                <div class="nice-select" tabindex="0">
-                                    <span class="current">Status</span>
-                                    <ul class="list">
-                                        <li data-value class="option selected">Status</li>
-                                        <li data-value="bungalow" class="option">Bungalow</li>
-                                        <li data-value="apartment" class="option">Apartment</li>
-                                        <li data-value="house" class="option">House</li>
-                                        <li data-value="smart-home" class="option">Smart Home</li>
-                                        <li data-value="Single family home" class="option">Office</li>
-                                        <li data-value="Multi family home" class="option">Villa</li>
-                                    </ul>
-                                </div>
+                                 
+                                 
+                                <select class="form-control form-select nice-select" name="property_detail" id="property_detail">
+                                    <option value="">Property Detail</option>
+                                    @foreach (config('constants.PROPERTY_DETAIL') as $key=>$value)
+                                        <option value="{{$key}}" {{ old('property_detail', request('property_detail')) == $key ? 'selected' : '' }} >{{$value}}</option>
+                                    @endforeach
+                                </select>
+                                 
                                 <div class="nice-select" tabindex="0">
                                     <span class="current">Type</span>
                                     <ul class="list">
@@ -62,6 +62,7 @@
                                         <li data-value="single" class="option">Single bed</li>
                                     </ul>
                                 </div>
+                                
                                 <div class="wrap-btn">
                                     <div class="btn-filter show-form">
                                         <div class="icons">
@@ -88,10 +89,11 @@
                                             </svg>
                                         </div>
                                     </div>
-                                    <a href="#" class="tf-btn bg-color-primary pd-3 fw-6">
+                                    <button type="submit" class="tf-btn bg-color-primary pd-3 fw-6">
                                         Search <i class="icon-MagnifyingGlass fw-6"></i>
-                                    </a>
+                                    </button>
                                 </div>
+                                
                             </div>
                             <div class="wd-search-form">
                                 <div class="group-price">
@@ -317,6 +319,7 @@
                                 </div>
                             </div>
                         </div>
+                        {{-- </form>  --}}
                     </div>
                 </div>
             </div>
@@ -413,711 +416,72 @@
                                 <div class="tab-content">
                                     <div class="tab-pane active show" id="gridLayout" role="tabpanel">
                                         <div class="tf-grid-layout md-col-2">
-                                            <div class="box-house hover-img">
-                                                <div class="image-wrap">
-                                                    <a href="property-detail-v1.html">
-                                                        <img class="lazyload" data-src="images/section/box-house.jpg"
-                                                            src="images/section/box-house.jpg" alt="">
-                                                    </a>
-                                                    <ul class="box-tag flex gap-8 ">
-                                                        <li class="flat-tag text-4 bg-main fw-6 text-white">Featured
-                                                        </li>
-                                                        <li class="flat-tag text-4 bg-3 fw-6 text-white">For Sale</li>
-                                                    </ul>
-                                                    <div class="list-btn flex gap-8 ">
-                                                        <a href="#" class="btn-icon save hover-tooltip"><i
-                                                                class="icon-save"></i>
-                                                            <span class="tooltip">Add Favorite</span>
+                                            @foreach ($rows as $row)
+                                                <div class="box-house hover-img">
+                                                    <div class="image-wrap">
+                                                        <a href="{{route('user.favorite.toggle', $row->id)}}">
+                                                            <img class="lazyload" data-src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" alt="">
                                                         </a>
-                                                        <a href="#" class="btn-icon find hover-tooltip"><i
-                                                                class="icon-find-plus"></i>
-                                                            <span class="tooltip">Quick View</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h5 class="title">
-                                                        <a href="property-detail-v1.html">Elegant studio flat</a>
-
-                                                    </h5>
-                                                    <p class="location text-1 flex items-center gap-6">
-                                                        <i class="icon-location"></i> 102 Ingraham St, Brooklyn, NY
-                                                        11237
-                                                    </p>
-                                                    <ul class="meta-list flex">
-                                                        <li class="text-1 flex"><span>3</span>Beds</li>
-                                                        <li class="text-1 flex"><span>3</span>Baths</li>
-                                                        <li class="text-1 flex"><span>4,043</span>Sqft</li>
-                                                    </ul>
-                                                    <div class="bot flex justify-between items-center">
-                                                        <h5 class="price">
-                                                            $8.600
-                                                        </h5>
-                                                        <div class="wrap-btn flex">
-                                                            <a href="#"
-                                                                class="compare flex gap-8 items-center text-1"><svg
-                                                                    width="20" height="20" viewBox="0 0 20 20"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path
-                                                                        d="M16.6922 14.1922L14.1922 16.6922C14.0749 16.8095 13.9159 16.8754 13.75 16.8754C13.5842 16.8754 13.4251 16.8095 13.3078 16.6922C13.1905 16.5749 13.1247 16.4159 13.1247 16.25C13.1247 16.0842 13.1905 15.9251 13.3078 15.8078L14.7414 14.375H3.75C3.58424 14.375 3.42527 14.3092 3.30806 14.192C3.19085 14.0747 3.125 13.9158 3.125 13.75C3.125 13.5843 3.19085 13.4253 3.30806 13.3081C3.42527 13.1909 3.58424 13.125 3.75 13.125H14.7414L13.3078 11.6922C13.1905 11.5749 13.1247 11.4159 13.1247 11.25C13.1247 11.0842 13.1905 10.9251 13.3078 10.8078C13.4251 10.6905 13.5842 10.6247 13.75 10.6247C13.9159 10.6247 14.0749 10.6905 14.1922 10.8078L16.6922 13.3078C16.7503 13.3659 16.7964 13.4348 16.8279 13.5107C16.8593 13.5865 16.8755 13.6679 16.8755 13.75C16.8755 13.8321 16.8593 13.9135 16.8279 13.9893C16.7964 14.0652 16.7503 14.1342 16.6922 14.1922ZM5.80782 9.1922C5.92509 9.30947 6.08415 9.37536 6.25 9.37536C6.41586 9.37536 6.57492 9.30947 6.69219 9.1922C6.80947 9.07492 6.87535 8.91586 6.87535 8.75001C6.87535 8.58416 6.80947 8.4251 6.69219 8.30782L5.2586 6.87501H16.25C16.4158 6.87501 16.5747 6.80916 16.6919 6.69195C16.8092 6.57474 16.875 6.41577 16.875 6.25001C16.875 6.08425 16.8092 5.92528 16.6919 5.80807C16.5747 5.69086 16.4158 5.62501 16.25 5.62501H5.2586L6.69219 4.1922C6.80947 4.07492 6.87535 3.91586 6.87535 3.75001C6.87535 3.58416 6.80947 3.4251 6.69219 3.30782C6.57492 3.19055 6.41586 3.12466 6.25 3.12466C6.08415 3.12466 5.92509 3.19055 5.80782 3.30782L3.30782 5.80782C3.24971 5.86587 3.20361 5.9348 3.17215 6.01067C3.1407 6.08655 3.12451 6.16788 3.12451 6.25001C3.12451 6.33215 3.1407 6.41348 3.17215 6.48935C3.20361 6.56522 3.24971 6.63415 3.30782 6.6922L5.80782 9.1922Z"
-                                                                        fill="#5C5E61" />
-                                                                </svg>
-                                                                Compare
+                                                        <ul class="box-tag flex gap-8 ">
+                                                            <li class="flat-tag text-4 bg-main fw-6 text-white">Featured
+                                                            </li>
+                                                            <li class="flat-tag text-4 bg-3 fw-6 text-white">{{config('constants.FOR_TYPE')[$row->for_type]}}</li>
+                                                        </ul>
+                                                        <div class="list-btn flex gap-8 ">
+                                                            <a href="{{route('user.favorite.toggle', $row->id)}}" class="btn-icon save hover-tooltip">
+                                                                <i class="icon-save"></i>
+                                                                <span class="tooltip">Add Favorite</span>
                                                             </a>
-                                                            <a href="property-detail-v1.html"
-                                                                class="tf-btn style-border pd-4">Details</a>
+                                                            <a href="{{route('property', $row->id)}}" class="btn-icon find hover-tooltip"><i
+                                                                    class="icon-find-plus"></i>
+                                                                <span class="tooltip">Quick View</span>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="content">
+                                                        <h5 class="title">
+                                                            <a href="{{route('property', $row->id)}}">{{$row->title}}</a>
+                                                        </h5>
+                                                        <p class="location text-1 flex items-center gap-6">
+                                                            <i class="icon-location"></i> {{$row->location}}
+                                                        </p>
+                                                        <ul class="meta-list flex">
+                                                            <li class="text-1 flex"><span>{{$row->bedroom}}</span>Beds</li>
+                                                            <li class="text-1 flex"><span>{{$row->bathroom}}</span>Baths</li>
+                                                            <li class="text-1 flex"><span>{{$row->plot_area}}</span>Sqft</li>
+                                                        </ul>
+                                                        <div class="bot flex justify-between items-center">
+                                                            <h5 class="price">
+                                                                {{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($row->price)}}
+                                                            </h5>
+                                                            <div class="wrap-btn flex"> 
+                                                                <a href="{{route('property', $row->id)}}" class="tf-btn style-border pd-4">Details</a>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="box-house hover-img">
-                                                <div class="image-wrap">
-                                                    <a href="property-detail-v1.html">
-                                                        <img class="lazyload" data-src="images/section/box-house-2.jpg"
-                                                            src="images/section/box-house-2.jpg" alt="">
-                                                    </a>
-                                                    <ul class="box-tag flex gap-8 ">
-                                                        <li class="flat-tag text-4 bg-main fw-6 text-white">Featured
-                                                        </li>
-                                                        <li class="flat-tag text-4 bg-3 fw-6 text-white">For Sale</li>
-                                                    </ul>
-                                                    <div class="list-btn flex gap-8 ">
-                                                        <a href="#" class="btn-icon save hover-tooltip"><i
-                                                                class="icon-save"></i>
-                                                            <span class="tooltip">Add Favorite</span>
-                                                        </a>
-                                                        <a href="#" class="btn-icon find hover-tooltip"><i
-                                                                class="icon-find-plus"></i>
-                                                            <span class="tooltip">Quick View</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h5 class="title">
-                                                        <a href="property-detail-v1.html">Elegant studio flat</a>
-
-                                                    </h5>
-                                                    <p class="location text-1 flex items-center gap-6">
-                                                        <i class="icon-location"></i> 102 Ingraham St, Brooklyn, NY
-                                                        11237
-                                                    </p>
-                                                    <ul class="meta-list flex">
-                                                        <li class="text-1 flex"><span>3</span>Beds</li>
-                                                        <li class="text-1 flex"><span>3</span>Baths</li>
-                                                        <li class="text-1 flex"><span>4,043</span>Sqft</li>
-                                                    </ul>
-                                                    <div class="bot flex justify-between items-center">
-                                                        <h5 class="price">
-                                                            $8.600
-                                                        </h5>
-                                                        <div class="wrap-btn flex">
-                                                            <a href="#"
-                                                                class="compare flex gap-8 items-center text-1"><svg
-                                                                    width="20" height="20" viewBox="0 0 20 20"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path
-                                                                        d="M16.6922 14.1922L14.1922 16.6922C14.0749 16.8095 13.9159 16.8754 13.75 16.8754C13.5842 16.8754 13.4251 16.8095 13.3078 16.6922C13.1905 16.5749 13.1247 16.4159 13.1247 16.25C13.1247 16.0842 13.1905 15.9251 13.3078 15.8078L14.7414 14.375H3.75C3.58424 14.375 3.42527 14.3092 3.30806 14.192C3.19085 14.0747 3.125 13.9158 3.125 13.75C3.125 13.5843 3.19085 13.4253 3.30806 13.3081C3.42527 13.1909 3.58424 13.125 3.75 13.125H14.7414L13.3078 11.6922C13.1905 11.5749 13.1247 11.4159 13.1247 11.25C13.1247 11.0842 13.1905 10.9251 13.3078 10.8078C13.4251 10.6905 13.5842 10.6247 13.75 10.6247C13.9159 10.6247 14.0749 10.6905 14.1922 10.8078L16.6922 13.3078C16.7503 13.3659 16.7964 13.4348 16.8279 13.5107C16.8593 13.5865 16.8755 13.6679 16.8755 13.75C16.8755 13.8321 16.8593 13.9135 16.8279 13.9893C16.7964 14.0652 16.7503 14.1342 16.6922 14.1922ZM5.80782 9.1922C5.92509 9.30947 6.08415 9.37536 6.25 9.37536C6.41586 9.37536 6.57492 9.30947 6.69219 9.1922C6.80947 9.07492 6.87535 8.91586 6.87535 8.75001C6.87535 8.58416 6.80947 8.4251 6.69219 8.30782L5.2586 6.87501H16.25C16.4158 6.87501 16.5747 6.80916 16.6919 6.69195C16.8092 6.57474 16.875 6.41577 16.875 6.25001C16.875 6.08425 16.8092 5.92528 16.6919 5.80807C16.5747 5.69086 16.4158 5.62501 16.25 5.62501H5.2586L6.69219 4.1922C6.80947 4.07492 6.87535 3.91586 6.87535 3.75001C6.87535 3.58416 6.80947 3.4251 6.69219 3.30782C6.57492 3.19055 6.41586 3.12466 6.25 3.12466C6.08415 3.12466 5.92509 3.19055 5.80782 3.30782L3.30782 5.80782C3.24971 5.86587 3.20361 5.9348 3.17215 6.01067C3.1407 6.08655 3.12451 6.16788 3.12451 6.25001C3.12451 6.33215 3.1407 6.41348 3.17215 6.48935C3.20361 6.56522 3.24971 6.63415 3.30782 6.6922L5.80782 9.1922Z"
-                                                                        fill="#5C5E61" />
-                                                                </svg>
-                                                                Compare
-                                                            </a>
-                                                            <a href="property-detail-v1.html"
-                                                                class="tf-btn style-border pd-4">Details</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="box-house hover-img">
-                                                <div class="image-wrap">
-                                                    <a href="property-detail-v1.html">
-                                                        <img class="lazyload" data-src="images/section/box-house-3.jpg"
-                                                            src="images/section/box-house-3.jpg" alt="">
-                                                    </a>
-                                                    <ul class="box-tag flex gap-8 ">
-                                                        <li class="flat-tag text-4 bg-main fw-6 text-white">Featured
-                                                        </li>
-                                                        <li class="flat-tag text-4 bg-3 fw-6 text-white">For Sale</li>
-                                                    </ul>
-                                                    <div class="list-btn flex gap-8 ">
-                                                        <a href="#" class="btn-icon save hover-tooltip"><i
-                                                                class="icon-save"></i>
-                                                            <span class="tooltip">Add Favorite</span>
-                                                        </a>
-                                                        <a href="#" class="btn-icon find hover-tooltip"><i
-                                                                class="icon-find-plus"></i>
-                                                            <span class="tooltip">Quick View</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h5 class="title">
-                                                        <a href="property-detail-v1.html">Elegant studio flat</a>
-
-                                                    </h5>
-                                                    <p class="location text-1 flex items-center gap-6">
-                                                        <i class="icon-location"></i> 102 Ingraham St, Brooklyn, NY
-                                                        11237
-                                                    </p>
-                                                    <ul class="meta-list flex">
-                                                        <li class="text-1 flex"><span>3</span>Beds</li>
-                                                        <li class="text-1 flex"><span>3</span>Baths</li>
-                                                        <li class="text-1 flex"><span>4,043</span>Sqft</li>
-                                                    </ul>
-                                                    <div class="bot flex justify-between items-center">
-                                                        <h5 class="price">
-                                                            $8.600
-                                                        </h5>
-                                                        <div class="wrap-btn flex">
-                                                            <a href="#"
-                                                                class="compare flex gap-8 items-center text-1"><svg
-                                                                    width="20" height="20" viewBox="0 0 20 20"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path
-                                                                        d="M16.6922 14.1922L14.1922 16.6922C14.0749 16.8095 13.9159 16.8754 13.75 16.8754C13.5842 16.8754 13.4251 16.8095 13.3078 16.6922C13.1905 16.5749 13.1247 16.4159 13.1247 16.25C13.1247 16.0842 13.1905 15.9251 13.3078 15.8078L14.7414 14.375H3.75C3.58424 14.375 3.42527 14.3092 3.30806 14.192C3.19085 14.0747 3.125 13.9158 3.125 13.75C3.125 13.5843 3.19085 13.4253 3.30806 13.3081C3.42527 13.1909 3.58424 13.125 3.75 13.125H14.7414L13.3078 11.6922C13.1905 11.5749 13.1247 11.4159 13.1247 11.25C13.1247 11.0842 13.1905 10.9251 13.3078 10.8078C13.4251 10.6905 13.5842 10.6247 13.75 10.6247C13.9159 10.6247 14.0749 10.6905 14.1922 10.8078L16.6922 13.3078C16.7503 13.3659 16.7964 13.4348 16.8279 13.5107C16.8593 13.5865 16.8755 13.6679 16.8755 13.75C16.8755 13.8321 16.8593 13.9135 16.8279 13.9893C16.7964 14.0652 16.7503 14.1342 16.6922 14.1922ZM5.80782 9.1922C5.92509 9.30947 6.08415 9.37536 6.25 9.37536C6.41586 9.37536 6.57492 9.30947 6.69219 9.1922C6.80947 9.07492 6.87535 8.91586 6.87535 8.75001C6.87535 8.58416 6.80947 8.4251 6.69219 8.30782L5.2586 6.87501H16.25C16.4158 6.87501 16.5747 6.80916 16.6919 6.69195C16.8092 6.57474 16.875 6.41577 16.875 6.25001C16.875 6.08425 16.8092 5.92528 16.6919 5.80807C16.5747 5.69086 16.4158 5.62501 16.25 5.62501H5.2586L6.69219 4.1922C6.80947 4.07492 6.87535 3.91586 6.87535 3.75001C6.87535 3.58416 6.80947 3.4251 6.69219 3.30782C6.57492 3.19055 6.41586 3.12466 6.25 3.12466C6.08415 3.12466 5.92509 3.19055 5.80782 3.30782L3.30782 5.80782C3.24971 5.86587 3.20361 5.9348 3.17215 6.01067C3.1407 6.08655 3.12451 6.16788 3.12451 6.25001C3.12451 6.33215 3.1407 6.41348 3.17215 6.48935C3.20361 6.56522 3.24971 6.63415 3.30782 6.6922L5.80782 9.1922Z"
-                                                                        fill="#5C5E61" />
-                                                                </svg>
-                                                                Compare
-                                                            </a>
-                                                            <a href="property-detail-v1.html"
-                                                                class="tf-btn style-border pd-4">Details</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="box-house hover-img">
-                                                <div class="image-wrap">
-                                                    <a href="property-detail-v1.html">
-                                                        <img class="lazyload" data-src="images/section/box-house-4.jpg"
-                                                            src="images/section/box-house-4.jpg" alt="">
-                                                    </a>
-                                                    <ul class="box-tag flex gap-8 ">
-                                                        <li class="flat-tag text-4 bg-main fw-6 text-white">Featured
-                                                        </li>
-                                                        <li class="flat-tag text-4 bg-3 fw-6 text-white">For Sale</li>
-                                                    </ul>
-                                                    <div class="list-btn flex gap-8 ">
-                                                        <a href="#" class="btn-icon save hover-tooltip"><i
-                                                                class="icon-save"></i>
-                                                            <span class="tooltip">Add Favorite</span>
-                                                        </a>
-                                                        <a href="#" class="btn-icon find hover-tooltip"><i
-                                                                class="icon-find-plus"></i>
-                                                            <span class="tooltip">Quick View</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h5 class="title">
-                                                        <a href="property-detail-v1.html">Elegant studio flat</a>
-
-                                                    </h5>
-                                                    <p class="location text-1 flex items-center gap-6">
-                                                        <i class="icon-location"></i> 102 Ingraham St, Brooklyn, NY
-                                                        11237
-                                                    </p>
-                                                    <ul class="meta-list flex">
-                                                        <li class="text-1 flex"><span>3</span>Beds</li>
-                                                        <li class="text-1 flex"><span>3</span>Baths</li>
-                                                        <li class="text-1 flex"><span>4,043</span>Sqft</li>
-                                                    </ul>
-                                                    <div class="bot flex justify-between items-center">
-                                                        <h5 class="price">
-                                                            $8.600
-                                                        </h5>
-                                                        <div class="wrap-btn flex">
-                                                            <a href="#"
-                                                                class="compare flex gap-8 items-center text-1"><svg
-                                                                    width="20" height="20" viewBox="0 0 20 20"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path
-                                                                        d="M16.6922 14.1922L14.1922 16.6922C14.0749 16.8095 13.9159 16.8754 13.75 16.8754C13.5842 16.8754 13.4251 16.8095 13.3078 16.6922C13.1905 16.5749 13.1247 16.4159 13.1247 16.25C13.1247 16.0842 13.1905 15.9251 13.3078 15.8078L14.7414 14.375H3.75C3.58424 14.375 3.42527 14.3092 3.30806 14.192C3.19085 14.0747 3.125 13.9158 3.125 13.75C3.125 13.5843 3.19085 13.4253 3.30806 13.3081C3.42527 13.1909 3.58424 13.125 3.75 13.125H14.7414L13.3078 11.6922C13.1905 11.5749 13.1247 11.4159 13.1247 11.25C13.1247 11.0842 13.1905 10.9251 13.3078 10.8078C13.4251 10.6905 13.5842 10.6247 13.75 10.6247C13.9159 10.6247 14.0749 10.6905 14.1922 10.8078L16.6922 13.3078C16.7503 13.3659 16.7964 13.4348 16.8279 13.5107C16.8593 13.5865 16.8755 13.6679 16.8755 13.75C16.8755 13.8321 16.8593 13.9135 16.8279 13.9893C16.7964 14.0652 16.7503 14.1342 16.6922 14.1922ZM5.80782 9.1922C5.92509 9.30947 6.08415 9.37536 6.25 9.37536C6.41586 9.37536 6.57492 9.30947 6.69219 9.1922C6.80947 9.07492 6.87535 8.91586 6.87535 8.75001C6.87535 8.58416 6.80947 8.4251 6.69219 8.30782L5.2586 6.87501H16.25C16.4158 6.87501 16.5747 6.80916 16.6919 6.69195C16.8092 6.57474 16.875 6.41577 16.875 6.25001C16.875 6.08425 16.8092 5.92528 16.6919 5.80807C16.5747 5.69086 16.4158 5.62501 16.25 5.62501H5.2586L6.69219 4.1922C6.80947 4.07492 6.87535 3.91586 6.87535 3.75001C6.87535 3.58416 6.80947 3.4251 6.69219 3.30782C6.57492 3.19055 6.41586 3.12466 6.25 3.12466C6.08415 3.12466 5.92509 3.19055 5.80782 3.30782L3.30782 5.80782C3.24971 5.86587 3.20361 5.9348 3.17215 6.01067C3.1407 6.08655 3.12451 6.16788 3.12451 6.25001C3.12451 6.33215 3.1407 6.41348 3.17215 6.48935C3.20361 6.56522 3.24971 6.63415 3.30782 6.6922L5.80782 9.1922Z"
-                                                                        fill="#5C5E61" />
-                                                                </svg>
-                                                                Compare
-                                                            </a>
-                                                            <a href="property-detail-v1.html"
-                                                                class="tf-btn style-border pd-4">Details</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="box-house hover-img">
-                                                <div class="image-wrap">
-                                                    <a href="property-detail-v1.html">
-                                                        <img class="lazyload" data-src="images/section/box-house-5.jpg"
-                                                            src="images/section/box-house-5.jpg" alt="">
-                                                    </a>
-                                                    <ul class="box-tag flex gap-8 ">
-                                                        <li class="flat-tag text-4 bg-main fw-6 text-white">Featured
-                                                        </li>
-                                                        <li class="flat-tag text-4 bg-3 fw-6 text-white">For Sale</li>
-                                                    </ul>
-                                                    <div class="list-btn flex gap-8 ">
-                                                        <a href="#" class="btn-icon save hover-tooltip"><i
-                                                                class="icon-save"></i>
-                                                            <span class="tooltip">Add Favorite</span>
-                                                        </a>
-                                                        <a href="#" class="btn-icon find hover-tooltip"><i
-                                                                class="icon-find-plus"></i>
-                                                            <span class="tooltip">Quick View</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h5 class="title">
-                                                        <a href="property-detail-v1.html">Elegant studio flat</a>
-
-                                                    </h5>
-                                                    <p class="location text-1 flex items-center gap-6">
-                                                        <i class="icon-location"></i> 102 Ingraham St, Brooklyn, NY
-                                                        11237
-                                                    </p>
-                                                    <ul class="meta-list flex">
-                                                        <li class="text-1 flex"><span>3</span>Beds</li>
-                                                        <li class="text-1 flex"><span>3</span>Baths</li>
-                                                        <li class="text-1 flex"><span>4,043</span>Sqft</li>
-                                                    </ul>
-                                                    <div class="bot flex justify-between items-center">
-                                                        <h5 class="price">
-                                                            $8.600
-                                                        </h5>
-                                                        <div class="wrap-btn flex">
-                                                            <a href="#"
-                                                                class="compare flex gap-8 items-center text-1"><svg
-                                                                    width="20" height="20" viewBox="0 0 20 20"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path
-                                                                        d="M16.6922 14.1922L14.1922 16.6922C14.0749 16.8095 13.9159 16.8754 13.75 16.8754C13.5842 16.8754 13.4251 16.8095 13.3078 16.6922C13.1905 16.5749 13.1247 16.4159 13.1247 16.25C13.1247 16.0842 13.1905 15.9251 13.3078 15.8078L14.7414 14.375H3.75C3.58424 14.375 3.42527 14.3092 3.30806 14.192C3.19085 14.0747 3.125 13.9158 3.125 13.75C3.125 13.5843 3.19085 13.4253 3.30806 13.3081C3.42527 13.1909 3.58424 13.125 3.75 13.125H14.7414L13.3078 11.6922C13.1905 11.5749 13.1247 11.4159 13.1247 11.25C13.1247 11.0842 13.1905 10.9251 13.3078 10.8078C13.4251 10.6905 13.5842 10.6247 13.75 10.6247C13.9159 10.6247 14.0749 10.6905 14.1922 10.8078L16.6922 13.3078C16.7503 13.3659 16.7964 13.4348 16.8279 13.5107C16.8593 13.5865 16.8755 13.6679 16.8755 13.75C16.8755 13.8321 16.8593 13.9135 16.8279 13.9893C16.7964 14.0652 16.7503 14.1342 16.6922 14.1922ZM5.80782 9.1922C5.92509 9.30947 6.08415 9.37536 6.25 9.37536C6.41586 9.37536 6.57492 9.30947 6.69219 9.1922C6.80947 9.07492 6.87535 8.91586 6.87535 8.75001C6.87535 8.58416 6.80947 8.4251 6.69219 8.30782L5.2586 6.87501H16.25C16.4158 6.87501 16.5747 6.80916 16.6919 6.69195C16.8092 6.57474 16.875 6.41577 16.875 6.25001C16.875 6.08425 16.8092 5.92528 16.6919 5.80807C16.5747 5.69086 16.4158 5.62501 16.25 5.62501H5.2586L6.69219 4.1922C6.80947 4.07492 6.87535 3.91586 6.87535 3.75001C6.87535 3.58416 6.80947 3.4251 6.69219 3.30782C6.57492 3.19055 6.41586 3.12466 6.25 3.12466C6.08415 3.12466 5.92509 3.19055 5.80782 3.30782L3.30782 5.80782C3.24971 5.86587 3.20361 5.9348 3.17215 6.01067C3.1407 6.08655 3.12451 6.16788 3.12451 6.25001C3.12451 6.33215 3.1407 6.41348 3.17215 6.48935C3.20361 6.56522 3.24971 6.63415 3.30782 6.6922L5.80782 9.1922Z"
-                                                                        fill="#5C5E61" />
-                                                                </svg>
-                                                                Compare
-                                                            </a>
-                                                            <a href="property-detail-v1.html"
-                                                                class="tf-btn style-border pd-4">Details</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="box-house hover-img">
-                                                <div class="image-wrap">
-                                                    <a href="property-detail-v1.html">
-                                                        <img class="lazyload" data-src="images/section/box-house-6.jpg"
-                                                            src="images/section/box-house-6.jpg" alt="">
-                                                    </a>
-                                                    <ul class="box-tag flex gap-8 ">
-                                                        <li class="flat-tag text-4 bg-main fw-6 text-white">Featured
-                                                        </li>
-                                                        <li class="flat-tag text-4 bg-3 fw-6 text-white">For Sale</li>
-                                                    </ul>
-                                                    <div class="list-btn flex gap-8 ">
-                                                        <a href="#" class="btn-icon save hover-tooltip"><i
-                                                                class="icon-save"></i>
-                                                            <span class="tooltip">Add Favorite</span>
-                                                        </a>
-                                                        <a href="#" class="btn-icon find hover-tooltip"><i
-                                                                class="icon-find-plus"></i>
-                                                            <span class="tooltip">Quick View</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h5 class="title">
-                                                        <a href="property-detail-v1.html">Elegant studio flat</a>
-
-                                                    </h5>
-                                                    <p class="location text-1 flex items-center gap-6">
-                                                        <i class="icon-location"></i> 102 Ingraham St, Brooklyn, NY
-                                                        11237
-                                                    </p>
-                                                    <ul class="meta-list flex">
-                                                        <li class="text-1 flex"><span>3</span>Beds</li>
-                                                        <li class="text-1 flex"><span>3</span>Baths</li>
-                                                        <li class="text-1 flex"><span>4,043</span>Sqft</li>
-                                                    </ul>
-                                                    <div class="bot flex justify-between items-center">
-                                                        <h5 class="price">
-                                                            $8.600
-                                                        </h5>
-                                                        <div class="wrap-btn flex">
-                                                            <a href="#"
-                                                                class="compare flex gap-8 items-center text-1"><svg
-                                                                    width="20" height="20" viewBox="0 0 20 20"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path
-                                                                        d="M16.6922 14.1922L14.1922 16.6922C14.0749 16.8095 13.9159 16.8754 13.75 16.8754C13.5842 16.8754 13.4251 16.8095 13.3078 16.6922C13.1905 16.5749 13.1247 16.4159 13.1247 16.25C13.1247 16.0842 13.1905 15.9251 13.3078 15.8078L14.7414 14.375H3.75C3.58424 14.375 3.42527 14.3092 3.30806 14.192C3.19085 14.0747 3.125 13.9158 3.125 13.75C3.125 13.5843 3.19085 13.4253 3.30806 13.3081C3.42527 13.1909 3.58424 13.125 3.75 13.125H14.7414L13.3078 11.6922C13.1905 11.5749 13.1247 11.4159 13.1247 11.25C13.1247 11.0842 13.1905 10.9251 13.3078 10.8078C13.4251 10.6905 13.5842 10.6247 13.75 10.6247C13.9159 10.6247 14.0749 10.6905 14.1922 10.8078L16.6922 13.3078C16.7503 13.3659 16.7964 13.4348 16.8279 13.5107C16.8593 13.5865 16.8755 13.6679 16.8755 13.75C16.8755 13.8321 16.8593 13.9135 16.8279 13.9893C16.7964 14.0652 16.7503 14.1342 16.6922 14.1922ZM5.80782 9.1922C5.92509 9.30947 6.08415 9.37536 6.25 9.37536C6.41586 9.37536 6.57492 9.30947 6.69219 9.1922C6.80947 9.07492 6.87535 8.91586 6.87535 8.75001C6.87535 8.58416 6.80947 8.4251 6.69219 8.30782L5.2586 6.87501H16.25C16.4158 6.87501 16.5747 6.80916 16.6919 6.69195C16.8092 6.57474 16.875 6.41577 16.875 6.25001C16.875 6.08425 16.8092 5.92528 16.6919 5.80807C16.5747 5.69086 16.4158 5.62501 16.25 5.62501H5.2586L6.69219 4.1922C6.80947 4.07492 6.87535 3.91586 6.87535 3.75001C6.87535 3.58416 6.80947 3.4251 6.69219 3.30782C6.57492 3.19055 6.41586 3.12466 6.25 3.12466C6.08415 3.12466 5.92509 3.19055 5.80782 3.30782L3.30782 5.80782C3.24971 5.86587 3.20361 5.9348 3.17215 6.01067C3.1407 6.08655 3.12451 6.16788 3.12451 6.25001C3.12451 6.33215 3.1407 6.41348 3.17215 6.48935C3.20361 6.56522 3.24971 6.63415 3.30782 6.6922L5.80782 9.1922Z"
-                                                                        fill="#5C5E61" />
-                                                                </svg>
-                                                                Compare
-                                                            </a>
-                                                            <a href="property-detail-v1.html"
-                                                                class="tf-btn style-border pd-4">Details</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="box-house hover-img">
-                                                <div class="image-wrap">
-                                                    <a href="property-detail-v1.html">
-                                                        <img class="lazyload" data-src="images/section/box-house-7.jpg"
-                                                            src="images/section/box-house-7.jpg" alt="">
-                                                    </a>
-                                                    <ul class="box-tag flex gap-8 ">
-                                                        <li class="flat-tag text-4 bg-main fw-6 text-white">Featured
-                                                        </li>
-                                                        <li class="flat-tag text-4 bg-3 fw-6 text-white">For Sale</li>
-                                                    </ul>
-                                                    <div class="list-btn flex gap-8 ">
-                                                        <a href="#" class="btn-icon save hover-tooltip"><i
-                                                                class="icon-save"></i>
-                                                            <span class="tooltip">Add Favorite</span>
-                                                        </a>
-                                                        <a href="#" class="btn-icon find hover-tooltip"><i
-                                                                class="icon-find-plus"></i>
-                                                            <span class="tooltip">Quick View</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h5 class="title">
-                                                        <a href="property-detail-v1.html">Elegant studio flat</a>
-
-                                                    </h5>
-                                                    <p class="location text-1 flex items-center gap-6">
-                                                        <i class="icon-location"></i> 102 Ingraham St, Brooklyn, NY
-                                                        11237
-                                                    </p>
-                                                    <ul class="meta-list flex">
-                                                        <li class="text-1 flex"><span>3</span>Beds</li>
-                                                        <li class="text-1 flex"><span>3</span>Baths</li>
-                                                        <li class="text-1 flex"><span>4,043</span>Sqft</li>
-                                                    </ul>
-                                                    <div class="bot flex justify-between items-center">
-                                                        <h5 class="price">
-                                                            $8.600
-                                                        </h5>
-                                                        <div class="wrap-btn flex">
-                                                            <a href="#"
-                                                                class="compare flex gap-8 items-center text-1"><svg
-                                                                    width="20" height="20" viewBox="0 0 20 20"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path
-                                                                        d="M16.6922 14.1922L14.1922 16.6922C14.0749 16.8095 13.9159 16.8754 13.75 16.8754C13.5842 16.8754 13.4251 16.8095 13.3078 16.6922C13.1905 16.5749 13.1247 16.4159 13.1247 16.25C13.1247 16.0842 13.1905 15.9251 13.3078 15.8078L14.7414 14.375H3.75C3.58424 14.375 3.42527 14.3092 3.30806 14.192C3.19085 14.0747 3.125 13.9158 3.125 13.75C3.125 13.5843 3.19085 13.4253 3.30806 13.3081C3.42527 13.1909 3.58424 13.125 3.75 13.125H14.7414L13.3078 11.6922C13.1905 11.5749 13.1247 11.4159 13.1247 11.25C13.1247 11.0842 13.1905 10.9251 13.3078 10.8078C13.4251 10.6905 13.5842 10.6247 13.75 10.6247C13.9159 10.6247 14.0749 10.6905 14.1922 10.8078L16.6922 13.3078C16.7503 13.3659 16.7964 13.4348 16.8279 13.5107C16.8593 13.5865 16.8755 13.6679 16.8755 13.75C16.8755 13.8321 16.8593 13.9135 16.8279 13.9893C16.7964 14.0652 16.7503 14.1342 16.6922 14.1922ZM5.80782 9.1922C5.92509 9.30947 6.08415 9.37536 6.25 9.37536C6.41586 9.37536 6.57492 9.30947 6.69219 9.1922C6.80947 9.07492 6.87535 8.91586 6.87535 8.75001C6.87535 8.58416 6.80947 8.4251 6.69219 8.30782L5.2586 6.87501H16.25C16.4158 6.87501 16.5747 6.80916 16.6919 6.69195C16.8092 6.57474 16.875 6.41577 16.875 6.25001C16.875 6.08425 16.8092 5.92528 16.6919 5.80807C16.5747 5.69086 16.4158 5.62501 16.25 5.62501H5.2586L6.69219 4.1922C6.80947 4.07492 6.87535 3.91586 6.87535 3.75001C6.87535 3.58416 6.80947 3.4251 6.69219 3.30782C6.57492 3.19055 6.41586 3.12466 6.25 3.12466C6.08415 3.12466 5.92509 3.19055 5.80782 3.30782L3.30782 5.80782C3.24971 5.86587 3.20361 5.9348 3.17215 6.01067C3.1407 6.08655 3.12451 6.16788 3.12451 6.25001C3.12451 6.33215 3.1407 6.41348 3.17215 6.48935C3.20361 6.56522 3.24971 6.63415 3.30782 6.6922L5.80782 9.1922Z"
-                                                                        fill="#5C5E61" />
-                                                                </svg>
-                                                                Compare
-                                                            </a>
-                                                            <a href="property-detail-v1.html"
-                                                                class="tf-btn style-border pd-4">Details</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="box-house hover-img">
-                                                <div class="image-wrap">
-                                                    <a href="property-detail-v1.html">
-                                                        <img class="lazyload" data-src="images/section/box-house-8.jpg"
-                                                            src="images/section/box-house-8.jpg" alt="">
-                                                    </a>
-                                                    <ul class="box-tag flex gap-8 ">
-                                                        <li class="flat-tag text-4 bg-main fw-6 text-white">Featured
-                                                        </li>
-                                                        <li class="flat-tag text-4 bg-3 fw-6 text-white">For Sale</li>
-                                                    </ul>
-                                                    <div class="list-btn flex gap-8 ">
-                                                        <a href="#" class="btn-icon save hover-tooltip"><i
-                                                                class="icon-save"></i>
-                                                            <span class="tooltip">Add Favorite</span>
-                                                        </a>
-                                                        <a href="#" class="btn-icon find hover-tooltip"><i
-                                                                class="icon-find-plus"></i>
-                                                            <span class="tooltip">Quick View</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h5 class="title">
-                                                        <a href="property-detail-v1.html">Elegant studio flat</a>
-
-                                                    </h5>
-                                                    <p class="location text-1 flex items-center gap-6">
-                                                        <i class="icon-location"></i> 102 Ingraham St, Brooklyn, NY
-                                                        11237
-                                                    </p>
-                                                    <ul class="meta-list flex">
-                                                        <li class="text-1 flex"><span>3</span>Beds</li>
-                                                        <li class="text-1 flex"><span>3</span>Baths</li>
-                                                        <li class="text-1 flex"><span>4,043</span>Sqft</li>
-                                                    </ul>
-                                                    <div class="bot flex justify-between items-center">
-                                                        <h5 class="price">
-                                                            $8.600
-                                                        </h5>
-                                                        <div class="wrap-btn flex">
-                                                            <a href="#"
-                                                                class="compare flex gap-8 items-center text-1"><svg
-                                                                    width="20" height="20" viewBox="0 0 20 20"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path
-                                                                        d="M16.6922 14.1922L14.1922 16.6922C14.0749 16.8095 13.9159 16.8754 13.75 16.8754C13.5842 16.8754 13.4251 16.8095 13.3078 16.6922C13.1905 16.5749 13.1247 16.4159 13.1247 16.25C13.1247 16.0842 13.1905 15.9251 13.3078 15.8078L14.7414 14.375H3.75C3.58424 14.375 3.42527 14.3092 3.30806 14.192C3.19085 14.0747 3.125 13.9158 3.125 13.75C3.125 13.5843 3.19085 13.4253 3.30806 13.3081C3.42527 13.1909 3.58424 13.125 3.75 13.125H14.7414L13.3078 11.6922C13.1905 11.5749 13.1247 11.4159 13.1247 11.25C13.1247 11.0842 13.1905 10.9251 13.3078 10.8078C13.4251 10.6905 13.5842 10.6247 13.75 10.6247C13.9159 10.6247 14.0749 10.6905 14.1922 10.8078L16.6922 13.3078C16.7503 13.3659 16.7964 13.4348 16.8279 13.5107C16.8593 13.5865 16.8755 13.6679 16.8755 13.75C16.8755 13.8321 16.8593 13.9135 16.8279 13.9893C16.7964 14.0652 16.7503 14.1342 16.6922 14.1922ZM5.80782 9.1922C5.92509 9.30947 6.08415 9.37536 6.25 9.37536C6.41586 9.37536 6.57492 9.30947 6.69219 9.1922C6.80947 9.07492 6.87535 8.91586 6.87535 8.75001C6.87535 8.58416 6.80947 8.4251 6.69219 8.30782L5.2586 6.87501H16.25C16.4158 6.87501 16.5747 6.80916 16.6919 6.69195C16.8092 6.57474 16.875 6.41577 16.875 6.25001C16.875 6.08425 16.8092 5.92528 16.6919 5.80807C16.5747 5.69086 16.4158 5.62501 16.25 5.62501H5.2586L6.69219 4.1922C6.80947 4.07492 6.87535 3.91586 6.87535 3.75001C6.87535 3.58416 6.80947 3.4251 6.69219 3.30782C6.57492 3.19055 6.41586 3.12466 6.25 3.12466C6.08415 3.12466 5.92509 3.19055 5.80782 3.30782L3.30782 5.80782C3.24971 5.86587 3.20361 5.9348 3.17215 6.01067C3.1407 6.08655 3.12451 6.16788 3.12451 6.25001C3.12451 6.33215 3.1407 6.41348 3.17215 6.48935C3.20361 6.56522 3.24971 6.63415 3.30782 6.6922L5.80782 9.1922Z"
-                                                                        fill="#5C5E61" />
-                                                                </svg>
-                                                                Compare
-                                                            </a>
-                                                            <a href="property-detail-v1.html"
-                                                                class="tf-btn style-border pd-4">Details</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="box-house hover-img">
-                                                <div class="image-wrap">
-                                                    <a href="property-detail-v1.html">
-                                                        <img class="lazyload" data-src="images/section/box-house-9.jpg"
-                                                            src="images/section/box-house-9.jpg" alt="">
-                                                    </a>
-                                                    <ul class="box-tag flex gap-8 ">
-                                                        <li class="flat-tag text-4 bg-main fw-6 text-white">Featured
-                                                        </li>
-                                                        <li class="flat-tag text-4 bg-3 fw-6 text-white">For Sale</li>
-                                                    </ul>
-                                                    <div class="list-btn flex gap-8 ">
-                                                        <a href="#" class="btn-icon save hover-tooltip"><i
-                                                                class="icon-save"></i>
-                                                            <span class="tooltip">Add Favorite</span>
-                                                        </a>
-                                                        <a href="#" class="btn-icon find hover-tooltip"><i
-                                                                class="icon-find-plus"></i>
-                                                            <span class="tooltip">Quick View</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h5 class="title">
-                                                        <a href="property-detail-v1.html">Elegant studio flat</a>
-
-                                                    </h5>
-                                                    <p class="location text-1 flex items-center gap-6">
-                                                        <i class="icon-location"></i> 102 Ingraham St, Brooklyn, NY
-                                                        11237
-                                                    </p>
-                                                    <ul class="meta-list flex">
-                                                        <li class="text-1 flex"><span>3</span>Beds</li>
-                                                        <li class="text-1 flex"><span>3</span>Baths</li>
-                                                        <li class="text-1 flex"><span>4,043</span>Sqft</li>
-                                                    </ul>
-                                                    <div class="bot flex justify-between items-center">
-                                                        <h5 class="price">
-                                                            $8.600
-                                                        </h5>
-                                                        <div class="wrap-btn flex">
-                                                            <a href="#"
-                                                                class="compare flex gap-8 items-center text-1"><svg
-                                                                    width="20" height="20" viewBox="0 0 20 20"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path
-                                                                        d="M16.6922 14.1922L14.1922 16.6922C14.0749 16.8095 13.9159 16.8754 13.75 16.8754C13.5842 16.8754 13.4251 16.8095 13.3078 16.6922C13.1905 16.5749 13.1247 16.4159 13.1247 16.25C13.1247 16.0842 13.1905 15.9251 13.3078 15.8078L14.7414 14.375H3.75C3.58424 14.375 3.42527 14.3092 3.30806 14.192C3.19085 14.0747 3.125 13.9158 3.125 13.75C3.125 13.5843 3.19085 13.4253 3.30806 13.3081C3.42527 13.1909 3.58424 13.125 3.75 13.125H14.7414L13.3078 11.6922C13.1905 11.5749 13.1247 11.4159 13.1247 11.25C13.1247 11.0842 13.1905 10.9251 13.3078 10.8078C13.4251 10.6905 13.5842 10.6247 13.75 10.6247C13.9159 10.6247 14.0749 10.6905 14.1922 10.8078L16.6922 13.3078C16.7503 13.3659 16.7964 13.4348 16.8279 13.5107C16.8593 13.5865 16.8755 13.6679 16.8755 13.75C16.8755 13.8321 16.8593 13.9135 16.8279 13.9893C16.7964 14.0652 16.7503 14.1342 16.6922 14.1922ZM5.80782 9.1922C5.92509 9.30947 6.08415 9.37536 6.25 9.37536C6.41586 9.37536 6.57492 9.30947 6.69219 9.1922C6.80947 9.07492 6.87535 8.91586 6.87535 8.75001C6.87535 8.58416 6.80947 8.4251 6.69219 8.30782L5.2586 6.87501H16.25C16.4158 6.87501 16.5747 6.80916 16.6919 6.69195C16.8092 6.57474 16.875 6.41577 16.875 6.25001C16.875 6.08425 16.8092 5.92528 16.6919 5.80807C16.5747 5.69086 16.4158 5.62501 16.25 5.62501H5.2586L6.69219 4.1922C6.80947 4.07492 6.87535 3.91586 6.87535 3.75001C6.87535 3.58416 6.80947 3.4251 6.69219 3.30782C6.57492 3.19055 6.41586 3.12466 6.25 3.12466C6.08415 3.12466 5.92509 3.19055 5.80782 3.30782L3.30782 5.80782C3.24971 5.86587 3.20361 5.9348 3.17215 6.01067C3.1407 6.08655 3.12451 6.16788 3.12451 6.25001C3.12451 6.33215 3.1407 6.41348 3.17215 6.48935C3.20361 6.56522 3.24971 6.63415 3.30782 6.6922L5.80782 9.1922Z"
-                                                                        fill="#5C5E61" />
-                                                                </svg>
-                                                                Compare
-                                                            </a>
-                                                            <a href="property-detail-v1.html"
-                                                                class="tf-btn style-border pd-4">Details</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="box-house hover-img">
-                                                <div class="image-wrap">
-                                                    <a href="property-detail-v1.html">
-                                                        <img class="lazyload" data-src="images/section/box-house-15.jpg"
-                                                            src="images/section/box-house-15.jpg" alt="">
-                                                    </a>
-                                                    <ul class="box-tag flex gap-8 ">
-                                                        <li class="flat-tag text-4 bg-main fw-6 text-white">Featured
-                                                        </li>
-                                                        <li class="flat-tag text-4 bg-3 fw-6 text-white">For Sale</li>
-                                                    </ul>
-                                                    <div class="list-btn flex gap-8 ">
-                                                        <a href="#" class="btn-icon save hover-tooltip"><i
-                                                                class="icon-save"></i>
-                                                            <span class="tooltip">Add Favorite</span>
-                                                        </a>
-                                                        <a href="#" class="btn-icon find hover-tooltip"><i
-                                                                class="icon-find-plus"></i>
-                                                            <span class="tooltip">Quick View</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h5 class="title">
-                                                        <a href="property-detail-v1.html">Elegant studio flat</a>
-
-                                                    </h5>
-                                                    <p class="location text-1 flex items-center gap-6">
-                                                        <i class="icon-location"></i> 102 Ingraham St, Brooklyn, NY
-                                                        11237
-                                                    </p>
-                                                    <ul class="meta-list flex">
-                                                        <li class="text-1 flex"><span>3</span>Beds</li>
-                                                        <li class="text-1 flex"><span>3</span>Baths</li>
-                                                        <li class="text-1 flex"><span>4,043</span>Sqft</li>
-                                                    </ul>
-                                                    <div class="bot flex justify-between items-center">
-                                                        <h5 class="price">
-                                                            $8.600
-                                                        </h5>
-                                                        <div class="wrap-btn flex">
-                                                            <a href="#"
-                                                                class="compare flex gap-8 items-center text-1"><svg
-                                                                    width="20" height="20" viewBox="0 0 20 20"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path
-                                                                        d="M16.6922 14.1922L14.1922 16.6922C14.0749 16.8095 13.9159 16.8754 13.75 16.8754C13.5842 16.8754 13.4251 16.8095 13.3078 16.6922C13.1905 16.5749 13.1247 16.4159 13.1247 16.25C13.1247 16.0842 13.1905 15.9251 13.3078 15.8078L14.7414 14.375H3.75C3.58424 14.375 3.42527 14.3092 3.30806 14.192C3.19085 14.0747 3.125 13.9158 3.125 13.75C3.125 13.5843 3.19085 13.4253 3.30806 13.3081C3.42527 13.1909 3.58424 13.125 3.75 13.125H14.7414L13.3078 11.6922C13.1905 11.5749 13.1247 11.4159 13.1247 11.25C13.1247 11.0842 13.1905 10.9251 13.3078 10.8078C13.4251 10.6905 13.5842 10.6247 13.75 10.6247C13.9159 10.6247 14.0749 10.6905 14.1922 10.8078L16.6922 13.3078C16.7503 13.3659 16.7964 13.4348 16.8279 13.5107C16.8593 13.5865 16.8755 13.6679 16.8755 13.75C16.8755 13.8321 16.8593 13.9135 16.8279 13.9893C16.7964 14.0652 16.7503 14.1342 16.6922 14.1922ZM5.80782 9.1922C5.92509 9.30947 6.08415 9.37536 6.25 9.37536C6.41586 9.37536 6.57492 9.30947 6.69219 9.1922C6.80947 9.07492 6.87535 8.91586 6.87535 8.75001C6.87535 8.58416 6.80947 8.4251 6.69219 8.30782L5.2586 6.87501H16.25C16.4158 6.87501 16.5747 6.80916 16.6919 6.69195C16.8092 6.57474 16.875 6.41577 16.875 6.25001C16.875 6.08425 16.8092 5.92528 16.6919 5.80807C16.5747 5.69086 16.4158 5.62501 16.25 5.62501H5.2586L6.69219 4.1922C6.80947 4.07492 6.87535 3.91586 6.87535 3.75001C6.87535 3.58416 6.80947 3.4251 6.69219 3.30782C6.57492 3.19055 6.41586 3.12466 6.25 3.12466C6.08415 3.12466 5.92509 3.19055 5.80782 3.30782L3.30782 5.80782C3.24971 5.86587 3.20361 5.9348 3.17215 6.01067C3.1407 6.08655 3.12451 6.16788 3.12451 6.25001C3.12451 6.33215 3.1407 6.41348 3.17215 6.48935C3.20361 6.56522 3.24971 6.63415 3.30782 6.6922L5.80782 9.1922Z"
-                                                                        fill="#5C5E61" />
-                                                                </svg>
-                                                                Compare
-                                                            </a>
-                                                            <a href="property-detail-v1.html"
-                                                                class="tf-btn style-border pd-4">Details</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="box-house hover-img">
-                                                <div class="image-wrap">
-                                                    <a href="property-detail-v1.html">
-                                                        <img class="lazyload" data-src="images/section/box-house-16.jpg"
-                                                            src="images/section/box-house-16.jpg" alt="">
-                                                    </a>
-                                                    <ul class="box-tag flex gap-8 ">
-                                                        <li class="flat-tag text-4 bg-main fw-6 text-white">Featured
-                                                        </li>
-                                                        <li class="flat-tag text-4 bg-3 fw-6 text-white">For Sale</li>
-                                                    </ul>
-                                                    <div class="list-btn flex gap-8 ">
-                                                        <a href="#" class="btn-icon save hover-tooltip"><i
-                                                                class="icon-save"></i>
-                                                            <span class="tooltip">Add Favorite</span>
-                                                        </a>
-                                                        <a href="#" class="btn-icon find hover-tooltip"><i
-                                                                class="icon-find-plus"></i>
-                                                            <span class="tooltip">Quick View</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h5 class="title">
-                                                        <a href="property-detail-v1.html">Elegant studio flat</a>
-
-                                                    </h5>
-                                                    <p class="location text-1 flex items-center gap-6">
-                                                        <i class="icon-location"></i> 102 Ingraham St, Brooklyn, NY
-                                                        11237
-                                                    </p>
-                                                    <ul class="meta-list flex">
-                                                        <li class="text-1 flex"><span>3</span>Beds</li>
-                                                        <li class="text-1 flex"><span>3</span>Baths</li>
-                                                        <li class="text-1 flex"><span>4,043</span>Sqft</li>
-                                                    </ul>
-                                                    <div class="bot flex justify-between items-center">
-                                                        <h5 class="price">
-                                                            $8.600
-                                                        </h5>
-                                                        <div class="wrap-btn flex">
-                                                            <a href="#"
-                                                                class="compare flex gap-8 items-center text-1"><svg
-                                                                    width="20" height="20" viewBox="0 0 20 20"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path
-                                                                        d="M16.6922 14.1922L14.1922 16.6922C14.0749 16.8095 13.9159 16.8754 13.75 16.8754C13.5842 16.8754 13.4251 16.8095 13.3078 16.6922C13.1905 16.5749 13.1247 16.4159 13.1247 16.25C13.1247 16.0842 13.1905 15.9251 13.3078 15.8078L14.7414 14.375H3.75C3.58424 14.375 3.42527 14.3092 3.30806 14.192C3.19085 14.0747 3.125 13.9158 3.125 13.75C3.125 13.5843 3.19085 13.4253 3.30806 13.3081C3.42527 13.1909 3.58424 13.125 3.75 13.125H14.7414L13.3078 11.6922C13.1905 11.5749 13.1247 11.4159 13.1247 11.25C13.1247 11.0842 13.1905 10.9251 13.3078 10.8078C13.4251 10.6905 13.5842 10.6247 13.75 10.6247C13.9159 10.6247 14.0749 10.6905 14.1922 10.8078L16.6922 13.3078C16.7503 13.3659 16.7964 13.4348 16.8279 13.5107C16.8593 13.5865 16.8755 13.6679 16.8755 13.75C16.8755 13.8321 16.8593 13.9135 16.8279 13.9893C16.7964 14.0652 16.7503 14.1342 16.6922 14.1922ZM5.80782 9.1922C5.92509 9.30947 6.08415 9.37536 6.25 9.37536C6.41586 9.37536 6.57492 9.30947 6.69219 9.1922C6.80947 9.07492 6.87535 8.91586 6.87535 8.75001C6.87535 8.58416 6.80947 8.4251 6.69219 8.30782L5.2586 6.87501H16.25C16.4158 6.87501 16.5747 6.80916 16.6919 6.69195C16.8092 6.57474 16.875 6.41577 16.875 6.25001C16.875 6.08425 16.8092 5.92528 16.6919 5.80807C16.5747 5.69086 16.4158 5.62501 16.25 5.62501H5.2586L6.69219 4.1922C6.80947 4.07492 6.87535 3.91586 6.87535 3.75001C6.87535 3.58416 6.80947 3.4251 6.69219 3.30782C6.57492 3.19055 6.41586 3.12466 6.25 3.12466C6.08415 3.12466 5.92509 3.19055 5.80782 3.30782L3.30782 5.80782C3.24971 5.86587 3.20361 5.9348 3.17215 6.01067C3.1407 6.08655 3.12451 6.16788 3.12451 6.25001C3.12451 6.33215 3.1407 6.41348 3.17215 6.48935C3.20361 6.56522 3.24971 6.63415 3.30782 6.6922L5.80782 9.1922Z"
-                                                                        fill="#5C5E61" />
-                                                                </svg>
-                                                                Compare
-                                                            </a>
-                                                            <a href="property-detail-v1.html"
-                                                                class="tf-btn style-border pd-4">Details</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="box-house hover-img">
-                                                <div class="image-wrap">
-                                                    <a href="property-detail-v1.html">
-                                                        <img class="lazyload" data-src="images/section/box-house-14.jpg"
-                                                            src="images/section/box-house-14.jpg" alt="">
-                                                    </a>
-                                                    <ul class="box-tag flex gap-8 ">
-                                                        <li class="flat-tag text-4 bg-main fw-6 text-white">Featured
-                                                        </li>
-                                                        <li class="flat-tag text-4 bg-3 fw-6 text-white">For Sale</li>
-                                                    </ul>
-                                                    <div class="list-btn flex gap-8 ">
-                                                        <a href="#" class="btn-icon save hover-tooltip"><i
-                                                                class="icon-save"></i>
-                                                            <span class="tooltip">Add Favorite</span>
-                                                        </a>
-                                                        <a href="#" class="btn-icon find hover-tooltip"><i
-                                                                class="icon-find-plus"></i>
-                                                            <span class="tooltip">Quick View</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h5 class="title">
-                                                        <a href="property-detail-v1.html">Elegant studio flat</a>
-
-                                                    </h5>
-                                                    <p class="location text-1 flex items-center gap-6">
-                                                        <i class="icon-location"></i> 102 Ingraham St, Brooklyn, NY
-                                                        11237
-                                                    </p>
-                                                    <ul class="meta-list flex">
-                                                        <li class="text-1 flex"><span>3</span>Beds</li>
-                                                        <li class="text-1 flex"><span>3</span>Baths</li>
-                                                        <li class="text-1 flex"><span>4,043</span>Sqft</li>
-                                                    </ul>
-                                                    <div class="bot flex justify-between items-center">
-                                                        <h5 class="price">
-                                                            $8.600
-                                                        </h5>
-                                                        <div class="wrap-btn flex">
-                                                            <a href="#"
-                                                                class="compare flex gap-8 items-center text-1"><svg
-                                                                    width="20" height="20" viewBox="0 0 20 20"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path
-                                                                        d="M16.6922 14.1922L14.1922 16.6922C14.0749 16.8095 13.9159 16.8754 13.75 16.8754C13.5842 16.8754 13.4251 16.8095 13.3078 16.6922C13.1905 16.5749 13.1247 16.4159 13.1247 16.25C13.1247 16.0842 13.1905 15.9251 13.3078 15.8078L14.7414 14.375H3.75C3.58424 14.375 3.42527 14.3092 3.30806 14.192C3.19085 14.0747 3.125 13.9158 3.125 13.75C3.125 13.5843 3.19085 13.4253 3.30806 13.3081C3.42527 13.1909 3.58424 13.125 3.75 13.125H14.7414L13.3078 11.6922C13.1905 11.5749 13.1247 11.4159 13.1247 11.25C13.1247 11.0842 13.1905 10.9251 13.3078 10.8078C13.4251 10.6905 13.5842 10.6247 13.75 10.6247C13.9159 10.6247 14.0749 10.6905 14.1922 10.8078L16.6922 13.3078C16.7503 13.3659 16.7964 13.4348 16.8279 13.5107C16.8593 13.5865 16.8755 13.6679 16.8755 13.75C16.8755 13.8321 16.8593 13.9135 16.8279 13.9893C16.7964 14.0652 16.7503 14.1342 16.6922 14.1922ZM5.80782 9.1922C5.92509 9.30947 6.08415 9.37536 6.25 9.37536C6.41586 9.37536 6.57492 9.30947 6.69219 9.1922C6.80947 9.07492 6.87535 8.91586 6.87535 8.75001C6.87535 8.58416 6.80947 8.4251 6.69219 8.30782L5.2586 6.87501H16.25C16.4158 6.87501 16.5747 6.80916 16.6919 6.69195C16.8092 6.57474 16.875 6.41577 16.875 6.25001C16.875 6.08425 16.8092 5.92528 16.6919 5.80807C16.5747 5.69086 16.4158 5.62501 16.25 5.62501H5.2586L6.69219 4.1922C6.80947 4.07492 6.87535 3.91586 6.87535 3.75001C6.87535 3.58416 6.80947 3.4251 6.69219 3.30782C6.57492 3.19055 6.41586 3.12466 6.25 3.12466C6.08415 3.12466 5.92509 3.19055 5.80782 3.30782L3.30782 5.80782C3.24971 5.86587 3.20361 5.9348 3.17215 6.01067C3.1407 6.08655 3.12451 6.16788 3.12451 6.25001C3.12451 6.33215 3.1407 6.41348 3.17215 6.48935C3.20361 6.56522 3.24971 6.63415 3.30782 6.6922L5.80782 9.1922Z"
-                                                                        fill="#5C5E61" />
-                                                                </svg>
-                                                                Compare
-                                                            </a>
-                                                            <a href="property-detail-v1.html"
-                                                                class="tf-btn style-border pd-4">Details</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            @endforeach 
                                         </div>
                                     </div>
                                     <div class="tab-pane" id="listLayout" role="tabpanel">
                                         <div class="wrap-list">
+                                            @foreach ($rows as $row)
                                             <div class="box-house style-list hover-img">
                                                 <div class="image-wrap">
-                                                    <a href="property-detail-v1.html">
-                                                        <img class="lazyload" data-src="images/section/box-house.jpg"
-                                                            src="images/section/box-house.jpg" alt="">
+                                                    <a href="{{route('user.favorite.toggle', $row->id)}}">
+                                                        <img class="lazyload" data-src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" alt="">
                                                     </a>
                                                     <ul class="box-tag flex gap-8 ">
                                                         <li class="flat-tag text-4 bg-main fw-6 text-white">Featured
                                                         </li>
-                                                        <li class="flat-tag text-4 bg-3 fw-6 text-white">For Sale</li>
+                                                        <li class="flat-tag text-4 bg-3 fw-6 text-white">{{config('constants.FOR_TYPE')[$row->for_type]}}</li>
                                                     </ul>
                                                     <div class="list-btn flex gap-8 ">
-                                                        <a href="#" class="btn-icon save hover-tooltip"><i
-                                                                class="icon-save"></i>
+                                                        <a href="{{route('user.favorite.toggle', $row->id)}}" class="btn-icon save hover-tooltip">
+                                                            <i class="icon-save"></i>
                                                             <span class="tooltip">Add Favorite</span>
                                                         </a>
-                                                        <a href="#" class="btn-icon find hover-tooltip"><i
+                                                        <a href="{{route('property', $row->id)}}" class="btn-icon find hover-tooltip"><i
                                                                 class="icon-find-plus"></i>
                                                             <span class="tooltip">Quick View</span>
                                                         </a>
@@ -1125,572 +489,34 @@
                                                 </div>
                                                 <div class="content">
                                                     <h5 class="title">
-                                                        <a href="property-detail-v1.html">Elegant studio flat</a>
-
+                                                        <a href="{{route('property', $row->id)}}">{{$row->title}}</a>
                                                     </h5>
                                                     <p class="location text-1 flex items-center gap-6">
-                                                        <i class="icon-location"></i> Los Angeles, California 91604
+                                                        <i class="icon-location"></i> {{$row->location}}
                                                     </p>
                                                     <ul class="meta-list flex">
-                                                        <li class="text-1 flex"><span>3</span>Beds</li>
-                                                        <li class="text-1 flex"><span>3</span>Baths</li>
-                                                        <li class="text-1 flex"><span>4,043</span>Sqft</li>
+                                                        <li class="text-1 flex"><span>{{$row->bedroom}}</span>Beds</li>
+                                                        <li class="text-1 flex"><span>{{$row->bathroom}}</span>Baths</li>
+                                                        <li class="text-1 flex"><span>{{$row->plot_area}}</span>Sqft</li>
                                                     </ul>
                                                     <div class="bot flex justify-between items-center">
                                                         <h5 class="price">
-                                                            $8.600
+                                                            {{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($row->price)}}
                                                         </h5>
-                                                        <div class="wrap-btn flex">
-
-                                                            <a href="property-detail-v1.html"
-                                                                class="tf-btn style-border pd-4">Details</a>
+                                                        <div class="wrap-btn flex"> 
+                                                            <a href="{{route('property', $row->id)}}" class="tf-btn style-border pd-4">Details</a>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="box-house style-list hover-img">
-                                                <div class="image-wrap">
-                                                    <a href="property-detail-v1.html">
-                                                        <img class="lazyload" data-src="images/section/box-house-2.jpg"
-                                                            src="images/section/box-house-2.jpg" alt="">
-                                                    </a>
-                                                    <ul class="box-tag flex gap-8 ">
-                                                        <li class="flat-tag text-4 bg-main fw-6 text-white">Featured
-                                                        </li>
-                                                        <li class="flat-tag text-4 bg-3 fw-6 text-white">For Sale</li>
-                                                    </ul>
-                                                    <div class="list-btn flex gap-8 ">
-                                                        <a href="#" class="btn-icon save hover-tooltip"><i
-                                                                class="icon-save"></i>
-                                                            <span class="tooltip">Add Favorite</span>
-                                                        </a>
-                                                        <a href="#" class="btn-icon find hover-tooltip"><i
-                                                                class="icon-find-plus"></i>
-                                                            <span class="tooltip">Quick View</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h5 class="title">
-                                                        <a href="property-detail-v1.html">Elegant studio flat</a>
-
-                                                    </h5>
-                                                    <p class="location text-1 flex items-center gap-6">
-                                                        <i class="icon-location"></i> Los Angeles, California 91604
-                                                    </p>
-                                                    <ul class="meta-list flex">
-                                                        <li class="text-1 flex"><span>3</span>Beds</li>
-                                                        <li class="text-1 flex"><span>3</span>Baths</li>
-                                                        <li class="text-1 flex"><span>4,043</span>Sqft</li>
-                                                    </ul>
-                                                    <div class="bot flex justify-between items-center">
-                                                        <h5 class="price">
-                                                            $8.600
-                                                        </h5>
-                                                        <div class="wrap-btn flex">
-
-                                                            <a href="property-detail-v1.html"
-                                                                class="tf-btn style-border pd-4">Details</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="box-house style-list hover-img">
-                                                <div class="image-wrap">
-                                                    <a href="property-detail-v1.html">
-                                                        <img class="lazyload" data-src="images/section/box-house-3.jpg"
-                                                            src="images/section/box-house-3.jpg" alt="">
-                                                    </a>
-                                                    <ul class="box-tag flex gap-8 ">
-                                                        <li class="flat-tag text-4 bg-main fw-6 text-white">Featured
-                                                        </li>
-                                                        <li class="flat-tag text-4 bg-3 fw-6 text-white">For Sale</li>
-                                                    </ul>
-                                                    <div class="list-btn flex gap-8 ">
-                                                        <a href="#" class="btn-icon save hover-tooltip"><i
-                                                                class="icon-save"></i>
-                                                            <span class="tooltip">Add Favorite</span>
-                                                        </a>
-                                                        <a href="#" class="btn-icon find hover-tooltip"><i
-                                                                class="icon-find-plus"></i>
-                                                            <span class="tooltip">Quick View</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h5 class="title">
-                                                        <a href="property-detail-v1.html">Elegant studio flat</a>
-
-                                                    </h5>
-                                                    <p class="location text-1 flex items-center gap-6">
-                                                        <i class="icon-location"></i> Los Angeles, California 91604
-                                                    </p>
-                                                    <ul class="meta-list flex">
-                                                        <li class="text-1 flex"><span>3</span>Beds</li>
-                                                        <li class="text-1 flex"><span>3</span>Baths</li>
-                                                        <li class="text-1 flex"><span>4,043</span>Sqft</li>
-                                                    </ul>
-                                                    <div class="bot flex justify-between items-center">
-                                                        <h5 class="price">
-                                                            $8.600
-                                                        </h5>
-                                                        <div class="wrap-btn flex">
-
-                                                            <a href="property-detail-v1.html"
-                                                                class="tf-btn style-border pd-4">Details</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="box-house style-list hover-img">
-                                                <div class="image-wrap">
-                                                    <a href="property-detail-v1.html">
-                                                        <img class="lazyload" data-src="images/section/box-house-4.jpg"
-                                                            src="images/section/box-house-4.jpg" alt="">
-                                                    </a>
-                                                    <ul class="box-tag flex gap-8 ">
-                                                        <li class="flat-tag text-4 bg-main fw-6 text-white">Featured
-                                                        </li>
-                                                        <li class="flat-tag text-4 bg-3 fw-6 text-white">For Sale</li>
-                                                    </ul>
-                                                    <div class="list-btn flex gap-8 ">
-                                                        <a href="#" class="btn-icon save hover-tooltip"><i
-                                                                class="icon-save"></i>
-                                                            <span class="tooltip">Add Favorite</span>
-                                                        </a>
-                                                        <a href="#" class="btn-icon find hover-tooltip"><i
-                                                                class="icon-find-plus"></i>
-                                                            <span class="tooltip">Quick View</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h5 class="title">
-                                                        <a href="property-detail-v1.html">Elegant studio flat</a>
-
-                                                    </h5>
-                                                    <p class="location text-1 flex items-center gap-6">
-                                                        <i class="icon-location"></i> Los Angeles, California 91604
-                                                    </p>
-                                                    <ul class="meta-list flex">
-                                                        <li class="text-1 flex"><span>3</span>Beds</li>
-                                                        <li class="text-1 flex"><span>3</span>Baths</li>
-                                                        <li class="text-1 flex"><span>4,043</span>Sqft</li>
-                                                    </ul>
-                                                    <div class="bot flex justify-between items-center">
-                                                        <h5 class="price">
-                                                            $8.600
-                                                        </h5>
-                                                        <div class="wrap-btn flex">
-
-                                                            <a href="property-detail-v1.html"
-                                                                class="tf-btn style-border pd-4">Details</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="box-house style-list hover-img">
-                                                <div class="image-wrap">
-                                                    <a href="property-detail-v1.html">
-                                                        <img class="lazyload" data-src="images/section/box-house-5.jpg"
-                                                            src="images/section/box-house-5.jpg" alt="">
-                                                    </a>
-                                                    <ul class="box-tag flex gap-8 ">
-                                                        <li class="flat-tag text-4 bg-main fw-6 text-white">Featured
-                                                        </li>
-                                                        <li class="flat-tag text-4 bg-3 fw-6 text-white">For Sale</li>
-                                                    </ul>
-                                                    <div class="list-btn flex gap-8 ">
-                                                        <a href="#" class="btn-icon save hover-tooltip"><i
-                                                                class="icon-save"></i>
-                                                            <span class="tooltip">Add Favorite</span>
-                                                        </a>
-                                                        <a href="#" class="btn-icon find hover-tooltip"><i
-                                                                class="icon-find-plus"></i>
-                                                            <span class="tooltip">Quick View</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h5 class="title">
-                                                        <a href="property-detail-v1.html">Elegant studio flat</a>
-
-                                                    </h5>
-                                                    <p class="location text-1 flex items-center gap-6">
-                                                        <i class="icon-location"></i> Los Angeles, California 91604
-                                                    </p>
-                                                    <ul class="meta-list flex">
-                                                        <li class="text-1 flex"><span>3</span>Beds</li>
-                                                        <li class="text-1 flex"><span>3</span>Baths</li>
-                                                        <li class="text-1 flex"><span>4,043</span>Sqft</li>
-                                                    </ul>
-                                                    <div class="bot flex justify-between items-center">
-                                                        <h5 class="price">
-                                                            $8.600
-                                                        </h5>
-                                                        <div class="wrap-btn flex">
-
-                                                            <a href="property-detail-v1.html"
-                                                                class="tf-btn style-border pd-4">Details</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="box-house style-list hover-img">
-                                                <div class="image-wrap">
-                                                    <a href="property-detail-v1.html">
-                                                        <img class="lazyload" data-src="images/section/box-house-6.jpg"
-                                                            src="images/section/box-house-6.jpg" alt="">
-                                                    </a>
-                                                    <ul class="box-tag flex gap-8 ">
-                                                        <li class="flat-tag text-4 bg-main fw-6 text-white">Featured
-                                                        </li>
-                                                        <li class="flat-tag text-4 bg-3 fw-6 text-white">For Sale</li>
-                                                    </ul>
-                                                    <div class="list-btn flex gap-8 ">
-                                                        <a href="#" class="btn-icon save hover-tooltip"><i
-                                                                class="icon-save"></i>
-                                                            <span class="tooltip">Add Favorite</span>
-                                                        </a>
-                                                        <a href="#" class="btn-icon find hover-tooltip"><i
-                                                                class="icon-find-plus"></i>
-                                                            <span class="tooltip">Quick View</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h5 class="title">
-                                                        <a href="property-detail-v1.html">Elegant studio flat</a>
-
-                                                    </h5>
-                                                    <p class="location text-1 flex items-center gap-6">
-                                                        <i class="icon-location"></i> Los Angeles, California 91604
-                                                    </p>
-                                                    <ul class="meta-list flex">
-                                                        <li class="text-1 flex"><span>3</span>Beds</li>
-                                                        <li class="text-1 flex"><span>3</span>Baths</li>
-                                                        <li class="text-1 flex"><span>4,043</span>Sqft</li>
-                                                    </ul>
-                                                    <div class="bot flex justify-between items-center">
-                                                        <h5 class="price">
-                                                            $8.600
-                                                        </h5>
-                                                        <div class="wrap-btn flex">
-
-                                                            <a href="property-detail-v1.html"
-                                                                class="tf-btn style-border pd-4">Details</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="box-house style-list hover-img">
-                                                <div class="image-wrap">
-                                                    <a href="property-detail-v1.html">
-                                                        <img class="lazyload" data-src="images/section/box-house-7.jpg"
-                                                            src="images/section/box-house-7.jpg" alt="">
-                                                    </a>
-                                                    <ul class="box-tag flex gap-8 ">
-                                                        <li class="flat-tag text-4 bg-main fw-6 text-white">Featured
-                                                        </li>
-                                                        <li class="flat-tag text-4 bg-3 fw-6 text-white">For Sale</li>
-                                                    </ul>
-                                                    <div class="list-btn flex gap-8 ">
-                                                        <a href="#" class="btn-icon save hover-tooltip"><i
-                                                                class="icon-save"></i>
-                                                            <span class="tooltip">Add Favorite</span>
-                                                        </a>
-                                                        <a href="#" class="btn-icon find hover-tooltip"><i
-                                                                class="icon-find-plus"></i>
-                                                            <span class="tooltip">Quick View</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h5 class="title">
-                                                        <a href="property-detail-v1.html">Elegant studio flat</a>
-
-                                                    </h5>
-                                                    <p class="location text-1 flex items-center gap-6">
-                                                        <i class="icon-location"></i> Los Angeles, California 91604
-                                                    </p>
-                                                    <ul class="meta-list flex">
-                                                        <li class="text-1 flex"><span>3</span>Beds</li>
-                                                        <li class="text-1 flex"><span>3</span>Baths</li>
-                                                        <li class="text-1 flex"><span>4,043</span>Sqft</li>
-                                                    </ul>
-                                                    <div class="bot flex justify-between items-center">
-                                                        <h5 class="price">
-                                                            $8.600
-                                                        </h5>
-                                                        <div class="wrap-btn flex">
-
-                                                            <a href="property-detail-v1.html"
-                                                                class="tf-btn style-border pd-4">Details</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="box-house style-list hover-img">
-                                                <div class="image-wrap">
-                                                    <a href="property-detail-v1.html">
-                                                        <img class="lazyload" data-src="images/section/box-house-8.jpg"
-                                                            src="images/section/box-house-8.jpg" alt="">
-                                                    </a>
-                                                    <ul class="box-tag flex gap-8 ">
-                                                        <li class="flat-tag text-4 bg-main fw-6 text-white">Featured
-                                                        </li>
-                                                        <li class="flat-tag text-4 bg-3 fw-6 text-white">For Sale</li>
-                                                    </ul>
-                                                    <div class="list-btn flex gap-8 ">
-                                                        <a href="#" class="btn-icon save hover-tooltip"><i
-                                                                class="icon-save"></i>
-                                                            <span class="tooltip">Add Favorite</span>
-                                                        </a>
-                                                        <a href="#" class="btn-icon find hover-tooltip"><i
-                                                                class="icon-find-plus"></i>
-                                                            <span class="tooltip">Quick View</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h5 class="title">
-                                                        <a href="property-detail-v1.html">Elegant studio flat</a>
-
-                                                    </h5>
-                                                    <p class="location text-1 flex items-center gap-6">
-                                                        <i class="icon-location"></i> Los Angeles, California 91604
-                                                    </p>
-                                                    <ul class="meta-list flex">
-                                                        <li class="text-1 flex"><span>3</span>Beds</li>
-                                                        <li class="text-1 flex"><span>3</span>Baths</li>
-                                                        <li class="text-1 flex"><span>4,043</span>Sqft</li>
-                                                    </ul>
-                                                    <div class="bot flex justify-between items-center">
-                                                        <h5 class="price">
-                                                            $8.600
-                                                        </h5>
-                                                        <div class="wrap-btn flex">
-
-                                                            <a href="property-detail-v1.html"
-                                                                class="tf-btn style-border pd-4">Details</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="box-house style-list hover-img">
-                                                <div class="image-wrap">
-                                                    <a href="property-detail-v1.html">
-                                                        <img class="lazyload" data-src="images/section/box-house-9.jpg"
-                                                            src="images/section/box-house-9.jpg" alt="">
-                                                    </a>
-                                                    <ul class="box-tag flex gap-8 ">
-                                                        <li class="flat-tag text-4 bg-main fw-6 text-white">Featured
-                                                        </li>
-                                                        <li class="flat-tag text-4 bg-3 fw-6 text-white">For Sale</li>
-                                                    </ul>
-                                                    <div class="list-btn flex gap-8 ">
-                                                        <a href="#" class="btn-icon save hover-tooltip"><i
-                                                                class="icon-save"></i>
-                                                            <span class="tooltip">Add Favorite</span>
-                                                        </a>
-                                                        <a href="#" class="btn-icon find hover-tooltip"><i
-                                                                class="icon-find-plus"></i>
-                                                            <span class="tooltip">Quick View</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h5 class="title">
-                                                        <a href="property-detail-v1.html">Elegant studio flat</a>
-
-                                                    </h5>
-                                                    <p class="location text-1 flex items-center gap-6">
-                                                        <i class="icon-location"></i> Los Angeles, California 91604
-                                                    </p>
-                                                    <ul class="meta-list flex">
-                                                        <li class="text-1 flex"><span>3</span>Beds</li>
-                                                        <li class="text-1 flex"><span>3</span>Baths</li>
-                                                        <li class="text-1 flex"><span>4,043</span>Sqft</li>
-                                                    </ul>
-                                                    <div class="bot flex justify-between items-center">
-                                                        <h5 class="price">
-                                                            $8.600
-                                                        </h5>
-                                                        <div class="wrap-btn flex">
-
-                                                            <a href="property-detail-v1.html"
-                                                                class="tf-btn style-border pd-4">Details</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="box-house style-list hover-img">
-                                                <div class="image-wrap">
-                                                    <a href="property-detail-v1.html">
-                                                        <img class="lazyload" data-src="images/section/box-house-15.jpg"
-                                                            src="images/section/box-house-15.jpg" alt="">
-                                                    </a>
-                                                    <ul class="box-tag flex gap-8 ">
-                                                        <li class="flat-tag text-4 bg-main fw-6 text-white">Featured
-                                                        </li>
-                                                        <li class="flat-tag text-4 bg-3 fw-6 text-white">For Sale</li>
-                                                    </ul>
-                                                    <div class="list-btn flex gap-8 ">
-                                                        <a href="#" class="btn-icon save hover-tooltip"><i
-                                                                class="icon-save"></i>
-                                                            <span class="tooltip">Add Favorite</span>
-                                                        </a>
-                                                        <a href="#" class="btn-icon find hover-tooltip"><i
-                                                                class="icon-find-plus"></i>
-                                                            <span class="tooltip">Quick View</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h5 class="title">
-                                                        <a href="property-detail-v1.html">Elegant studio flat</a>
-
-                                                    </h5>
-                                                    <p class="location text-1 flex items-center gap-6">
-                                                        <i class="icon-location"></i> Los Angeles, California 91604
-                                                    </p>
-                                                    <ul class="meta-list flex">
-                                                        <li class="text-1 flex"><span>3</span>Beds</li>
-                                                        <li class="text-1 flex"><span>3</span>Baths</li>
-                                                        <li class="text-1 flex"><span>4,043</span>Sqft</li>
-                                                    </ul>
-                                                    <div class="bot flex justify-between items-center">
-                                                        <h5 class="price">
-                                                            $8.600
-                                                        </h5>
-                                                        <div class="wrap-btn flex">
-
-                                                            <a href="property-detail-v1.html"
-                                                                class="tf-btn style-border pd-4">Details</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="box-house style-list hover-img">
-                                                <div class="image-wrap">
-                                                    <a href="property-detail-v1.html">
-                                                        <img class="lazyload" data-src="images/section/box-house-16.jpg"
-                                                            src="images/section/box-house-16.jpg" alt="">
-                                                    </a>
-                                                    <ul class="box-tag flex gap-8 ">
-                                                        <li class="flat-tag text-4 bg-main fw-6 text-white">Featured
-                                                        </li>
-                                                        <li class="flat-tag text-4 bg-3 fw-6 text-white">For Sale</li>
-                                                    </ul>
-                                                    <div class="list-btn flex gap-8 ">
-                                                        <a href="#" class="btn-icon save hover-tooltip"><i
-                                                                class="icon-save"></i>
-                                                            <span class="tooltip">Add Favorite</span>
-                                                        </a>
-                                                        <a href="#" class="btn-icon find hover-tooltip"><i
-                                                                class="icon-find-plus"></i>
-                                                            <span class="tooltip">Quick View</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h5 class="title">
-                                                        <a href="property-detail-v1.html">Elegant studio flat</a>
-
-                                                    </h5>
-                                                    <p class="location text-1 flex items-center gap-6">
-                                                        <i class="icon-location"></i> Los Angeles, California 91604
-                                                    </p>
-                                                    <ul class="meta-list flex">
-                                                        <li class="text-1 flex"><span>3</span>Beds</li>
-                                                        <li class="text-1 flex"><span>3</span>Baths</li>
-                                                        <li class="text-1 flex"><span>4,043</span>Sqft</li>
-                                                    </ul>
-                                                    <div class="bot flex justify-between items-center">
-                                                        <h5 class="price">
-                                                            $8.600
-                                                        </h5>
-                                                        <div class="wrap-btn flex">
-
-                                                            <a href="property-detail-v1.html"
-                                                                class="tf-btn style-border pd-4">Details</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="box-house style-list hover-img">
-                                                <div class="image-wrap">
-                                                    <a href="property-detail-v1.html">
-                                                        <img class="lazyload" data-src="images/section/box-house-14.jpg"
-                                                            src="images/section/box-house-14.jpg" alt="">
-                                                    </a>
-                                                    <ul class="box-tag flex gap-8 ">
-                                                        <li class="flat-tag text-4 bg-main fw-6 text-white">Featured
-                                                        </li>
-                                                        <li class="flat-tag text-4 bg-3 fw-6 text-white">For Sale</li>
-                                                    </ul>
-                                                    <div class="list-btn flex gap-8 ">
-                                                        <a href="#" class="btn-icon save hover-tooltip"><i
-                                                                class="icon-save"></i>
-                                                            <span class="tooltip">Add Favorite</span>
-                                                        </a>
-                                                        <a href="#" class="btn-icon find hover-tooltip"><i
-                                                                class="icon-find-plus"></i>
-                                                            <span class="tooltip">Quick View</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="content">
-                                                    <h5 class="title">
-                                                        <a href="property-detail-v1.html">Elegant studio flat</a>
-
-                                                    </h5>
-                                                    <p class="location text-1 flex items-center gap-6">
-                                                        <i class="icon-location"></i> Los Angeles, California 91604
-                                                    </p>
-                                                    <ul class="meta-list flex">
-                                                        <li class="text-1 flex"><span>3</span>Beds</li>
-                                                        <li class="text-1 flex"><span>3</span>Baths</li>
-                                                        <li class="text-1 flex"><span>4,043</span>Sqft</li>
-                                                    </ul>
-                                                    <div class="bot flex justify-between items-center">
-                                                        <h5 class="price">
-                                                            $8.600
-                                                        </h5>
-                                                        <div class="wrap-btn flex">
-
-                                                            <a href="property-detail-v1.html"
-                                                                class="tf-btn style-border pd-4">Details</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            @endforeach 
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="wrap-pagination">
-                                <p class="text-1">Showing 1-8 of 42 results.</p>
-                                <ul class="wg-pagination ">
-                                    <li class="arrow">
-                                        <a href="#"><i class="icon-arrow-left"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#">1</a>
-                                    </li>
-                                    <li class="active">
-                                        <a href="#">2</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">...</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">20</a>
-                                    </li>
-                                    <li class="arrow">
-                                        <a href="#"><i class="icon-arrow-right"></i></a>
-                                    </li>
-                                </ul>
+                                <p class="text-1">Showing {{ $rows->firstItem() }}-{{ $rows->lastItem() }} of {{ $rows->total() }} results.</p>
+                                {{ $rows->links() }}
                             </div>
                         </div>
                         <div class="col-lg-4">
@@ -1841,167 +667,33 @@
                                 <div class="sidebar-item sidebar-featured style-2  pb-36 mb-28">
                                     <h4 class="sidebar-title mb-28 ">Featured Listings</h4>
                                     <ul>
+                                        @foreach ($featured as $featuredRow)
                                         <li class="box-listings style-2 hover-img">
                                             <div class="image-wrap">
-                                                <img class="lazyload" data-src="images/section/box-listing-1.jpg"
-                                                    src="images/section/box-listing-1.jpg" alt="">
+                                                <img class="lazyload" data-src="{{ App\Helper\Helper::getImage('storage/property/'.$featuredRow->id, $featuredRow?->image?->image) }}"
+                                                    src="{{ App\Helper\Helper::getImage('storage/property/'.$featuredRow->id, $featuredRow?->image?->image) }}" alt="">
                                             </div>
                                             <div class="content">
                                                 <div class="text-1 title fw-5 lh-20">
-                                                    <a href="property-detail-v1.html">Casa Lomas de Machalí Machas</a>
+                                                    <a href="{{route('property', $featuredRow->id)}}">{{$featuredRow->title}}</a>
                                                 </div>
                                                 <ul class="meta-list flex">
-                                                    <li class="text-1 flex"><span>3</span>Bed</li>
-                                                    <li class="text-1 flex"><span>3</span>Bath</li>
-                                                    <li class="text-1 flex"><span>4,043</span>Sqft</li>
+                                                    <li class="text-1 flex"><span>{{$featuredRow->bedroom}}</span>Beds</li>
+                                                    <li class="text-1 flex"><span>{{$featuredRow->bathroom}}</span>Baths</li>
+                                                    <li class="text-1 flex"><span>{{$featuredRow->plot_area}}</span>Sqft</li>
                                                 </ul>
-                                                <div class="price text-1 lh-20 fw-6">$7250,00</div>
+                                                <div class="price text-1 lh-20 fw-6">{{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($featuredRow->price)}}</div>
                                             </div>
                                         </li>
-                                        <li class="box-listings style-2 hover-img">
-                                            <div class=" image-wrap">
-                                                <img class="lazyload" data-src="images/section/box-listing-2.jpg"
-                                                    src="images/section/box-listing-2.jpg" alt="">
-                                            </div>
-                                            <div class="content">
-                                                <div class="text-1 title fw-5 lh-20">
-                                                    <a href="property-detail-v1.html">Casa Lomas de Machalí Machas</a>
-                                                </div>
-                                                <ul class="meta-list flex">
-                                                    <li class="text-1 flex"><span>3</span>Bed</li>
-                                                    <li class="text-1 flex"><span>3</span>Bath</li>
-                                                    <li class="text-1 flex"><span>4,043</span>Sqft</li>
-                                                </ul>
-                                                <div class="price text-1 lh-20 fw-6">$7250,00</div>
-
-                                            </div>
-                                        </li>
-                                        <li class="box-listings style-2 hover-img">
-                                            <div class=" image-wrap">
-                                                <img class="lazyload" data-src="images/section/box-listing-3.jpg"
-                                                    src="images/section/box-listing-3.jpg" alt="">
-                                            </div>
-                                            <div class="content">
-                                                <div class="text-1 title fw-5 lh-20">
-                                                    <a href="property-detail-v1.html">Casa Lomas de Machalí Machas</a>
-                                                </div>
-                                                <ul class="meta-list flex">
-                                                    <li class="text-1 flex"><span>3</span>Bed</li>
-                                                    <li class="text-1 flex"><span>3</span>Bath</li>
-                                                    <li class="text-1 flex"><span>4,043</span>Sqft</li>
-                                                </ul>
-                                                <div class="price text-1 lh-20 fw-6">$7250,00</div>
-
-                                            </div>
-                                        </li>
-                                        <li class="box-listings style-2 hover-img">
-                                            <div class=" image-wrap">
-                                                <img class="lazyload" data-src="images/section/box-listing-4.jpg"
-                                                    src="images/section/box-listing-4.jpg" alt="">
-                                            </div>
-                                            <div class="content">
-                                                <div class="text-1 title fw-5 lh-20">
-                                                    <a href="property-detail-v1.html">Casa Lomas de Machalí Machas</a>
-                                                </div>
-                                                <ul class="meta-list flex">
-                                                    <li class="text-1 flex"><span>3</span>Bed</li>
-                                                    <li class="text-1 flex"><span>3</span>Bath</li>
-                                                    <li class="text-1 flex"><span>4,043</span>Sqft</li>
-                                                </ul>
-                                                <div class="price text-1 lh-20 fw-6">$7250,00</div>
-                                            </div>
-                                        </li>
-                                        <li class="box-listings style-2 hover-img">
-                                            <div class=" image-wrap">
-                                                <img class="lazyload" data-src="images/section/box-listing-5.jpg"
-                                                    src="images/section/box-listing-5.jpg" alt="">
-                                            </div>
-                                            <div class="content">
-                                                <div class="text-1 title fw-5 lh-20">
-                                                    <a href="property-detail-v1.html">Casa Lomas de Machalí Machas</a>
-                                                </div>
-                                                <ul class="meta-list flex">
-                                                    <li class="text-1 flex"><span>3</span>Bed</li>
-                                                    <li class="text-1 flex"><span>3</span>Bath</li>
-                                                    <li class="text-1 flex"><span>4,043</span>Sqft</li>
-                                                </ul>
-                                                <div class="price text-1 lh-20 fw-6">$7250,00</div>
-
-                                            </div>
-                                        </li>
+                                        @endforeach 
                                     </ul>
-                                </div>
-                                <div class="sidebar-item sidebar-location">
-                                    <h4 class="sidebar-title mb-28 ">Real estate near you</h4>
-                                    <div class="wrap-box-location">
-                                        <a class="box-location style-2 hover-img-rotate">
-                                            <div class="image-wrap">
-                                                <img class="lazyload" data-src="images/section/location-23.jpg"
-                                                    src="images/section/location-23.jpg" alt="">
-                                            </div>
-                                            <div class="content">
-                                                <h6 class="text-white text-1 lh-20">New York</h6>
-                                                <p class="text-2">1570 listing</p>
-                                            </div>
-                                        </a>
-                                        <a class="box-location style-2 hover-img-rotate">
-                                            <div class="image-wrap">
-                                                <img class="lazyload" data-src="images/section/location-24.jpg"
-                                                    src="images/section/location-24.jpg" alt="">
-                                            </div>
-                                            <div class="content">
-                                                <h6 class="text-white text-1 lh-20">Mississauga</h6>
-                                                <p class="text-2">1570 listing</p>
-                                            </div>
-                                        </a>
-                                        <a class="box-location style-2 hover-img-rotate">
-                                            <div class="image-wrap">
-                                                <img class="lazyload" data-src="images/section/location-25.jpg"
-                                                    src="images/section/location-25.jpg" alt="">
-                                            </div>
-                                            <div class="content">
-                                                <h6 class="text-white text-1 lh-20">Halifax</h6>
-                                                <p class="text-2">1570 listing</p>
-                                            </div>
-                                        </a>
-                                        <a class="box-location style-2 hover-img-rotate">
-                                            <div class="image-wrap">
-                                                <img class="lazyload" data-src="images/section/location-26.jpg"
-                                                    src="images/section/location-26.jpg" alt="">
-                                            </div>
-                                            <div class="content">
-                                                <h6 class="text-white text-1 lh-20">Ottawa</h6>
-                                                <p class="text-2">1570 listing</p>
-                                            </div>
-                                        </a>
-                                        <a class="box-location style-2 hover-img-rotate">
-                                            <div class="image-wrap">
-                                                <img class="lazyload" data-src="images/section/location-27.jpg"
-                                                    src="images/section/location-27.jpg" alt="">
-                                            </div>
-                                            <div class="content">
-                                                <h6 class="text-white text-1 lh-20">Iqaluit</h6>
-                                                <p class="text-2">1570 listing</p>
-                                            </div>
-                                        </a>
-                                        <a class="box-location style-2 hover-img-rotate">
-                                            <div class="image-wrap">
-                                                <img class="lazyload" data-src="images/section/location-28.jpg"
-                                                    src="images/section/location-28.jpg" alt="">
-                                            </div>
-                                            <div class="content">
-                                                <h6 class="text-white text-1 lh-20">Toronto</h6>
-                                                <p class="text-2">1570 listing</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
+                                </div> 
                                 <div class="sidebar-item sidebar-contact-agents">
                                     <h4 class="sidebar-title mb-28 ">Real estate near you</h4>
                                     <div class="wrap-contact-agents">
                                         <div class="box-contact-agent">
                                             <div class="avatar">
-                                                <img src="images/avatar/avt-png19.png" alt="">
+                                                <img src="{{ url('frontend/images/avatar/avt-png19.png')}}" alt="">
                                             </div>
                                             <div class="content">
                                                 <a href="#" class="text-1">Robert Fox</a>
@@ -2010,7 +702,7 @@
                                         </div>
                                         <div class="box-contact-agent">
                                             <div class="avatar">
-                                                <img src="images/avatar/avt-png20.png" alt="">
+                                                <img src="{{ url('frontend/images/avatar/avt-png20.png')}}" alt="">
                                             </div>
                                             <div class="content">
                                                 <a href="#" class="text-1">Cameron Williamson</a>
@@ -2019,7 +711,7 @@
                                         </div>
                                         <div class="box-contact-agent">
                                             <div class="avatar">
-                                                <img src="images/avatar/avt-png21.png" alt="">
+                                                <img src="{{ url('frontend/images/avatar/avt-png21.png')}}" alt="">
                                             </div>
                                             <div class="content">
                                                 <a href="#" class="text-1">Darlene Robertson</a>
@@ -2030,11 +722,11 @@
                                 </div>
                                 <div class="sidebar-ads">
                                     <div class="image-wrap">
-                                        <img class="lazyload" data-src="images/blog/ads.jpg" src="images/blog/ads.jpg"
+                                        <img class="lazyload" data-src="{{ url('frontend/images/blog/ads.jpg')}}" src="{{ url('frontend/images/blog/ads.jpg')}}"
                                             alt="">
                                     </div>
                                     <div class="logo relative z-5">
-                                        <img src="images/logo/logo-2%402x.png" alt="">
+                                        <img src="{{ url('frontend/images/logo/logo-2%402x.png')}}" alt="">
                                     </div>
                                     <div class="box-ads relative z-5">
                                         <div class="content ">
@@ -2062,7 +754,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="content-inner">
-                                <img src="images/section/cta.png" alt="">
+                                <img src="{{ url('frontend/images/section/cta.png')}}" alt="">
                                 <div class="content">
                                     <h4 class="text-white mb-8 ">Find a Local Real Estate Agent Today</h4>
                                     <p class="text-white text-1">If you’re looking to buy or sell a home. We’ll help you

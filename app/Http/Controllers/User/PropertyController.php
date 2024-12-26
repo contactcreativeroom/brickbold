@@ -28,7 +28,38 @@ class PropertyController extends Controller
     }
  
     public function list(Request $request){
-        $properties = Property::paginate($this->pagerecords);
+        $user = $this->userAuth; 
+
+        $properties = $user->Properties();
+        if ($request->has('status') && $request->status > 0) {
+            $status = $request->status; 
+            $properties->where('status', $status) ;
+        } 
+
+        if ($request->has('search') && $request->search !='') {
+            $search = $request->get('search');
+            //$properties->where('location', 'like', '%' . $search . '%');
+            $properties->where(function ($query) use ($search) {
+                $query->where('location', 'like', '%' . $search . '%')->orWhere('title', 'like', '%' . $search . '%');
+            });
+        }
+
+        if ($request->has('short')) { // Sorting
+            $sort = $request->short;
+            if ($sort === 'asc') {
+                $properties->orderBy('id', 'asc');
+            } else { 
+                $properties->orderBy('id', 'desc');
+            }
+        }
+
+        $properties = $properties->paginate($this->pagerecords)->appends([
+            'status' => $request->get('status'),
+            'search' => $request->get('search'),
+            'short' => $request->get('short'),
+        ]); 
+
+        // $properties = $user->Properties()->paginate($this->pagerecords);
         $data=array('rows'=>$properties);
         return view($this->prefix.'.property.list')->with($data);
     }
