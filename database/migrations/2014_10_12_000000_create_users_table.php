@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('profile_image')->nullable();
             $table->date('dob')->nullable();
             $table->string('phone')->nullable();
-            $table->string('description')->nullable();
+            $table->longText('description')->nullable();
             $table->string('address')->nullable();
             $table->string('city')->nullable();
             $table->string('state')->nullable();

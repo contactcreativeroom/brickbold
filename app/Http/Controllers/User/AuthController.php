@@ -44,8 +44,10 @@ class AuthController extends Controller
         ]);
     
         if ($user) {
+            Auth::guard('user')->login($user);
             return response()->json([
                 'success' => true,
+                'redirect_url' => route('user.dashboard'),
                 'message' => 'Registered successfully!',
             ], 201);
         }
@@ -134,8 +136,8 @@ class AuthController extends Controller
  
     public function passwordReset(Request $request) {
         $token = $request->token;
-        if ($request->isMethod('post')) {
-            $request->validate([
+        if ($request->isMethod('post')) { 
+            $this->validate($request, [
                 'token' => 'required',
                 'email' => 'required|email',
                 'password' => 'required|min:6|confirmed',
@@ -151,6 +153,7 @@ class AuthController extends Controller
                     event(new PasswordReset($user));
                 }
             ); 
+            
             if ($status === Password::PASSWORD_RESET) {
                 Helper::flashMessage(true, 'user password reset successfully!'); 
                 return redirect()->route('password.reset-success')->with('status', __($status));

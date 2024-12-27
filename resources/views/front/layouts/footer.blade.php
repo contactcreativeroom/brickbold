@@ -25,7 +25,7 @@
                                             Call us
                                         </div>
                                         <h6>
-                                            <a href="javascript:void(0)"> 0161-4048145</a>
+                                            <a href="javascript:void(0)">{{config('constants.CONTACT.country_code')}}-{{config('constants.CONTACT.phone')}}</a>
                                         </h6>
                                     </div>
                                 </div>
@@ -49,7 +49,7 @@
                                         </div>
                                         <h6 class="fw-4">
                                             <a href="javascript:void(0)">
-                                                support@brickbold.com
+                                                {{config('constants.CONTACT.email')}}
                                             </a>
                                         </h6>
                                     </div>
@@ -61,8 +61,8 @@
                         <div class="row">
                             <div class="col-lg-3 col-md-6">
                                 <div class="footer-menu-list footer-col-block style-2">
-                                    <h5 class="title lh-30 title-desktop">About us</h5>
-                                    <h5 class="title lh-30 title-mobile">About us</h5>
+                                    <h5 class="title lh-30 title-desktop">Quick links</h5>
+                                    <h5 class="title lh-30 title-mobile">Quick links</h5>
                                     <ul class="tf-collapse-content">
                                         <li><a href="contact.html">Contact</a></li>
                                         <li><a href="service-details.html">Why choose us?</a></li>
@@ -89,15 +89,12 @@
                             </div>
                             <div class="col-lg-3 col-md-6">
                                 <div class="footer-menu-list footer-col-block style-2">
-                                    <h5 class="title lh-30 title-desktop">Quick links</h5>
-                                    <h5 class="title lh-30 title-mobile">Quick links</h5>
+                                    <h5 class="title lh-30 title-desktop">Pages</h5>
+                                    <h5 class="title lh-30 title-mobile">Pages</h5>
                                     <ul class="tf-collapse-content">
-                                        <li><a href="#">Terms of use</a></li>
-                                        <li><a href="#">Privacy policy</a></li>
-                                        <li><a href="#">Our services</a></li>
-                                        <li><a href="contact.html">Contact support</a></li>
-                                        <li><a href="#">Pricing plans</a></li>
-                                        <li><a href="faq.html">FAQs</a></li>
+                                        @foreach (App\Helper\Helper::pages() as $page)
+                                            <li><a href="{{route('page', $page->slug)}}">{{$page->title}}</a></li>
+                                        @endforeach 
                                     </ul>
                                 </div>
                             </div>
@@ -199,9 +196,7 @@
                 </div>
                 <div class="col-12">
                     <div class="footer-bottom">
-                        <p>Copyright © 2024 <span class="fw-7">PROTY - BRICKBOLD</span> . Designed & Developed by
-                            <a href="https://www.creativeroom.in/">Creative Room</a>
-                        </p>
+                        <p>Copyright © 2024. Designed & Developed by <a href="https://www.creativeroom.in/">Creative Room</a> </p>
                         <div class="wrap-social">
                             <div class="text-3  fw-6 text-white">Follow us</div>
                             <ul class="tf-social ">

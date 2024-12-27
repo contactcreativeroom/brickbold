@@ -8,7 +8,9 @@
                         <img src="{{url('frontend/images/section/banner-login.jpg')}}" alt="banner">
                     </div> 
                     <form class="form-account" id="loginForm" method="POST" action="{{ route('password.reset', ['token' => request()->token, 'email' => request()->email ]) }}">
-                        {{ csrf_field() }}
+                        @csrf
+                        <input type="hidden" name="token" value="{{ request()->token }}" >
+                        <input type="hidden" name="email" value="{{ request()->email }}" >
                         <div class="title-box mb-40">
                             <h4>Setup New Password</h4>
                         </div>
@@ -24,9 +26,9 @@
                                             stroke="#A3ABB0" stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
                                     <input class="form-control @if($errors->has('password')) is-invalid @endif" type="password" placeholder="" name="password" autocomplete="off" >
-                                </div>
+                                </div> 
                                 @if ($errors->has('password'))
-                                <div class="text-danger is_error invalid-feedback">
+                                <div class="text-danger is_error">
                                     <div>{{ $errors->first('password') }}</div>
                                 </div>
                                 @endif
@@ -43,8 +45,18 @@
                                     <input class="form-control @if($errors->has('password_confirmation')) is-invalid @endif" type="password" placeholder="" name="password_confirmation" autocomplete="off">
                                 </div>
                                 @if ($errors->has('password_confirmation'))
-								<div class="text-danger is_error invalid-feedback">
+								<div class="text-danger is_error">
 									<div>{{ $errors->first('password_confirmation') }}</div>
+								</div>
+								@endif  
+                                @if ($errors->has('token'))
+								<div class="text-danger is_error">
+									<div>{{ $errors->first('token') }}</div>
+								</div>
+								@endif  
+                                @if ($errors->has('email'))
+								<div class="text-danger is_error">
+									<div>{{ $errors->first('email') }}</div>
 								</div>
 								@endif  
                             </fieldset>

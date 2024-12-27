@@ -9,6 +9,7 @@
 
 <head>
     @include('front.layouts.head')
+
 </head>
 
 <body class="popup-loader">
@@ -35,7 +36,8 @@
     @include('front.layouts.modal')
     @include('front.layouts.navbar')
     @include('front.layouts.script')
-
+    <script> var site_url = "{{url('/')}}";  </script>
+    <script type="text/javascript" src="{{url('frontend/js/custom.js')}}"></script> 
     @stack('scripts')
 
     @if (Session::has('message'))

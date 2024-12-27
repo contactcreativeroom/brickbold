@@ -10,3 +10,14 @@
 .selectedClass svg path{
     stroke: #fff;
 }
+
+.custom-pages, .custom-pages p{
+    line-height: 27px;
+}
+.toast-title{
+    font-size: 18px;
+}
+
+.toast-message{
+    font-size: 12px;
+}

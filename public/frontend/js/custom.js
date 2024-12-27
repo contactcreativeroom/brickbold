@@ -8,7 +8,7 @@ $('#registerForm').on('submit', function(e) {
         method: 'POST',
         data: formData,
         success: function(response) {
-            alert(response.message);
+            toastr.success(response.message, 'Successfully!');
             if (response.success) {
                 window.location.href = response.redirect_url || '/';
             }
@@ -17,10 +17,10 @@ $('#registerForm').on('submit', function(e) {
             if (xhr.responseJSON && xhr.responseJSON.errors) {
                 let errors = xhr.responseJSON.errors;
                 for (let field in errors) {
-                    $(`#${field}-error`).text(errors[field][0]);
+                    $(`#registerForm #${field}-error`).text(errors[field][0]);
                 }
-            } else {
-                alert(xhr.responseJSON.message || 'An error occurred. Please try again.');
+            } else { 
+                toastr.error("An error occurred. Please try again.", 'Error!');
             }
         }
     });
@@ -37,7 +37,7 @@ $('#loginForm').on('submit', function(e) {
         method: 'POST',
         data: formData,
         success: function(response) {
-            alert(response.message);
+            toastr.success(response.message, 'Successfully!');
             if (response.success) {
                 window.location.href = response.redirect_url;
             }
@@ -46,10 +46,10 @@ $('#loginForm').on('submit', function(e) {
             if (xhr.responseJSON && xhr.responseJSON.errors) {
                 let errors = xhr.responseJSON.errors;
                 for (let field in errors) {
-                    $(`#${field}-error`).text(errors[field][0]);
+                    $(`#loginForm #${field}-error`).text(errors[field][0]);
                 }
             } else {
-                alert(xhr.responseJSON.message || 'An error occurred. Please try again.');
+                toastr.error("An error occurred. Please try again.", 'Error!');
             }
         }
     });

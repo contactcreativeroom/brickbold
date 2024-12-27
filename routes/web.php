@@ -47,16 +47,20 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/faq', [HomeController::class, 'faq'])->name('faq');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+Route::get('/page/{slug}', [HomeController::class, 'page'])->name('page');
 
 Route::get('/properties', [FrontPropertyController::class, 'properties'])->name('properties');
 Route::get('/property/{id}', [FrontPropertyController::class, 'property'])->name('property');
+Route::get('/ad-packages', [HomeController::class, 'adPackages'])->name('ad-packages');
 
 Route::post('/login', [UserAuthController::class, 'login'])->name('login');
 Route::post('/register', [UserAuthController::class, 'register'])->name('register');
 Route::any('/forgot/password', [UserAuthController::class, 'forgotPassword'])->name('forgot.password');
 Route::match(['get','post'], '/password-reset/{token}', [UserAuthController::class, 'passwordReset'])->name('password.reset');
 Route::get('/reset/success', [UserAuthController::class, 'passwordResetSuccess'])->name('password.reset-success'); 
-Route::group(['prefix' => 'user'], function () {
+
+Route::middleware(['auth.user'])->prefix('user')->group(function () {
+// Route::group(['prefix' => 'user'], function () {
     Route::get('/logout', [UserAuthController::class, 'logout'])->name('user.logout');
     Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
     Route::any('/profile/edit', [UserController::class, 'editProfile'])->name('user.profile.edit');
@@ -78,6 +82,7 @@ Route::group(['prefix' => 'user'], function () {
     Route::post('/property/post', [PropertyController::class, 'postData'])->name('user.property.post');
     Route::get('/property/sold/{id}', [PropertyController::class, 'changeStatusSold'])->name('user.property.sold');
     Route::get('/property/enquery', [PropertyController::class, 'enquery'])->name('user.property.enquery');
+
 });
 
 Route::group(['prefix' => 'admin'], function () {

@@ -23,8 +23,8 @@
                                         stroke="#A3ABB0" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
                                 <input type="text" class="form-control" id="name" name="name" placeholder="full name">
-                                <span id="name-error" class="text-danger is_error"></span>
                             </div>
+                            <span id="name-error" class="text-danger is_error"></span>
                         </fieldset>
                         <fieldset class="box-fieldset">
                             <label for="email">Email address</label>
@@ -55,7 +55,7 @@
                             <span id="password-error" class="text-danger is_error"></span>
                         </fieldset>
                         <fieldset class="box-fieldset">
-                            <label for="confirm_password">Confirm password</label>
+                            <label for="password_confirmation">Confirm password</label>
                             <div class="ip-field">
                                 <svg class="icon" width="18" height="18" viewBox="0 0 18 18" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -63,7 +63,7 @@
                                         d="M12.375 7.875V5.0625C12.375 4.16739 12.0194 3.30895 11.3865 2.67601C10.7535 2.04308 9.89511 1.6875 9 1.6875C8.10489 1.6875 7.24645 2.04308 6.61351 2.67601C5.98058 3.30895 5.625 4.16739 5.625 5.0625V7.875M5.0625 16.3125H12.9375C13.3851 16.3125 13.8143 16.1347 14.1307 15.8182C14.4472 15.5018 14.625 15.0726 14.625 14.625V9.5625C14.625 9.11495 14.4472 8.68573 14.1307 8.36926C13.8143 8.05279 13.3851 7.875 12.9375 7.875H5.0625C4.61495 7.875 4.18573 8.05279 3.86926 8.36926C3.55279 8.68573 3.375 9.11495 3.375 9.5625V14.625C3.375 15.0726 3.55279 15.5018 3.86926 15.8182C4.18573 16.1347 4.61495 16.3125 5.0625 16.3125Z"
                                         stroke="#A3ABB0" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
-                                <input type="password" class="form-control" id="confirm_password" name="confirm_password"  placeholder="Confirm password">
+                                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation"  placeholder="Confirm password">
                             </div>
                             <span id="password_confirmation-error" class="text-danger is_error"></span>
                         </fieldset>
@@ -75,6 +75,7 @@
                                     <span class="text">I agreed to the terms & conditions</span>
                                 </label>
                             </div>
+                            <span id="accept_term_condition-error" class="text-danger is_error"></span>
                         </fieldset>
 
                     </div>
@@ -110,25 +111,7 @@
 
                             Google
                         </a>
-                        <a href="#" class="btn-social">
-                            <svg width="21" height="20" viewBox="0 0 21 20" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <g clip-path="url(#clip0_2478_12044)">
-                                    <path
-                                        d="M20.5 10C20.5 14.9914 16.843 19.1285 12.0625 19.8785V12.8906H14.3926L14.8359 10H12.0625V8.12422C12.0625 7.3332 12.45 6.5625 13.6922 6.5625H14.9531V4.10156C14.9531 4.10156 13.8086 3.90625 12.7145 3.90625C10.4305 3.90625 8.9375 5.29063 8.9375 7.79688V10H6.39844V12.8906H8.9375V19.8785C4.15703 19.1285 0.5 14.9914 0.5 10C0.5 4.47734 4.97734 0 10.5 0C16.0227 0 20.5 4.47734 20.5 10Z"
-                                        fill="#1877F2" />
-                                    <path
-                                        d="M14.3926 12.8906L14.8359 10H12.0625V8.12418C12.0625 7.33336 12.4499 6.5625 13.6921 6.5625H14.9531V4.10156C14.9531 4.10156 13.8088 3.90625 12.7146 3.90625C10.4304 3.90625 8.9375 5.29063 8.9375 7.79688V10H6.39844V12.8906H8.9375V19.8785C9.44664 19.9584 9.96844 20 10.5 20C11.0316 20 11.5534 19.9584 12.0625 19.8785V12.8906H14.3926Z"
-                                        fill="white" />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_2478_12044">
-                                        <rect width="20" height="20" fill="white" transform="translate(0.5)" />
-                                    </clipPath>
-                                </defs>
-                            </svg>
-                            Facebook
-                        </a>
+                        <a href="#" class="btn-social"> OTP </a>
                     </div>
                 </form>
             </div>
@@ -223,18 +206,7 @@
 
                             Google
                         </a>
-                        <a href="#" class="btn-social">
-                            <svg width="21" height="20" viewBox="0 0 21 20" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M20.5 10C20.5 14.9914 16.843 19.1285 12.0625 19.8785V12.8906H14.3926L14.8359 10H12.0625V8.12422C12.0625 7.3332 12.45 6.5625 13.6922 6.5625H14.9531V4.10156C14.9531 4.10156 13.8086 3.90625 12.7145 3.90625C10.4305 3.90625 8.9375 5.29063 8.9375 7.79688V10H6.39844V12.8906H8.9375V19.8785C4.15703 19.1285 0.5 14.9914 0.5 10C0.5 4.47734 4.97734 0 10.5 0C16.0227 0 20.5 4.47734 20.5 10Z"
-                                    fill="#1877F2" />
-                                <path
-                                    d="M14.3926 12.8906L14.8359 10H12.0625V8.12418C12.0625 7.33336 12.4499 6.5625 13.6921 6.5625H14.9531V4.10156C14.9531 4.10156 13.8088 3.90625 12.7146 3.90625C10.4304 3.90625 8.9375 5.29063 8.9375 7.79688V10H6.39844V12.8906H8.9375V19.8785C9.44664 19.9584 9.96844 20 10.5 20C11.0316 20 11.5534 19.9584 12.0625 19.8785V12.8906H14.3926Z"
-                                    fill="white" />
-                            </svg>
-                            Facebook
-                        </a>
+                        <a href="#" class="btn-social"> OTP </a>
                     </div>
                 </form>
             </div>

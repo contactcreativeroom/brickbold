@@ -3,7 +3,7 @@
                 <div class="sidebar-menu-dashboard">
                     <div class="menu-box">
                         <ul class="box-menu-dashboard">
-                            <li class="nav-menu-item active">
+                            <li class="nav-menu-item {{ in_array(Route::currentRouteName(), ['user.dashboard']) ? 'active' : '' }}">
                                 <a class="nav-menu-link" href="{{route('user.dashboard')}}">
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -27,7 +27,7 @@
                                     Dashboards
                                 </a>
                             </li>
-                            <li class="nav-menu-item">
+                            <li class="nav-menu-item {{ in_array(Route::currentRouteName(), ['user.profile']) ? 'active' : '' }}">
                                 <a class="nav-menu-link" href="{{route('user.profile')}}">
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -51,7 +51,7 @@
                                     Profile
                                 </a>
                             </li>
-                            <li class="nav-menu-item">
+                            <li class="nav-menu-item {{ in_array(Route::currentRouteName(), ['user.package']) ? 'active' : '' }}">
                                 <a class="nav-menu-link" href="{{route('user.package')}}">
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -69,7 +69,7 @@
                                     My package
                                 </a>
                             </li>
-                            <li class="nav-menu-item">
+                            {{-- <li class="nav-menu-item {{ in_array(Route::currentRouteName(), ['user.favorites']) ? 'active' : '' }}">
                                 <a class="nav-menu-link" href="{{route('user.favorites')}}">
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -88,8 +88,8 @@
                                     </svg>
                                     My favorites (1)
                                 </a>
-                            </li> 
-                            <li class="nav-menu-item">
+                            </li>  --}}
+                            {{-- <li class="nav-menu-item {{ in_array(Route::currentRouteName(), ['user.reviews']) ? 'active' : '' }}">
                                 <a class="nav-menu-link" href="{{route('user.reviews')}}">
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -108,8 +108,8 @@
                                     </svg>
                                     Reviews
                                 </a>
-                            </li>
-                            <li class="nav-menu-item">
+                            </li> --}}
+                            <li class="nav-menu-item {{ in_array(Route::currentRouteName(), ['user.properties']) ? 'active' : '' }}">
                                 <a class="nav-menu-link" href="{{route('user.properties')}}">
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -145,7 +145,7 @@
                                     My properties
                                 </a>
                             </li>
-                            <li class="nav-menu-item">
+                            <li class="nav-menu-item {{ in_array(Route::currentRouteName(), ['user.property.add']) ? 'active' : '' }}">
                                 <a class="nav-menu-link" href="{{route('user.property.add')}}">
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">

@@ -14,81 +14,167 @@
                             <ul class="navigation ">
                                 <li class="current-menu"><a href="{{route('about')}}">About Us</a></li>  
 
-                                <li class="has-child style-2"><a href="#">Buy</a>
+                                <li class="has-child style-2"><a href="{{route('properties')}}">Buy</a>
                                     <ul class="submenu">
                                         <li>
-                                            <a href="#">Popular</a>
+                                            <a href="{{route('properties')}}">Popular</a>
                                             <ul class="submenu2">
                                                 <li>
-                                                    <a href="property-grid-full-width.html">Ready to Move</a>
+                                                    <a href="{{route('properties')}}">Ready to Move</a>
                                                 </li>
                                                 <li>
-                                                    <a href="property-gird-top-search.html">Owner Properties</a>
+                                                    <a href="{{route('properties')}}">Owner Properties</a>
                                                 </li>
                                                 <li>
-                                                    <a href="property-gird-left-sidebar.html">Budget Homes</a>
+                                                    <a href="{{route('properties')}}">Budget Homes</a>
                                                 </li>
                                                 <li>
-                                                    <a href="property-gird-right-sidebar.html">Premium Homes</a>
+                                                    <a href="{{route('properties')}}">Premium Homes</a>
                                                 </li>
                                                 <li>
-                                                    <a href="property-list-full-width.html">Newly Launched</a>
+                                                    <a href="{{route('properties')}}">Newly Launched</a>
                                                 </li>                                                 
                                             </ul>
                                         </li>
                                         <li>
-                                            <a href="#">Property Types</a>
+                                            <a href="{{route('properties')}}">Property Types</a>
                                             <ul class="submenu2">
                                                 <li>
-                                                    <a href="property-half-map-grid.html">Residential</a>
+                                                    <a href="{{route('properties')}}">Residential</a>
                                                 <li>
-                                                    <a href="property-half-map-list.html">House For Sell</a>
+                                                    <a href="{{route('properties')}}">House For Sell</a>
                                                 </li>
                                                 <li>
-                                                    <a href="property-half-top-map.html">Villa For Sell</a>
+                                                    <a href="{{route('properties')}}">Villa For Sell</a>
                                                 </li>
                                                 <li>
-                                                    <a href="property-filter-popup.html">Apartment</a>
+                                                    <a href="{{route('properties')}}>Apartment</a>
                                                 </li>
                                                 <li>
-                                                    <a href="property-filter-popup-left.html">Commercial</a>
+                                                    <a href="{{route('properties')}}">Commercial</a>
                                                 </li>
                                                 <li>
-                                                    <a href="property-filter-popup-right.html">Commercial Office Space</a>
+                                                    <a href="{{route('properties')}}">Commercial Office Space</a>
                                                 </li>
                                                 <li>
-                                                    <a href="property-filter-popup-right.html">Commercial Land</a>
+                                                    <a href="{{route('properties')}}">Commercial Land</a>
                                                 </li>
 
                                             </ul>
                                         </li>
                                         <li>
-                                            <a href="#">Budget</a>
+                                            <a href="{{route('properties')}}">Budget</a>
                                             <ul class="submenu2">
-                                                <li><a href="property-detail-v1.html">Under ₹ 50 Lac</a>
+                                                <li><a href="{{route('properties')}}">Under ₹50 Lac</a>
                                                 </li>
-                                                <li><a href="property-detail-v2.html">50 Lac - ₹ 1 Cr</a>
+                                                <li><a href="{{route('properties')}}">₹50 Lac - ₹1 Cr</a>
                                                 </li>
-                                                <li><a href="property-detail-v3.html">1 Cr - ₹ 2 Cr</a>
+                                                <li><a href="{{route('properties')}}">₹1 Cr - ₹2 Cr</a>
                                                 </li>
-                                                <li><a href="property-detail-v4.html">2 Cr - ₹ 5 Cr</a>
+                                                <li><a href="{{route('properties')}}">₹2 Cr - ₹5 Cr</a>
                                                 </li>
-                                                <li><a href="property-detail-v5.html">Above ₹ 10 Cr</a>
+                                                <li><a href="{{route('properties')}}">Above ₹10 Cr</a>
                                                 </li>
                                             </ul>
                                         </li>
                                     </ul>
                                 </li>  
 
-                                <li class="has-child style-2"><a href="#">Rent</a>
+                                <li class="has-child style-2"><a href="{{route('properties')}}">Rent</a>
                                     <ul class="submenu">
-                                        <li class="current-item"><a href="index.html">Home Page 01</a></li>
+                                        <li>
+                                            <a href="{{route('properties')}}">Popular Choices</a>
+                                            <ul class="submenu2">
+                                                <li>
+                                                    <a href="{{route('properties')}}">Ready to Move</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{route('properties')}}">Owner Properties</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{route('properties')}}">Verified Properties</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{route('properties')}}">Furnished Homes</a>
+                                                </li>                                                  
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="{{route('properties')}}">Property Types</a>
+                                            <ul class="submenu2">
+                                                <li>
+                                                    <a href="{{route('properties')}}">Residential</a>
+                                                <li>
+                                                    <a href="{{route('properties')}}">House For Rent</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{route('properties')}}">Villa For Rent</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{route('properties')}}">Apartment</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{route('properties')}}">Commercial</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{route('properties')}}">Office Space</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="{{route('properties')}}">Budget</a>
+                                            <ul class="submenu2">
+                                                <li><a href="{{route('properties')}}">Under ₹10,000</a>
+                                                </li>
+                                                <li><a href="{{route('properties')}}">₹10,000 - ₹15,000</a>
+                                                </li>
+                                                <li><a href="{{route('properties')}}">₹15,000 - ₹20,000</a>
+                                                </li>
+                                                <li><a href="{{route('properties')}}">₹20,000 - ₹25,000</a>
+                                                </li>
+                                                <li><a href="{{route('properties')}}">Above ₹25,000</a>
+                                                </li>
+                                            </ul>
+                                        </li>
                                     </ul>
                                 </li>
 
                                 <li class="has-child style-2"><a href="#">Sell</a>
                                     <ul class="submenu">
-                                        <li class="current-item"><a href="index.html">Home Page 01</a></li>
+                                        <li>
+                                            <a href="{{route('properties')}}">For Owner</a>
+                                            <ul class="submenu2">
+                                                <li>
+                                                    <a href="{{route('user.property.add')}}">Rent Post Property</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{route('user.dashboard')}}">My Dashboard</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{route('ad-packages')}}">Sell / Rent Ad Packages</a>
+                                                </li>                                                  
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="{{route('properties')}}">For Agent & Builder</a>
+                                            <ul class="submenu2">
+                                                <li>
+                                                    <a href="{{route('user.dashboard')}}">My Dashboard</a>
+                                                <li>
+                                                    <a href="{{route('ad-packages')}}">Ad Packages</a>
+                                                </li> 
+                                                <li>
+                                                    <a href="{{route('contact')}}">Sales Enquiry</a>
+                                                </li> 
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="{{route('properties')}}">Selling Tools</a>
+                                            <ul class="submenu2">
+                                                <li><a href="{{route('properties')}}">Find an Agent</a>
+                                                </li>
+                                            </ul>
+                                        </li>
                                     </ul>
                                 </li>
 
@@ -107,7 +193,7 @@
                                     </svg>
 
                                 </div>
-                                <p>0161-4048145</p>
+                                <p>{{config('constants.CONTACT.country_code')}}-{{config('constants.CONTACT.phone')}}</p>
                             </div>
                             @auth('user')
                             <div class="box-user tf-action-btns">

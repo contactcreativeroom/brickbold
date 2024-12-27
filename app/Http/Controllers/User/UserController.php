@@ -24,7 +24,8 @@ class UserController extends Controller
  
     public function profile(){
         $user = $this->userAuth;
-        return view('user.profile', compact('user'));
+        $data=array('row'=>$user);
+        return view($this->prefix.'.profile')->with($data);
     }
 
     public function editProfile(Request $request)
@@ -33,7 +34,8 @@ class UserController extends Controller
             $validator = Validator::make($request->all(), [
                 'name' => 'required',
                 'email' => 'required|email',
-
+                'phone' => 'required',
+                'address' => 'required',
             ]);
 
             if ($validator->fails()) {
@@ -42,12 +44,14 @@ class UserController extends Controller
             };
             $user = $this->userAuth;
             $user->name = $request->name;
+            $user->description = $request->description;
             $user->email = $request->email;
             $user->phone = $request->phone;
+            $user->address = $request->address; 
 
-            $image = $request->file('image');
+            $image = $request->file('profile_image');
             if(isset($image)){
-                Helper::uploadImage($image, $user, 'user/profile', false, 'update', 'image', true, false, true, false);                 
+                Helper::uploadImage($image, $user, 'user/'.$user->id, false, 'update', 'profile_image', true, false, true, false);                 
             } 
 
             if ($user->save()) {
@@ -55,49 +59,36 @@ class UserController extends Controller
                 return redirect()->route('user.profile');
             }
         }
-        return view('user.auth.updateprofile');
+        return view('user.profile');
     }
 
-    public function changePassword(Request $request)
-    {
-        if ($request->method() == 'POST') {
-            $rules = [
+    public function changePassword(Request $request){ 
+        
+        if ($request->isMethod('post')) { 
+            $request->validate([
                 'old_password' => 'required',
-                'new_password' => 'required',
-                'confirm_password' => 'required|same:new_password',
-            ];
-
-            $validator = Validator::make($request->all(), $rules);
-            if ($validator->fails()) {
-
-                Helper::toastMsg(false, 'Validation Error!');
-                return back()->withInput()->withErrors($validator);
+                'new_password' => 'required|min:6|confirmed',
+            ]);
+ 
+            $user = $this->userAuth; 
+            if (!Hash::check($request->old_password, $user->password)) {
+                Helper::toastMsg(false, 'The old password is incorrect!');
+                return back()->withInput();
             }
-
-            $user = $this->userAuth;
-            $old_password = $request->old_password;
-            $new_password = $request->new_password;
-            $confirm_password = $request->confirm_password;
-
-            if ($old_password == $new_password) {
-                Helper::toastMsg(false, 'Old Password and New Password cannot be same!');
-                return back();
+ 
+            $user->password = Hash::make($request->new_password);
+            if ($user->save()) {
+                Helper::toastMsg(true, 'Password changed successfully!');
+                return redirect()->route('user.profile');
             }
-            if (Hash::check($old_password, $user->password)) {
-                $user->password = Hash::make($new_password);
-                if ($user->save()) {
-
-                    Helper::toastMsg(true, 'Password Changed Successfully!');
-                    return redirect()->route('user.profile');
-                }
-            } else {
-
-                Helper::toastMsg(false, 'Old Password is Incorrect!');
-                return back();
-            }
+ 
+            Helper::toastMsg(false, 'Failed to change the password. Please try again.');
+            return back();
         }
+ 
         return view('user.auth.changePassword');
     }
+
 
 
     public function package(){

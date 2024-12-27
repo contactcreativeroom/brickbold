@@ -16,6 +16,7 @@ content=" RealEstate, RealEstate, Buy, Rent, Homes, Apartment, Listings, Sale, R
 <link rel="stylesheet" type="text/css" href="{{url('frontend/css/sib-styles.css')}}" />
 <link rel="stylesheet" type="text/css" href="{{url('frontend/css/styles.css')}}" />
 <link rel="stylesheet" type="text/css" href="{{url('frontend/css/custom.css')}}" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" rel="stylesheet">
 
 <!-- Icon -->
 <link rel="stylesheet" type="text/css" href="{{url('frontend/icons/icomoon/style.css')}}" />
