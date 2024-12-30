@@ -1285,8 +1285,8 @@ a:hover, a:focus {
   padding: 21px 0px 15px;
 }
 #header-main .header-logo img {
-  width: 136px;
-  height: 42px;
+  /* width: 136px; */
+  height: 45px;
 }
 #header-main .tf-btn {
   height: 44px;
@@ -2001,8 +2001,8 @@ a:hover, a:focus {
   gap: 16px;
 }
 #footer .footer-logo img {
-  width: 136px;
-  height: 42px;
+  /* width: 136px; */
+  height: 48px;
 }
 
 .footer-col-block .title-mobile {
@@ -2775,7 +2775,10 @@ form label {
 }
 .form-contact textarea {
   border-radius: 16px;
-  margin-bottom: 32px;
+  /* margin-bottom: 32px; */
+}
+textarea.is-invalid{
+  border: 1px solid #DC3544;
 }
 .form-contact .phone {
   width: 50%;

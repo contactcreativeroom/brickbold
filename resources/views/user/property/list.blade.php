@@ -62,7 +62,7 @@
                                                     </div>
                                                     <div class="content">
                                                         <div class="title">
-                                                            <a href="{{route('property', $row->id)}}" class="link">{{$row->title}}</a> 
+                                                            <a href="{{route('property', $row->slug)}}" class="link">{{$row->title}}</a> 
                                                         </div>
                                                         <div class="text-date">Posting date: {{ App\Helper\Helper::formatStringDate($row->created_at)  }}</div>
                                                         <div class="text-btn text-color-primary">{{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($row->price)}}</div>
@@ -103,7 +103,7 @@
                                                         </li>
                                                     @endif                                                    
                                                     <li>
-                                                        <a href="{{route('property', $row->id)}}" class="item">
+                                                        <a href="{{route('property', $row->slug)}}" class="item">
                                                             <svg width="16" height="16" viewBox="0 0 16 16"
                                                                 fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                 <path

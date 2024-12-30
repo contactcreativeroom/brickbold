@@ -88,13 +88,13 @@
                                 @if (Auth::guard('user')->user())
                                     <div class="action action-button-list">
                                         <ul class="list-action">
-                                            <li>
+                                            {{-- <li>
                                                 <a href="{{route('user.favorite.toggle', $row->id)}}" class="{{ $row->favorites()->where('user_id', Auth::guard('user')->user()->id)->count() > 0 ? 'selectedClass' : '' }}">
                                                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M15.75 6.1875C15.75 4.32375 14.1758 2.8125 12.234 2.8125C10.7828 2.8125 9.53625 3.657 9 4.86225C8.46375 3.657 7.21725 2.8125 5.76525 2.8125C3.825 2.8125 2.25 4.32375 2.25 6.1875C2.25 11.6025 9 15.1875 9 15.1875C9 15.1875 15.75 11.6025 15.75 6.1875Z" stroke="#5C5E61" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                     </svg>
                                                 </a>
-                                            </li>
+                                            </li> --}}
                                             <li><a href="#"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
                                                         <path
@@ -398,7 +398,7 @@
                             </div>
                         </div>
                        
-                        <div class="wg-property mb-0 box-comment spacing-8">
+                        {{-- <div class="wg-property mb-0 box-comment spacing-8">
                             <div class="wrap-comment">
                                 <h4 class="title">Guest Reviews</h4>
                                 <ul class="comment-list">
@@ -622,7 +622,7 @@
                                     </button>
                                 </form>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="col-xl-4 col-lg-5">
                         <div class=" tf-sidebar sticky-sidebar ">
@@ -632,27 +632,24 @@
                                 </h4>
                                 <div class="seller-info">
                                     <div class="avartar">
-                                        <img src="{{ url('frontend/images/avatar/seller.jpg')}}" alt="">
+                                        <img src="{{ App\Helper\Helper::getProfileImage('storage/user/'.$row?->user_id, $row?->user->profile_image) }}" alt="">
                                     </div>
                                     <div class="content">
                                         <h6 class="name">Shara Conner</h6>
                                         <ul class="contact">
-                                            <li><i class="icon-phone-1"></i><span>1-333-345-6868</span></li>
-                                            <li><i class="icon-mail"></i><a href="#">themesflat@gmail.com</a></li>
+                                            <li><i class="icon-phone-1"></i><span>{{$row?->user->name }}</span></li>
+                                            <li><i class="icon-mail"></i>{{$row?->user->email }}</li>
                                         </ul>
                                     </div>
                                 </div>
                                 <fieldset class="mb-12">
-                                    <input type="text" class="form-control" placeholder="Full Name" name="name"
-                                        id="name1" required>
+                                    <input type="text" class="form-control" placeholder="Full Name" name="name" id="name1" required>
                                 </fieldset>
                                 <fieldset class="mb-30">
-                                    <textarea name="message" cols="30" rows="10" placeholder="How can an agent help"
-                                        id="message1" required></textarea>
+                                    <textarea name="message" cols="30" rows="10" placeholder="How can an agent help" id="message1" required></textarea>
                                 </fieldset>
 
-                                <a href="#" class="tf-btn bg-color-primary w-full">
-                                    Send message</a>
+                                <button type="submit" class="tf-btn bg-color-primary w-full"> Send message</button>
                             </form>
                             <div class=" sidebar-ads mb-30">
                                 <div class="image-wrap">
@@ -731,7 +728,7 @@
                                     <div class="swiper-slide">
                                     <div class="box-house hover-img">
                                         <div class="image-wrap">
-                                            <a href="property-detail-v1.html">
+                                            <a href="{{route('property', $similarProperty->slug)}}">
                                                 <img class="lazyload" data-src="{{ App\Helper\Helper::getImage('storage/property/'.$similarProperty->id, $similarProperty?->image?->image) }}" src="{{ App\Helper\Helper::getImage('storage/property/'.$similarProperty->id, $similarProperty?->image?->image) }}" alt="">
                                             </a>
                                             <ul class="box-tag flex gap-8 ">
@@ -739,17 +736,17 @@
                                                 <li class="flat-tag text-4 bg-3 fw-6 text-white">{{config('constants.FOR_TYPE')[$similarProperty->for_type]}}</li>
                                             </ul>
                                             <div class="list-btn flex gap-8 ">
-                                                <a href="{{route('user.favorite.toggle', $similarProperty->id)}}" class="btn-icon save hover-tooltip"><i class="icon-save"></i>
+                                                {{-- <a href="{{route('user.favorite.toggle', $similarProperty->id)}}" class="btn-icon save hover-tooltip"><i class="icon-save"></i>
                                                     <span class="tooltip">Add Favorite</span>
-                                                </a>
-                                                <a href="{{route('property', $similarProperty->id)}}" class="btn-icon find hover-tooltip"><i class="icon-find-plus"></i>
+                                                </a> --}}
+                                                <a href="{{route('property', $similarProperty->slug)}}" class="btn-icon find hover-tooltip"><i class="icon-find-plus"></i>
                                                     <span class="tooltip">Quick View</span>
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="content">
                                             <h5 class="title">
-                                                <a href="{{route('property', $similarProperty->id)}}">{{$similarProperty->title}}</a>
+                                                <a href="{{route('property', $similarProperty->slug)}}">{{$similarProperty->title}}</a>
 
                                             </h5>
                                             <p class="location text-1 flex items-center gap-8">
@@ -765,7 +762,7 @@
                                                     {{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($similarProperty->price)}}
                                                 </h5>
                                                 <div class="wrap-btn flex"> 
-                                                    <a href="{{route('property', $similarProperty->id)}}" class="tf-btn style-border pd-4">Details</a>
+                                                    <a href="{{route('property', $similarProperty->slug)}}" class="tf-btn style-border pd-4">Details</a>
                                                 </div>
                                             </div>
                                         </div>

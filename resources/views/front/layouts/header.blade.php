@@ -20,19 +20,19 @@
                                             <a href="{{route('properties')}}">Popular</a>
                                             <ul class="submenu2">
                                                 <li>
-                                                    <a href="{{route('properties')}}">Ready to Move</a>
+                                                    <a href="{{ route('properties', ['for_type' => 'for-sell', 'availability' => 'ready-to-move']) }}">Ready to Move</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{route('properties')}}">Owner Properties</a>
+                                                    <a href="{{route('properties', ['for_type' => 'for-sell', 'ownership' => 'free-hold'])}}">Owner Properties</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{route('properties')}}">Budget Homes</a>
+                                                    <a href="{{route('properties', ['for_type' => 'for-sell', 'is_negotiable' => 'negotiable'])}}">Budget Homes</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{route('properties')}}">Premium Homes</a>
+                                                    <a href="{{route('properties', ['for_type' => 'for-sell', 'user_premium' => 1])}}">Premium Homes</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{route('properties')}}">Newly Launched</a>
+                                                    <a href="{{route('properties', ['for_type' => 'for-sell', 'sort' => 'asc'])}}">Newly Launched</a>
                                                 </li>                                                 
                                             </ul>
                                         </li>
@@ -40,24 +40,24 @@
                                             <a href="{{route('properties')}}">Property Types</a>
                                             <ul class="submenu2">
                                                 <li>
-                                                    <a href="{{route('properties')}}">Residential</a>
+                                                    <a href="{{route('properties', ['for_type' => 'for-sell', 'type' => 'residential'])}}">Residential</a>
                                                 <li>
-                                                    <a href="{{route('properties')}}">House For Sell</a>
+                                                    <a href="{{route('properties', ['for_type' => 'for-sell', 'property_detail' => 'house'])}}">House For Sell</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{route('properties')}}">Villa For Sell</a>
+                                                    <a href="{{route('properties', ['for_type' => 'for-sell', 'property_detail' => 'villa'])}}">Villa For Sell</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{route('properties')}}>Apartment</a>
+                                                    <a href="{{route('properties', ['for_type' => 'for-sell', 'type' => 'apartment'])}}">Apartment</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{route('properties')}}">Commercial</a>
+                                                    <a href="{{route('properties', ['for_type' => 'for-sell', 'type' => 'commercial'])}}">Commercial</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{route('properties')}}">Commercial Office Space</a>
+                                                    <a href="{{route('properties', ['for_type' => 'for-sell', 'property_detail' => 'office'])}}">Commercial Office Space</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{route('properties')}}">Commercial Land</a>
+                                                    <a href="{{route('properties', ['for_type' => 'for-sell', 'property_detail' => 'plot-land'])}}">Commercial Land</a>
                                                 </li>
 
                                             </ul>
@@ -65,15 +65,15 @@
                                         <li>
                                             <a href="{{route('properties')}}">Budget</a>
                                             <ul class="submenu2">
-                                                <li><a href="{{route('properties')}}">Under ₹50 Lac</a>
+                                                <li><a href="{{route('properties', ['for_type' => 'for-sell', 'max_price' => 5000000])}}">Under ₹50 Lac</a>
                                                 </li>
-                                                <li><a href="{{route('properties')}}">₹50 Lac - ₹1 Cr</a>
+                                                <li><a href="{{route('properties', ['for_type' => 'for-sell', 'min_price' => 5000000, 'max_price' => 10000000])}}">₹50 Lac - ₹1 Cr</a>
                                                 </li>
-                                                <li><a href="{{route('properties')}}">₹1 Cr - ₹2 Cr</a>
+                                                <li><a href="{{route('properties', ['for_type' => 'for-sell', 'min_price' => 10000000, 'max_price' => 20000000])}}">₹1 Cr - ₹2 Cr</a>
                                                 </li>
-                                                <li><a href="{{route('properties')}}">₹2 Cr - ₹5 Cr</a>
+                                                <li><a href="{{route('properties', ['for_type' => 'for-sell', 'min_price' => 20000000, 'max_price' => 50000000])}}">₹2 Cr - ₹5 Cr</a>
                                                 </li>
-                                                <li><a href="{{route('properties')}}">Above ₹10 Cr</a>
+                                                <li><a href="{{route('properties', ['for_type' => 'for-sell', 'min_price' => 100000000])}}">Above ₹10 Cr</a>
                                                 </li>
                                             </ul>
                                         </li>
@@ -207,7 +207,7 @@
                                     </svg>
                                 </div>
                                 <div class="name">
-                                    Johan
+                                    {{ auth('user')->user()->name }}
                                     <i class="icon-CaretDown"></i>
                                 </div>
                                 <div class=" menu-user">
@@ -288,7 +288,7 @@
                                                 stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
                                         My package</a>
-                                    <a class="dropdown-item" href="{{route('user.favorites')}}">
+                                    {{-- <a class="dropdown-item" href="{{route('user.favorites')}}">
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -304,9 +304,9 @@
                                                 stroke="#A8ABAE" stroke-width="1.4" stroke-linecap="round"
                                                 stroke-linejoin="round" />
                                         </svg>
-                                        My favorites (1)</a>
+                                        My favorites (1)</a> --}}
                                      
-                                    <a class="dropdown-item" href="{{route('user.reviews')}}">
+                                    {{-- <a class="dropdown-item" href="{{route('user.reviews')}}">
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -322,7 +322,7 @@
                                                 stroke="#A8ABAE" stroke-width="1.4" stroke-linecap="round"
                                                 stroke-linejoin="round" />
                                         </svg>
-                                        Reviews</a>
+                                        Reviews</a> --}}
                                     <a class="dropdown-item" href="{{route('user.properties')}}">
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -378,13 +378,14 @@
                                         Logout</a>
                                 </div>
                             </div>
-                            <div class="btn-add">
-                                <a class="tf-btn style-border pd-23" href="{{route('user.property.add')}}">Add property</a>
-                            </div>
+                            
                             @endauth
 
                             @guest('user')
-                                <div class="box-user tf-action-btns">
+                                <div class="btn-add">
+                                    <a class="tf-btn style-border pd-23" href="#modalLogin" data-bs-toggle="modal" >Add property</a>
+                                </div>
+                                {{-- <div class="box-user tf-action-btns">
                                     <div class="user ">
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -399,7 +400,7 @@
                                         <span>/</span>
                                         <a href="#modalRegister" data-bs-toggle="modal">register </a>
                                     </div>
-                                </div>
+                                </div> --}}
                             @endguest
                             <div class="mobile-button" data-bs-toggle="offcanvas" data-bs-target="#menu-mobile"
                                 aria-controls="menu-mobile">

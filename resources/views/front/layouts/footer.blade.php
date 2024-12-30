@@ -58,18 +58,18 @@
                         </div>
                     </div>
                     <div class="footer-main">
-                        <div class="row">
+                    <div class="row">
                             <div class="col-lg-3 col-md-6">
                                 <div class="footer-menu-list footer-col-block style-2">
                                     <h5 class="title lh-30 title-desktop">Quick links</h5>
                                     <h5 class="title lh-30 title-mobile">Quick links</h5>
                                     <ul class="tf-collapse-content">
-                                        <li><a href="contact.html">Contact</a></li>
-                                        <li><a href="service-details.html">Why choose us?</a></li>
-                                        <li><a href="#">Customer reviews</a></li>
+                                        <li><a href="{{route('contact')}}">Contact us</a></li>
+                                        <li><a href="{{route('about')}}">Why choose us?</a></li>
+                                        {{-- <li><a href="#">Customer reviews</a></li>
                                         <li><a href="agents.html">Our team</a></li>
                                         <li><a href="career.html">Careers with realty</a></li>
-                                        <li><a href="career.html">Work with us</a></li>
+                                        <li><a href="career.html">Work with us</a></li> --}}
                                     </ul>
                                 </div>
                             </div>
@@ -78,12 +78,11 @@
                                     <h5 class="title lh-30 title-desktop">Popular house</h5>
                                     <h5 class="title lh-30 title-mobile">Popular house</h5>
                                     <ul class="tf-collapse-content">
-                                        <li><a href="property-gird.html">#Penthouses</a></li>
-                                        <li><a href="property-gird.html">#Villa</a></li>
-                                        <li><a href="property-gird.html">#Smart home</a></li>
-                                        <li><a href="property-gird.html">#Apartments</a></li>
-                                        <li><a href="property-gird.html">#Office</a></li>
-                                        <li><a href="property-gird.html">#Bungalow</a></li>
+                                        <li><a href="{{ route('properties', ['property_detail' => 'penthouses']) }}">#Penthouses</a></li>
+                                        <li><a href="{{ route('properties', ['property_detail' => 'villa']) }}">#Villa</a></li> 
+                                        <li><a href="{{ route('properties', ['property_detail' => 'apartments']) }}">#Apartments</a></li>
+                                        <li><a href="{{ route('properties', ['property_detail' => 'office']) }}">#Office</a></li>
+                                        <li><a href="{{ route('properties', ['property_detail' => 'bungalow']) }}">#Bungalow</a></li>
                                     </ul>
                                 </div>
                             </div>

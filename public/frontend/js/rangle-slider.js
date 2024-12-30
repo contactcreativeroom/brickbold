@@ -2,54 +2,48 @@
 
 // Initialize slider:
 $(document).ready(function () {
-    if ($("#slider-range").length > 0) {
+    if ($("#slider-range-price").length > 0) {
         $(".noUi-handle").on("click", function () {
             $(this).width(50);
         });
-        var rangeSlider = document.getElementById("slider-range");
+        var priceRangeSlider = document.getElementById("slider-range-price");
         var moneyFormat = wNumb({
             decimals: 0,
             thousand: ",",
-            prefix: "$",
+            prefix: "₹",
         });
-        noUiSlider.create(rangeSlider, {
-            start: [100, 500000],
+        noUiSlider.create(priceRangeSlider, {
+            start: [minPrice, maxPrice],
             step: 1,
             range: {
-                min: [100],
-                max: [650000],
+                min: [0],
+                max: [500000000],
             },
             format: moneyFormat,
             connect: true,
         });
         // Set visual min and max values and also update value hidden form inputs
-        rangeSlider.noUiSlider.on("update", function (values, handle) {
-            document.getElementById("slider-range-value1").innerHTML =
-                values[0];
-            document.getElementById("slider-range-value2").innerHTML =
-                values[1];
-            document.getElementsByName("min-value").value = moneyFormat.from(
-                values[0]
-            );
-            document.getElementsByName("max-value").value = moneyFormat.from(
-                values[1]
-            );
+        priceRangeSlider.noUiSlider.on("update", function (values, handle) {
+            document.getElementById("min-range-price").innerHTML = values[0];
+            document.getElementById("max-range-price").innerHTML = values[1];
+            jQuery('[name="min_price"]').val(moneyFormat.from(values[0]));
+            jQuery('[name="max_price"]').val(moneyFormat.from(values[1]));
         });
     }
 });
 
 $(document).ready(function () {
-    if ($("#slider-range2").length > 0) {
+    if ($("#slider-range-size").length > 0) {
         $(".noUi-handle2").on("click", function () {
             $(this).width(50);
         });
-        var rangeSlider = document.getElementById("slider-range2");
+        var rangeSlider = document.getElementById("slider-range-size");
         var moneyFormat = wNumb({
             decimals: 0,
             thousand: ",",
         });
         noUiSlider.create(rangeSlider, {
-            start: [0, 1000],
+            start: [minSize, maxSize],
             step: 1,
             range: {
                 min: [0],
@@ -60,16 +54,10 @@ $(document).ready(function () {
         });
         // Set visual min and max values and also update value hidden form inputs
         rangeSlider.noUiSlider.on("update", function (values, handle) {
-            document.getElementById("slider-range-value01").innerHTML =
-                values[0];
-            document.getElementById("slider-range-value02").innerHTML =
-                values[1];
-            document.getElementsByName("min-value2").value = moneyFormat.from(
-                values[0]
-            );
-            document.getElementsByName("max-value2").value = moneyFormat.from(
-                values[1]
-            );
+            document.getElementById("min-range-size").innerHTML = values[0];
+            document.getElementById("max-range-size").innerHTML = values[1];
+            jQuery('[name="min_size"]').val(moneyFormat.from(values[0]));
+            jQuery('[name="max_size"]').val(moneyFormat.from(values[1]));
         });
     }
 });

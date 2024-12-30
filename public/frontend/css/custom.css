@@ -21,3 +21,13 @@
 .toast-message{
     font-size: 12px;
 }
+
+.wg-filter.style-2 .form {
+    max-width: 320px;
+    width: 100%;
+    flex-shrink: 0;
+}
+
+.home01 .wg-filter .form {
+    flex: 1;
+}

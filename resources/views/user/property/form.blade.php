@@ -68,7 +68,7 @@
                                 <label for="zip">
                                     Province/State:<span>*</span>
                                 </label>
-                                <input type="text" class="form-control {{ $errors->has('state') ? ' is-invalid' : '' }}" name="state" placeholder="Enter property zip code" value="@if(old('state')!=null){{old('state')}}@elseif(!empty($row->state)){{$row->state}}@endif" id="__address_state">
+                                <input type="text" class="form-control {{ $errors->has('state') ? ' is-invalid' : '' }}" name="state" placeholder="Enter property zip code" value="@if(old('state')!=null){{old('state')}}@elseif(!empty($row->state)){{$row->state}}@endif" id="__address_state" readonly>
                                 @if($errors->has('state'))
 									<span class="invalid-feedback">
 										{{ $errors->first('state') }}
@@ -80,7 +80,7 @@
                                 <label for="City">
                                     City:<span>*</span>
                                 </label>
-                                <input type="text" class="form-control {{ $errors->has('city') ? ' is-invalid' : '' }}" name="city" placeholder="Enter property zip code" value="@if(old('city')!=null){{old('city')}}@elseif(!empty($row->city)){{$row->city}}@endif" id="__address_city">
+                                <input type="text" class="form-control {{ $errors->has('city') ? ' is-invalid' : '' }}" name="city" placeholder="Enter property zip code" value="@if(old('city')!=null){{old('city')}}@elseif(!empty($row->city)){{$row->city}}@endif" id="__address_city" readonly >
                                 @if($errors->has('city'))
 									<span class="invalid-feedback">
 										{{ $errors->first('city') }}
@@ -91,7 +91,7 @@
                                 <label for="zip">
                                     Zip Code:<span>*</span>
                                 </label>
-                                <input type="text" class="form-control {{ $errors->has('zip_code') ? ' is-invalid' : '' }}" name="zip_code" placeholder="Enter property zip code" value="@if(old('zip_code')!=null){{old('zip_code')}}@elseif(!empty($row->zip_code)){{$row->zip_code}}@endif" id="__address_postcode" >
+                                <input type="text" class="form-control {{ $errors->has('zip_code') ? ' is-invalid' : '' }}" name="zip_code" placeholder="Enter property zip code" value="@if(old('zip_code')!=null){{old('zip_code')}}@elseif(!empty($row->zip_code)){{$row->zip_code}}@endif" id="__address_postcode" readonly>
                                 @if($errors->has('zip_code'))
 									<span class="invalid-feedback">
 										{{ $errors->first('zip_code') }}

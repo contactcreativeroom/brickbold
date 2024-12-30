@@ -19,17 +19,17 @@ return [
         0 =>  'In-active'
     ],
     'IS_NEGOTIABLE' => [
-        1 =>  'Negotiable',
-        2 =>  'Fixed Price'
+        'negotiable' =>  'Negotiable',
+        'fixed-price' =>  'Fixed Price'
     ],
     'AVAILABILITY' => [
-        1 =>  'Under Construction',
-        2 =>  'Ready to move',
-        3 =>  'Plot/Land'
+        'under-construction' => 'Under Construction',
+        'ready-to-move' => 'Ready to move',
+        'plot-land' => 'Plot/Land',
     ],
     'OWNERSHIP' => [
-        1 =>  'Free Hold',
-        2 =>  'Lease Hold'
+        'free-hold' =>  'Free Hold',
+        'lease-hold' =>  'Lease Hold'
     ],
     'BUILD_YEAR' => [
         1 =>  'Plot/Land',
@@ -38,29 +38,31 @@ return [
         4 =>  'Less Then 15 to 20 Years',
         5 =>  'Less Then 10 to 15 Years',
         6 =>  'Above 20 Years'
-    ],  
-    'IS_NEGOTIABLE' => [
-        1 =>  'Fixed Price',
-        2 =>  'Negotiable Price'
     ], 
     'TYPE' => [
-        1 =>  'Apartment',
-        2 =>  'Commercial',
-        3 =>  'Residential'
+        'apartment' =>  'Apartment',
+        'commercial' =>  'Commercial',
+        'residential' =>  'Residential'
     ],
     'FOR_TYPE' => [
-        1 =>  'For Sell',
-        2 =>  'For Rent'
+        'for-sell' =>  'For Sell',
+        'for-rent' =>  'For Rent'
     ],
+
     'PROPERTY_DETAIL' => [
-        1 =>  'House',
-        2 =>  'Villa',
-        3 =>  'Flat',
-        4 =>  'Plot/Land',
-        5 =>  'PG'
-    ], 
+        'house' => 'House',
+        'villa' => 'Villa',
+        'flat' => 'Flat',
+        'plot-land' => 'Plot/Land',
+        'pg' => 'PG',
+        'studio' => 'Studio',
+        'office' => 'Office',
+        'townhouse' => 'Townhouse',
+        'bungalow' => 'Bungalow',
+        'penthouses' => 'Penthouses',
+    ],
     'LOOP5' => ['1','2','3','4','5','5+'],
-    'FACING' => ['East','North-East','North-West','South-East','South-West'],
+    'FACING' => ['East','West','North','South','North-East','North-West','South-East','South-West'],
     'FURNISHED_DETAIL' => [
         'Furnished',
         'UnFurnished',
@@ -98,13 +100,14 @@ return [
     ],
 
     'BUSINESS' => [
-        'name' => 'TurQuoise'
+        'name' => 'Brickbold'
     ],
 
     'CONTACT' => [
         'country_code' => '+0161',
         'phone' => '4048145',
         'email' => 'support@brickbold.com',
+        'addresss' => 'SCO-18, 2nd Floor, Cabin No. 208, Feroze Gandhi Market, Ludhiana, Punjab, India, 141001',
     ],    
 
     'SMS' => [

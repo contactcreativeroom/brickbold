@@ -47,10 +47,11 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/faq', [HomeController::class, 'faq'])->name('faq');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+Route::post('/contact/post', [HomeController::class, 'contactPost'])->name('contact.post');
 Route::get('/page/{slug}', [HomeController::class, 'page'])->name('page');
 
 Route::get('/properties', [FrontPropertyController::class, 'properties'])->name('properties');
-Route::get('/property/{id}', [FrontPropertyController::class, 'property'])->name('property');
+Route::get('/property/{slug}', [FrontPropertyController::class, 'property'])->name('property');
 Route::get('/ad-packages', [HomeController::class, 'adPackages'])->name('ad-packages');
 
 Route::post('/login', [UserAuthController::class, 'login'])->name('login');

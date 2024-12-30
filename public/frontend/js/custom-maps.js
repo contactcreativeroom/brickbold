@@ -131,6 +131,7 @@
               //fields: ["address_components", "geometry", "place_id", "name", "formatted_address"],
               fields: ["address_components", "place_id", "geometry", "formatted_address", "name"],
               //types: ["address"],
+              componentRestrictions: {country: ["in"]}
           });
           // addressField.focus();
           autocomplete.addListener("place_changed", fillInAddress);

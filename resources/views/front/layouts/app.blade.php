@@ -36,7 +36,13 @@
     @include('front.layouts.modal')
     @include('front.layouts.navbar')
     @include('front.layouts.script')
-    <script> var site_url = "{{url('/')}}";  </script>
+    <script>
+        var site_url = "{{url('/')}}";  
+        const minPrice = "{{ request('min_price', '') }}";
+        const maxPrice = "{{ request('max_price', '') }}";
+        const minSize = "{{ request('min_size', '') }}";
+        const maxSize = "{{ request('max_size', '') }}";
+    </script>
     <script type="text/javascript" src="{{url('frontend/js/custom.js')}}"></script> 
     @stack('scripts')
 

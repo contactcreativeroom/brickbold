@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable()->index();
             $table->string('title')->nullable();
+            $table->string('slug')->nullable();
             $table->longText('description')->nullable();
             $table->string('state')->nullable();
             $table->string('city')->nullable();
@@ -25,12 +26,12 @@ return new class extends Migration
             $table->integer('price')->nullable();
             $table->string('price_detail')->nullable();
             $table->integer('is_negotiable')->nullable()->default(1)->comment('1=Negotiable, 2=Fixed Price');
-            $table->integer('availability')->nullable()->default(1)->comment('1=Under Construction, 2=Fixed Price');
+            $table->string('availability')->nullable()->default('ready-to-move');
             $table->integer('ownership')->nullable()->default(1)->comment('1=Free Hold, 2=Lease Hold');
             $table->integer('build_year')->nullable()->default(1);
-            $table->integer('type')->nullable()->default(1);
+            $table->string('type')->nullable()->default('residential');
             $table->string('property_detail')->nullable();
-            $table->integer('for_type')->nullable()->default(1)->comment('1=For Sell, 2=For Sell');
+            $table->string('for_type')->nullable()->default('for-sell');
             $table->string('plot_area')->nullable();
             $table->string('plot_type')->nullable();
             $table->string('carpet_area')->nullable();
@@ -47,7 +48,9 @@ return new class extends Migration
             $table->string('video_link')->nullable(); 
             $table->integer('status')->nullable()->default(2);
             $table->integer('verify')->nullable();
-            $table->integer('user_premium')->nullable(); 
+            $table->integer('views')->nullable();
+            $table->integer('is_luxury')->nullable();
+            $table->integer('user_premium')->nullable();
             $table->timestamps();
         });
     }
