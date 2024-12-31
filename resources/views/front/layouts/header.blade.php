@@ -29,7 +29,7 @@
                                                     <a href="{{route('properties', ['for_type' => 'for-sell', 'is_negotiable' => 'negotiable'])}}">Budget Homes</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{route('properties', ['for_type' => 'for-sell', 'user_premium' => 1])}}">Premium Homes</a>
+                                                    <a href="{{route('properties', ['for_type' => 'for-sell', 'is_premium' => 1])}}">Premium Homes</a>
                                                 </li>
                                                 <li>
                                                     <a href="{{route('properties', ['for_type' => 'for-sell', 'sort' => 'asc'])}}">Newly Launched</a>
@@ -80,22 +80,22 @@
                                     </ul>
                                 </li>  
 
-                                <li class="has-child style-2"><a href="{{route('properties')}}">Rent</a>
+                                <li class="has-child style-2"><a href="{{ route('properties', ['for_type' => 'for-rent']) }}">Rent</a>
                                     <ul class="submenu">
                                         <li>
-                                            <a href="{{route('properties')}}">Popular Choices</a>
+                                            <a href="{{ route('properties', ['for_type' => 'for-rent']) }}">Popular Choices</a>
                                             <ul class="submenu2">
                                                 <li>
-                                                    <a href="{{route('properties')}}">Ready to Move</a>
+                                                    <a href="{{ route('properties', ['for_type' => 'for-rent', 'availability' => 'ready-to-move']) }}">Ready to Move</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{route('properties')}}">Owner Properties</a>
+                                                    <a href="{{route('properties', ['for_type' => 'for-rent', 'ownership' => 'free-hold'])}}">Owner Properties</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{route('properties')}}">Verified Properties</a>
+                                                    <a href="{{route('properties', ['for_type' => 'for-rent', 'is_verified' => 1])}}">Verified Properties</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{route('properties')}}">Furnished Homes</a>
+                                                    <a href="{{route('properties', ['for_type' => 'for-rent', 'property_detail' => 'house', 'furnished' => 'furnished'])}}">Furnished Homes</a>
                                                 </li>                                                  
                                             </ul>
                                         </li>
@@ -103,36 +103,36 @@
                                             <a href="{{route('properties')}}">Property Types</a>
                                             <ul class="submenu2">
                                                 <li>
-                                                    <a href="{{route('properties')}}">Residential</a>
+                                                    <a href="{{route('properties', ['for_type' => 'for-rent', 'type' => 'residential'])}}">Residential</a>
                                                 <li>
-                                                    <a href="{{route('properties')}}">House For Rent</a>
+                                                    <a href="{{route('properties', ['for_type' => 'for-rent', 'property_detail' => 'house'])}}">House For Rent</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{route('properties')}}">Villa For Rent</a>
+                                                    <a href="{{route('properties', ['for_type' => 'for-rent', 'property_detail' => 'villa'])}}">Villa For Rent</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{route('properties')}}">Apartment</a>
+                                                    <a href="{{route('properties', ['for_type' => 'for-rent', 'type' => 'apartment'])}}">Apartment</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{route('properties')}}">Commercial</a>
+                                                    <a href="{{route('properties', ['for_type' => 'for-rent', 'type' => 'commercial'])}}">Commercial</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{route('properties')}}">Office Space</a>
+                                                    <a href="{{route('properties', ['for_type' => 'for-rent', 'property_detail' => 'office'])}}">Office Space</a>
                                                 </li>
                                             </ul>
                                         </li>
                                         <li>
                                             <a href="{{route('properties')}}">Budget</a>
                                             <ul class="submenu2">
-                                                <li><a href="{{route('properties')}}">Under ₹10,000</a>
+                                                <li><a href="{{route('properties', ['for_type' => 'for-rent', 'max_price' => 10000])}}">Under ₹10,000</a>
                                                 </li>
-                                                <li><a href="{{route('properties')}}">₹10,000 - ₹15,000</a>
+                                                <li><a href="{{route('properties', ['for_type' => 'for-rent', 'min_price' => 10000, 'max_price' => 15000])}}">₹10,000 - ₹15,000</a>
                                                 </li>
-                                                <li><a href="{{route('properties')}}">₹15,000 - ₹20,000</a>
+                                                <li><a href="{{route('properties', ['for_type' => 'for-rent', 'min_price' => 15000, 'max_price' => 20000])}}">₹15,000 - ₹20,000</a>
                                                 </li>
-                                                <li><a href="{{route('properties')}}">₹20,000 - ₹25,000</a>
+                                                <li><a href="{{route('properties', ['for_type' => 'for-rent', 'min_price' => 20000, 'max_price' => 25000])}}">₹20,000 - ₹25,000</a>
                                                 </li>
-                                                <li><a href="{{route('properties')}}">Above ₹25,000</a>
+                                                <li><a href="{{route('properties', ['for_type' => 'for-rent', 'min_price' => 25000])}}">Above ₹25,000</a>
                                                 </li>
                                             </ul>
                                         </li>

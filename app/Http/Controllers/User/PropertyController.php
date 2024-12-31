@@ -21,6 +21,7 @@ class PropertyController extends Controller
 
     public function __construct()
     {
+        $this->pagerecords = config('constants.FRONT_PAGE_RECORDS');
         $this->middleware(function ($request, $next) {
             $this->userAuth = Auth::guard('user')->user();
             return $next($request);
@@ -69,7 +70,7 @@ class PropertyController extends Controller
     }
 
     public function edit(Request $request, $id){
-        $property = Property::where('id',$id)->first();
+       $property = Property::where('id',$id)->first();
         if( !$property ){  
             Helper::toastMsg(false, "Property not found.");
             return back();  
@@ -78,7 +79,7 @@ class PropertyController extends Controller
     }
     
     public function postData(Request $request){       
-        $validationArray = [
+        $validator = Validator::make($request->all(), [
             'title' => 'required',
             'location' => 'required',
             'state' => 'required',
@@ -87,7 +88,8 @@ class PropertyController extends Controller
             'availability' => 'required',
             'ownership' => 'required',
             'build_year' => 'required',
-            'price' => 'required',
+            'price' => 'required|numeric',
+            'token_amount' => 'nullable|numeric|lt:price',
             'is_negotiable' => 'required',
             'type' => 'required',
             'property_detail' => 'required',
@@ -99,9 +101,21 @@ class PropertyController extends Controller
             'bathroom' => 'required',
             'facing' => 'required',
             'furnished' => 'required',
-        ];
-        
-        $this->validate($request, $validationArray);
+        ]);
+         
+        if ($validator->fails()) {
+            Helper::toastMsg(false, "Validation errors: " . json_encode($validator->errors()->toArray()));
+            return back()->withErrors($validator)->withInput();
+        }
+
+        //return $request->token_amount;
+        if(isset($request->token_amount) && $request->token_amount > 0){
+            if($request->token_amount > $request->price){
+                Helper::toastMsg(false, "Token price should be less then price.");
+                return back()->withInput();
+            }
+        }
+ 
         $amenities = '';
         $additional = '';
         if(isset($request->amenities)){
@@ -138,7 +152,7 @@ class PropertyController extends Controller
         $property->build_year = $request->build_year;
         $property->price = $request->price;
         $property->is_negotiable = $request->is_negotiable;
-        $property->price_detail = $request->price_detail;
+        $property->token_amount = $request->token_amount;
         $property->type = $request->type;
         $property->property_detail = $request->property_detail;
         $property->for_type = $request->for_type;
@@ -191,8 +205,10 @@ class PropertyController extends Controller
         return redirect()->route('user.properties');
     }
 
-    public function enquery(){
+    public function enquiries(Request $request){ 
         $user = $this->userAuth;
-        return view('user.enquery-properties', compact('user'));
+        $propertyEnquiries = $user->PropertyEnquiries()->paginate($this->pagerecords);
+        $data=array('rows'=>$propertyEnquiries);
+        return view($this->prefix.'.enquiry-properties')->with($data);
     }
 }

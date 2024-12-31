@@ -9,7 +9,7 @@
                 <span class="body-1">Show Dashboard</span>
             </div>
             <div class="flat-counter-v2 tf-counter">
-                <div class="counter-box">
+                <a href="{{route('user.properties')}}" class="counter-box">
                     <div class="box-icon">
                         <span class="icon ">
                             <svg width="36" height="36" viewBox="0 0 36 36" fill="none"
@@ -35,13 +35,13 @@
                     <div class="content-box">
                         <div class="title-count text-variant-1">Your listing</div>
                         <div class="box-count d-flex align-items-end">
-                            <div class="number">32</div>
+                            <div class="number">{{ $properties->count() }}</div>
                             <span class="text">/50 remaining</span>
                         </div>
 
                     </div>
-                </div>
-                <div class="counter-box">
+                </a> 
+                <a href="{{route('user.properties',["status"=>2])}}" class="counter-box">
                     <div class="box-icon">
                         <span class="icon "><svg width="36" height="36" viewBox="0 0 36 36" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -59,11 +59,11 @@
                     <div class="content-box">
                         <div class="title-count text-variant-1">Pending</div>
                         <div class="box-count d-flex align-items-end">
-                            <div class="number">02</div>
+                            <div class="number">{{ $properties->where('status', 2)->count() }}</div>
                         </div>
                     </div>
-                </div>
-                <div class="counter-box">
+                </a> 
+                <a href="{{route('user.properties',["status"=>1])}}" class="counter-box">
                     <div class="box-icon">
                         <span class="icon ">
                             <svg width="36" height="36" viewBox="0 0 36 36" fill="none"
@@ -82,14 +82,14 @@
                         </span>
                     </div>
                     <div class="content-box">
-                        <div class="title-count text-variant-1">Favorites</div>
+                        <div class="title-count text-variant-1">Active</div>
                         <div class="d-flex align-items-end">
-                            <div class="number">06</div>
+                            <div class="number">{{ $properties->where('status', 1)->count() }}</div>
                         </div>
 
                     </div>
-                </div>
-                <div class="counter-box">
+                </a> 
+                <a href="{{route('user.properties',["status"=>3])}}" class="counter-box">
                     <div class="box-icon">
                         <span class="icon">
                             <svg width="36" height="36" viewBox="0 0 36 36" fill="none"
@@ -111,12 +111,12 @@
                         </span>
                     </div>
                     <div class="content-box">
-                        <div class="title-count text-variant-1">Reviews</div>
+                        <div class="title-count text-variant-1">Sold</div>
                         <div class="d-flex align-items-end">
-                            <div class="number">1.483</div>
+                            <div class="number">{{ $properties->where('status', 3)->count() }}</div>
                         </div>
                     </div>
-                </div>
+                </a> 
             </div>
             <div class="row">
                 {{-- <div class="col-xl-9 ">

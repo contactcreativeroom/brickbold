@@ -24,10 +24,10 @@ return new class extends Migration
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
             $table->integer('price')->nullable();
-            $table->string('price_detail')->nullable();
-            $table->integer('is_negotiable')->nullable()->default(1)->comment('1=Negotiable, 2=Fixed Price');
+            $table->integer('token_amount')->nullable()->default(0);
+            $table->string('is_negotiable')->nullable()->default('negotiable');
             $table->string('availability')->nullable()->default('ready-to-move');
-            $table->integer('ownership')->nullable()->default(1)->comment('1=Free Hold, 2=Lease Hold');
+            $table->string('ownership')->nullable()->default('free-hold');
             $table->integer('build_year')->nullable()->default(1);
             $table->string('type')->nullable()->default('residential');
             $table->string('property_detail')->nullable();
@@ -47,10 +47,10 @@ return new class extends Migration
             $table->string('amenities')->nullable();
             $table->string('video_link')->nullable(); 
             $table->integer('status')->nullable()->default(2);
-            $table->integer('verify')->nullable();
             $table->integer('views')->nullable();
             $table->integer('is_luxury')->nullable();
-            $table->integer('user_premium')->nullable();
+            $table->integer('is_verified')->nullable()->default(0);
+            $table->integer('is_premium')->nullable()->default(0);
             $table->timestamps();
         });
     }

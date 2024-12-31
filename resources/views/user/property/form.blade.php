@@ -182,10 +182,10 @@
                                     @endif
                                 </fieldset>
                                 <fieldset class="box-fieldset">
-                                    <label for="price_detail">
+                                    <label for="token_amount">
                                         Token/Booking Amount:
                                     </label>
-                                    <input type="number" class="form-control" value="@if(old('price_detail')!=null){{old('price_detail')}}@elseif(!empty($row->price_detail)){{$row->price_detail}}@endif" name="price_detail">
+                                    <input type="number" class="form-control" value="@if(old('token_amount')!=null){{old('token_amount')}}@elseif(!empty($row->token_amount)){{$row->token_amount}}@endif" name="token_amount">
                                 </fieldset>
                             </div>
                         </div>
@@ -358,7 +358,7 @@
                                 <select class="form-select form-control nice-select {{ $errors->has('furnished') ? ' is-invalid' : '' }}" id="furnished" name="furnished">
                                     <option value="">Select Furnished</option>
                                     @foreach (config('constants.FURNISHED_DETAIL') as $key=>$value)
-                                        <option value="{{$value}}" @if(old('furnished')!=null && old('furnished')==$value) selected @elseif(!empty($row) && $row->furnished==$value) selected @endif >{{$value}}</option>
+                                        <option value="{{$key}}" @if(old('furnished')!=null && old('furnished')==$key) selected @elseif(!empty($row) && $row->furnished==$key) selected @endif >{{$value}}</option>
                                     @endforeach
                                 </select>
                                 @if($errors->has('furnished'))
@@ -374,7 +374,7 @@
                                 <select class="form-select form-control nice-select" id="approved_by" name="approved_by">
                                     <option value="">Select Approved By</option>
                                     @foreach (config('constants.APPROVED_BY') as $key=>$value)
-                                        <option value="{{$value}}" @if(old('approved_by')!=null && old('approved_by')==$value) selected @elseif(!empty($row) && $row->approved_by==$value) selected @endif >{{$value}}</option>
+                                        <option value="{{$key}}" @if(old('approved_by')!=null && old('approved_by')==$key) selected @elseif(!empty($row) && $row->approved_by==$key) selected @endif >{{$value}}</option>
                                     @endforeach
                                 </select>
                             </fieldset>

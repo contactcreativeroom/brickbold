@@ -20,7 +20,13 @@
                                         <input type="text" placeholder="Address, City, ZIP..." name="search" value="{{ request('search', '') }}">
                                     </fieldset>
                                     
-                                    
+                                    <select class="form-control form-select nice-select" name="for_type">
+                                        <option value="">For Type: Any</option>
+                                        @foreach (config('constants.FOR_TYPE') as $key=>$value)
+                                            <option value="{{$key}}" {{ old('for_type', request('for_type')) == $key ? 'selected' : '' }} >{{$value}}</option>
+                                        @endforeach                                 
+                                    </select>
+
                                     <select class="form-control form-select nice-select" name="property_detail">
                                         <option value="">Property: Any</option>
                                         @foreach (config('constants.PROPERTY_DETAIL') as $key=>$value)
@@ -33,21 +39,7 @@
                                         @foreach (config('constants.TYPE') as $key=>$value)
                                             <option value="{{$key}}" {{ old('type', request('type')) == $key ? 'selected' : '' }} >{{$value}}</option>
                                         @endforeach                                 
-                                    </select>
-                                    
-                                    <select class="form-control form-select nice-select" name="bedroom">
-                                        <option value="">Bedroom: Any</option>
-                                        @foreach (config('constants.LOOP5') as $value)
-                                            <option value="{{$value}}" {{ old('bedroom', request('bedroom')) == $value ? 'selected' : '' }} >{{$value}}</option>
-                                        @endforeach                              
-                                    </select>
-
-                                    <select class="form-control form-select nice-select" name="bathroom">
-                                        <option value="">Bathroom: Any</option>
-                                        @foreach (config('constants.LOOP5') as $value)
-                                            <option value="{{$value}}" {{ old('bathroom', request('bathroom')) == $value ? 'selected' : '' }} >{{$value}}</option>
-                                        @endforeach                              
-                                    </select>
+                                    </select> 
 
                                     
                                     
@@ -101,6 +93,67 @@
                                             <input type="hidden" name="max_price" value="{{ request('max_price', '') }}" >
                                         </div> 
                                     </div>  
+                                    <div class=" group-select">
+                                        <div class="box-select">
+                                            <select class="form-control form-select nice-select" name="availability">
+                                                <option value="">Availability: Any</option>
+                                                @foreach (config('constants.AVAILABILITY') as $key=>$value)
+                                                    <option value="{{$key}}" {{ old('availability', request('availability')) == $key ? 'selected' : '' }} >{{$value}}</option>
+                                                @endforeach                                 
+                                            </select>
+                                        </div>
+                                        <div class="box-select">
+                                            <select class="form-control form-select nice-select" name="ownership">
+                                                <option value="">Ownership: Any</option>
+                                                @foreach (config('constants.OWNERSHIP') as $key=>$value)
+                                                    <option value="{{$key}}" {{ old('ownership', request('ownership')) == $key ? 'selected' : '' }} >{{$value}}</option>
+                                                @endforeach                                 
+                                            </select>
+                                        </div>
+                                        <div class="box-select">
+                                            <select class="form-control form-select nice-select" name="furnished">
+                                                <option value="">Furnished: Any</option>
+                                                @foreach (config('constants.FURNISHED_DETAIL') as $key=>$value)
+                                                    <option value="{{$key}}" {{ old('furnished', request('furnished')) == $key ? 'selected' : '' }} >{{$value}}</option>
+                                                @endforeach                                 
+                                            </select>
+                                        </div>
+
+                                        <div class="box-select">
+                                            <select class="form-control form-select nice-select" name="is_premium">
+                                                <option value="">Premium: Any</option>
+                                                @foreach (config('constants.IS_PREMIUM') as $key=>$value)
+                                                    <option value="{{$key}}" {{ old('is_premium', request('is_premium')) === (string)$key ? 'selected' : '' }} >{{$value}}</option>
+                                                @endforeach                                 
+                                            </select>
+                                        </div>
+
+                                        <div class="box-select">
+                                            <select class="form-control form-select nice-select" name="is_verified">
+                                                <option value="">Verify: Any</option>
+                                                @foreach (config('constants.IS_VERIFIED') as $key=>$value)
+                                                    <option value="{{$key}}" {{ old('is_verified', request('is_verified')) === (string)$key ? 'selected' : '' }} >{{$value}}</option>
+                                                @endforeach                                 
+                                            </select>
+                                        </div>
+
+                                        <div class="box-select">
+                                            <select class="form-control form-select nice-select" name="bathroom">
+                                                <option value="">Bath: Any</option>
+                                                @foreach (config('constants.LOOP5') as $value)
+                                                    <option value="{{$value}}" {{ old('bathroom', request('bathroom')) == $value ? 'selected' : '' }} >{{$value}}</option>
+                                                @endforeach                              
+                                            </select>
+                                        </div>
+                                        <div class="box-select">
+                                            <select class="form-control form-select nice-select" name="bedroom">
+                                                <option value="">Beds Any</option>
+                                                @foreach (config('constants.LOOP5') as $value)
+                                                    <option value="{{$value}}" {{ old('bedroom', request('bedroom')) == $value ? 'selected' : '' }} >{{$value}}</option>
+                                                @endforeach                              
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </form> 

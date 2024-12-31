@@ -8,10 +8,13 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
+    private $prefix = 'user';
     protected $userAuth;
+    private $pagerecords;
 
     public function __construct()
     {
+        $this->pagerecords = config('constants.FRONT_PAGE_RECORDS');
         $this->middleware(function ($request, $next) {
             $this->userAuth = Auth::guard('user')->user();
             return $next($request);
@@ -21,6 +24,8 @@ class DashboardController extends Controller
     public function index()
     {
         $user = $this->userAuth;
-        return view('user.dashboard', compact('user'));
+        $properties = $user->Properties()->get();
+        $data=array('properties'=>$properties, 'user'=>$user);
+        return view($this->prefix.'.dashboard')->with($data);
     }
 }

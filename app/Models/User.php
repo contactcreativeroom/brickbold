@@ -71,6 +71,11 @@ class User extends Authenticatable
         return $this->hasOne(Property::class);
     }
 
+    public function PropertyEnquiries()
+    {
+        return $this->hasMany(PropertyEnquiry::class);
+    }
+
     public function favorites()
     {
         return $this->hasMany(Favorite::class);

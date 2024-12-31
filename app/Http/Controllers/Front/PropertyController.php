@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Helper\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Property;
+use App\Models\PropertyEnquiry;
 use Illuminate\Http\Request;
 
 class PropertyController extends Controller
@@ -15,13 +16,13 @@ class PropertyController extends Controller
 
     public function __construct()
     {
-        //
+        $this->pagerecords = config('constants.FRONT_PAGE_RECORDS');
     }
 
     public function properties(Request $request) {
         $properties = Property::query();
         
-        if ($request->has('availability')) {
+        if ($request->filled('availability')) {
             $availability = $request->availability; 
             $properties->where('availability', $availability) ;
         } 
@@ -29,6 +30,20 @@ class PropertyController extends Controller
         if ($request->filled('for_type')) {
             $for_type = $request->for_type; 
             $properties->where('for_type', $for_type) ;
+        }
+
+        if ($request->filled('is_verified')) {
+            $is_verified = $request->is_verified; 
+            $properties->where('is_verified', $is_verified) ;
+        }
+        if ($request->filled('is_premium')) {
+            $is_premium = $request->is_premium; 
+            $properties->where('is_premium', $is_premium) ;
+        }
+
+        if ($request->filled('furnished')) {
+            $furnished = $request->furnished; 
+            $properties->where('furnished', $furnished) ;
         }
 
         // if ($request->has('key') && $request->key !='') {
@@ -100,6 +115,9 @@ class PropertyController extends Controller
         $properties = $properties->paginate($this->pagerecords)->appends([
             'availability' => $request->get('availability'),
             'for_type' => $request->get('for_type'),
+            'is_verified' => $request->get('is_verified'),
+            'is_premium' => $request->get('is_premium'),
+            'furnished' => $request->get('furnished'),
             'search' => $request->get('search'),
             'property_detail' => $request->get('property_detail'),
             'type' => $request->get('type'),
@@ -125,5 +143,46 @@ class PropertyController extends Controller
         $property->save();
         $similarProperties = Property::where('id', '!=', $property->id)->where('type', $property->type)->where('for_type', $property->for_type)->latest()->limit(3)->get();
         return view($this->prefix.'.property.detail',['row' => $property, 'similarProperties' => $similarProperties]);
+    }
+
+    public function enquiryPost(Request $request) { 
+        $validationArray = [
+            'name' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'message' => 'required',
+        ];
+        
+        $this->validate($request, $validationArray); 
+        $property = Property::find($request->property_id);
+        if(!$property){
+            Helper::toastMsg(false, "Opps! Some error in Property detail.");
+            return back()->withInput();
+        }
+        $propertyEnquiry = $property->enquiry()->create([
+            'user_id' => $property->user_id,
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'message' => $request->message,
+            'status' => 1,
+        ]); 
+        
+        if($propertyEnquiry){
+            $details = array(
+                'logo' => Helper::getLogo(),
+                'name'=> $request->name,
+                'email'=>$request->email,
+                'phone'=>$request->phone,
+                'property_name'=>$property->name,
+                'description'=>$request->message,
+             );
+            //dispatch(new \App\Jobs\PropertyEnquiryQueue($details));
+        } else{
+            Helper::toastMsg(false, "Opps! Some error occured.");
+            return back()->withInput();
+        } 
+        Helper::toastMsg(true, 'Thank you for reaching out! Your enquiry has been successfully submitted. One of our real estate experts will get in touch with you soon.');
+        return back();
     }
 }

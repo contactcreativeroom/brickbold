@@ -1,6 +1,6 @@
 <?php
 return [
-    'FRONT_PAGE_RECORDS' => 15,
+    'FRONT_PAGE_RECORDS' => 10,
     'ADMIN_PAGE_RECORDS' => 10,
     'ADMIN_PAGE_BOOKING_RECORDS' => 9,
     'ADMIN_RECORDS' => [
@@ -64,17 +64,33 @@ return [
     'LOOP5' => ['1','2','3','4','5','5+'],
     'FACING' => ['East','West','North','South','North-East','North-West','South-East','South-West'],
     'FURNISHED_DETAIL' => [
-        'Furnished',
-        'UnFurnished',
-        'Semi-Furnished'
+        'furnished' => 'Furnished',
+        'un-furnished' => 'UnFurnished',
+        'semi-furnished' => 'Semi-Furnished'
     ],
-    'APPROVED_BY' => [
-        'Punjab Urban Development Authority(PUDA)',
-        'Geater Ludhiana Area Development Authority(GLADA)', 
-        'Geater Mohali Area Development Authority (GMADA)', 
-        'RWA/Co-Operative Housing Society', 
-        'City Municipal Corporation'
+    'APPROVED_BY' => [ 
+        'punjab-urban-development-authority' => 'Punjab Urban Development Authority(PUDA)',
+        'greater-ludhiana-area-development-authority' => 'Greater Ludhiana Area Development Authority(GLADA)',
+        'greater-mohali-area-development-authority' => 'Greater Mohali Area Development Authority(GMADA)',
+        'rwa-cooperative-housing-society' => 'RWA/Co-Operative Housing Society',
+        'city-municipal-corporation' => 'City Municipal Corporation'
     ],
+    'PROPERTY_STATUSES' => [
+        1 =>  'Approved',
+        2 =>  'Pending',
+        3 =>  'Sold',
+    ],
+
+    'IS_PREMIUM' => [
+        0 =>  'No', 
+        1 =>  'Yes',
+    ],
+
+    'IS_VERIFIED' => [
+        0 =>  'No', 
+        1 =>  'Yes',
+    ],
+
     'PROPERTY_STATUSES' => [
         1 =>  'Approved',
         2 =>  'Pending',

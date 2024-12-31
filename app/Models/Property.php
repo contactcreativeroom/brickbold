@@ -56,4 +56,12 @@ class Property extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+
+    public function enquiry(){
+        return $this->hasOne(PropertyEnquiry::class);
+    }
+
+    public function enquiries(){
+        return $this->hasMany(PropertyEnquiry::class);
+    }
 }

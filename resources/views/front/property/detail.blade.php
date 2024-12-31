@@ -626,7 +626,8 @@
                     </div>
                     <div class="col-xl-4 col-lg-5">
                         <div class=" tf-sidebar sticky-sidebar ">
-                            <form class="form-contact-seller mb-30">
+                            <form class="form-contact-seller mb-30" method="post" action="{{route('property.enquiry')}}" >
+                                @csrf
                                 <h4 class="heading-title mb-30">
                                     Contact Sellers
                                 </h4>
@@ -643,12 +644,39 @@
                                     </div>
                                 </div>
                                 <fieldset class="mb-12">
-                                    <input type="text" class="form-control" placeholder="Full Name" name="name" id="name1" required>
+                                    <input type="text" class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="Your name" name="name" id="name" value="@if(old('name')!=null){{old('name')}}@endif">
+                                    @if($errors->has('name'))
+                                        <span class="invalid-feedback">
+                                            {{ $errors->first('name') }}
+                                        </span>
+                                    @endif
+                                </fieldset>
+                                <fieldset class="mb-12">
+                                    <input type="text" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="Email" name="email" id="email-contact" value="@if(old('email')!=null){{old('email')}}@endif">
+                                    @if($errors->has('email'))
+                                        <span class="invalid-feedback">
+                                            {{ $errors->first('email') }}
+                                        </span>
+                                    @endif
+                                </fieldset>
+                                <fieldset class="mb-12"> 
+                                    <input type="text" class="form-control {{ $errors->has('phone') ? ' is-invalid' : '' }}" placeholder="Your phone number" name="phone" id="phone" value="@if(old('phone')!=null){{old('phone')}}@endif">
+                                    @if($errors->has('phone'))
+                                        <span class="invalid-feedback">
+                                            {{ $errors->first('phone') }}
+                                        </span>
+                                    @endif
                                 </fieldset>
                                 <fieldset class="mb-30">
-                                    <textarea name="message" cols="30" rows="10" placeholder="How can an agent help" id="message1" required></textarea>
+                                    <textarea name="message" cols="30" rows="10" placeholder="How can an agent help" id="message1" class="{{ $errors->has('message') ? ' is-invalid' : '' }}">@if(old('message')!=null){{old('message')}}@endif</textarea>
+                                    @if($errors->has('message'))
+                                        <span class="invalid-feedback">
+                                            {{ $errors->first('message') }}
+                                        </span>
+                                    @endif
                                 </fieldset>
-
+                                <input type="hidden" name="property_id"  value="{{$row->id}}">
+                                <input type="hidden" name="property_slug"  value="{{$row->slug}}">
                                 <button type="submit" class="tf-btn bg-color-primary w-full"> Send message</button>
                             </form>
                             <div class=" sidebar-ads mb-30">
@@ -673,38 +701,7 @@
                                     </a>
                                 </div>
                             </div>
-                            <form class="form-contact-agent">
-                                <h4 class="heading-title mb-30">
-                                    Contact me
-                                </h4>
-                                <fieldset>
-                                    <input type="text" class="form-control" placeholder="Your name" name="name"
-                                        id="name2" required>
-                                </fieldset>
-                                <fieldset>
-                                    <input type="text" class="form-control" placeholder="Email" name="email"
-                                        id="email2" required>
-                                </fieldset>
-                                <fieldset class="phone">
-                                    <input type="text" class="form-control " placeholder="Your phone number"
-                                        name="phone" id="phone" required>
-                                </fieldset>
-                                <fieldset>
-                                    <textarea name="message" cols="30" rows="10" placeholder="Message" id="message2"
-                                        required></textarea>
-                                </fieldset>
-                                <div class="wrap-btn">
-                                    <a href="#" class="tf-btn bg-color-primary w-full"><svg width="20" height="20"
-                                            viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M18.125 5.625V14.375C18.125 14.8723 17.9275 15.3492 17.5758 15.7008C17.2242 16.0525 16.7473 16.25 16.25 16.25H3.75C3.25272 16.25 2.77581 16.0525 2.42417 15.7008C2.07254 15.3492 1.875 14.8723 1.875 14.375V5.625M18.125 5.625C18.125 5.12772 17.9275 4.65081 17.5758 4.29917C17.2242 3.94754 16.7473 3.75 16.25 3.75H3.75C3.25272 3.75 2.77581 3.94754 2.42417 4.29917C2.07254 4.65081 1.875 5.12772 1.875 5.625M18.125 5.625V5.8275C18.125 6.14762 18.0431 6.46242 17.887 6.74191C17.7309 7.0214 17.5059 7.25628 17.2333 7.42417L10.9833 11.27C10.6877 11.4521 10.3472 11.5485 10 11.5485C9.65275 11.5485 9.31233 11.4521 9.01667 11.27L2.76667 7.425C2.4941 7.25711 2.26906 7.02224 2.11297 6.74275C1.95689 6.46325 1.87496 6.14845 1.875 5.82833V5.625"
-                                                stroke="white" stroke-width="1.5" stroke-linecap="round"
-                                                stroke-linejoin="round" />
-                                        </svg>
-                                        Email agent</a>
-
-                                </div>
-                            </form>
+                            
                         </div>
                     </div>
                 </div>

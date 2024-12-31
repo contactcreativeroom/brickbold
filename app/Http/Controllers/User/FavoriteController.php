@@ -22,6 +22,7 @@ class FavoriteController extends Controller
 
     public function __construct()
     {
+        $this->pagerecords = config('constants.FRONT_PAGE_RECORDS');
         $this->middleware(function ($request, $next) {
             $this->userAuth = Auth::guard('user')->user();
             return $next($request);

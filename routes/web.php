@@ -52,6 +52,7 @@ Route::get('/page/{slug}', [HomeController::class, 'page'])->name('page');
 
 Route::get('/properties', [FrontPropertyController::class, 'properties'])->name('properties');
 Route::get('/property/{slug}', [FrontPropertyController::class, 'property'])->name('property');
+Route::post('/property/enquiry/post', [FrontPropertyController::class, 'enquiryPost'])->name('property.enquiry');
 Route::get('/ad-packages', [HomeController::class, 'adPackages'])->name('ad-packages');
 
 Route::post('/login', [UserAuthController::class, 'login'])->name('login');
@@ -78,11 +79,11 @@ Route::middleware(['auth.user'])->prefix('user')->group(function () {
 
     Route::get('/properties', [PropertyController::class, 'list'])->name('user.properties');
     Route::get('/property/add', [PropertyController::class, 'add'])->name('user.property.add');
-    Route::get('/property/{id}', [PropertyController::class, 'edit'])->name('user.property.edit');
+    Route::get('/property/edit/{id}', [PropertyController::class, 'edit'])->name('user.property.edit');
     Route::post('/property/image/delete', [PropertyController::class, 'deleteImage'])->name('user.property.image.delete');
     Route::post('/property/post', [PropertyController::class, 'postData'])->name('user.property.post');
     Route::get('/property/sold/{id}', [PropertyController::class, 'changeStatusSold'])->name('user.property.sold');
-    Route::get('/property/enquery', [PropertyController::class, 'enquery'])->name('user.property.enquery');
+    Route::get('/property/enquiries', [PropertyController::class, 'enquiries'])->name('user.property.enquiries');
 
 });
 
