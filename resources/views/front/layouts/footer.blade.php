@@ -128,9 +128,8 @@
                                             </div>
                                             <div id="sib-container"
                                                 class="sib-container--large sib-container--vertical">
-                                                <form id="sib-form" method="POST"
-                                                    action="https://3c02c1a1.sibforms.com/serve/MUIFABjeOIIJNMRgQ-0Mb1bjkLdsnuanXhO94qzsHBwAVG3reSaZ5DIq2ozIM0_PBl7b_lcysdmopwilW1dcjaAmtOu_es-dny_hZggPsstdEuk75SIQ1B7K-NuFEN5hBn9HqJ2SFLbleb-PnrNQY1dGLy7gXPmMlWJfT2Jfc2MeVJg4Ufeezo6UlJhAZwbC5nZ8aV9PghzVQVkE"
-                                                    data-type="subscription">
+                                                <form id="sib-form" method="POST" action="{{route('newsletter.post')}}" data-type="subscription">
+                                                @csrf
                                                     <div class="sib-form-block">
                                                         <div class="sib-text-form-block">
                                                             <p class="text-1">Sign up to receive the latest articles</p>
@@ -140,14 +139,14 @@
                                                         <div class="form__entry entry_block">
                                                             <div class="form__label-row ">
                                                                 <fieldset class="entry__field">
-                                                                    <input class="input input-nl" type="text" id="EMAIL"
-                                                                        name="EMAIL" autocomplete="off"
-                                                                        placeholder="Your email address"
-                                                                        data-required="true" required />
+                                                                    <input type="text" class="input input-nl {{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="Email" name="email" id="email-contact" value="@if(old('email')!=null){{old('email')}}@endif">
                                                                 </fieldset>
                                                             </div>
-                                                            <label class="  entry__error entry__error--primary">
-                                                            </label>
+                                                            @if($errors->has('email'))
+                                                                <label class="entry__error entry__error--primary">
+                                                                    {{ $errors->first('email') }}
+                                                                </label>
+                                                            @endif                                                            
                                                         </div>
                                                     </div>
                                                     <div class="sib-optin sib-form-block">
@@ -155,18 +154,17 @@
                                                             <div class="form__label-row ">
                                                                 <div class="checkbox-item ">
                                                                     <label>
-                                                                        <span class="text-2 text-color-default">I have
-                                                                            read and agree to
-                                                                            the terms &
-                                                                            conditions</span>
-                                                                        <input type="checkbox" class="input_replaced"
-                                                                            value="1" id="OPT_IN" name="OPT_IN">
+                                                                        <span class="text-2 text-color-default">I have read and agree to the terms & conditions</span>
+                                                                        <input type="checkbox" class="input_replaced {{ $errors->has('accept_term_condition') ? ' is-invalid' : '' }}" value="1" name="accept_term_condition">
                                                                         <span class="btn-checkbox"></span>
                                                                     </label>
                                                                 </div>
                                                             </div>
-                                                            <label class="entry__error entry__error--primary">
-                                                            </label>
+                                                            @if($errors->has('accept_term_condition'))
+                                                                <label class="entry__error entry__error--primary">
+                                                                    {{ $errors->first('accept_term_condition') }}
+                                                                </label>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                     <div class="sib-form-block">
@@ -182,8 +180,7 @@
                                                         </button>
                                                     </div>
                                             </div>
-                                            <input type="text" name="email_address_check" value=""
-                                                class="input--hidden">
+                                            <input type="text" name="email_address_check" value="" class="input--hidden">
                                             <input type="hidden" name="locale" value="en">
                                             </form>
                                         </div>

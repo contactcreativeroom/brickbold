@@ -1493,7 +1493,7 @@
                                                 website.
                                             </p>
                                         </div>
-                                        <a href="#" class="tf-btn bg-color-primary fw-7 pd-11">
+                                        <a href="{{ route('contact')}}" class="tf-btn bg-color-primary fw-7 pd-11">
                                             Request your free appraisal
                                         </a>
                                         <div class="person wow animate__fadeInRight animate__animated"

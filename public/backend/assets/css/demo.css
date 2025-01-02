@@ -291,3 +291,8 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.avatar-xxl {
+    width: 8rem;
+    height: 6rem;
+}

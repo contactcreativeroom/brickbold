@@ -39,15 +39,15 @@
             </a>
         </li>
 
-        <li class="menu-item {{ in_array(Route::currentRouteName(), ['admin.banners']) ? 'active' : '' }}">
-            <a href="#" class="menu-link">
+        <li class="menu-item {{ in_array(Route::currentRouteName(), ['admin.users']) ? 'active' : '' }}">
+            <a href="{{route('admin.users')}}" class="menu-link">
                 <i class="menu-icon fa-solid fa-users"></i>
                 <div>Users</div>
             </a>
         </li> 
 
-        <li class="menu-item {{ in_array(Route::currentRouteName(), ['admin.banners']) ? 'active' : '' }}">
-            <a href="#" class="menu-link">
+        <li class="menu-item {{ in_array(Route::currentRouteName(), ['admin.properties']) ? 'active' : '' }}">
+            <a href="{{route('admin.properties')}}" class="menu-link">
                 <i class="menu-icon fa-solid fa-building"></i>
                 <div>Properties</div>
             </a>
@@ -70,7 +70,7 @@
             </a>
         </li>    
        
-        <li class="menu-header small text-uppercase">
+        {{-- <li class="menu-header small text-uppercase">
             <span class="menu-header-text">General Pages</span>
         </li>
 
@@ -86,7 +86,25 @@
                 <i class="menu-icon fa-solid fa-envelope"></i>
                 <div>Contact-Us</div>
             </a>
-        </li>
+        </li> --}}
+
+        
+ 
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Enquiries</span>
+        </li> 
+        <li class="menu-item {{ in_array(Route::currentRouteName(), ['admin.banners']) ? 'active' : '' }}">
+            <a href="#" class="menu-link">
+                <i class="menu-icon fa-solid fa-home"></i>
+                <div>Properties Enquiries</div>
+            </a>
+        </li> 
+        <li class="menu-item {{ in_array(Route::currentRouteName(), ['admin.banners']) ? 'active' : '' }}">
+            <a href="#" class="menu-link">
+                <i class="menu-icon fa-solid fa-address-card"></i>
+                <div>Contact Enquiries</div>
+            </a>
+        </li> 
 
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">CMS Pages</span>
@@ -106,22 +124,7 @@
                 </a>
             </li>
         @endforeach 
- 
-        <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">Enquiries</span>
-        </li> 
-        <li class="menu-item {{ in_array(Route::currentRouteName(), ['admin.banners']) ? 'active' : '' }}">
-            <a href="#" class="menu-link">
-                <i class="menu-icon fa-solid fa-home"></i>
-                <div>Properties Enquiries</div>
-            </a>
-        </li> 
-        <li class="menu-item {{ in_array(Route::currentRouteName(), ['admin.banners']) ? 'active' : '' }}">
-            <a href="#" class="menu-link">
-                <i class="menu-icon fa-solid fa-address-card"></i>
-                <div>Contact Enquiries</div>
-            </a>
-        </li> 
+
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">SEO</span>
         </li>

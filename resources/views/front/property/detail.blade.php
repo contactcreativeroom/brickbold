@@ -1,4 +1,5 @@
 @extends('front.layouts.app')
+{{-- <link rel="stylesheet" type="text/css" href="{{url('frontend/css/map.min.css')}}" /> --}}
 @section('content')
     <!-- flat-title -->
     <section class="flat-title ">
@@ -30,7 +31,7 @@
                                     <a href="javascript:void(0)" data-fancybox="gallery"
                                         class="image-wrap relative d-block">
                                         <img class="lazyload" data-src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}"
-                                            src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" alt="">
+                                            src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" alt="" style="height:500px;">
                                         <div class="tag-property ">
                                             <div class="icon">
                                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
@@ -51,7 +52,7 @@
                                 <div class="swiper-slide">
                                     <a href="javascript:void(0)" data-fancybox="gallery"
                                         class="image-wrap d-block">
-                                        <img class="lazyload" data-src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $imageVal->image) }}" src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $imageVal->image) }}" alt="">
+                                        <img class="lazyload" data-src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $imageVal->image) }}" src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $imageVal->image) }}" alt="" style="height:500px;">
                                     </a>
                                 </div> 
                                 @endforeach
@@ -305,95 +306,76 @@
                             <div class="wg-title text-11 fw-6 text-color-heading">
                                 Amenities And Features
                             </div>
+                            @php
+                                $amenities = explode(',', $row->amenities);
+                                $boxCount = 3;
+                                $boxes = array_fill(0, $boxCount, []);
+                                foreach ($amenities as $index => $amenitie) {
+                                    $boxIndex = $index % $boxCount;
+                                    $boxes[$boxIndex][] = trim($amenitie);
+                                }
+                            @endphp
+                            <div class="wrap-feature">
+                                @foreach ($boxes as $box)
+                                    <div class="box-feature">
+                                        <ul>
+                                            @foreach ($box as $amenitie)
+                                                <li class="feature-item">
+                                                    {{ $amenitie }}
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="wg-property box-amenities spacing-3">
+                            <div class="wg-title text-11 fw-6 text-color-heading">
+                                Addtional Room
+                            </div>
+                            
                             <div class="wrap-feature">
                                 <div class="box-feature">
                                     <ul>
-                                    @foreach (explode(',', $row->amenities) as $amenitie)
+                                    @foreach (explode(',', $row->additional) as $addtional)
                                         <li class="feature-item">
-                                            {{ $amenitie }}
+                                            {{ $addtional }}
                                         </li>
                                     @endforeach 
                                     </ul>
-                                </div>
-                                <div class="box-feature">
-                                    <ul>
-                                        <li class="feature-item">
-                                            Hangers
-                                        </li>
-                                        <li class="feature-item">
-                                            Bed linens
-                                        </li>
-                                        <li class="feature-item">
-                                            Extra pillows & blankets
-                                        </li>
-                                        <li class="feature-item">
-                                            Iron
-                                        </li>
-                                        <li class="feature-item">
-                                            TV with standard cable
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="box-feature">
-                                    <ul>
-                                        <li class="feature-item">
-                                            Refrigerator
-                                        </li>
-                                        <li class="feature-item">
-                                            Microwave
-                                        </li>
-                                        <li class="feature-item">
-                                            Dishwasher
-                                        </li>
-                                        <li class="feature-item">
-                                            Coffee maker
-                                        </li>
-                                    </ul>
-                                </div>
+                                </div> 
                             </div>
                         </div>
                         <div class="wg-property single-property-map spacing-9">
-                            <div class="wg-title text-11 fw-6 text-color-heading">Get Direction</div>
-                            <iframe
-                            width="600"
-                            height="450"
-                            style="border:0"
-                            loading="lazy"
-                            allowfullscreen
-                            src="https://www.google.com/maps/embed/v1/view?key=AIzaSyBUkrIEQStEvADw3fBKMbeVNMjrAZdON4s&center=37.7749,-122.4194&zoom=12">
-                        </iframe>
-                            <iframe class="map"
-                                src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d135905.11693909427!2d-73.95165795400088!3d41.17584829642291!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1727094281524!5m2!1sen!2s"
-                                style="border:0;" allowfullscreen="" loading="lazy"
-                                referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            <div class="wg-title text-11 fw-6 text-color-heading">Get Direction</div>                            
+                            <iframe class="map" 
+                            {{-- src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d135905.11693909427!2d-73.95165795400088!3d41.17584829642291!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1727094281524!5m2!1sen!2s"   --}}
+                            
+                             src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d135905.11693909427!2d{{$row->longitude}}!3d{{$row->latitude}}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s{{$row->location}}!5m2!1sen!2s"  
+    
+                            style="border:0;" allowfullscreen="" loading="lazy"  referrerpolicy="no-referrer-when-downgrade"></iframe> 
+                            {{-- <div id="map"  data-map-zoom="16" data-map-scroll="true" style="height:500px;"></div> --}}
                             <div class="info-map">
                                 <ul class="box-left">
                                     <li>
                                         <span class="label fw-6">Address</span>
-                                        <div class="text text-variant-1">150 sqft</div>
+                                        <div class="text text-variant-1">{{$row->location}}</div>
                                     </li>
-                                    <li>
-                                        <span class="label fw-6">City</span>
-                                        <div class="text text-variant-1">#1234</div>
-                                    </li>
+                                    
                                     <li>
                                         <span class="label fw-6">State/county</span>
-                                        <div class="text text-variant-1">$7,500</div>
+                                        <div class="text text-variant-1">{{$row->state}}</div>
                                     </li>
                                 </ul>
                                 <ul class="box-right">
                                     <li>
+                                        <span class="label fw-6">City</span>
+                                        <div class="text text-variant-1">{{$row->city}}</div>
+                                    </li>
+                                    <li>
                                         <span class="label fw-6">Postal code</span>
-                                        <div class="text text-variant-1">7.328</div>
-                                    </li>
-                                    <li>
-                                        <span class="label fw-6">Area</span>
-                                        <div class="text text-variant-1">7.328</div>
-                                    </li>
-                                    <li>
-                                        <span class="label fw-6">Country</span>
-                                        <div class="text text-variant-1">2024</div>
-                                    </li>
+                                        <div class="text text-variant-1">{{$row->zip_code}}</div>
+                                    </li> 
                                 </ul>
                             </div>
                         </div>
@@ -696,7 +678,7 @@
                                                 whether you’re buying or selling.</p>
                                         </div>
                                     </div>
-                                    <a href="#" class="tf-btn fw-6 bg-color-primary w-full">
+                                    <a href="{{ route('contact')}}" class="tf-btn fw-6 bg-color-primary w-full">
                                         Connect with an agent
                                     </a>
                                 </div>
@@ -775,28 +757,7 @@
         </section>
         <!-- /section-opinion -->
 
-        <!-- section-CTA -->
-        <section class="section-CTA">
-            <div class="tf-container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="content-inner">
-                            <img src="{{ url('frontend/images/section/cta.png')}}" alt="">
-                            <div class="content">
-                                <h4 class="text-white mb-8 ">Find a Local Real Estate Agent Today</h4>
-                                <p class="text-white text-1">If you’re looking to buy or sell a home. We’ll help you
-                                    make
-                                    the most money
-                                    possible.</p>
-                            </div>
-                            <a href="#" class="tf-btn style-2 fw-6 ">Find your location agent <i
-                                    class="icon-MagnifyingGlass fw-6"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- /section-CTA -->
+         @include('front.layouts.pre-footer')
 
     </div>
     <!-- /main-content -->
@@ -804,4 +765,26 @@
 @endsection
 
 @push('scripts') 
+<script>
+var curLong = {{ $row->longitude }} ;
+var curLat = {{ $row->latitude }} ;
+var locations = [
+    {
+        coordinates: [{{ $row->longitude }}, {{ $row->latitude }}],
+        properties: {
+            image: "{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}",
+            url: "{{route('property', $row->slug)}}",
+            title: "{{ $row->title }}",
+            location: "{{ $row->location }}",
+            price: "{{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($row->price)}}",
+            beds: {{ $row->bedroom }},
+            baths: {{ $row->bathroom }},
+            sqft: "{{ $row->plot_area }}",
+            forType: "{{config('constants.FOR_TYPE')[$row->for_type]}}",
+        },
+    },
+] ;   
+</script>
+{{-- <script type="text/javascript" src="{{url('frontend/js/map.min.js') }}"></script>
+<script type="text/javascript" src="{{url('frontend/js/map.js') }}"></script>  --}}
 @endpush

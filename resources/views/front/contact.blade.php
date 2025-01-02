@@ -1,4 +1,5 @@
 @extends('front.layouts.app')
+<link rel="stylesheet" type="text/css" href="{{url('frontend/css/map.min.css')}}" />
 @section('content')
     <div class="main-content">
         <!-- section-top-map -->
@@ -33,10 +34,10 @@
                                         <label for="email">Email:<span>*</span></label>
                                         <input type="text" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="Email" name="email" id="email-contact" value="@if(old('email')!=null){{old('email')}}@endif">
                                         @if($errors->has('email'))
-                                        <span class="invalid-feedback">
-                                            {{ $errors->first('email') }}
-                                        </span>
-                                    @endif
+                                            <span class="invalid-feedback">
+                                                {{ $errors->first('email') }}
+                                            </span>
+                                        @endif
                                     </fieldset>
                                 </div>
                                 <div class="cols">
@@ -203,6 +204,30 @@
 
     </div><!-- /.main-content -->
 @endsection
-
 @push('scripts') 
+<script>
+var curLong = 75.857277 ;
+var curLat = 30.900965 ;
+var locations = [
+        @foreach ($properties as $property)
+        {
+            coordinates: [{{ $property->longitude }}, {{ $property->latitude }}],
+            properties: {
+                image: "{{ App\Helper\Helper::getImage('storage/property/'.$property->id, $property?->image?->image) }}",
+                url: "{{route('property', $property->slug)}}",
+                title: "{{ $property->title }}",
+                location: "{{ $property->location }}",
+                price: "{{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($property->price)}}",
+                beds: {{ $property->bedroom }},
+                baths: {{ $property->bathroom }},
+                sqft: "{{ $property->plot_area }}",
+                forType: "{{config('constants.FOR_TYPE')[$property->for_type]}}",
+            },
+        },
+        @endforeach 
+       
+    ];
+</script>
+<script type="text/javascript" src="{{url('frontend/js/map.min.js') }}"></script>
+<script type="text/javascript" src="{{url('frontend/js/map.js') }}"></script>
 @endpush

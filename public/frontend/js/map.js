@@ -4,65 +4,27 @@
     mapboxgl.accessToken =
         "pk.eyJ1IjoiaG9hbmdoYW5kbiIsImEiOiJjbHp3YnUyc2cwMTl3MmtweWo1MjU0cnQ3In0.kJvlxTy_K1nVvwR8y5O8xA";
 
-    const locations = [
-        {
-            coordinates: [-73.994601, 40.711536],
-            properties: {
-                image: "images/section/box-house.jpg",
-                url: "property-details-v1.html",
-                title: "Elegant studio flat",
-                location: "102 Ingraham St, Brooklyn...",
-                price: "$8.600",
-                beds: 3,
-                baths: 2,
-                sqft: "2,100",
-            },
-        },
-        {
-            coordinates: [-74.016245, 40.710885],
-            properties: {
-                image: "images/section/box-house-2.jpg",
-                url: "property-details-v1.html",
-                title: "Elegant studio flat",
-                location: "102 Ingraham St, Brooklyn...",
-                price: "$8.600",
-                beds: 3,
-                baths: 2,
-                sqft: "2,100",
-            },
-        },
-        {
-            coordinates: [-74.010316, 40.715504],
-            properties: {
-                image: "images/section/box-house-3.jpg",
-                url: "property-details-v1.html",
-                title: "Elegant studio flat",
-                location: "102 Ingraham St, Brooklyn...",
-                price: "$8.600",
-                beds: 3,
-                baths: 2,
-                sqft: "2,100",
-            },
-        },
-        {
-            coordinates: [-74.010316, 40.726204],
-            properties: {
-                image: "images/section/box-house-4.jpg",
-                url: "property-details-v1.html",
-                title: "Elegant studio flat",
-                location: "102 Ingraham St, Brooklyn...",
-                price: "$8.600",
-                beds: 3,
-                baths: 2,
-                sqft: "2,100",
-            },
-        },
-    ];
+    // const locations = [
+    //     {
+    //         coordinates: [-74.010316, 40.726204],
+    //         properties: {
+    //             image: "images/section/box-house-4.jpg",
+    //             url: "property-details-v1.html",
+    //             title: "Elegant studio flat",
+    //             location: "102 Ingraham St, Brooklyn...",
+    //             price: "$8.600",
+    //             beds: 3,
+    //             baths: 2,
+    //             sqft: "2,100",
+    //         },
+    //     },
+    // ] ;  
 
+    console.log(locations);
     const map = new mapboxgl.Map({
         container: "map",
         style: "mapbox://styles/mapbox/light-v11",
-        center: [-74.003099, 40.709295],
+        center: [curLong, curLat],
         zoom: 13,
         cooperativeGestures: true 
     });
@@ -107,38 +69,37 @@
         // Create popup content
         const popupContent = `
         <div class="map-listing-item">
-    <div class="box-house">
-        <div class="infoBox-close"><i class="icon icon-close"></i></div>
-        <div class="image-wrap">
-            <a href="#">
-                <img src="${location.properties.image}" alt="${location.properties.image}">
-            </a>
-            <ul class="box-tag flex gap-8">
-                <li class="flat-tag text-4 bg-main fw-6 text-white">For Sale</li>
-            </ul>
-            <div class="list-btn flex gap-8">
-                <a href="#" class="btn-icon save"><i class="icon-save"></i></a>
-                <a href="#" class="btn-icon find"><i class="icon-find-plus"></i></a>
-            </div>
-        </div>
-        <div class="content">
-            <h5 class="title"><a href="${location.properties.url}">${location.properties.title}</a></h5>
-            <p class="location text-1 flex items-center gap-8">
-                <i class="icon-location"></i>  ${location.properties.location}
-            </p>
-            <ul class="meta-list flex">
-                <li class="text-1 flex"><span>${location.properties.beds}</span>Beds</li>
-                <li class="text-1 flex"><span>${location.properties.baths}</span>Baths</li>
-                <li class="text-1 flex"><span>${location.properties.sqft}</span>Sqft</li>
-            </ul>
-            <div class="bot flex justify-between items-center">
-                <h5 class="price">${location.properties.price}</h5>
-                <div class="wrap-btn flex">
-                    <a href="#" class="tf-btn style-border pd-4">Details</a>
+            <div class="box-house">
+                <div class="infoBox-close"><i class="icon icon-close"></i></div>
+                <div class="image-wrap">
+                    <a href="${location.properties.url}">
+                        <img src="${location.properties.image}" alt="${location.properties.image}">
+                    </a>
+                    <ul class="box-tag flex gap-8">
+                        <li class="flat-tag text-4 bg-main fw-6 text-white">${location.properties.forType}</li>
+                    </ul>
+                    <div class="list-btn flex gap-8">
+                        <a href="${location.properties.url}" class="btn-icon find"><i class="icon-find-plus"></i></a>
+                    </div>
+                </div>
+                <div class="content">
+                    <h5 class="title"><a href="${location.properties.url}">${location.properties.title}</a></h5>
+                    <p class="location text-1 flex items-center gap-8">
+                        <i class="icon-location"></i>  ${location.properties.location}
+                    </p>
+                    <ul class="meta-list flex">
+                        <li class="text-1 flex"><span>${location.properties.beds}</span>Beds</li>
+                        <li class="text-1 flex"><span>${location.properties.baths}</span>Baths</li>
+                        <li class="text-1 flex"><span>${location.properties.sqft}</span>Sqft</li>
+                    </ul>
+                    <div class="bot flex justify-between items-center">
+                        <h5 class="price">${location.properties.price}</h5>
+                        <div class="wrap-btn flex">
+                            <a href="${location.properties.url}" class="tf-btn style-border pd-4">Details</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
         </div>
 
         `;

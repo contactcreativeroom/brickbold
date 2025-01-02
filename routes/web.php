@@ -8,15 +8,18 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\Dashboard;
 use App\Http\Controllers\Admin\MetaDetailController;
 use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\Admin\PropertyController as AdminPropertyController;
 use App\Http\Controllers\Admin\SubAdminController;
-
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Front\HomeController;
+use App\Http\Controllers\Front\NewsletterController;
 use App\Http\Controllers\Front\PropertyController as FrontPropertyController;
 use App\Http\Controllers\User\AuthController as UserAuthController;
 use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\FavoriteController;
 use App\Http\Controllers\User\PropertyController;
 use App\Http\Controllers\User\UserController;
+
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -60,6 +63,8 @@ Route::post('/register', [UserAuthController::class, 'register'])->name('registe
 Route::any('/forgot/password', [UserAuthController::class, 'forgotPassword'])->name('forgot.password');
 Route::match(['get','post'], '/password-reset/{token}', [UserAuthController::class, 'passwordReset'])->name('password.reset');
 Route::get('/reset/success', [UserAuthController::class, 'passwordResetSuccess'])->name('password.reset-success'); 
+
+Route::post('/newsletter/post', [NewsletterController::class, 'postData'])->name('newsletter.post');
 
 Route::middleware(['auth.user'])->prefix('user')->group(function () {
 // Route::group(['prefix' => 'user'], function () {
@@ -118,13 +123,25 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/banner/delete/{entity_id}', [BannersController::class, 'delete'])->name('admin.banner.delete');
         Route::post('/banner/status/change', [BannersController::class, 'changeStatus'])->name('admin.banner.status.change');
         Route::post('/banner/priority-change', [BannersController::class, 'changePriority'])->name('admin.banner.priority.change');
+
+        Route::get('/users', [AdminUserController::class, 'list'])->name('admin.users');
+        Route::get('/user/detail/{id}', [AdminUserController::class, 'detail'])->name('admin.user');
+        Route::get('/user/edit/{id}', [AdminUserController::class, 'edit'])->name('admin.user.edit');
+        Route::post('user-post-data', [AdminUserController::class, 'postData'])->name('admin.user.post');
+        Route::post('/user/status/change', [AdminUserController::class, 'changeStatus'])->name('admin.user.status.change');
+
+        Route::get('/properties', [AdminPropertyController::class, 'list'])->name('admin.properties');
+        Route::get('/property/edit/{id}', [AdminPropertyController::class, 'edit'])->name('admin.property.edit');
+        Route::post('property-post-data', [AdminPropertyController::class, 'postData'])->name('admin.property.post');
+        Route::post('/property/image/delete', [AdminPropertyController::class, 'deleteImage'])->name('admin.property.image.delete');
+        Route::post('/property/status/change', [AdminPropertyController::class, 'changeStatus'])->name('admin.property.status.change');
         
-        Route::get('/categories', [CategoryController::class, 'list'])->name('admin.categories');
-        Route::get('/category', [CategoryController::class, 'add'])->name('admin.category');
-        Route::get('/category/{id}', [CategoryController::class, 'edit'])->name('admin.category.edit');
-        Route::post('category-post-data', [CategoryController::class, 'postData'])->name('admin.category.post');
-        Route::get('/category/delete/{id}', [CategoryController::class, 'delete'])->name('admin.category.delete');
-        Route::post('/category/status/change', [CategoryController::class, 'changeStatus'])->name('admin.category.status.change');
+        // Route::get('/categories', [CategoryController::class, 'list'])->name('admin.categories');
+        // Route::get('/category', [CategoryController::class, 'add'])->name('admin.category');
+        // Route::get('/category/{id}', [CategoryController::class, 'edit'])->name('admin.category.edit');
+        // Route::post('category-post-data', [CategoryController::class, 'postData'])->name('admin.category.post');
+        // Route::get('/category/delete/{id}', [CategoryController::class, 'delete'])->name('admin.category.delete');
+        // Route::post('/category/status/change', [CategoryController::class, 'changeStatus'])->name('admin.category.status.change');
  
         Route::get('pages', [PageController::class, 'list'])->name('admin.pages');
         Route::get('page', [PageController::class, 'add'])->name('admin.page');

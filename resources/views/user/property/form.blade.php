@@ -56,12 +56,6 @@
 
                                 <input type="hidden" id="__address_country_code" name="address_country_code" value="@if(!empty($row->address_country_code)) {{$row->address_country_code}}@elseif(old('address_country_code')!=null){{old('address_country_code')}}@endif" />
                             </div>
-
-                            {{-- <iframe class="map"
-                                src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d135905.11693909427!2d-73.95165795400088!3d41.17584829642291!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1727094281524!5m2!1sen!2s"
-                                width="100%" height="456" style="border:0;" allowfullscreen="" loading="lazy"
-                                referrerpolicy="no-referrer-when-downgrade"></iframe> --}}
-
                         </div> 
                         <div class="box grid-layout-3 gap-30">
                             <fieldset class="box-fieldset">

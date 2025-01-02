@@ -26,7 +26,8 @@ class HomeController extends Controller
         return view('front.faq');
     }
     public function contact(Request $request) { 
-        return view('front.contact');
+        $properties = Property::orderBy('id', 'desc')->get();
+        return view('front.contact',['properties' => $properties]);
     }
     public function contactPost(Request $request) { 
         $validationArray = [

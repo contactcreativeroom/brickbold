@@ -17,7 +17,7 @@
                             <fieldset class="box-fieldset">
                                 <div class="text-forgot d-flex justify-content-between" >
                                     <label for="email">Email Account</label>
-                                    <a href="{{route('login')}}">Back to login</a>
+                                    <a href="#modalLogin" data-bs-toggle="modal" >Back to login</a>
                                 </div>
                                 <div class="ip-field">
                                     <svg class="icon" width="18" height="18" viewBox="0 0 18 18" fill="none"
