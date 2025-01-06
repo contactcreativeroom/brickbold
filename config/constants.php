@@ -92,9 +92,18 @@ return [
     ],
 
     'PROPERTY_STATUSES' => [
+        0 =>  'Inactive',
         1 =>  'Approved',
         2 =>  'Pending',
         3 =>  'Sold',
+    ],
+    'ADDITIONALS' => ['Puja Room', 'Study Room', 'Store Room', 'Servent Room', 'Gym Room', 'Theater Room'],
+    'AMENITIES' =>['Air Conditioner', 'Security', 'Lift', 'Piped Gas', 'Power Backup', 'Ro Water System', 'Internet/Wifi Community', 'Extra pillows & blankets', 'Fingerprint access', 'TV with standard cable', 'Fire Alarm', 'Laundry Service', 'Microwave', 'Dishwasher', 'Rain Water Harvesting', 'Swimming Pool', 'Car Parking Facility', 'Visitors Parking'],
+    'PLOT_TYPE' => ['SqFt', 'SqYd', 'SqMtr', 'Acre', 'Marla'],
+    'PACKAGE_TYPE' => ['SELL', 'BUY', 'RENT'],
+    'PACKAGE_PROFILE' => ['OWNER', 'BUILDER', 'AGENT'],
+    'USER_ROLES' => [
+        'INDIVIDUAL', 'OWNER', 'AGENT', 'BUILDER'
     ],
     'TICKET_STATUSES' => [
         'Assigned',
@@ -149,8 +158,8 @@ return [
         'upload' => public_path('storage/')
     ],
     'STATUS' => [
-        'inactive' => 0,
-        'active' => 1,
+        '1' => 'Active',
+        '0'  =>'Inactive',
     ],
     'DEFAULT_USER_IMG' => 'avtar.png',
     'USER_TYPE' => [
@@ -178,12 +187,7 @@ return [
         'vendor' => 3,
 
     ],
-    'PRODUCT_PROGRESS_STATUS' => [
-        'Ongoing' => 1,
-        'Completed' => 2,
-        'Pending' => 3,
-        // 'Delayed' => 4
-    ],
+    
     'CAREER_AREAS_OF_INTEREST' => [
         'Manager' => 1,
         'Other' => 2

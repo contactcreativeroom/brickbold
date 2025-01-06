@@ -37,7 +37,12 @@
                                         </div>
                                     </div>
                                 </div> 
-                                <h5 class="pb-4 border-bottom mb-4">Details</h5>
+                                <h5 class="pb-4 border-bottom justify-header mb-4">
+                                    Details
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input entity-toggle" type="checkbox" data-entity-url="{{ route('admin.user.status.change') }}" data-entity-id="{{ $user->id }}" data-entity-type="user" {{ $user->status == 1 ? 'checked' : '' }}>
+                                    </div>
+                                </h5>
                                 <div class="info-container">
                                     <ul class="list-unstyled mb-6">                                        
                                         <li class="mb-2">
@@ -71,9 +76,8 @@
                                         </li>
                                     </ul>
                                     <div class="d-flex justify-content-center">
-                                        <a href="javascript:void(0);" class="btn btn-primary me-2" data-bs-target="#editUser" data-bs-toggle="modal">Edit</a>
-                                        <a href="javascript:void(0);" data-entity-url="{{ route('admin.user.status.change') }}" data-entity-id="{{ $user->id }}" data-entity-type="user" class="btn btn-label-danger suspend-user me-2">{{ $user->status == 1 ? 'Active' : 'Inactive' }}</a>
-                                        <a href="{{route("admin.user", $user->id)}}" class="btn btn-label-warning">Add property</a>
+                                        <a href="{{route("admin.user.edit", ['id'=>$user->id])}}" class="btn btn-primary me-2">Edit</a>
+                                        <a href="{{route("admin.property.add", ['user_id'=>$user->id])}}" class="btn btn-label-danger suspend-user">Add property</a>
                                     </div>
                                 </div>
                             </div>
@@ -126,18 +130,22 @@
 
                         <!-- Project table -->
                         <div class="card mb-6">
-                            <h5 class="card-header pb-0 text-sm-start text-center">Properties List</h5>
+                            <h5 class="card-header pb-0 text-sm-start text-center">Property List</h5>
                             <div class="table-responsive mb-4">
+                                @if($rows->isEmpty())
+                                <div class="alert alert-danger text-center">
+                                    No Records found.
+                                </div>
+                                @else
                                 <table class="table table-hover">
                                     <thead class="table-primary">
                                         <tr>
                                             <th scope="col" class="border">#</th>
-                                            <th scope="col" class="border">User</th>
-                                            <th scope="col" class="border">Role</th>
+                                            <th scope="col" class="border">Property</th>
                                             <th scope="col" class="border">Address</th>
+                                            <th scope="col" class="border">For-Type</th>
+                                            <th scope="col" class="border">Type</th>
                                             <th scope="col" class="border">Status</th>
-                                            <th scope="col" class="border">Joined on</th>
-                                            <th scope="col" class="border">Operations</th>
                                         </tr>
                                     </thead>
                                     <tbody  data-entity-type="category"  >
@@ -147,58 +155,46 @@
                                             <td class="sorting_1">
                                                 <div class="d-flex justify-content-start align-items-center user-name">
                                                     <div class="avatar-wrapper">
-                                                        <div class="avatar avatar-sm me-4">
-                                                            <img src="{{ App\Helper\Helper::getProfileImage('storage/user/'.$row->id, $row->profile_image) }}" alt="Avatar" class="rounded-circle">
+                                                        <div class="avatar avatar-xxl me-4">
+                                                            <img src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" alt="Avatar" class="rounded">
                                                         </div>
                                                     </div>
                                                     <div class="d-flex flex-column">
-                                                        <a href="app-user-view-account.html" class="text-heading text-truncate">
-                                                            <span class="fw-medium">{{ $row->name }}</span>
+                                                        <a href="{{route('property', $row->slug)}}" class="text-heading text-truncate">
+                                                            <span class="fw-medium">{{$row->title}}</span>
                                                         </a>
-                                                        <small>{{ $row->email }}</small>
-                                                        <small>{{ $row->phone }}</small>
+                                                        <small>Date: {{ App\Helper\Helper::formatStringDate($row->created_at)  }}</small>
+                                                        <small>Views: {{$row->views}}</small>
+                                                        <small class="text-btn text-color-primary" >{{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($row->price)}}</small>
+                                                        <small>
+                                                            <a href="{{route("admin.property.edit", $row->id)}}">
+                                                                <span class="btn-primary badge" text-capitalized="">Edit</span>
+                                                            </a>
+                                                        </small>
                                                     </div>
                                                 </div>
-                                            </td>   
-                                            <td> role </td>   
+                                            </td>      
                                             <td> 
-                                                {{ $row->address }} 
-                                                <small>{{ $row->state }}</small>
+                                                {{-- {{ $row->location }} 
+                                                <small>{{ $row->state }}</small>--}}
                                                 <small>{{ $row->city }}</small>
-                                                <small>{{ $row->postal_code }}</small>
+                                                <small>{{ $row->zip_code }}</small> 
                                             </td>   
+                                            <td>{{config('constants.FOR_TYPE')[$row->for_type]}} </td>   
+                                            <td>{{config('constants.TYPE')[$row->type]}}</td>   
                                             <td>
                                                 <div class="form-check form-switch">
-                                                    <input class="form-check-input entity-toggle" type="checkbox" data-entity-url="{{ route('admin.user.status.change') }}" data-entity-id="{{ $row->id }}" data-entity-type="user" {{ $row->status == 1 ? 'checked' : '' }}>
+                                                    <input class="form-check-input entity-toggle" type="checkbox" data-entity-url="{{ route('admin.property.status.change') }}" data-entity-id="{{ $row->id }}" data-entity-type="user" {{ $row->status == 1 ? 'checked' : '' }}>
                                                 </div>
-                                            </td>
-                                            <td><span class="row-number"></span> {{ App\Helper\Helper::formatStringDate($row->created_at, true)  }}</td>
-                                            <td>                             
-                                                <a href="{{route("admin.user", $row->id)}}">
-                                                    <span class="btn-info badge" text-capitalized="">View</span>
-                                                </a>
-
-                                                <a href="{{route("admin.user.edit", $row->id)}}">
-                                                    <span class="btn-primary badge" text-capitalized="">Edit</span>
-                                                </a>
-
-                                                <a href="{{route("admin.user", $row->id)}}">
-                                                    <span class="btn-warning badge" text-capitalized="">Add property</span>
-                                                </a>
-                                                
-                                            </td>
+                                            </td>  
                                         </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
-                                <div class="row custom-row ">
-                                    <div class="col-sm-6 text-center text-sm-right order-sm-1">
-                                        Showing {{ $rows->firstItem() }} to {{ $rows->lastItem() }} of {{ $rows->total() }} results
-                                    </div>
-                                    <div class="col-sm-6 text-center text-sm-left mt-3 mt-sm-0">
-                                        {{ $rows->links() }}
-                                    </div>
+                                <div class="ps-5 pt-5">
+                                    {{ $rows->links() }}
                                 </div>
+                                @endif
                             </div>
                         </div>
                         <!-- /Project table -->
@@ -221,7 +217,7 @@
         </div>
     </div>
     <!-- / Content -->
-@include('admin.layouts.modal')
+
 @endsection
 
 @push('scripts')

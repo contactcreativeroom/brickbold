@@ -16,14 +16,13 @@
         <!-- Content -->
         <div class="container">
             <h2>Meta Details</h2>
-            <div class="row">
-                <div class="col-sm-4 pb-4">
-                    <a href="{{ route('admin.meta.save') }}" class="btn btn-primary">Add meta details</a>
-                </div>
+            <div class="card-header d-flex align-items-center mb-5">
+                <h5 class="card-title mb-0 flex-grow-1">Meta detail List</h5>
+                <div><a href="{{route('admin.meta.save')}}" class="btn btn-primary">Add meta details</a></div>
             </div>
             @if($meta_details->isEmpty())
             <div class="alert alert-danger text-center">
-                No meta details found.
+                No Records found.
             </div>
             @else
             <table class="table table-hover">

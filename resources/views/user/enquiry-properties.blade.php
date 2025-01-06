@@ -59,7 +59,7 @@
                                 </div>
                                 <div class="wrap-pagination">
                                     <p class="text-1">Showing {{ $rows->firstItem() }}-{{ $rows->lastItem() }} of {{ $rows->total() }} results.</p>
-                                    {{ $rows->links() }}
+                                    {{ $rows->links('vendor.pagination.frontend-bootstrap-4') }}
                                 </div> 
                             </div>
                         </div>

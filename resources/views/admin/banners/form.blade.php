@@ -19,7 +19,7 @@
         <!-- Content -->
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <!-- Left side of the form -->
                     <div class="card">
                         <div class="card-header">

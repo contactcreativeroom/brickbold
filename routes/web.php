@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\BannersController;
 use App\Http\Controllers\Admin\CategoryController; 
 use App\Http\Controllers\Admin\Dashboard;
 use App\Http\Controllers\Admin\MetaDetailController;
+use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\PropertyController as AdminPropertyController;
 use App\Http\Controllers\Admin\SubAdminController;
@@ -19,7 +20,7 @@ use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\FavoriteController;
 use App\Http\Controllers\User\PropertyController;
 use App\Http\Controllers\User\UserController;
-
+use App\Models\Package;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -131,11 +132,23 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/user/status/change', [AdminUserController::class, 'changeStatus'])->name('admin.user.status.change');
 
         Route::get('/properties', [AdminPropertyController::class, 'list'])->name('admin.properties');
+        Route::get('/property/add/{user_id?}', [AdminPropertyController::class, 'add'])->name('admin.property.add');
         Route::get('/property/edit/{id}', [AdminPropertyController::class, 'edit'])->name('admin.property.edit');
         Route::post('property-post-data', [AdminPropertyController::class, 'postData'])->name('admin.property.post');
         Route::post('/property/image/delete', [AdminPropertyController::class, 'deleteImage'])->name('admin.property.image.delete');
         Route::post('/property/status/change', [AdminPropertyController::class, 'changeStatus'])->name('admin.property.status.change');
         
+        Route::get('/packages', [PackageController::class, 'list'])->name('admin.packages');
+        Route::get('/package/add', [PackageController::class, 'add'])->name('admin.package.add');
+        Route::get('/package/edit/{id}', [PackageController::class, 'edit'])->name('admin.package.edit');
+        Route::post('package-post-data', [PackageController::class, 'postData'])->name('admin.package.post');
+        Route::get('/package/delete/{id}', [PackageController::class, 'delete'])->name('admin.package.delete');
+        Route::post('/package/status/change', [PackageController::class, 'changeStatus'])->name('admin.package.status.change');
+        Route::get('/package/orders', [PackageController::class, 'orders'])->name('admin.package.orders');
+
+        Route::get('/contact-enquiries', [Dashboard::class, 'contactEnquiries'])->name('admin.contact-enquiries');
+        Route::get('/property-enquiries', [Dashboard::class, 'propertyEnquiries'])->name('admin.property-enquiries');
+
         // Route::get('/categories', [CategoryController::class, 'list'])->name('admin.categories');
         // Route::get('/category', [CategoryController::class, 'add'])->name('admin.category');
         // Route::get('/category/{id}', [CategoryController::class, 'edit'])->name('admin.category.edit');

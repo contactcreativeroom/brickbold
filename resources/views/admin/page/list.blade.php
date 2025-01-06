@@ -18,14 +18,13 @@
         <!-- Content -->
         <div class="container">
             <h2>Pages</h2>
-            <div class="row">
-                <div class="col-sm-4 pb-4">
-                    <a href="{{ route('admin.page') }}" class="btn btn-primary">Add page</a>
-                </div>
+            <div class="card-header d-flex align-items-center mb-5">
+                <h5 class="card-title mb-0 flex-grow-1">Page List</h5>
+                <div><a href="{{ route('admin.page') }}" class="btn btn-primary">Add page</a></div>
             </div>
             @if($rows->isEmpty())
             <div class="alert alert-danger text-center">
-                No Pages found.
+                No Records found.
             </div>
             @else
             <table class="table table-hover">

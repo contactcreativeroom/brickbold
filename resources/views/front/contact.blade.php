@@ -54,10 +54,10 @@
                                         <label class="text-1 fw-6 mb-12">What are you interested in?</label>
                                         <select class="form-control form-select nice-select open" name="interest">
                                             <option value="">Select</option>
-                                            <option value="Location">Location</option>                                          
+                                            <option value="Buy">Buy</option>                                          
                                             <option value="Rent">Rent</option>                                          
                                             <option value="Sale">Sale</option>                                          
-                                            <option value="Sutilities">Sutilities</option>                                          
+                                            <option value="Others">Others</option>                                          
                                         </select> 
                                     </div>
                                 </div>
@@ -218,8 +218,8 @@ var locations = [
                 title: "{{ $property->title }}",
                 location: "{{ $property->location }}",
                 price: "{{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($property->price)}}",
-                beds: {{ $property->bedroom }},
-                baths: {{ $property->bathroom }},
+                beds: "{{ $property->bedroom }}",
+                baths: "{{ $property->bathroom }}",
                 sqft: "{{ $property->plot_area }}",
                 forType: "{{config('constants.FOR_TYPE')[$property->for_type]}}",
             },

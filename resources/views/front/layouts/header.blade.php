@@ -139,7 +139,7 @@
                                     </ul>
                                 </li>
 
-                                <li class="has-child style-2"><a href="#">Sell</a>
+                                <li class="has-child style-2 size-6"><a href="#">Sell</a>
                                     <ul class="submenu">
                                         <li>
                                             <a href="{{route('properties')}}">For Owner</a>
@@ -166,13 +166,6 @@
                                                 <li>
                                                     <a href="{{route('contact')}}">Sales Enquiry</a>
                                                 </li> 
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a href="{{route('properties')}}">Selling Tools</a>
-                                            <ul class="submenu2">
-                                                <li><a href="{{route('properties')}}">Find an Agent</a>
-                                                </li>
                                             </ul>
                                         </li>
                                     </ul>

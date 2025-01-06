@@ -67,7 +67,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        {{ $rows->links() }}
+                        {{ $rows->links('vendor.pagination.frontend-bootstrap-4') }}
                     </div>
                 </div>
                 @include('user.layouts.footer')

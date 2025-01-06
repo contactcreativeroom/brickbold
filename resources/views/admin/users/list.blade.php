@@ -20,42 +20,41 @@
             <h2>Users</h2>
             <div class="card-header  mb-5">
                 <h5 class="card-title mb-0">Search Filters</h5>
-                <div class="d-flex justify-content-between align-items-center row pt-4 gap-4 gap-md-0 g-6 mb-3">
-                    <div class="col-md-4 user_role">
-                        <select id="UserRole" class="form-select text-capitalize">
-                            <option value=""> Select Role </option>
-                            <option value="Admin">Admin</option>
-                            <option value="Author">Author</option>
-                            <option value="Editor">Editor</option>
-                            <option value="Maintainer">Maintainer</option>
-                            <option value="Subscriber">Subscriber</option>
-                        </select>
+                <form action="{{ route('admin.users') }}" method="get" enctype='multipart/form-data'>
+                    <div class="d-flex justify-content-between align-items-center row pt-4 gap-4 gap-md-0 g-6 mb-3">
+                        <div class="col-md-4 user_role">
+                            <select  class="form-select text-capitalize" name="role">
+                                <option value="">Role</option>
+                                @foreach (config('constants.USER_ROLES') as $key=>$value)
+                                    <option value="{{$value}}" {{ old('role', request('role')) == $value ? 'selected' : '' }} >{{$value}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-4 user_plan">
+                            <select  class="form-select text-capitalize" name="package">
+                                <option value="">Package</option>
+                                @foreach ($packages as $key=>$value)
+                                    <option value="{{$value->id}}" {{ old('package', request('package')) == $value->id ? 'selected' : '' }} >{{$value->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        
+                        <div class="col-md-4 user_status">
+                            <select id="FilterTransaction" class="form-select text-capitalize" name="status">
+                                <option value=""> Select Status </option>
+                                @foreach (config('constants.STATUS') as $key=>$value)
+                                    <option value="{{$key}}" {{ old('status', request('status')) === (string)$key ? 'selected' : '' }} >{{$value}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
-                    <div class="col-md-4 user_plan">
-                        <select id="UserPlan" class="form-select text-capitalize">
-                            <option value=""> Select Plan </option>
-                            <option value="Basic">Basic</option>
-                            <option value="Company">Company</option>
-                            <option value="Enterprise">Enterprise</option>
-                            <option value="Team">Team</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4 user_status">
-                        <select id="FilterTransaction" class="form-select text-capitalize">
-                            <option value=""> Select Status </option>
-                            <option value="Pending" class="text-capitalize">Pending</option>
-                            <option value="Active" class="text-capitalize">Active</option>
-                            <option value="Inactive" class="text-capitalize">Inactive</option>
-                        </select>
-                    </div>
-                </div>
-                <button class="btn btn-secondary add-new btn-primary" type="submit" >
-                    <span class="d-none d-sm-inline-block">submit</span>
-                </button>
+                    <button class="btn btn-secondary add-new btn-primary" type="submit" >Submit</button>
+                    <a href="{{ route('admin.users') }}"  class="btn btn-secondary add-new btn-primary" >Reset</a>
+                </form>
             </div>
             @if($rows->isEmpty())
             <div class="alert alert-danger text-center">
-                No Categories found.
+                No Records found.
             </div>
             @else
             <table class="table table-hover">
@@ -112,7 +111,7 @@
                                 <span class="btn-primary badge" text-capitalized="">Edit</span>
                             </a>
 
-                            <a href="{{route("admin.user", $row->id)}}">
+                            <a href="{{route("admin.property.add", ['user_id'=>$row->id])}}">
                                 <span class="btn-warning badge" text-capitalized="">Add property</span>
                             </a>
                              

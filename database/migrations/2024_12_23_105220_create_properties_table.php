@@ -36,10 +36,10 @@ return new class extends Migration
             $table->string('plot_type')->nullable();
             $table->string('carpet_area')->nullable();
             $table->string('builtup_area')->nullable();
-            $table->integer('floors')->nullable();
-            $table->integer('bathroom')->nullable();
-            $table->integer('bedroom')->nullable();
-            $table->integer('balcony')->nullable();
+            $table->text('floors')->nullable();
+            $table->text('bathroom')->nullable();
+            $table->text('bedroom')->nullable();
+            $table->text('balcony')->nullable();
             $table->string('facing')->nullable();
             $table->string('furnished')->nullable();
             $table->string('approved_by')->nullable();

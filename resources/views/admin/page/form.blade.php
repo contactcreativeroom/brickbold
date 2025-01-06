@@ -22,9 +22,9 @@
                 <div class="col-md-12">
                     <!-- Left side of the form -->
                     <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title p-3">{{isset($row->id) ? "Update Page" : "Add Page"}}</h4>
-                            <div class="ml-auto py-2 px-3"><a class="btn btn-primary" href="{{route('admin.pages')}}">List</a></div>
+                        <div class="card-header d-flex align-items-center">
+                            <h4 class="card-title mb-0 flex-grow-1">{{isset($row->id) ? "Update Page" : "Add Page"}}</h4>
+                            <div><a href="{{ route('admin.pages') }}" class="btn btn-primary">List</a></div>
                         </div>
                         <div class="card-body">
                             <form action="{{ route('admin.page.post') }}" method="post" enctype='multipart/form-data'>

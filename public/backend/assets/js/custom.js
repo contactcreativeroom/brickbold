@@ -1,69 +1,30 @@
-$(document).ready(function(){
-    $('#category').on('change', function(){
-        var category_id = $(this).val();
-     
+$(document).ready(function(){  
 
-        if(category_id){
-            getSubCategory(category_id)
-        //  console.log(category_id);
-        //     $.ajax({
-        //         url: '/show_sub_category/'+category_id,
-        //         type: 'GET',
-        //         dataType: 'json',
-        //         success: function(data){
-                 
-
-        //              $('#sub_category').empty();   
-        //              $('#sub_category').append('<option value="">Select Sub Category</option>');
-        //              $.each(data, function(key, value){
-        //                    $('#sub_category').append('<option value="'+value.id+'">'+value.sub_category+'</option>');
-        //                    // console.log(value.id, value.sub_category);
-        //              });                                                                       
-        //         }
-        //     });
-        }else{
-            $('#sub_category').empty();
-        }
-    });
-
-    var category_id = $('#category').data('category');
-    if( category_id != "" ){
-        getSubCategory(category_id);
-    }
+    jQuery('#add_more').click(function(){
+        //let cnt = $(this).attr('data-id');
+        let cnt = $('.more_fields').length +1;
+        let row = '<div class="row mt-3 more_fields" id="row_'+cnt+'"><div class="col-md-7"><input type="text" class="form-control" placeholder="Heading" name="fields['+cnt+'][heading]" /></div><div class="col-md-3"><input type="text" class="form-control" placeholder="Value" name="fields['+cnt+'][value]" /></div><div class="col-md-2"><a href="javascript:void(0);" data-id="'+cnt+'"  class="btn btn-danger remove_row" style="width: 100%;" >Remove </a></div></div>';
+        cnt++;            
+        $(this).attr('data-id',cnt);
+        $('.add_more_field').append(row);
     
-    function getSubCategory(category_id){
-        if(category_id){
-            var sub_category_id = $('#sub_category').data('subcategory');
-            $.ajax({
-                url: $('#category').data('url'),
-                type: 'POST',
-                data: {category_id: category_id,
-                    _token: $('meta[name="csrf-token"]').attr('content')
-                },
-                dataType: 'json',
-                success: function(data){
-                    $('#sub_category').empty();   
-                    $('#sub_category').append('<option value="">Select Sub Category</option>');
-                    $.each(data, function(key, value){
-                        $('#sub_category').append('<option '+( sub_category_id == value.id ? "selected" : "" )+' value="'+value.id+'">'+value.sub_category+'</option>');
-                    });                                                                       
-                }
-            });
-        }else{
-            $('#sub_category').empty();
-        }
-    }
-
+    });
+    
+    jQuery('html body').on('click','.remove_row',function(){        
+        let cnt = $(this).attr('data-id');
+        $('#row_'+cnt).remove();
+    });
 
     const togglePassword = document.getElementById('togglePassword');
     const password = document.getElementById('password');
-
-    togglePassword.addEventListener('click', function() {
-        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-        password.setAttribute('type', type);
-        this.querySelector('i').classList.toggle('fa-eye');
-        this.querySelector('i').classList.toggle('fa-eye-slash');
-    });
+    if (togglePassword && password) {
+        togglePassword.addEventListener('click', function() {
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            this.querySelector('i').classList.toggle('fa-eye');
+            this.querySelector('i').classList.toggle('fa-eye-slash');
+        });
+    }
 });
 
 $(document).ready(function() {
@@ -137,39 +98,42 @@ $(document).ready(function() {
     });
 
     // Sortable list for entities
-    $('#sortableList').sortable({
-       
-        placeholder: 'ui-state-highlight',
-        update: function(event, ui) {
-            var entityType = $('#sortableList').data('entity-type'); // Get entity type from container
-            var entityUrl = $('#sortableList').data('entity-url');
-            var entityIdArr = [];
-            $('#sortableList .sortable-row').each(function() {
-                entityIdArr.push($(this).data('entity-id'));
-            });
-            var csrfToken = $('meta[name="csrf-token"]').attr('content');
-           
-            $.ajax({
-                type: 'POST',
-                url: entityUrl, 
-                data: {
-                    entityIdArr: entityIdArr,
-                    _token: csrfToken
-                },
-                dataType: 'json',
-                success: function(response) {
-                    if (response.status === 'success') {
-                        showToastr(entityType.charAt(0).toUpperCase() + entityType.slice(1) + ' priority updated', 'success');
-                    } else {
-                        alert('Error updating position');
+    if($('#sortableList').length > 0){
+        $('#sortableList').sortable({
+        
+            placeholder: 'ui-state-highlight',
+            update: function(event, ui) {
+                var entityType = $('#sortableList').data('entity-type'); // Get entity type from container
+                var entityUrl = $('#sortableList').data('entity-url');
+                var entityIdArr = [];
+                $('#sortableList .sortable-row').each(function() {
+                    entityIdArr.push($(this).data('entity-id'));
+                });
+                var csrfToken = $('meta[name="csrf-token"]').attr('content');
+            
+                $.ajax({
+                    type: 'POST',
+                    url: entityUrl, 
+                    data: {
+                        entityIdArr: entityIdArr,
+                        _token: csrfToken
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            showToastr(entityType.charAt(0).toUpperCase() + entityType.slice(1) + ' priority updated', 'success');
+                        } else {
+                            alert('Error updating position');
+                        }
+                    },
+                    error: function(e) {
+                        console.error('Error:', e);
                     }
-                },
-                error: function(e) {
-                    console.error('Error:', e);
-                }
-            });
-        }
-    });
+                });
+            }
+        });
+    }
+    
 
 });
 

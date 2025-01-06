@@ -22,11 +22,37 @@ class PropertyController extends Controller
         $this->pagerecords = config('constants.ADMIN_PAGE_RECORDS');
     }
 
-    public function list(Request $request){
-        $properties = Property::latest()->paginate($this->pagerecords);
+    public function list(Request $request){ 
+        $properties = Property::query();
+        if ($request->has('type') && $request->type != "") {
+            $type = $request->type; 
+            $properties->where('type', $type) ;
+        } 
+        if ($request->has('property_detail') && $request->property_detail != "") {
+            $property_detail = $request->property_detail; 
+            $properties->where('property_detail', $property_detail) ;
+        } 
+        if ($request->has('for_type') && $request->for_type != "") {
+            $for_type = $request->for_type; 
+            $properties->where('for_type', $for_type) ;
+        } 
+        if ($request->has('status')) {
+            $status = $request->status; 
+            $properties->where('status', $status) ;
+        } 
+        $properties = $properties->paginate($this->pagerecords)->appends([
+            'type' => $request->get('type'),
+            'property_detail' => $request->get('property_detail'),
+            'for_type' => $request->get('for_type'),
+            'status' => $request->get('status'),
+        ]);
         $data=array('rows'=>$properties);
         return view($this->prefix.'.property.list')->with($data);
     } 
+
+    public function add(Request $request, $user_id = 0){
+        return view($this->prefix . '.property.form', compact('user_id'));
+    }
 
     public function edit(Request $request, $id) {
         $property = Property::find($id);

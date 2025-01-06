@@ -8,7 +8,7 @@
             <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
                 <ol class="breadcrumb mb-0">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Users</li>
+                    <li class="breadcrumb-item active" aria-current="page">Properties</li>
                 </ol>
             </nav>
         </div>
@@ -17,45 +17,55 @@
     <div class="content-wrapper">
         <!-- Content -->
         <div class="container">
-            <h2>Users</h2>
+            <h2>Properties</h2>
             <div class="card-header  mb-5">
                 <h5 class="card-title mb-0">Search Filters</h5>
-                <div class="d-flex justify-content-between align-items-center row pt-4 gap-4 gap-md-0 g-6 mb-3">
-                    <div class="col-md-4 user_role">
-                        <select id="UserRole" class="form-select text-capitalize">
-                            <option value=""> Select Role </option>
-                            <option value="Admin">Admin</option>
-                            <option value="Author">Author</option>
-                            <option value="Editor">Editor</option>
-                            <option value="Maintainer">Maintainer</option>
-                            <option value="Subscriber">Subscriber</option>
-                        </select>
+                <form action="{{ route('admin.properties') }}" method="get" enctype='multipart/form-data'>
+                    <div class="d-flex justify-content-between align-items-center row pt-4 gap-4 gap-md-0 g-6 mb-3">
+                        <div class="col-md-3 user_role">
+                            <select  class="form-select text-capitalize" name="type">
+                                <option value="">Property Type</option>
+                                @foreach (config('constants.TYPE') as $key=>$value)
+                                    <option value="{{$key}}" {{ old('type', request('type')) == $key ? 'selected' : '' }} >{{$value}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-3 user_plan">
+                            <select  class="form-select text-capitalize" name="property_detail">
+                                <option value="">Property Detail </option>
+                                @foreach (config('constants.PROPERTY_DETAIL') as $key=>$value)
+                                    <option value="{{$key}}" {{ old('property_detail', request('property_detail')) == $key ? 'selected' : '' }} >{{$value}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-3 user_plan">
+                            <select  class="form-select text-capitalize" name="for_type">
+                                <option value="">For Type</option>
+                                @foreach (config('constants.FOR_TYPE') as $key=>$value)
+                                    <option value="{{$key}}" {{ old('for_type', request('for_type')) == $key ? 'selected' : '' }} >{{$value}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-3 user_status">
+                            <select id="FilterTransaction" class="form-select text-capitalize" name="status">
+                                <option value=""> Select Status </option>
+                                @foreach (config('constants.PROPERTY_STATUSES') as $key=>$value)
+                                    <option value="{{$key}}" {{ old('status', request('status')) === (string)$key ? 'selected' : '' }} >{{$value}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
-                    <div class="col-md-4 user_plan">
-                        <select id="UserPlan" class="form-select text-capitalize">
-                            <option value=""> Select Plan </option>
-                            <option value="Basic">Basic</option>
-                            <option value="Company">Company</option>
-                            <option value="Enterprise">Enterprise</option>
-                            <option value="Team">Team</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4 user_status">
-                        <select id="FilterTransaction" class="form-select text-capitalize">
-                            <option value=""> Select Status </option>
-                            <option value="Pending" class="text-capitalize">Pending</option>
-                            <option value="Active" class="text-capitalize">Active</option>
-                            <option value="Inactive" class="text-capitalize">Inactive</option>
-                        </select>
-                    </div>
-                </div>
-                <button class="btn btn-secondary add-new btn-primary" type="submit" >
-                    <span class="d-none d-sm-inline-block">submit</span>
-                </button>
+                    <button class="btn btn-secondary add-new btn-primary" type="submit" >Submit</button>
+                    <a href="{{ route('admin.properties') }}"  class="btn btn-secondary add-new btn-primary" >Reset</a>
+                </form>
+            </div>
+            <div class="card-header d-flex align-items-center mb-5">
+                <h5 class="card-title mb-0 flex-grow-1">Property List</h5>
+                <div><a href="{{route('admin.property.add')}}" class="btn btn-primary">Add Property</a></div>
             </div>
             @if($rows->isEmpty())
             <div class="alert alert-danger text-center">
-                No Categories found.
+                No Records found.
             </div>
             @else
             <table class="table table-hover">
@@ -102,23 +112,28 @@
                         <td>{{config('constants.TYPE')[$row->type]}}</td>   
                         <td>
                             <div class="form-check form-switch">
-                                <input class="form-check-input entity-toggle" type="checkbox" data-entity-url="{{ route('admin.property.status.change') }}" data-entity-id="{{ $row->id }}" data-entity-type="user" {{ $row->status == 1 ? 'checked' : '' }}>
+                                <input class="form-check-input entity-toggle" type="checkbox" data-entity-url="{{ route('admin.property.status.change') }}" data-entity-id="{{ $row->id }}" data-entity-type="property" {{ $row->status == 1 ? 'checked' : '' }}>
                             </div>
                         </td> 
                         <td class="sorting_1">
-                            <div class="d-flex justify-content-start align-items-center user-name">
-                                <div class="avatar-wrapper">
-                                    <div class="avatar avatar-sm me-4">
-                                        <img src="{{ App\Helper\Helper::getProfileImage('storage/user/'.$row->user->id, $row->user->profile_image) }}" alt="Avatar" class="rounded-circle">
+                            @if (isset($row->user_id) && $row->user_id > 0)
+                                <div class="d-flex justify-content-start align-items-center user-name">
+                                    <div class="avatar-wrapper">
+                                        <div class="avatar avatar-sm me-4">
+                                            <img src="{{ App\Helper\Helper::getProfileImage('storage/user/'.$row->user->id, $row->user->profile_image) }}" alt="Avatar" class="rounded-circle">
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-column">
+                                        <a href="{{route('admin.user', $row->user_id)}}" class="text-heading text-truncate">
+                                            <span class="fw-medium">{{ $row->user->name }}</span>
+                                        </a>
+                                        <small>{{ $row->user->phone }}</small>
                                     </div>
                                 </div>
-                                <div class="d-flex flex-column">
-                                    <a href="{{route('admin.user', $row->user_id)}}" class="text-heading text-truncate">
-                                        <span class="fw-medium">{{ $row->user->name }}</span>
-                                    </a>
-                                    <small>{{ $row->user->phone }}</small>
-                                </div>
-                            </div>
+                            @else 
+                                Admin
+                            @endif                           
+
                         </td>
                         <td>  
 

@@ -7,8 +7,8 @@
             <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
                 <ol class="breadcrumb mb-0">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('admin.properties') }}">property</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Update</li>
+                    <li class="breadcrumb-item"><a href="{{ route('admin.properties') }}">properties</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{empty($row->id)?'Add New' : 'Update';}}</li>
                 </ol>
             </nav>
         </div>
@@ -23,24 +23,22 @@
                     <!-- Left side of the form -->
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Update Property</h4>
+                            <h4 class="card-title">{{empty($row->id)?'Add Property' : 'Update Property';}}</h4>
                         </div>
                         <div class="card-body">
                             <form id="postaddForm" action="{{ route('admin.property.post') }}" method="POST"  enctype='multipart/form-data'>
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <label class="form-label">Status</label>
+                                            <label class="form-label">Status<span>*</span></label>
                                             <select class="form-control form-select" name="status">
-                                                <option @if ($row->status == 1) selected @endif value="1">
-                                                    Active
-                                                </option>
-                                                <option @if ($row->status == 0) selected @endif value="0">
-                                                    Inactive</option>
+                                                @foreach (config('constants.STATUS') as $key=>$value)
+                                                    <option value="{{$key}}" {{ old('status', request('status')) === (string)$key ? 'selected' : '' }} >{{$value}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="col-md-3">
-                                            <label for="type" class="form-label">Property Type</label>
+                                            <label for="type" class="form-label">Property Type<span>*</span></label>
                                             <select class="form-control form-select {{ $errors->has('type') ? ' is-invalid' : '' }}" name="type" id="property_type">
                                                 <option value="">Select Property Type</option>
                                                 @foreach (config('constants.TYPE') as $key=>$value)
@@ -54,7 +52,7 @@
                                             </select>
                                         </div>
                                         <div class="col-md-3">
-                                            <label for="detail" class="form-label">Property Detail</label>
+                                            <label for="detail" class="form-label">Property Detail<span>*</span></label>
                                             <select class="form-control form-select{{ $errors->has('property_detail') ? ' is-invalid' : '' }}" name="property_detail" id="property_detail">
                                                 <option value="">Select Property Detail</option>
                                                 @foreach (config('constants.PROPERTY_DETAIL') as $key => $value)
@@ -70,7 +68,7 @@
                                             @endif
                                         </div>
                                         <div class="col-md-3">
-                                            <label for="address" class="form-label">Property Status</label>
+                                            <label for="address" class="form-label">Property Status<span>*</span></label>
                                             <select class="form-control form-select{{ $errors->has('for_type') ? ' is-invalid' : '' }}" name="for_type">
                                                 @foreach (config('constants.FOR_TYPE') as $key=>$value)
                                                     <option value="{{$key}}" @if(old('for_type')!=null && old('for_type')==$key) selected @elseif(!empty($row) && $row->for_type==$key) selected @endif >{{$value}}</option>
@@ -86,7 +84,7 @@
                                     </div>
                                     <div class="row mt-3">
                                         <div class="col-md-12">
-                                            <label for="title" class="form-label">Title</label>
+                                            <label for="title" class="form-label">Title<span>*</span></label>
                                             <input type="text" class="form-control {{ $errors->has('title') ? ' is-invalid' : '' }}" placeholder="Title" name="title" value="@if(old('title')!=null){{old('title')}}@elseif(!empty($row->title)){{$row->title}}@endif">
                                             @if($errors->has('title'))
                                                 <span class="invalid-feedback">
@@ -104,7 +102,7 @@
                                     </div>
                                     <div class="row mt-3">
                                         <div class="col-md-12">
-                                            <label for="location" class="form-label">Location</label>
+                                            <label for="location" class="form-label">Location<span>*</span></label>
                                             <input type="text" id="__address"
                                                 class="form-control {{ $errors->has('location') ? ' is-invalid' : '' }}"
                                                 name="location" placeholder="Location"
@@ -268,31 +266,21 @@
                                     <div class="row mt-3">
                                         <div class="col-md-4">
                                             <div class="row">
-                                                <div class="col-md-8" style="padding-right:0px;">
-                                                    <label for="plot_area" class="form-label">Plot Area</label>
-                                                    <input type="text" style="border-radius: 0;"
-                                                        value="{{ $row->plot_area }}" class="form-control"
-                                                        id="plot_area" name="plot_area" />
+                                                <div class="col-md-9" style="padding-right:0px;">
+                                                    <label for="plot_area" class="form-label">Plot Area<span>*</span></label>
+                                                    <input type="text" class="form-control plot-area {{ $errors->has('plot_area') ? ' is-invalid' : '' }}" name="plot_area" value="@if(old('plot_area')!=null){{old('plot_area')}}@elseif(!empty($row->plot_area)){{$row->plot_area}}@endif">
+                                                    @if($errors->has('plot_area'))
+                                                        <span class="invalid-feedback">
+                                                            {{ $errors->first('plot_area') }}
+                                                        </span>
+                                                    @endif
                                                 </div>
-                                                <div class="col-md-4" style="padding-left:0px;">
-                                                    <select style="margin-top: 27px; border-radius: 0;"
-                                                        class="form-control form-select" name="plot_type">
-
-                                                        <option <?php if ($row->plot_type == 'SqFt') {
-                                                            echo 'selected="selected"';
-                                                        } ?> value="Sqft">SqFt</option>
-                                                        <option <?php if ($row->plot_type == 'SqYd') {
-                                                            echo 'selected="selected"';
-                                                        } ?> value="SqYd">SqYd</option>
-                                                        <option <?php if ($row->plot_type == 'SqMtr') {
-                                                            echo 'selected="selected"';
-                                                        } ?> value="SqMtr">SqMtr</option>
-                                                        <option <?php if ($row->plot_type == 'Acre') {
-                                                            echo 'selected="selected"';
-                                                        } ?> value="Acre">Acre</option>
-                                                        <option <?php if ($row->plot_type == 'Marla') {
-                                                            echo 'selected="selected"';
-                                                        } ?> value="Marla">Marla</option>
+                                                <div class="col-md-3" style="padding-left:0px;">
+                                                    <label for="plot_area" class="form-label"></label>
+                                                    <select class="form-control form-select plot-area-type {{ $errors->has('plot_type') ? ' is-invalid' : '' }}" name="plot_type">
+                                                        @foreach (config('constants.PLOT_TYPE') as $value)
+                                                            <option value="{{$value}}" @if(old('plot_type')!=null && old('plot_type')==$value) selected @elseif(!empty($row) && $row->plot_type==$value) selected @endif >{{$value}}</option>
+                                                        @endforeach 
                                                     </select>
 
                                                 </div>
@@ -408,13 +396,9 @@
                                     </div>
                                     <h5 class="mt-3">Addtional Room</h5>
                                     <div class="row mt-3">
-                                        @php
-                                        $additionals = ['Puja Room', 'Study Room', 'Store Room', 'Servent Room', 'Gym Room', 'Theater Room'];
-                                        @endphp
-
                                         <div class="col-md-12">
                                             <div class="row check_additional">
-                                                @foreach($additionals as $additional)
+                                                @foreach(config('constants.ADDITIONALS') as $additional)
                                                 <div class="col-md-4 mb-2">
                                                     <input type="checkbox" class="form-check-input" name="additional[]" id="{{str_replace(' ', '', $additional)}}" value="{{$additional}}" @if(old('additional')!=null && in_array($additional, old('additional'))) checked @elseif(!empty($row) && in_array($additional, explode(',', $row->additional))) checked @endif > 
                                                     <label class="form-check-label" for="{{str_replace(' ', '', $additional)}}">{{$additional}}</label>
@@ -426,12 +410,10 @@
 
                                     <h5 class="mt-3">Amenities</h5>
                                     <div class="row mt-3">
-                                        <?php
-                                        $amenities = ['Air Conditioner', 'Security', 'Lift', 'Piped Gas', 'Power Backup', 'Ro Water System', 'Internet/Wifi Community', 'Extra pillows & blankets', 'Fingerprint access', 'TV with standard cable', 'Fire Alarm', 'Laundry Service', 'Microwave', 'Dishwasher', 'Rain Water Harvesting', 'Swimming Pool', 'Car Parking Facility', 'Visitors Parking'];
-                                        ?>
+                                        
                                         <div class="col-md-12">
                                             <div class="row check_amenities"> 
-                                                @foreach ($amenities as $amenity)
+                                                @foreach (config('constants.AMENITIES') as $amenity)
                                                 <div class="col-md-4 mb-2">
                                                     <input  class="form-check-input" type="checkbox"
                                                         name="amenities[]" id="{{str_replace(' ', '', $amenity)}}"
@@ -498,8 +480,10 @@
                                                 @if (isset($row->id))   
                                                     <input type="hidden" name="id" value="{{$row->id}}">
                                                 @endif
-                                                <button style="padding: 12px 46px;" type="submit"
-                                                    class="btn btn-primary">{{empty($row->id)?'Add Property' : 'Update Property';}}</button>
+                                                @if (isset($user_id))   
+                                                    <input type="hidden" name="user_id" value="{{$user_id}}">
+                                                @endif
+                                                <button style="padding: 12px 46px;" type="submit" class="btn btn-primary">{{empty($row->id)?'Add Property' : 'Update Property';}}</button>
                                             </div>
                                         </div>
                                     </div>
@@ -516,6 +500,7 @@
 @endsection
 
 @push('scripts')
+<script type="text/javascript" src="{{url('frontend/js/custom-maps.js') }}"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQe-4d-xDKRGSzs6IQNYXdv3g3Uw3X6MI&libraries=places&callback=initAutocomplete"></script>
 <script src="{{ url('backend/plugins/spartan-multi-image-picker-master/spartan-multi-image-picker-min.js') }}"></script>
   <script>

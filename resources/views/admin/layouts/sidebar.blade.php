@@ -57,14 +57,14 @@
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Packages</span>
         </li>
-        <li class="menu-item {{ in_array(Route::currentRouteName(), ['admin.banners']) ? 'active' : '' }}">
-            <a href="#" class="menu-link">
+        <li class="menu-item {{ in_array(Route::currentRouteName(), ['admin.packages']) ? 'active' : '' }}">
+            <a href="{{ route('admin.packages') }}" class="menu-link">
                 <i class="menu-icon fa-solid fa-box"></i>
                 <div>Packages</div>
             </a>
         </li>
-        <li class="menu-item {{ in_array(Route::currentRouteName(), ['admin.banners']) ? 'active' : '' }}">
-            <a href="#" class="menu-link">
+        <li class="menu-item {{ in_array(Route::currentRouteName(), ['admin.package.orders']) ? 'active' : '' }}">
+            <a href="{{ route('admin.package.orders') }}" class="menu-link">
                 <i class="menu-icon fa-solid fa-file-invoice"></i>
                 <div>Orders</div>
             </a>
@@ -93,14 +93,14 @@
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Enquiries</span>
         </li> 
-        <li class="menu-item {{ in_array(Route::currentRouteName(), ['admin.banners']) ? 'active' : '' }}">
-            <a href="#" class="menu-link">
+        <li class="menu-item {{ in_array(Route::currentRouteName(), ['admin.property-enquiries']) ? 'active' : '' }}">
+            <a href="{{route('admin.property-enquiries')}}" class="menu-link">
                 <i class="menu-icon fa-solid fa-home"></i>
                 <div>Properties Enquiries</div>
             </a>
         </li> 
-        <li class="menu-item {{ in_array(Route::currentRouteName(), ['admin.banners']) ? 'active' : '' }}">
-            <a href="#" class="menu-link">
+        <li class="menu-item {{ in_array(Route::currentRouteName(), ['admin.contact-enquiries']) ? 'active' : '' }}">
+            <a href="{{route('admin.contact-enquiries')}}" class="menu-link">
                 <i class="menu-icon fa-solid fa-address-card"></i>
                 <div>Contact Enquiries</div>
             </a>

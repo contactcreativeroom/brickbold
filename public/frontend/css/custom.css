@@ -31,3 +31,10 @@
 .home01 .wg-filter .form {
     flex: 1;
 }
+
+li.has-child{
+    position: relative;
+}
+.has-child.size-6 > .submenu {
+    min-width: 600px !important;
+}

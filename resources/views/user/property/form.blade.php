@@ -25,6 +25,7 @@
                                 </span>
                             @endif
                         </fieldset>
+                        
                         <fieldset class="box box-fieldset">
                             <label for="desc">Description:</label>
                             <textarea class="textarea" placeholder="Decscription" name="description">@if(old('description')!=null){{old('description')}}@elseif(!empty($row->description)){{$row->description}}@endif</textarea>

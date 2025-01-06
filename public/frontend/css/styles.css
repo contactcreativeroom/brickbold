@@ -1685,7 +1685,7 @@ a:hover, a:focus {
   min-width: 800px;
 }
 .has-child.style-2 > .submenu::before {
-  left: 105px !important;
+  /* left: 105px !important; */
 }
 .has-child.style-2 > .submenu > li > a {
   font-size: 20px;

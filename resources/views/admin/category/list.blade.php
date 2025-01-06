@@ -25,7 +25,7 @@
             </div>
             @if($rows->isEmpty())
             <div class="alert alert-danger text-center">
-                No Categories found.
+                No Records found.
             </div>
             @else
             <table class="table table-hover">
