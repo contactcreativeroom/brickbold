@@ -31,13 +31,15 @@
                 <div data-i18n="Analytics">Banners</div>
             </a>
         </li>
-
-        <li class="menu-item {{ in_array(Route::currentRouteName(), ['admin.subadmins']) ? 'active' : '' }}">
-            <a href="{{ route('admin.subadmins') }}" class="menu-link">
-                <i class="menu-icon fa-solid fa-user-tie"></i>
-                <div>Sub Admin</div>
-            </a>
-        </li>
+        @if (Auth::guard('admin')->user()->level ==1)
+            <li class="menu-item {{ in_array(Route::currentRouteName(), ['admin.subadmins']) ? 'active' : '' }}">
+                <a href="{{ route('admin.subadmins') }}" class="menu-link">
+                    <i class="menu-icon fa-solid fa-user-tie"></i>
+                    <div>Sub Admin</div>
+                </a>
+            </li>
+        @endif
+        
 
         <li class="menu-item {{ in_array(Route::currentRouteName(), ['admin.users']) ? 'active' : '' }}">
             <a href="{{route('admin.users')}}" class="menu-link">

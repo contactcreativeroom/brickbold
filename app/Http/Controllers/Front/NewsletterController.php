@@ -6,6 +6,7 @@ use App\Helper\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Newsletter;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class NewsletterController extends Controller
 {
@@ -18,13 +19,17 @@ class NewsletterController extends Controller
         $this->pagerecords = config('constants.FRONT_PAGE_RECORDS');
     }
 
-    public function postData(Request $request) { 
-        $validationArray = [
+    public function postData(Request $request) {
+        $validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'accept_term_condition' => 'required|in:1',
-        ];
-        
-        $this->validate($request, $validationArray); 
+        ]);
+         
+        if ($validator->fails()) {
+            Helper::toastMsg(false, "Validation errors: " . json_encode($validator->errors()->toArray()));
+            return back()->withErrors($validator)->withInput();
+        }
+
         $newsletter = new Newsletter(); 
         $newsletter->email = $request->email;
         $newsletter->status = 1;

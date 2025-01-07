@@ -138,4 +138,30 @@ class PackageController extends Controller
         }
         return response()->json(['status' => false, 'message' => 'package not found']);
     }
+
+    public function orders(Request $request){
+        $packages = Package::query();
+        if ($request->has('type') && $request->type != "") {
+            $type = $request->type; 
+            $packages->where('type', $type) ;
+        } 
+        if ($request->has('profile') && $request->profile != "") {
+            $profile = $request->profile; 
+            $packages->where('profile', $profile) ;
+        } 
+        if ($request->has('status') && $request->status > 0) {
+            $status = $request->status; 
+            $packages->where('status', $status) ;
+        } 
+        $packages = $packages->paginate($this->pagerecords)->appends([
+            'type' => $request->get('type'),
+            'profile' => $request->get('profile'),
+            'status' => $request->get('status'),
+        ]);
+
+        $data=array('rows'=>$packages);
+        return view($this->prefix.'.package.list')->with($data);
+    } 
+
+    
 }

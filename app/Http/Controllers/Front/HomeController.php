@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Contact;
 use App\Models\Page;
 use App\Models\Property;
+use App\Models\Testimonial;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -17,7 +18,8 @@ class HomeController extends Controller
     public function index(Request $request) {
         $todayLuxury = Property::orderBy('is_luxury', 'desc')->orderBy('id', 'desc')->limit(6)->get();
         $readyToMove = Property::orderBy('views', 'desc')->limit(4)->get();
-        return view($this->prefix.'.home',['todayLuxury' => $todayLuxury, 'readyToMove' => $readyToMove]);
+        $testimonials = Testimonial::orderBy('priority', 'asc')->limit(10)->get();
+        return view($this->prefix.'.home',['todayLuxury' => $todayLuxury, 'readyToMove' => $readyToMove, 'testimonials' => $testimonials]);
     }
     public function about (Request $request) { 
         return view('front.about');
@@ -72,4 +74,12 @@ class HomeController extends Controller
         return view($this->prefix.'.page')->with(compact('page'));
 
     }
+
+    public function packages(){  
+         
+        return view($this->prefix.'.packages');
+
+    }
+
+    
 }

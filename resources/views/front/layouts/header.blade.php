@@ -151,7 +151,7 @@
                                                     <a href="{{route('user.dashboard')}}">My Dashboard</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{route('ad-packages')}}">Sell / Rent Ad Packages</a>
+                                                    <a href="{{route('packages')}}">Sell / Rent Ad Packages</a>
                                                 </li>                                                  
                                             </ul>
                                         </li>
@@ -161,7 +161,7 @@
                                                 <li>
                                                     <a href="{{route('user.dashboard')}}">My Dashboard</a>
                                                 <li>
-                                                    <a href="{{route('ad-packages')}}">Ad Packages</a>
+                                                    <a href="{{route('packages')}}">Ad Packages</a>
                                                 </li> 
                                                 <li>
                                                     <a href="{{route('contact')}}">Sales Enquiry</a>

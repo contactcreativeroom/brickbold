@@ -57,7 +57,7 @@ Route::get('/page/{slug}', [HomeController::class, 'page'])->name('page');
 Route::get('/properties', [FrontPropertyController::class, 'properties'])->name('properties');
 Route::get('/property/{slug}', [FrontPropertyController::class, 'property'])->name('property');
 Route::post('/property/enquiry/post', [FrontPropertyController::class, 'enquiryPost'])->name('property.enquiry');
-Route::get('/ad-packages', [HomeController::class, 'adPackages'])->name('ad-packages');
+Route::get('/packages', [HomeController::class, 'packages'])->name('packages');
 
 Route::post('/login', [UserAuthController::class, 'login'])->name('login');
 Route::post('/register', [UserAuthController::class, 'register'])->name('register');
@@ -102,7 +102,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/reset/success', [AuthController::class, 'passwordResetSuccess'])->name('admin.password.reset-success');    
     }); 
      
-    Route::group(['middleware' => ['admin.auth']], function () {
+    Route::group(['middleware' => ['admin.auth', 'check.level']], function () {
         Route::get('/logout', [AuthController::class, 'logout'])->name('admin.logout');
         Route::get('/profile', [AdminController::class, 'profile'])->name('admin.profile');
         Route::any('/profile/edit', [AdminController::class, 'editProfile'])->name('admin.profile.edit');

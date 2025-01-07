@@ -3,7 +3,7 @@
         aria-labelledby="menu-mobile">
         <div class="offcanvas-header top-nav-mobile">
             <div class="offcanvas-title">
-                <a href="index.html"><img src="{{url('frontend/images/logo/logo%402x.png" alt')}}=""></a>
+                <a href="{{route('home')}}"><img src="{{ App\Helper\Helper::getLogo(); }}"></a>
             </div>
             <div data-bs-dismiss="offcanvas" aria-label="Close">
                 <i class="icon-close"></i>
@@ -12,193 +12,215 @@
         <div class="offcanvas-body inner-mobile-nav">
             <div class="mb-body">
                 <ul id="menu-mobile-menu">
-                    <li class="menu-item menu-item-has-children-mobile current-menu-item">
-                        <a href="#dropdown-menu-one" class="item-menu-mobile collapsed" data-bs-toggle="collapse"
-                            aria-expanded="true" aria-controls="dropdown-menu-one">
-                            Home
-                        </a>
-                        <div id="dropdown-menu-one" class="collapse" data-bs-parent="#menu-mobile-menu">
-                            <ul class="sub-mobile ">
-                                <li class="menu-item current-item"><a href="index.html">Home Page 01</a></li>
-                                <li class="menu-item"><a href="home02.html">Home Page 02</a></li>
-                                <li class="menu-item"><a href="home03.html">Home Page 03</a></li>
-                                <li class="menu-item"><a href="home04.html">Home Page 04</a></li>
-                                <li class="menu-item"><a href="home05.html">Home Page 05</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="menu-item menu-item-has-children-mobile">
-                        <a href="#dropdown-menu-two" class="item-menu-mobile collapsed" data-bs-toggle="collapse"
-                            aria-expanded="true" aria-controls="dropdown-menu-two">
-                            Listing
-                        </a>
-                        <div id="dropdown-menu-two" class="collapse" data-bs-parent="#menu-mobile-menu">
-                            <ul class="sub-mobile">
-                                <li class="menu-item menu-item-has-children-mobile-2">
-                                    <a href="#sub-layout" class="item-menu-mobile  collapsed" data-bs-toggle="collapse"
-                                        aria-expanded="true" aria-controls="sub-agents">Layout</a>
-                                    <div id="sub-layout" class="collapse" data-bs-parent="#dropdown-menu-two">
-                                        <ul class="sub-mobile">
-                                            <li class="menu-item ">
-                                                <a href="property-grid-full-width.html" class="item-menu-mobile ">Grid
-                                                    Style - Full Width</a>
-                                            </li>
-                                            <li class="menu-item ">
-                                                <a href="property-gird-top-search.html" class="item-menu-mobile ">Grid
-                                                    Style - Top Search</a>
-                                            </li>
-                                            <li class="menu-item ">
-                                                <a href="property-gird-left-sidebar.html" class="item-menu-mobile ">Grid
-                                                    Style - Sidebar Left</a>
-                                            </li>
-                                            <li class="menu-item ">
-                                                <a href="property-gird-right-sidebar.html" class="item-menu-mobile ">
-                                                    Grid Style - Sidebar Right</a>
-                                            </li>
-                                            <li class="menu-item ">
-                                                <a href="property-list-full-width.html" class="item-menu-mobile "> List
-                                                    Style - Full Width</a>
-                                            </li>
-                                            <li class="menu-item ">
-                                                <a href="property-list-top-search.html" class="item-menu-mobile "> List
-                                                    Style - Top Search</a>
-                                            </li>
-                                            <li class="menu-item ">
-                                                <a href="property-list-left-sidebar.html" class="item-menu-mobile ">List
-                                                    Style - Sidebar Left</a>
-                                            </li>
-                                            <li class="menu-item ">
-                                                <a href="property-list-right-sidebar.html" class="item-menu-mobile ">
-                                                    List Style - Sidebar Right</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li class="menu-item menu-item-has-children-mobile-2">
-                                    <a href="#sub-feaure" class="item-menu-mobile  collapsed" data-bs-toggle="collapse"
-                                        aria-expanded="true" aria-controls="sub-agents">Feature</a>
-                                    <div id="sub-feaure" class="collapse" data-bs-parent="#dropdown-menu-two">
-                                        <ul class="sub-mobile">
-                                            <li class="menu-item">
-                                                <a href="property-half-map-grid.html">Property Half Map Grid</a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="property-half-map-list.html">Property Half Map List</a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="property-half-top-map.html">Property Half Top Map</a>
-                                            </li>
-                                            <li class="menu-item ">
-                                                <a href="property-filter-popup.html" class="item-menu-mobile ">
-                                                    Property Filter Popup</a>
-                                            </li>
-                                            <li class="menu-item ">
-                                                <a href="property-filter-popup-left.html"
-                                                    class="item-menu-mobile ">Property Filter Popup Left</a>
-                                            </li>
-                                            <li class="menu-item ">
-                                                <a href="property-filter-popup-right.html" class="item-menu-mobile ">
-                                                    Property Filter Popup Right</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li class="menu-item menu-item-has-children-mobile-2">
-                                    <a href="#sub-details" class="item-menu-mobile  collapsed" data-bs-toggle="collapse"
-                                        aria-expanded="true" aria-controls="sub-agents">Listing Details</a>
-                                    <div id="sub-details" class="collapse" data-bs-parent="#dropdown-menu-two">
-                                        <ul class="sub-mobile">
-                                            <li class="menu-item">
-                                                <a href="property-detail-v1.html">Property Details 1</a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="property-detail-v2.html">Property Details 2</a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="property-detail-v3.html">Property Details 3</a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="property-detail-v4.html">Property Details 4</a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="property-detail-v5.html">Property Details 5</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="menu-item menu-item-has-children-mobile">
-                        <a href="#dropdown-menu-four" class="item-menu-mobile collapsed" data-bs-toggle="collapse"
-                            aria-expanded="true" aria-controls="dropdown-menu-four">
-                            Pages
-                        </a>
-                        <div id="dropdown-menu-four" class="collapse" data-bs-parent="#menu-mobile-menu">
-                            <ul class="sub-mobile">
-                                <li class="menu-item menu-item-has-children-mobile-2">
-                                    <a href="#sub-agents" class="item-menu-mobile  collapsed" data-bs-toggle="collapse"
-                                        aria-expanded="true" aria-controls="sub-agents">Agents</a>
-                                    <div id="sub-agents" class="collapse" data-bs-parent="#dropdown-menu-four">
-                                        <ul class="sub-mobile">
-                                            <li class="menu-item ">
-                                                <a href="agents.html" class="item-menu-mobile "> Agents</a>
-                                            </li>
-                                            <li class="menu-item ">
-                                                <a href="agents-details.html" class="item-menu-mobile "> Agnet
-                                                    Details</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li class="menu-item menu-item-has-children-mobile-2">
-                                    <a href="#sub-agency" class="item-menu-mobile  collapsed" data-bs-toggle="collapse"
-                                        aria-expanded="true" aria-controls="sub-agency">Agencies</a>
-                                    <div id="sub-agency" class="collapse" data-bs-parent="#dropdown-menu-four">
-                                        <ul class="sub-mobile">
-                                            <li class="menu-item ">
-                                                <a href="agency-grid.html" class="item-menu-mobile ">Agencies Grid</a>
-                                            </li>
-                                            <li class="menu-item ">
-                                                <a href="agency-list.html" class="item-menu-mobile "> Agencies List</a>
-                                            </li>
-                                            <li class="menu-item ">
-                                                <a href="agency-details.html" class="item-menu-mobile "> Agencies
-                                                    Details</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li class="menu-item"><a href="home-loan-process.html">Home Loan Process</a></li>
-                                <li class="menu-item"><a href="career.html">Career</a></li>
-                                <li class="menu-item"><a href="faq.html">Faq's</a></li>
-                                <li class="menu-item"><a href="dashboard.html">Dashboard</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="menu-item menu-item-has-children-mobile">
-                        <a href="#dropdown-menu-five" class="item-menu-mobile collapsed" data-bs-toggle="collapse"
-                            aria-expanded="true" aria-controls="dropdown-menu-five">
-                            Blogs
-                        </a>
-                        <div id="dropdown-menu-five" class="collapse" data-bs-parent="#menu-mobile-menu">
-                            <ul class="sub-mobile ">
-                                <li class="menu-item"><a href="blog-grid.html">Blog Grid</a></li>
-                                <li class="menu-item"><a href="blog-list.html">Blog List</a></li>
-                                <li class="menu-item"><a href="blog-details.html">Blog Details </a></li>
-                            </ul>
-                        </div>
-                    </li>
                     <li class="menu-item ">
-                        <a href="contact.html" class="tem-menu-mobile "> Contact</a>
+                        <a href="{{route('about')}}" class="tem-menu-mobile ">About Us</a>
+                    </li>
+                    <li class="menu-item menu-item-has-children-mobile">
+                        <a href="#dropdown-menu-buy" class="item-menu-mobile collapsed" data-bs-toggle="collapse"
+                            aria-expanded="true" aria-controls="dropdown-menu-buy">
+                            Buy
+                        </a>
+                        <div id="dropdown-menu-buy" class="collapse" data-bs-parent="#menu-mobile-menu">
+                            <ul class="sub-mobile">
+                                <li class="menu-item menu-item-has-children-mobile-2">
+                                    <a href="#sub-buy-popular" class="item-menu-mobile  collapsed" data-bs-toggle="collapse" aria-expanded="true" aria-controls="sub-agents">Popular</a>
+                                    <div id="sub-buy-popular" class="collapse" data-bs-parent="#dropdown-menu-buy">
+                                        <ul class="sub-mobile">
+                                            <li class="menu-item ">
+                                                <a class="item-menu-mobile " href="{{ route('properties', ['for_type' => 'for-sell', 'availability' => 'ready-to-move']) }}">Ready to Move</a>
+                                            </li>
+                                            <li class="menu-item ">
+                                                <a class="item-menu-mobile " href="{{route('properties', ['for_type' => 'for-sell', 'ownership' => 'free-hold'])}}">Owner Properties</a>
+                                            </li>
+                                            <li class="menu-item ">
+                                                <a class="item-menu-mobile " href="{{route('properties', ['for_type' => 'for-sell', 'is_negotiable' => 'negotiable'])}}">Budget Homes</a>
+                                            </li>
+                                            <li class="menu-item ">
+                                                <a class="item-menu-mobile " href="{{route('properties', ['for_type' => 'for-sell', 'is_premium' => 1])}}">Premium Homes</a>
+                                            </li>
+                                            <li class="menu-item ">
+                                                <a class="item-menu-mobile " href="{{route('properties', ['for_type' => 'for-sell', 'sort' => 'asc'])}}">Newly Launched</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="menu-item menu-item-has-children-mobile-2">
+                                    <a href="#sub-buy-type" class="item-menu-mobile  collapsed" data-bs-toggle="collapse"
+                                        aria-expanded="true" aria-controls="sub-agents">Property Types</a>
+                                    <div id="sub-buy-type" class="collapse" data-bs-parent="#dropdown-menu-buy">
+                                        <ul class="sub-mobile">
+                                           <li class="menu-item ">
+                                                <a class="item-menu-mobile " href="{{route('properties', ['for_type' => 'for-sell', 'type' => 'residential'])}}">Residential</a>
+                                            </li>
+                                            <li class="menu-item ">
+                                                <a class="item-menu-mobile " href="{{route('properties', ['for_type' => 'for-sell', 'property_detail' => 'house'])}}">House For Sell</a>
+                                            </li>
+                                            <li class="menu-item ">
+                                                <a class="item-menu-mobile " href="{{route('properties', ['for_type' => 'for-sell', 'property_detail' => 'villa'])}}">Villa For Sell</a>
+                                            </li>
+                                            <li class="menu-item ">
+                                                <a class="item-menu-mobile " href="{{route('properties', ['for_type' => 'for-sell', 'type' => 'apartment'])}}">Apartment</a>
+                                            </li>
+                                            <li class="menu-item ">
+                                                <a class="item-menu-mobile " href="{{route('properties', ['for_type' => 'for-sell', 'type' => 'commercial'])}}">Commercial</a>
+                                            </li>
+                                            <li class="menu-item ">
+                                                <a class="item-menu-mobile " href="{{route('properties', ['for_type' => 'for-sell', 'property_detail' => 'office'])}}">Commercial Office Space</a>
+                                            </li>
+                                            <li class="menu-item ">
+                                                <a class="item-menu-mobile " href="{{route('properties', ['for_type' => 'for-sell', 'property_detail' => 'plot-land'])}}">Commercial Land</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="menu-item menu-item-has-children-mobile-2">
+                                    <a href="#sub-buy-budget" class="item-menu-mobile  collapsed" data-bs-toggle="collapse"
+                                        aria-expanded="true" aria-controls="sub-agents">Budget</a>
+                                    <div id="sub-buy-budget" class="collapse" data-bs-parent="#dropdown-menu-buy">
+                                        <ul class="sub-mobile">
+                                            <li class="menu-item "><a class="item-menu-mobile " href="{{route('properties', ['for_type' => 'for-sell', 'max_price' => 5000000])}}">Under ₹50 Lac</a>
+                                                </li>
+                                            <li class="menu-item "><a class="item-menu-mobile " href="{{route('properties', ['for_type' => 'for-sell', 'min_price' => 5000000, 'max_price' => 10000000])}}">₹50 Lac - ₹1 Cr</a>
+                                            </li>
+                                            <li class="menu-item "><a class="item-menu-mobile " href="{{route('properties', ['for_type' => 'for-sell', 'min_price' => 10000000, 'max_price' => 20000000])}}">₹1 Cr - ₹2 Cr</a>
+                                            </li>
+                                            <li class="menu-item "><a class="item-menu-mobile " href="{{route('properties', ['for_type' => 'for-sell', 'min_price' => 20000000, 'max_price' => 50000000])}}">₹2 Cr - ₹5 Cr</a>
+                                            </li>
+                                            <li class="menu-item "><a class="item-menu-mobile " href="{{route('properties', ['for_type' => 'for-sell', 'min_price' => 100000000])}}">Above ₹10 Cr</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="menu-item menu-item-has-children-mobile">
+                        <a href="#dropdown-menu-rent" class="item-menu-mobile collapsed" data-bs-toggle="collapse"
+                            aria-expanded="true" aria-controls="dropdown-menu-rent">
+                            Rent
+                        </a>
+                        <div id="dropdown-menu-rent" class="collapse" data-bs-parent="#menu-mobile-menu">
+                            <ul class="sub-mobile">
+                                <li class="menu-item menu-item-has-children-mobile-2">
+                                    <a href="#sub-rent-choice" class="item-menu-mobile  collapsed" data-bs-toggle="collapse" aria-expanded="true" aria-controls="sub-agents">Popular Choices</a>
+                                    <div id="sub-rent-choice" class="collapse" data-bs-parent="#dropdown-menu-rent">
+                                        <ul class="sub-mobile">
+                                            <li class="menu-item " >
+                                                <a class="item-menu-mobile" href="{{ route('properties', ['for_type' => 'for-rent', 'availability' => 'ready-to-move']) }}">Ready to Move</a>
+                                            </li>
+                                            <li class="menu-item " >
+                                                <a class="item-menu-mobile" href="{{route('properties', ['for_type' => 'for-rent', 'ownership' => 'free-hold'])}}">Owner Properties</a>
+                                            </li>
+                                            <li class="menu-item " >
+                                                <a class="item-menu-mobile" href="{{route('properties', ['for_type' => 'for-rent', 'is_verified' => 1])}}">Verified Properties</a>
+                                            </li>
+                                            <li class="menu-item " >
+                                                <a class="item-menu-mobile" href="{{route('properties', ['for_type' => 'for-rent', 'property_detail' => 'house', 'furnished' => 'furnished'])}}">Furnished Homes</a>
+                                            </li> 
+                                        </ul>
+                                    </div>
+                                </li>
+
+                                <li class="menu-item menu-item-has-children-mobile-2">
+                                    <a href="#sub-rent-type" class="item-menu-mobile  collapsed" data-bs-toggle="collapse"
+                                        aria-expanded="true" aria-controls="sub-agents">Property Types</a>
+                                    <div id="sub-rent-type" class="collapse" data-bs-parent="#dropdown-menu-rent">
+                                        <ul class="sub-mobile">
+                                            <li class="menu-item " >
+                                                <a class="item-menu-mobile" href="{{route('properties', ['for_type' => 'for-rent', 'type' => 'residential'])}}">Residential</a>
+                                            <li class="menu-item " >
+                                                <a class="item-menu-mobile" href="{{route('properties', ['for_type' => 'for-rent', 'property_detail' => 'house'])}}">House For Rent</a>
+                                            </li>
+                                            <li class="menu-item " >
+                                                <a class="item-menu-mobile" href="{{route('properties', ['for_type' => 'for-rent', 'property_detail' => 'villa'])}}">Villa For Rent</a>
+                                            </li>
+                                            <li class="menu-item " >
+                                                <a class="item-menu-mobile" href="{{route('properties', ['for_type' => 'for-rent', 'type' => 'apartment'])}}">Apartment</a>
+                                            </li>
+                                            <li class="menu-item " >
+                                                <a class="item-menu-mobile" href="{{route('properties', ['for_type' => 'for-rent', 'type' => 'commercial'])}}">Commercial</a>
+                                            </li>
+                                            <li class="menu-item " >
+                                                <a class="item-menu-mobile" href="{{route('properties', ['for_type' => 'for-rent', 'property_detail' => 'office'])}}">Office Space</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="menu-item menu-item-has-children-mobile-2">
+                                    <a href="#sub-rent-budget" class="item-menu-mobile  collapsed" data-bs-toggle="collapse"
+                                        aria-expanded="true" aria-controls="sub-agents">Budget</a>
+                                    <div id="sub-rent-budget" class="collapse" data-bs-parent="#dropdown-menu-rent">
+                                        <ul class="sub-mobile">
+                                            <li class="menu-item " ><a class="item-menu-mobile" href="{{route('properties', ['for_type' => 'for-rent', 'max_price' => 10000])}}">Under ₹10,000</a>
+                                            </li>
+                                            <li class="menu-item " ><a class="item-menu-mobile" href="{{route('properties', ['for_type' => 'for-rent', 'min_price' => 10000, 'max_price' => 15000])}}">₹10,000 - ₹15,000</a>
+                                            </li>
+                                            <li class="menu-item " ><a class="item-menu-mobile" href="{{route('properties', ['for_type' => 'for-rent', 'min_price' => 15000, 'max_price' => 20000])}}">₹15,000 - ₹20,000</a>
+                                            </li>
+                                            <li class="menu-item " ><a class="item-menu-mobile" href="{{route('properties', ['for_type' => 'for-rent', 'min_price' => 20000, 'max_price' => 25000])}}">₹20,000 - ₹25,000</a>
+                                            </li>
+                                            <li class="menu-item " ><a class="item-menu-mobile" href="{{route('properties', ['for_type' => 'for-rent', 'min_price' => 25000])}}">Above ₹25,000</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="menu-item menu-item-has-children-mobile">
+                        <a href="#dropdown-menu-sell" class="item-menu-mobile collapsed" data-bs-toggle="collapse"
+                            aria-expanded="true" aria-controls="dropdown-menu-sell">
+                            Sell
+                        </a>
+                        <div id="dropdown-menu-sell" class="collapse" data-bs-parent="#menu-mobile-menu">
+                            <ul class="sub-mobile">
+                                <li class="menu-item menu-item-has-children-mobile-2">
+                                    <a href="#sub-sell-owner" class="item-menu-mobile  collapsed" data-bs-toggle="collapse" aria-expanded="true" aria-controls="sub-agents">For Owner</a>
+                                    <div id="sub-sell-owner" class="collapse" data-bs-parent="#dropdown-menu-sell">
+                                        <ul class="sub-mobile">
+                                            <li class="menu-item " >
+                                                <a class="item-menu-mobile" href="{{route('user.property.add')}}">Rent Post Property</a>
+                                            </li>
+                                            <li class="menu-item " >
+                                                <a class="item-menu-mobile" href="{{route('user.dashboard')}}">My Dashboard</a>
+                                            </li>
+                                            <li class="menu-item " >
+                                                <a class="item-menu-mobile" href="{{route('packages')}}">Sell / Rent Ad Packages</a>
+                                            </li> 
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="menu-item menu-item-has-children-mobile-2">
+                                    <a href="#sub-sell-agent" class="item-menu-mobile  collapsed" data-bs-toggle="collapse"
+                                        aria-expanded="true" aria-controls="sub-agents">For Agent & Builder</a>
+                                    <div id="sub-sell-agent" class="collapse" data-bs-parent="#dropdown-menu-sell">
+                                        <ul class="sub-mobile">
+                                           <li class="menu-item " >
+                                                <a class="item-menu-mobile" href="{{route('user.dashboard')}}">My Dashboard</a>
+                                            <li class="menu-item " >
+                                                <a class="item-menu-mobile" href="{{route('packages')}}">Ad Packages</a>
+                                            </li> 
+                                            <li class="menu-item " >
+                                                <a class="item-menu-mobile" href="{{route('contact')}}">Sales Enquiry</a>
+                                            </li> 
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                   
+                    <li class="menu-item ">
+                        <a href="{{route('contact')}}" class="tem-menu-mobile "> Contact</a>
                     </li>
                 </ul>
                 <div class="support">
-                    <a href="#" class="text-need"> Need help?</a>
+                    <a href="{{route('contact')}}" class="text-need"> Need help?</a>
                     <ul class="mb-info">
-                        <li>Call Us Now: <span class="number">1-555-678-8888</span></li>
-                        <li>Support 24/7: <a href="#">themesflat@gmail.com</a></li>
+                        <li>Call Us Now: <span class="number">{{config('constants.CONTACT.country_code')}}-{{config('constants.CONTACT.phone')}}</span></li>
+                        <li>Support 24/7: <a href="javascript:void(0)">{{config('constants.CONTACT.email')}}</a></li>
                         <li>
                             <div class="wrap-social">
                                 <p>Follow us:</p>
