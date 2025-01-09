@@ -64,4 +64,12 @@ class Property extends Model
     public function enquiries(){
         return $this->hasMany(PropertyEnquiry::class);
     }
+
+    public function history(){
+        return $this->hasOne(PropertyHistory::class);
+    }
+
+    public function histories(){
+        return $this->hasMany(PropertyHistory::class);
+    }
 }

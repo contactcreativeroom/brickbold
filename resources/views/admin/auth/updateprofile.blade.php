@@ -42,7 +42,7 @@
 
                             <div class="mb-3">
                                 <label for="image" class="form-label">Upload Profile Image</label>
-                                <input type="file" class="dropify" data-default-file="{{ App\Helper\Helper::getProfileImage('storage/admin/profile/', Auth::guard('admin')->user()->image) }}" name="image" />
+                                <input type="file" class="dropify" data-default-file="{{ App\Helper\Helper::getProfileImage('storage/subadmin/'.Auth::guard('admin')->user()->id, Auth::guard('admin')->user()->image) }}" name="image" />
                                 @error('image')
                                 <div class="text-danger">
                                     <small>{{ $message }}</small>

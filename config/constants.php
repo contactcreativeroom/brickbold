@@ -129,11 +129,20 @@ return [
     ],
 
     'CONTACT' => [
-        'country_code' => '+0161',
+        'country_code' => '0161',
         'phone' => '4048145',
         'email' => 'support@brickbold.com',
         'addresss' => 'SCO-18, 2nd Floor, Cabin No. 208, Feroze Gandhi Market, Ludhiana, Punjab, India, 141001',
     ],    
+
+    'SOCIAL' => [
+        'facebook' => 'https://www.facebook.com/BrickBold2024/',
+        'linkedin' => 'https://www.linkedin.com/in/brick-bold-209a5a31a/',
+        'instagram' => 'https://www.instagram.com/official_brickbold/',
+        'twitter' => 'https://x.com/BrickBold',
+        'pinterest' => 'https://in.pinterest.com/brickbold2024/',
+        'youtube' => 'https://www.youtube.com/channel/UCGsg-VpUgkGlCQbYh73bUrg',
+    ], 
 
     'SMS' => [
         'mobile' => '+96179100381',        
@@ -162,10 +171,7 @@ return [
         '0'  =>'Inactive',
     ],
     'DEFAULT_USER_IMG' => 'avtar.png',
-    'USER_TYPE' => [
-        'admin' => 0,
-
-    ],
+    
     'MEDIA_TYPE' => [
         'Product_thumbnail' => 1,
         'Product_images' => 2,
@@ -181,12 +187,7 @@ return [
         'dispute_image' => 12,
 
     ],
-    'USER_TYPE' => [
-        'admin' => 1,
-        'user' => 2,
-        'vendor' => 3,
-
-    ],
+    'USER_TYPE' => ['Owner', 'Agent', 'Builder'],
     
     'CAREER_AREAS_OF_INTEREST' => [
         'Manager' => 1,

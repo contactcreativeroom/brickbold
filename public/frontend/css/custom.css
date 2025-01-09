@@ -38,3 +38,17 @@ li.has-child{
 .has-child.size-6 > .submenu {
     min-width: 600px !important;
 }
+
+.package-col{
+    padding-left: 8px;
+    padding-right: 8px;
+    font-size: 13px;
+}
+
+.plot-area{
+    border-radius: 16px 0 0 16px !important;
+}
+.plot-area-type{
+    border-radius: 0 16px 16px 0;
+    margin-top: 10.5px;
+}

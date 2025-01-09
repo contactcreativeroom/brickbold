@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('property_histories', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable()->index();
+            $table->unsignedBigInteger('admin_id')->nullable()->index();
             $table->unsignedBigInteger('property_id')->nullable();
             $table->string('current_status')->nullable();
             $table->string('meta_key')->nullable();

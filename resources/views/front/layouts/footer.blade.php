@@ -25,7 +25,7 @@
                                             Call us
                                         </div>
                                         <h6>
-                                            <a href="javascript:void(0)">{{config('constants.CONTACT.country_code')}}-{{config('constants.CONTACT.phone')}}</a>
+                                            <a href="javascript:void(0)">{{ data_get($config, 'phone', '') }}</a>
                                         </h6>
                                     </div>
                                 </div>
@@ -49,7 +49,7 @@
                                         </div>
                                         <h6 class="fw-4">
                                             <a href="javascript:void(0)">
-                                                {{config('constants.CONTACT.email')}}
+                                                {{ data_get($config, 'email', '') }}
                                             </a>
                                         </h6>
                                     </div>
@@ -197,22 +197,22 @@
                             <div class="text-3  fw-6 text-white">Follow us</div>
                             <ul class="tf-social ">
                                 <li>
-                                    <a href="#">
+                                    <a target="_blank" href="{{ data_get($config, 'social.facebook', '') }}">
                                         <i class="icon-fb"></i>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#">
+                                    <a target="_blank" href="{{ data_get($config, 'social.twitter', '') }}">
                                         <i class="icon-X"></i>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#">
+                                    <a target="_blank" href="{{ data_get($config, 'social.linkedin', '') }}">
                                         <i class="icon-linked"></i>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#">
+                                    <a target="_blank" href="{{ data_get($config, 'social.instagram', '') }}">
                                         <i class="icon-ins"></i>
                                     </a>
                                 </li>

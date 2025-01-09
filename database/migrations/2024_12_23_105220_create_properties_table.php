@@ -51,6 +51,7 @@ return new class extends Migration
             $table->integer('is_luxury')->nullable();
             $table->integer('is_verified')->nullable()->default(0);
             $table->integer('is_premium')->nullable()->default(0);
+            $table->date('sold_date')->nullable();
             $table->timestamps();
         });
     }

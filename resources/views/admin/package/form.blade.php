@@ -95,10 +95,10 @@
                                 <div class="row mt-3">
                                     <div class="col-md-3">
                                         <label for="mobile" class="form-label">Days</label>
-                                        <input type="number" class="form-control {{ $errors->has('months') ? ' is-invalid' : '' }}" placeholder="e.g. 3" name="months" value="{{ old('months', $row->months ?? '') }}" />
-                                        @if($errors->has('months'))
+                                        <input type="number" class="form-control {{ $errors->has('days') ? ' is-invalid' : '' }}" placeholder="e.g. 3" name="days" value="{{ old('days', $row->days ?? '') }}" />
+                                        @if($errors->has('days'))
                                             <span class="invalid-feedback">
-                                                {{ $errors->first('months') }}
+                                                {{ $errors->first('days') }}
                                             </span>
                                         @endif
                                     </div>

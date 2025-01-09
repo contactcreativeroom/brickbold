@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('profile')->nullable()->default('OWNER');
             $table->string('property_type')->nullable();
             $table->integer('unit')->nullable()->default(1);
-            $table->integer('months')->nullable()->default(1);
+            $table->integer('days')->nullable()->default(1);
             $table->integer('post_property')->nullable()->default(1);
             $table->float('price')->nullable()->default(0);
             $table->float('discount')->nullable()->default(0);

@@ -83,7 +83,7 @@
                                     <ul class="meta-list flex">
                                         <li class="text-1 flex"><span>{{$row->bedroom}}</span>Bed</li>
                                         <li class="text-1 flex"><span>{{$row->bathroom}}</span>Bath</li>
-                                        <li class="text-1 flex"><span>{{$row->plot_area}}</span>Sqft</li>
+                                        <li class="text-1 flex"><span>{{$row->plot_area}}</span>{{$row->plot_type? $row->plot_type : 'sqft'}}</li>
                                     </ul>
                                 </div>
                                 @if (Auth::guard('user')->user())
@@ -135,7 +135,7 @@
                                         </div>
                                         <div class="content">
                                             <div class="text-4 text-color-default">ID:</div>
-                                            <div class="text-1 text-color-heading">2297</div>
+                                            <div class="text-1 text-color-heading">#{{ App\Helper\Helper::propertyid($row->id) }}</div>
                                         </div>
                                     </div>
                                     <div class="box-icon">
@@ -155,7 +155,7 @@
                                         </div>
                                         <div class="content">
                                             <div class="text-4 text-color-default">Type:</div>
-                                            <div class="text-1 text-color-heading">Hourse</div>
+                                            <div class="text-1 text-color-heading">{{config('constants.TYPE')[$row->type]}}</div>
                                         </div>
                                     </div>
                                     <div class="box-icon">
@@ -164,7 +164,7 @@
                                         </div>
                                         <div class="content">
                                             <div class="text-4 text-color-default">Land Size:</div>
-                                            <div class="text-1 text-color-heading">{{$row->plot_area}} SqFt</div>
+                                            <div class="text-1 text-color-heading">{{$row->plot_area}} {{$row->plot_type? $row->plot_type : 'sqft'}}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -195,7 +195,7 @@
                                         </div>
                                         <div class="content">
                                             <div class="text-4 text-color-default">Bedrooms:</div>
-                                            <div class="text-1 text-color-heading">{{$row->plot_area}} Rooms</div>
+                                            <div class="text-1 text-color-heading">{{$row->bedroom}} Rooms</div>
                                         </div>
                                     </div>
                                     <div class="box-icon">
@@ -203,13 +203,13 @@
                                             <i class="icon-Ruler"></i>
                                         </div>
                                         <div class="content">
-                                            <div class="text-4 text-color-default">Size:</div>
-                                            <div class="text-1 text-color-heading">{{$row->plot_area}} SqFt</div>
+                                            <div class="text-4 text-color-default">Builtup Area:</div>
+                                            <div class="text-1 text-color-heading">{{$row->builtup_area}} sqft</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <a href="#" class="tf-btn bg-color-primary pd-21 fw-6">Ask a question</a>
+                            <a href="{{route('contact')}}" class="tf-btn bg-color-primary pd-21 fw-6">Ask a question</a>
                         </div>
                         @if ($row->video_link)
                         <div class=" wg-property video spacing-2">
@@ -266,9 +266,23 @@
                                         <p>{{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($row->price)}}</p>
                                     </li>
                                     <li class="flex">
-                                        <p class="fw-6">Size</p>
-                                        <p>{{$row->plot_area}} sqft</p>
+                                        <p class="fw-6">Status</p>
+                                        <p>{{config('constants.FOR_TYPE')[$row->for_type]}}</p>
                                     </li>
+                                    <li class="flex">
+                                        <p class="fw-6">Size</p>
+                                        <p>{{$row->plot_area}} {{$row->plot_type? $row->plot_type : 'sqft'}} </p>
+                                    </li>
+                                    <li class="flex">
+                                        <p class="fw-6">Builtup Area</p>
+                                        <p>{{$row->builtup_area}} sqft </p>
+                                    </li>
+                                    <li class="flex">
+                                        <p class="fw-6">Carpet Area</p>
+                                        <p>{{$row->carpet_area}} sqft </p>
+                                    </li>
+                                </ul>
+                                <ul>
                                     <li class="flex">
                                         <p class="fw-6">Rooms</p>
                                         <p>{{$row->bathroom + $row->bedroom}}</p>
@@ -277,8 +291,6 @@
                                         <p class="fw-6">Baths</p>
                                         <p>{{$row->bathroom}}</p>
                                     </li>
-                                </ul>
-                                <ul>
                                     <li class="flex">
                                         <p class="fw-6">Beds</p>
                                         <p>{{$row->bedroom}}</p>
@@ -290,10 +302,6 @@
                                     <li class="flex">
                                         <p class="fw-6">Type</p>
                                         <p>{{config('constants.TYPE')[$row->type]}}</p>
-                                    </li>
-                                    <li class="flex">
-                                        <p class="fw-6">Status</p>
-                                        <p>{{config('constants.FOR_TYPE')[$row->for_type]}}</p>
                                     </li>
                                     <li class="flex">
                                         <p class="fw-6">Balcony</p>
@@ -615,13 +623,13 @@
                                 </h4>
                                 <div class="seller-info">
                                     <div class="avartar">
-                                        <img src="{{ App\Helper\Helper::getProfileImage('storage/user/'.$row?->user_id, $row?->user->profile_image) }}" alt="">
+                                        <img src="{{ App\Helper\Helper::getProfileImage('storage/user/'.$row?->user_id, $row?->user?->profile_image) }}" alt="">
                                     </div>
                                     <div class="content">
-                                        <h6 class="name">Shara Conner</h6>
+                                        <h6 class="name">{{$row?->user?->name }}</h6>
                                         <ul class="contact">
-                                            <li><i class="icon-phone-1"></i><span>{{$row?->user->name }}</span></li>
-                                            <li><i class="icon-mail"></i>{{$row?->user->email }}</li>
+                                            <li><i class="icon-phone-1"></i><span>{{$row?->user?->phone }}</span></li>
+                                            <li><i class="icon-mail"></i>{{$row?->user?->email }}</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -734,7 +742,7 @@
                                             <ul class="meta-list flex">
                                                 <li class="text-1 flex"><span>{{$similarProperty->bedroom}}</span>Beds</li>
                                                 <li class="text-1 flex"><span>{{$similarProperty->bathroom}}</span>Baths</li>
-                                                <li class="text-1 flex"><span>{{$similarProperty->plot_area}}</span>Sqft</li>
+                                                <li class="text-1 flex"><span>{{$similarProperty->plot_area}}</span>{{$similarProperty->plot_type? $similarProperty->plot_type : 'sqft'}} </li>
                                             </ul>
                                             <div class="bot flex justify-between items-center">
                                                 <h5 class="price">

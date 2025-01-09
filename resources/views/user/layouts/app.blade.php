@@ -6,7 +6,9 @@
 
 
 <!-- Mirrored from themesflat.co/html/proty/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 09 Dec 2024 11:51:31 GMT -->
-
+@php
+    $config =  App\Helper\Helper::getWebsiteConfig();
+@endphp
 <head>
     @include('front.layouts.head')
 

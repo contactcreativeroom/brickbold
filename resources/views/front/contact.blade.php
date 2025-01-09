@@ -1,6 +1,9 @@
 @extends('front.layouts.app')
 <link rel="stylesheet" type="text/css" href="{{url('frontend/css/map.min.css')}}" />
 @section('content')
+@php
+    $config =  App\Helper\Helper::getWebsiteConfig();
+@endphp
     <div class="main-content">
         <!-- section-top-map -->
         <section class="section-top-map style-2">
@@ -110,7 +113,7 @@
                                     </div>
                                     <div class="content">
                                         <div class="sub">Office address</div>
-                                        <p>{{config('constants.CONTACT.addresss')}}</p>
+                                        <p>{{ data_get($config, 'address', '') }}</p>
                                     </div>
                                 </li>
                                 <li>
@@ -139,7 +142,7 @@
                                     </div>
                                     <div class="content">
                                         <div class="sub">Office phone</div>
-                                        <div class="phone">{{config('constants.CONTACT.country_code')}}-{{config('constants.CONTACT.phone')}}</div>
+                                        <div class="phone">{{ data_get($config, 'phone', '') }}</div>
                                     </div>
                                 </li>
                                 <li>
@@ -183,7 +186,7 @@
                                     </div>
                                     <div class="content">
                                         <div class="sub">Office email</div>
-                                        <a href="javascript:void(0)">{{config('constants.CONTACT.email')}}</a>
+                                        <a href="javascript:void(0)">{{ data_get($config, 'email', '') }}</a>
                                     </div>
                                 </li>
                             </ul>

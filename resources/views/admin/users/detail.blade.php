@@ -55,16 +55,23 @@
                                         </li>
                                         <li class="mb-2">
                                             <span class="h6">Role:</span>
-                                            <span>Author</span>
+                                            <span>{{ $user->user_type }}</span>
                                         </li>
-                                        <li class="mb-2">
-                                            <span class="h6">GSTIN:</span>
-                                            <span>Tax-8965</span>
-                                        </li>
+                                        
                                         <li class="mb-2">
                                             <span class="h6">Phone:</span>
                                             <span>{{ $user->phone }}</span>
                                         </li> 
+                                        @if (!empty($user->user_type) && in_array($user->user_type , ['Agent', 'Builder']))
+                                        <li class="mb-2">
+                                            <span class="h6">Business Name:</span>
+                                            <span>{{ $user->business_name }}</span>
+                                        </li> 
+                                        <li class="mb-2">
+                                            <span class="h6">Landline Number:</span>
+                                            <span>{{ $user->landline_number }}</span>
+                                        </li> 
+                                        @endif
                                         <li class="mb-2">
                                             <span class="h6">Address:</span>
                                             <span>
@@ -74,6 +81,20 @@
                                                 <small>{{ $user->postal_code }}</small>
                                             </span>
                                         </li>
+                                        @if (!empty($user->user_type) && in_array($user->user_type , ['Agent', 'Builder']))
+                                        <li class="mb-2">
+                                            <span class="h6">GSTIN:</span>
+                                            <span>{{ $user->gstin }}</span>
+                                        </li> 
+                                        <li class="mb-2">
+                                            <span class="h6">Rera Number:</span>
+                                            <span>{{ $user->rera_number }}</span>
+                                        </li> 
+                                        <li class="mb-2">
+                                            <span class="h6">Website:</span>
+                                            <span>{{ $user->website }}</span>
+                                        </li> 
+                                        @endif
                                     </ul>
                                     <div class="d-flex justify-content-center">
                                         <a href="{{route("admin.user.edit", ['id'=>$user->id])}}" class="btn btn-primary me-2">Edit</a>

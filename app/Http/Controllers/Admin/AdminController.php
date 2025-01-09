@@ -49,7 +49,7 @@ class AdminController extends Controller
 
             $image = $request->file('image');
             if(isset($image)){
-                Helper::uploadImage($image, $admin, 'admin/profile', false, 'update', 'image', true, false, true, false);                 
+                Helper::uploadImage($image, $admin, 'subadmin/'.$admin->id, false, 'update', 'image', true, false, true, false);                 
             } 
 
             if ($admin->save()) {

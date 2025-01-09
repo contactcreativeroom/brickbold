@@ -186,7 +186,7 @@
                                     </svg>
 
                                 </div>
-                                <p>{{config('constants.CONTACT.country_code')}}-{{config('constants.CONTACT.phone')}}</p>
+                                <p>{{ data_get($config, 'phone', '') }}</p>
                             </div>
                             @auth('user')
                             <div class="box-user tf-action-btns">

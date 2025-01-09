@@ -45,9 +45,14 @@ class UserController extends Controller
             $user = $this->userAuth;
             $user->name = $request->name;
             $user->description = $request->description;
+            $user->business_name = $request->business_name;
             $user->email = $request->email;
             $user->phone = $request->phone;
+            $user->landline_number = $request->landline_number;
             $user->address = $request->address; 
+            $user->gstin = $request->gstin; 
+            $user->rera_number = $request->rera_number; 
+            $user->website = $request->website; 
 
             $image = $request->file('profile_image');
             if(isset($image)){

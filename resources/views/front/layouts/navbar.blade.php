@@ -219,32 +219,34 @@
                 <div class="support">
                     <a href="{{route('contact')}}" class="text-need"> Need help?</a>
                     <ul class="mb-info">
-                        <li>Call Us Now: <span class="number">{{config('constants.CONTACT.country_code')}}-{{config('constants.CONTACT.phone')}}</span></li>
-                        <li>Support 24/7: <a href="javascript:void(0)">{{config('constants.CONTACT.email')}}</a></li>
+                        <li>Call Us Now: <span class="number">{{ data_get($config, 'phone', '') }}</span></li>
+                        <li>Support 24/7: <a href="javascript:void(0)">{{ data_get($config, 'email', '') }}</a></li>
                         <li>
                             <div class="wrap-social">
                                 <p>Follow us:</p>
                                 <ul class="tf-social  style-2">
+
                                     <li>
-                                        <a href="#">
+                                        <a target="_blank" href="{{ data_get($config, 'social.facebook', '') }}">
                                             <i class="icon-fb"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">
+                                        <a target="_blank" href="{{ data_get($config, 'social.twitter', '') }}">
                                             <i class="icon-X"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">
+                                        <a target="_blank" href="{{ data_get($config, 'social.linkedin', '') }}">
                                             <i class="icon-linked"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">
+                                        <a target="_blank" href="{{ data_get($config, 'social.instagram', '') }}">
                                             <i class="icon-ins"></i>
                                         </a>
                                     </li>
+                                    
                                 </ul>
                             </div>
                         </li>

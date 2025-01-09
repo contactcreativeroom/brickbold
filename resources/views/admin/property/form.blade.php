@@ -32,7 +32,7 @@
                                         <div class="col-md-3">
                                             <label class="form-label">Status<span>*</span></label>
                                             <select class="form-control form-select" name="status">
-                                                @foreach (config('constants.STATUS') as $key=>$value)
+                                                @foreach (config('constants.PROPERTY_STATUSES') as $key=>$value)
                                                     <option value="{{$key}}" {{ old('status', request('status')) === (string)$key ? 'selected' : '' }} >{{$value}}</option>
                                                 @endforeach
                                             </select>
@@ -282,7 +282,6 @@
                                                             <option value="{{$value}}" @if(old('plot_type')!=null && old('plot_type')==$value) selected @elseif(!empty($row) && $row->plot_type==$value) selected @endif >{{$value}}</option>
                                                         @endforeach 
                                                     </select>
-
                                                 </div>
                                             </div>
                                         </div>

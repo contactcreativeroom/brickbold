@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PropertyHistory extends Model
+class Setting extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'user_id', 'admin_id', 'property_id', 'current_status', 'meta_key', 'meta_values', 'status'
+        'key', 'value', 'status'
     ];
 }

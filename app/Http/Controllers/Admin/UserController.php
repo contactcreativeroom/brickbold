@@ -24,18 +24,19 @@ class UserController extends Controller
 
     public function list(Request $request){
         $users = User::query();
-        if ($request->has('role') && $request->role != "") {
-            $role = $request->role; 
-            //$users->where('role', $role) ;
+        if ($request->has('user_type') && $request->user_type != "") {
+            $user_type = $request->user_type; 
+            $users->where('user_type', $user_type);
         } 
         if ($request->has('package') && $request->package != "") {
             $package = $request->package; 
             //$users->where('package', $package) ;
         }  
-        if ($request->has('status')) {
+        if ($request->has('status') && $request->status != "") {
             $status = $request->status; 
             $users->where('status', $status) ;
         } 
+        $users->latest();
         $users = $users->paginate($this->pagerecords)->appends([
             'role' => $request->get('role'),
             'package' => $request->get('package'),
@@ -60,44 +61,50 @@ class UserController extends Controller
     }
 
     public function postData(Request $request){
-         $id = trim($request->input('id'));
-        $validationArray=array(
+        $id = trim($request->input('id'));
+        $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email',
             'phone' => 'required',
-            'address' => 'required',          
-        );
+            'address' => 'required',  
+        ]);
          
-        $validator = Validator::make($request->all(), $validationArray);
-        if($validator->fails()){
-            $errorMessage=null;
-            foreach($validator->errors()->getMessages() as $error){
-                $errorMessage=$error[0];
-                break;
-            }
-            Helper::toastMsg(false, $errorMessage);
-            return redirect()->back(); 
+        if ($validator->fails()) {
+            Helper::toastMsg(false, "Validation errors: " . json_encode($validator->errors()->toArray()));
+            return back()->withErrors($validator)->withInput();
         }       
 
         DB::beginTransaction();        
         if(empty($id)){
             $user = User::create([
+                'user_type' => $request->user_type,
                 'name' => $request->name,
                 'description' => $request->description,
                 'email' => $request->email,
                 'password' => Hash::make('123456'),
                 'phone' => $request->phone,
                 'address' => $request->address,
+                'business_name' => $request->business_name,
+                'landline_number' => $request->landline_number,
+                'gstin' => $request->gstin,
+                'rera_number' => $request->rera_number,
+                'website' => $request->website,
                 'status' => 1,
             ]);
         }else{
             $user = User::find($id); 
             $user->update([
+                'user_type' => $request->user_type,
                 'name' => $request->name,
                 'description' => $request->description,
                 'email' => $request->email,
                 'phone' => $request->phone,
                 'address' => $request->address,
+                'business_name' => $request->business_name,
+                'landline_number' => $request->landline_number,
+                'gstin' => $request->gstin,
+                'rera_number' => $request->rera_number,
+                'website' => $request->website,
                 'status' => $request->status,
             ]);
         }

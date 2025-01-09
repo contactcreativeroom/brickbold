@@ -6,7 +6,9 @@ use App\Helper\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Property;
 use App\Models\PropertyImage;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -36,10 +38,11 @@ class PropertyController extends Controller
             $for_type = $request->for_type; 
             $properties->where('for_type', $for_type) ;
         } 
-        if ($request->has('status')) {
+        if ($request->has('status') && $request->status != "") {
             $status = $request->status; 
             $properties->where('status', $status) ;
         } 
+        $properties->latest() ;
         $properties = $properties->paginate($this->pagerecords)->appends([
             'type' => $request->get('type'),
             'property_detail' => $request->get('property_detail'),
@@ -109,6 +112,8 @@ class PropertyController extends Controller
         } 
         
         DB::beginTransaction(); 
+        $admin = Auth::guard('admin')->user();
+        $metaValue = "Added new property by ".$admin->name." with status ".config('constants.PROPERTY_STATUSES')[$request->status];
         $id = trim($request->input('id'));
         if (empty($id)) {
             $property = new Property();
@@ -116,12 +121,18 @@ class PropertyController extends Controller
                 $property->user_id = $request->user_id; 
             }
         } else {
+            $metaValue = "Updated property to ".config('constants.PROPERTY_STATUSES')[$request->status]." by ".$admin->name;
             $property = Property::find($id);
             if (!$property) {
                 Helper::toastMsg(false, "Property not found.");
                 return back();  
             }
         }  
+        if($request->status == 3){
+            $property->sold_date = Carbon::now()->format('Y-m-d');
+        } else{
+            $property->sold_date = null;
+        }
         $property->title = $request->title;
         $property->description = $request->description;
         $property->location = $request->location;
@@ -163,6 +174,15 @@ class PropertyController extends Controller
             }
         }            
 
+        $property->history()->create([ 
+            'user_id' => $property->user_id,
+            'admin_id' => $admin?->id,
+            'current_status' => $request->status, 
+            'meta_key' => 'admin', 
+            'meta_values' => $metaValue, 
+            'status' => 1,
+        ]);
+
         DB::commit();
         Helper::toastMsg(true, 'Property Added/Updated successfully!');
         return redirect()->route('admin.properties');
@@ -182,10 +202,20 @@ class PropertyController extends Controller
 
     public function changeStatus(Request $request)
     {
+        $admin = Auth::guard('admin')->user();
         $property = Property::find($request->entity_id);
         if($property){
             $property->status = $request->status;
+            $property->sold_date = null;
             $property->save();
+            $property->history()->create([ 
+                'user_id' => $property?->user_id,
+                'admin_id' => $admin?->id,
+                'current_status' => $request->status, 
+                'meta_key' => 'admin', 
+                'meta_values' => "Updated to ".config('constants.PROPERTY_STATUSES')[$request->status]. " By ". $admin?->name, 
+                'status' => 1,
+            ]); 
             return response()->json(['status' => 'success', 'message' => 'Status updated successfully']);
         }
         return response()->json(['status' => false, 'message' => 'Property not found']);

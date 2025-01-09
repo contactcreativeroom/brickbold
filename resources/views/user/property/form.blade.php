@@ -239,15 +239,25 @@
                         
                         <div class="box grid-layout-3 gap-30">
                             <fieldset class="box-fieldset">
-                                <label for="size">
-                                    Size (SqFt):<span>*</span>
-                                </label>
-                                <input type="text" class="form-control {{ $errors->has('plot_area') ? ' is-invalid' : '' }}" name="plot_area" value="@if(old('plot_area')!=null){{old('plot_area')}}@elseif(!empty($row->plot_area)){{$row->plot_area}}@endif">
-                                @if($errors->has('plot_area'))
-									<span class="invalid-feedback">
-										{{ $errors->first('plot_area') }}
-									</span>
-								@endif
+                                <div class="row">
+                                    <div class="col-8" style="padding-right:0px;">
+                                        <label for="size"> Plot Area:<span>*</span> </label>
+                                        <input type="text" class="form-control plot-area {{ $errors->has('plot_area') ? ' is-invalid' : '' }}" name="plot_area" value="@if(old('plot_area')!=null){{old('plot_area')}}@elseif(!empty($row->plot_area)){{$row->plot_area}}@endif">
+                                        @if($errors->has('plot_area'))
+                                            <span class="invalid-feedback">
+                                                {{ $errors->first('plot_area') }}
+                                            </span>
+                                        @endif
+                                    </div>
+                                    <div class="col-4" style="padding-left:0px;">
+                                        <label for="plot_area"></label>
+                                        <select class="form-control form-select  nice-select plot-area-type {{ $errors->has('plot_type') ? ' is-invalid' : '' }}" name="plot_type">
+                                            @foreach (config('constants.PLOT_TYPE') as $value)
+                                                <option value="{{$value}}" @if(old('plot_type')!=null && old('plot_type')==$value) selected @elseif(!empty($row) && $row->plot_type==$value) selected @endif >{{$value}}</option>
+                                            @endforeach 
+                                        </select>
+                                    </div>
+                                </div>
                             </fieldset>
                             <fieldset class="box-fieldset">
                                 <label for="builtup">

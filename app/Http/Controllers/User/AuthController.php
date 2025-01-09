@@ -19,6 +19,7 @@ class AuthController extends Controller
 
     public function register(Request $request){
         $validator = Validator::make($request->all(), [
+            'role' => 'required',
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email|max:255',
             'password' => 'required|min:6|confirmed',
@@ -36,6 +37,7 @@ class AuthController extends Controller
         }
     
         $user = User::create([
+            'user_type' => $request->role,
             'name' => $request->name,
             'email' => $request->email,
             'dob' => $request->dob,
@@ -47,7 +49,7 @@ class AuthController extends Controller
             Auth::guard('user')->login($user);
             return response()->json([
                 'success' => true,
-                'redirect_url' => route('user.dashboard'),
+                'redirect_url' => route('user.property.add'),
                 'message' => 'Registered successfully!',
             ], 201);
         }
@@ -90,7 +92,7 @@ class AuthController extends Controller
                 return response()->json([
                     'success' => true,
                     'message' => 'Logged in successfully!',
-                    'redirect_url' => route('user.dashboard'),
+                    'redirect_url' => route('user.property.add'),
                 ], 200);
             }
     

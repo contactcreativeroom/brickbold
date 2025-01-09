@@ -12,7 +12,9 @@ content=" RealEstate, RealEstate, Buy, Rent, Homes, Apartment, Listings, Sale, R
 <!-- Theme Style -->
 <link rel="stylesheet" type="text/css" href="{{url('frontend/css/bootstrap.css')}}" />
 <link rel="stylesheet" type="text/css" href="{{url('frontend/css/animate.min.css')}}" />
+<link rel="stylesheet" type="text/css" href="{{url('frontend/css/magnific-popup.min.css')}}" />
 <link rel="stylesheet" type="text/css" href="{{url('frontend/css/swiper-bundle.min.css')}}" />
+<link rel="stylesheet" type="text/css" href="{{url('frontend/css/jquery.fancybox.min.css')}}" />
 <link rel="stylesheet" type="text/css" href="{{url('frontend/css/sib-styles.css')}}" />
 <link rel="stylesheet" type="text/css" href="{{url('frontend/css/styles.css')}}" />
 <link rel="stylesheet" type="text/css" href="{{url('frontend/css/custom.css')}}" />

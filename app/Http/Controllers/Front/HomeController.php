@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Helper\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
+use App\Models\Package;
 use App\Models\Page;
 use App\Models\Property;
 use App\Models\Testimonial;
@@ -14,6 +15,13 @@ use Illuminate\Support\Facades\DB;
 class HomeController extends Controller
 {
     private $prefix = 'front';
+    protected $userAuth;
+    private $pagerecords;
+
+    public function __construct()
+    {
+        $this->pagerecords = config('constants.FRONT_PAGE_RECORDS');
+    }
     
     public function index(Request $request) {
         $todayLuxury = Property::orderBy('is_luxury', 'desc')->orderBy('id', 'desc')->limit(6)->get();
@@ -75,10 +83,31 @@ class HomeController extends Controller
 
     }
 
-    public function packages(){  
-         
-        return view($this->prefix.'.packages');
+    public function packages(Request $request){  
+        $packages = Package::where('status', 1);
+        
+        if ($request->filled('profile')) {
+            $profile = $request->profile; 
+            $packages->where('profile', $profile) ;
+        } 
 
+        if ($request->filled('type')) {
+            $type = $request->type; 
+            $packages->where('type', $type) ;
+        }
+
+        if ($request->filled('property_type')) {
+            $property_type = $request->property_type; 
+            $packages->where('property_type', $property_type) ;
+        }
+
+        $packages = $packages->paginate($this->pagerecords)->appends([
+            'profile' => $request->get('profile'),
+            'type' => $request->get('type'),
+            'property_type' => $request->get('property_type')
+        ]); 
+        //$packages =  Package::where('status', 1)->latest()->get(); 
+        return view($this->prefix.'.packages',['rows' => $packages]);
     }
 
     

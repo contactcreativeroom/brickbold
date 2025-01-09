@@ -84,7 +84,7 @@
                         <td>{{ $row->name }} <br><small>Date: {{ App\Helper\Helper::formatStringDate($row->created_at)  }}</small></td>   
                         <td>{{ $row->type }}</td>    
                         <td>{{ $row->profile }}</td>   
-                        <td>{{ $row->months }} </td>
+                        <td>{{ $row->days }} </td>
                         <td>{{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($row->price)}}</td>
                         <td>{{ $row->discount }}</td>
                         <td>{{ $row->grand_price }}</td>

@@ -71,6 +71,23 @@
                                 @endif
                             </div>
                         </div>
+                        @if (!empty($row->user_type) && in_array($row->user_type , ['Agent', 'Builder']))
+                        <div class="box grid-layout-2 gap-30 box-info-2">   
+                            <div class="box-fieldset">
+                                <label for="company">Business Name:<span>*</span></label>
+                                <input type="text" name="business_name" class="form-control {{ $errors->has('business_name') ? ' is-invalid' : '' }}" value="@if(old('business_name')!=null){{old('business_name')}}@elseif(!empty($row->business_name)){{$row->business_name}}@endif" >
+                                @if($errors->has('business_name'))
+                                    <span class="invalid-feedback">
+                                        {{ $errors->first('business_name') }}
+                                    </span>
+                                @endif
+                            </div>
+                            <div class="box-fieldset">
+                                <label for="name">Landline Number:</label>
+                                <input type="text" name="landline_number"  class="form-control" value="@if(old('landline_number')!=null){{old('landline_number')}}@elseif(!empty($row->landline_number)){{$row->landline_number}}@endif" >
+                            </div>
+                        </div>
+                        @endif
                         <div class="box box-fieldset">
                             <label for="address">Address:<span>*</span></label>
                             <input type="text" id="address" name="address" value="@if(old('address')!=null){{old('address')}}@elseif(!empty($row->address)){{$row->address}}@endif" class="form-control {{ $errors->has('address') ? ' is-invalid' : '' }}">
@@ -80,7 +97,22 @@
                                 </span>
                             @endif
                         </div>
-                         
+                        @if (!empty($row->user_type) && in_array($row->user_type , ['Agent', 'Builder']))
+                        <div class="box grid-layout-3 gap-30 box-info-2">  
+                            <div class="box-fieldset">
+                                <label for="company">GSTIN/Udyog Aadhaar Number:</label>
+                                <input type="text" name="gstin" class="form-control" value="@if(old('gstin')!=null){{old('gstin')}}@elseif(!empty($row->gstin)){{$row->gstin}}@endif" >
+                            </div>
+                            <div class="box-fieldset">
+                                <label for="name">Rera Number:</label>
+                                <input type="text" name="rera_number"  class="form-control" value="@if(old('rera_number')!=null){{old('rera_number')}}@elseif(!empty($row->rera_number)){{$row->rera_number}}@endif" >
+                            </div>
+                            <div class="box-fieldset">
+                                <label for="position">Website:</label>
+                                <input type="text" name="website" class="form-control" value="@if(old('website')!=null){{old('website')}}@elseif(!empty($row->website)){{$row->website}}@endif" >
+                            </div>
+                        </div>
+                        @endif
                         <div class="box">
                             <button type="submit" class="tf-btn bg-color-primary pd-10">Save & Update</button>
                         </div>

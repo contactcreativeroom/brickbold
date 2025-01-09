@@ -29,6 +29,7 @@ use App\Models\MetaDetails;
 use App\Models\Page;
 use App\Models\Service;
 use App\Models\ServiceTravellingRate;
+use App\Models\Setting;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 
@@ -341,7 +342,156 @@ class Helper
         }
     }
         
-    
+    public static function getWebsiteConfig($method = null){
+        $settingObj = new Setting();
+        $config = [];
+        
+        if($method == null || ($method != null && $method == 'email')){
+            $email = $settingObj->where('key', 'email')->first();
+            if($email && $email->value){
+                $config['email'] = $email->value;
+            }else{
+                $config['email'] = config('constants.CONTACT.email');
+            }
+        }
+
+        if($method == null || ($method != null && ($method == 'country_code' || $method == 'phone' || $method == 'whatsapp'))){
+            $countryCode = $settingObj->where('key', 'country_code')->first();
+            if($countryCode && $countryCode->value){
+                $config['country_code'] = $countryCode->value;
+            }else{
+                $config['country_code'] = config('constants.CONTACT.country_code');
+            }
+        }
+
+        if($method == null || ($method != null && $method == 'phone')){
+            $phone = $settingObj->where('key', 'phone')->first();
+            if($phone && $phone->value){
+                $config['phone'] = '+'.$config['country_code'].'-'.$phone->value;
+            }else{
+                $phones = Self::makePhonesText($config['country_code'], config('constants.CONTACT.phone'));
+                $config['phone'] = $phones;
+            }
+        }
+
+        if($method == null || ($method != null && $method == 'whatsapp')){
+            $whatsapp = $settingObj->where('key', 'whatsapp')->first();
+            if($whatsapp && $whatsapp->value){
+                $config['whatsapp'] = 'https://wa.me/'.$config['country_code'].$whatsapp->value;
+            }else{
+                $config['whatsapp'] = config('constants.CONTACT.whatsapp');
+            }
+        }
+
+        if($method == null || ($method != null && $method == 'whatsapp_number')){
+            $whatsapp = $settingObj->where('key', 'whatsapp')->first();
+            if($whatsapp && $whatsapp->value){
+                $config['whatsapp_number'] = '+'.$config['country_code'].$whatsapp->value;
+            }else{
+                $config['whatsapp_number'] = config('constants.CONTACT.whatsapp_number');
+            }
+        }
+
+        if($method == null || ($method != null && $method == 'address')){
+            $address = $settingObj->where('key', 'address')->first();
+            if($address && $address->value){
+                $config['address'] = $address->value;
+            }else{
+                $config['address'] = config('constants.CONTACT.addresss');
+            }
+        }
+
+        if($method == null || ($method != null && $method == 'map_link')){
+            $mapLink = $settingObj->where('key', 'map_link')->first();
+            if($mapLink && $mapLink->value){
+                $config['map_link'] = $mapLink->value;
+            }else{
+                $config['map_link'] = config('constants.ADDRESS.map_link');
+            }
+        }
+
+          
+
+        if($method == null || ($method != null && $method == 'social')){
+            $facebook = $settingObj->where('key', 'facebook_social')->first();
+            if($facebook && $facebook->value && $facebook->value != '#'){
+                $config['social']['facebook'] = $facebook->value;
+            }else{
+                $config['social']['facebook'] = config('constants.SOCIAL.facebook');
+            }
+        }
+
+        if($method == null || ($method != null && $method == 'social')){
+            $linkedin = $settingObj->where('key', 'linkedin_social')->first();
+            if($linkedin && $linkedin->value && $linkedin->value != '#'){
+                $config['social']['linkedin'] = $linkedin->value;
+            }else{
+                $config['social']['linkedin'] = config('constants.SOCIAL.linkedin');
+            }
+        }
+
+        if($method == null || ($method != null && $method == 'social')){
+            $instagram = $settingObj->where('key', 'instagram_social')->first();
+            if($instagram && $instagram->value && $instagram->value != '#'){
+                $config['social']['instagram'] = $instagram->value;
+            }else{
+                $config['social']['instagram'] = config('constants.SOCIAL.instagram');
+            }
+        }
+
+        if($method == null || ($method != null && $method == 'social')){
+            $twitter = $settingObj->where('key', 'twitter_social')->first();
+            if($twitter && $twitter->value && $twitter->value != '#'){
+                $config['social']['twitter'] = $twitter->value;
+            }else{
+                $config['social']['twitter'] = config('constants.SOCIAL.twitter');
+            }
+        }
+
+        if($method == null || ($method != null && $method == 'social')){
+            $pinterest = $settingObj->where('key', 'pinterest_social')->first();
+            if($pinterest && $pinterest->value && $pinterest->value != '#'){
+                $config['social']['pinterest'] = $pinterest->value;
+            }else{
+                $config['social']['pinterest'] = config('constants.SOCIAL.pinterest');
+            }
+        }
+
+        if($method == null || ($method != null && $method == 'social')){
+            $youtube = $settingObj->where('key', 'youtube_social')->first();
+            if($youtube && $youtube->value && $youtube->value != '#'){
+                $config['social']['youtube'] = $youtube->value;
+            }else{
+                $config['social']['youtube'] = config('constants.SOCIAL.youtube');
+            }
+        }
+
+        if($method == null || ($method != null && $method == 'currency_sign')){
+            $currencySign = $settingObj->where('key', 'currency_sign')->first();
+            if($currencySign && $currencySign->value){
+                $config['currency_sign'] = $currencySign->value;
+            }else{
+                $config['currency_sign'] = config('constants.CONFIG.currency_sign');
+            }
+        }
+        return $config;
+
+    }
+
+    public static function makePhonesText($countryCode, $phones){
+        $phoneText = '';
+        if(is_string($phones)){
+            return $phoneText = '+'.$countryCode.'-'.$phones;
+        } else{
+            foreach($phones as $phone){
+                $phoneText .= '+'.$countryCode.'-'.$phone.', ';
+            }
+            $phoneText = rtrim($phoneText, ', ');
+            return $phoneText;
+        }
+        
+    }
+
     public static function saveMetaDetails($data)
     {
         $meta = [

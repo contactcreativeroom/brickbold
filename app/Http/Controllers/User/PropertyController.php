@@ -6,6 +6,7 @@ use App\Helper\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Property;
 use App\Models\PropertyImage;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -52,6 +53,8 @@ class PropertyController extends Controller
             } else { 
                 $properties->orderBy('id', 'desc');
             }
+        } else { 
+            $properties->orderBy('id', 'desc');
         }
 
         $properties = $properties->paginate($this->pagerecords)->appends([
@@ -78,7 +81,7 @@ class PropertyController extends Controller
         return view($this->prefix.'.property.form',['row' => $property]);
     }
     
-    public function postData(Request $request){       
+    public function postData(Request $request){      
         $validator = Validator::make($request->all(), [
             'title' => 'required',
             'location' => 'required',
@@ -129,10 +132,12 @@ class PropertyController extends Controller
         DB::beginTransaction(); 
         $id = trim($request->input('id'));  
         $user = $this->userAuth; 
+        $metaValue = "Added new property";
         if (empty($id)) {
             $property = new Property();
             $property->user_id = $user->id; 
         } else {
+            $metaValue = "Updated property";
             $property = $user->Property->find($id);
             if (!$property) {
                 Helper::toastMsg(false, "Property not found.");
@@ -180,6 +185,14 @@ class PropertyController extends Controller
             }
         }            
 
+        $property->history()->create([ 
+            'user_id' => $property->user_id,
+            'current_status' => 2, 
+            'meta_key' => 'user', 
+            'meta_values' => $metaValue, 
+            'status' => 1,
+        ]); 
+
         DB::commit();
         Helper::toastMsg(true, 'Property Added/Updated successfully!');
         return redirect()->route('user.properties');
@@ -200,7 +213,15 @@ class PropertyController extends Controller
     public function changeStatusSold(Request $request) {
         $property = Property::find($request->id);
         $property->status = 3;
+        $property->sold_date = Carbon::now()->format('Y-m-d');
         $property->save();
+        $property->history()->create([ 
+            'user_id' => $property->user_id,
+            'current_status' => 3, 
+            'meta_key' => 'user', 
+            'meta_values' => "Updated to sold", 
+            'status' => 1,
+        ]); 
         Helper::toastMsg(true, 'Successfully!');
         return redirect()->route('user.properties');
     }

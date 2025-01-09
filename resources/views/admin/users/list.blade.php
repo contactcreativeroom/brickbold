@@ -23,10 +23,10 @@
                 <form action="{{ route('admin.users') }}" method="get" enctype='multipart/form-data'>
                     <div class="d-flex justify-content-between align-items-center row pt-4 gap-4 gap-md-0 g-6 mb-3">
                         <div class="col-md-4 user_role">
-                            <select  class="form-select text-capitalize" name="role">
+                            <select  class="form-select text-capitalize" name="user_type">
                                 <option value="">Role</option>
-                                @foreach (config('constants.USER_ROLES') as $key=>$value)
-                                    <option value="{{$value}}" {{ old('role', request('role')) == $value ? 'selected' : '' }} >{{$value}}</option>
+                                @foreach (config('constants.USER_TYPE') as $key=>$value)
+                                    <option value="{{$value}}" {{ old('user_type', request('user_type')) == $value ? 'selected' : '' }} >{{$value}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -89,7 +89,7 @@
                                 </div>
                             </div>
                         </td>   
-                        <td> role </td>   
+                        <td>{{ $row->user_type }}</td>
                         <td> 
                             {{ $row->address }} 
                             <small>{{ $row->state }}</small>

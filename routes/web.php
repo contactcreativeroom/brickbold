@@ -10,6 +10,8 @@ use App\Http\Controllers\Admin\MetaDetailController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\PropertyController as AdminPropertyController;
+use App\Http\Controllers\Admin\setting\SocialController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SubAdminController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Front\HomeController;
@@ -166,6 +168,9 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/meta-details', [MetaDetailController::class, 'metaList'])->name('admin.meta.list');
         Route::any('/meta/update/{id?}', [MetaDetailController::class, 'metaUpdate'])->name('admin.meta.update');
          
+        Route::match(['get','post'], 'settings', [SettingController::class, 'logo'])->name('admin.settings');
+        Route::match(['get','post'], 'settings/social', [SocialController::class, 'social'])->name('admin.settings.social');        
+
     });
 });
 

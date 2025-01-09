@@ -21,242 +21,71 @@
     <div class="main-content tf-spacing-6 header-fixed custom-pages">
         <!-- section-faq -->
         <section class="section-faq ">
-            <div class="tf-container">
-                <div class="row mt-5">
-                    <div class="col col-xs-12 p-0 m-0">
-                        <div class="card-md">
-                            <div class="card-header-2 bg-white">
-                                <div style="height:232px;"></div>
+            <div class="container">
+                <div class="card-header  mb-48">
+                    <h5 class="card-title mb-0">Search Filters</h5>
+                    <form action="{{ route('packages') }}" method="get" enctype='multipart/form-data'>
+                        <div class="d-flex justify-content-between align-items-center row pt-4 gap-4 gap-md-0 g-6 mb-3">
+                            
+                            <div class="col-md-4 user_plan">
+                                <select  class="form-select nice-select" name="profile">
+                                    <option value="">Select Profile </option>
+                                    @foreach (config('constants.PACKAGE_PROFILE') as $key=>$value)
+                                        <option value="{{$value}}" {{ old('profile', request('profile')) == $value ? 'selected' : '' }} >{{$value}}</option>
+                                    @endforeach
+                                </select>
                             </div>
-                            <div class="card-body">
-                                <table class="table table-bordered table-striped">
-                                    <tbody>
-                                        <tr>
-                                            <td>Number of listing Property's</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Validity of your Property ads</td>
-                                        </tr>
-                                        <tr>
-                                            <td>No. of buyer's Contact</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Email Promotion</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Buyer inquiry against posted Property</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Verified tag on Property</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Priority customer Support</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Home loan Facility</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Notification to Buyer</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Response Rate</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <div class="col-md-4 user_role">
+                                <select  class="form-select nice-select" name="type">
+                                    <option value="">Select For </option>
+                                    @foreach (config('constants.PACKAGE_TYPE') as $key=>$value)
+                                        <option value="{{$value}}" {{ old('type', request('type')) == $value ? 'selected' : '' }} >{{$value}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-4 user_role">
+                                <select class="form-control form-select nice-select" name="property_type">
+                                    <option value="">Select Property Type</option>
+                                    @foreach (config('constants.TYPE') as $key=>$value)
+                                        <option value="{{$value}}" {{ old('property_type', request('property_type')) == $value ? 'selected' : '' }}  >{{$value}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
-                    </div>
-                    <div class="col col-xs-12 p-0 m-0">
-                        <div class="card mb-4 box-shadow">
-                            <div class="card-header ">
-                                <h1 class="card-title pricing-card-title text-center">SILVER</h1>
-                                <h2 class="title-price">₹ 1200</h2>
-                                <h4 class="card-tile">₹ 960</h4>
-                                <!--<p class="date-title">180 Days validity</p>-->
-                                <a href="selected-package/?pid=1" class="btn btn-md btn-outline-primary">Buy Now</a>
-                                <!--<p class="date-title mt-2">View Sample</p>-->
-                            </div>
-                            <div class="card-body">
-                                <table class="table table-bordered table-striped table-hover">
-                                    <tbody>
-                                        <tr>
-                                            <td class="text-center">1</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">60 Days</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">Upto - 10</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">No</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">Yes</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">No</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">No</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">Yes</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">No</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">Low</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                        <div class="bot flex items-center">
+                            <button class="tf-btn bg-color-primary pd-3 me-3" type="submit" >Submit</button>
+                            <a href="{{ route('packages') }}"  class="tf-btn style-border pd-4" >Reset</a>
                         </div>
-                    </div>
-                    <div class="col col-xs-12 p-0 m-0">
-                        <div class="card mb-4 box-shadow">
-                            <div class="card-header border-x">
-                                <h1 class="card-title pricing-card-title text-center">GOLD</h1>
-                                <h2 class="title-price">₹ 3500</h2>
-                                <h4 class="card-tile">₹ 2625</h4>
-                                <!--<p class="date-title">180 Days validity</p>-->
-                                <a href="selected-package/?pid=2" class="btn btn-md btn-outline-primary">Buy Now</a>
-                                <!--<p class="date-title mt-2">View Sample</p>-->
+                    </form>
+                </div>
+                <div class="widget-box-2-- style-2 package">
+                    <div class="row">
+                        @foreach ($rows as $row)
+                            <div class="package-col col-xl-3">
+                                <div class="flat-pricing">
+                                    <div class="box box-style">
+                                        <h3 class="sub-title  fw-7">{{$row->name}}</h3>
+                                        <p class="text-sub fw-6 ">Upgrade your {{$row->profile}} account to the {{$row->name}} package.</p>
+                                        <div class="title-price flex">
+                                            <h2 class="text-color-primary">{{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($row->grand_price)}} </h2>
+                                            <div class="month fw-7"> / <span class="text-decoration-line-through">{{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($row->price)}}</span></div>
+                                        </div>
+                                        <p class="texts">Get benefits for {{$row->property_type}} {{$row->type}} properties account for {{$row->days}} days.</p>
+                                        <ul class="check">
+                                            @foreach ($row->fields as $field)
+                                                <li class="flex-three">{{ $field->heading}}: {{ $field->value}}</li>
+                                            @endforeach 
+                                        </ul>
+                                        <div class="button-pricing">
+                                            <a class="tf-btn bg-color-primary pd-20" href="#">
+                                                <span>Buy</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div> 
                             </div>
-                            <div class="card-body">
-                                <table class="table table-bordered table-striped table-hover">
-                                    <tbody>
-                                        <tr>
-                                            <td class="text-center">1</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">90 Days</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">Upto - 15</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">Yes</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">Yes</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">No</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">No</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">Yes </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">No</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">Medium</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col col-xs-12 p-0 m-0">
-                        <div class="card mb-4 box-shadow">
-                            <div class="card-header ">
-                                <h1 class="card-title pricing-card-title text-center">PLATINUM</h1>
-                                <h2 class="title-price">₹ 5000</h2>
-                                <h4 class="card-tile">₹ 3500</h4>
-                                <!--<p class="date-title">180 Days validity</p>-->
-                                <a href="selected-package/?pid=3" class="btn btn-md btn-outline-primary">Buy Now</a>
-                                <!--<p class="date-title mt-2">View Sample</p>-->
-                            </div>
-                            <div class="card-body">
-                                <table class="table table-bordered table-striped table-hover">
-                                    <tbody>
-                                        <tr>
-                                            <td class="text-center">1</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">120 Days</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">Upto - 25</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">Yes</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">Yes</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">Yes</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">Yes</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">Yes</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">No</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">High</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col col-xs-12 p-0 m-0">
-                        <div class="card mb-4 box-shadow">
-                            <div class="card-header border-x">
-                                <h1 class="card-title pricing-card-title text-center">DIAMOND</h1>
-                                <h2 class="title-price">₹ 7500</h2>
-                                <h4 class="card-tile">₹ 4500</h4>
-                                <!--<p class="date-title">180 Days validity</p>-->
-                                <a href="selected-package/?pid=4" class="btn btn-md btn-outline-primary">Buy Now</a>
-                                <!--<p class="date-title mt-2">View Sample</p>-->
-                            </div>
-                            <div class="card-body">
-                                <table class="table table-bordered table-striped table-hover">
-                                    <tbody>
-                                        <tr>
-                                            <td class="text-center">1</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">180 Days</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">Upto - 40</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">Yes</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">Yes</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">Yes</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">Yes</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">Yes</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">Yes</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">High</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                        @endforeach
+                        
                     </div>
                 </div>
             </div>

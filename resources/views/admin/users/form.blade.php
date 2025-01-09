@@ -49,7 +49,7 @@
                                         <select class="form-control {{ $errors->has('status') ? ' is-invalid' : '' }}" id="status" name="status">
                                             <option value="">--Select Status--</option>
                                             @foreach(config('constants.STATUSES') as $key => $status)
-                                                <option value="{{$key}}" {{ (isset($row->status) && $key == $row->status) ?'selected':'' }} >{{$status}}</option>
+                                                <option value="{{$key}}" @if(old('status')!=null && old('status')==$key) selected @elseif(!empty($row) && $row->status==$key) selected @endif >{{$status}}</option>
                                             @endforeach
                                         </select> 
                                         @error('status')
@@ -59,6 +59,15 @@
                                         @enderror
                                     </div>
                                     <div class="col-md-6">
+                                        <label for="link" class="form-label">Role</label>
+                                        <select class="form-control {{ $errors->has('user_type') ? ' is-invalid' : '' }}" id="user_type" name="user_type">
+                                            <option value="">Select Role</option>
+                                            @foreach(config('constants.USER_TYPE') as $key => $value)
+                                                <option value="{{$value}}" @if(old('user_type')!=null && old('user_type')==$value) selected @elseif(!empty($row) && $row->user_type==$value) selected @endif>{{$value}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
                                         <label for="name" class="form-label">Name <span class="text-danger mandatory">*</span></label>
                                         <input type="text" class="form-control form-control-solid {{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="" name="name" value="@if(!empty($row->name)){{$row->name}}@elseif(old('name')!=null){{old('name')}}@endif" />
                                         @error('name')
@@ -67,7 +76,7 @@
                                         </div>
                                         @enderror
                                     </div> 
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <label for="email" class="form-label">email <span class="text-danger mandatory">*</span></label>
                                         <input type="text" class="form-control form-control-solid {{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="" name="email" value="@if(!empty($row->email)){{$row->email}}@elseif(old('email')!=null){{old('email')}}@endif" />
                                         @error('email')
@@ -77,11 +86,11 @@
                                         @enderror
                                     </div> 
                                     
-                                    <div class="col-md-6"> 
+                                    <div class="col-md-4"> 
                                         <label class="form-label" for="phone">Your Phone <span class="text-danger mandatory">*</span></label>
                                         <div class="input-group input-group-merge">
                                             <span class="input-group-text">IN (+91)</span>
-                                            <input type="text" id="phoneNumber" name="phone" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="" value="@if(!empty($row->phone)){{$row->phone}}@elseif(old('phone')!=null){{old('phone')}}@endif" />
+                                            <input type="text" id="phoneNumber" name="phone" class="form-control {{ $errors->has('phone') ? ' is-invalid' : '' }}" placeholder="" value="@if(!empty($row->phone)){{$row->phone}}@elseif(old('phone')!=null){{old('phone')}}@endif" />
                                             @error('phone')
                                             <div class="text-danger">
                                                 <small>{{ $message }}</small>
@@ -89,6 +98,21 @@
                                             @enderror
                                         </div>
                                     </div>
+                                    @if (!empty($row->user_type) && in_array($row->user_type , ['Agent', 'Builder']))
+                                    <div class="col-md-6">
+                                        <label class="form-label" for="business_name">Business Name <span class="text-danger mandatory">*</span></label>
+                                        <input type="text" id="business_name" name="business_name" value="@if(old('business_name')!=null){{old('business_name')}}@elseif(!empty($row->business_name)){{$row->business_name}}@endif" class="form-control {{ $errors->has('business_name') ? ' is-invalid' : '' }}">
+                                        @if($errors->has('business_name'))
+                                            <span class="invalid-feedback">
+                                                {{ $errors->first('business_name') }}
+                                            </span>
+                                        @endif
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label" for="landline_number">Landline Number</label>
+                                        <input type="text" id="landline_number" name="landline_number" value="@if(old('landline_number')!=null){{old('landline_number')}}@elseif(!empty($row->landline_number)){{$row->landline_number}}@endif" class="form-control {{ $errors->has('landline_number') ? ' is-invalid' : '' }}">
+                                    </div>
+                                    @endif
                                     <div class="col-md-12">
                                         <label class="form-label" for="address">Address <span class="text-danger mandatory">*</span></label>
                                         <input type="text" id="address" name="address" value="@if(old('address')!=null){{old('address')}}@elseif(!empty($row->address)){{$row->address}}@endif" class="form-control {{ $errors->has('address') ? ' is-invalid' : '' }}">
@@ -98,12 +122,22 @@
                                             </span>
                                         @endif
                                     </div>
-                                    
-                                     <div class="col-md-12">
-                                        <label for="description" class="form-label">Description</label>
-                                        <textarea name="description" class="form-control" rows="4">@if(old('description')!=null){{old('description')}}@elseif(!empty($row->description)){{$row->description}}@endif</textarea>
+                                    @if (!empty($row->user_type) && in_array($row->user_type , ['Agent', 'Builder']))                                     
+                                    <div class="col-md-4">
+                                        <label class="form-label" for="gstin">GSTIN/Udyog Aadhaar Number</label>
+                                        <input type="text" id="gstin" name="gstin" value="@if(old('gstin')!=null){{old('gstin')}}@elseif(!empty($row->gstin)){{$row->gstin}}@endif" class="form-control {{ $errors->has('gstin') ? ' is-invalid' : '' }}">
                                     </div>
-                                     
+
+                                    <div class="col-md-4">
+                                        <label class="form-label" for="rera_number">Rera Number</label>
+                                        <input type="text" id="rera_number" name="rera_number" value="@if(old('rera_number')!=null){{old('rera_number')}}@elseif(!empty($row->rera_number)){{$row->rera_number}}@endif" class="form-control {{ $errors->has('rera_number') ? ' is-invalid' : '' }}">
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label class="form-label" for="website">Website</label>
+                                        <input type="text" id="website" name="website" value="@if(old('website')!=null){{old('website')}}@elseif(!empty($row->website)){{$row->website}}@endif" class="form-control {{ $errors->has('website') ? ' is-invalid' : '' }}">
+                                    </div>
+                                    @endif
                                     
                                 </div>
                                 <div class="mt-6">

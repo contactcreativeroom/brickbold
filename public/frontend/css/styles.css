@@ -3145,7 +3145,7 @@ textarea.is-invalid{
   top: 50%;
   transform: translateY(-50%);
 }
-.flat-account .form-account .ip-field input {
+.flat-account .form-account .ip-field input, .flat-account .form-account .ip-field select {
   padding-left: 46px;
 }
 .flat-account .box-btn .text {
@@ -7125,7 +7125,7 @@ tr {
 }
 .box-property-detail ul li p:first-child {
   color: #3a3a3c;
-  width: 76px;
+  width: 96px;
 }
 
 .widget-video {
@@ -7960,7 +7960,7 @@ tr {
 
 .flat-pricing .box {
   background: var(--White);
-  padding: 41px 30px 30px;
+  padding: 41px 20px 20px;
   border-radius: 10px;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;

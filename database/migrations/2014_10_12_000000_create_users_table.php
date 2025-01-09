@@ -14,18 +14,24 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('unique_id')->unique()->nullable();
+            $table->string('user_type', 150)->default('Owner')->nullable();
             $table->string('name')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('profile_image')->nullable();
             $table->date('dob')->nullable();
             $table->string('phone')->nullable();
+            $table->string('landline_number', 150)->nullable();
             $table->longText('description')->nullable();
+            $table->string('business_name')->nullable();
             $table->string('address')->nullable();
             $table->string('city')->nullable();
             $table->string('state')->nullable();
             $table->string('country')->nullable();
             $table->string('postal_code')->nullable();
+            $table->string('gstin', 150)->nullable();
+            $table->string('rera_number', 150)->nullable();
+            $table->string('website')->nullable();
             $table->string('password');
             $table->boolean('status')->default(1)->nullable();
             $table->boolean('verify_account')->default(0)->nullable();

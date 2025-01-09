@@ -111,9 +111,13 @@
                         <td>{{config('constants.FOR_TYPE')[$row->for_type]}} </td>   
                         <td>{{config('constants.TYPE')[$row->type]}}</td>   
                         <td>
+                            @if ($row->status==3)
+                                <span class="badge bg-label-danger me-1">Sold</span>
+                            @else
                             <div class="form-check form-switch">
                                 <input class="form-check-input entity-toggle" type="checkbox" data-entity-url="{{ route('admin.property.status.change') }}" data-entity-id="{{ $row->id }}" data-entity-type="property" {{ $row->status == 1 ? 'checked' : '' }}>
                             </div>
+                            @endif
                         </td> 
                         <td class="sorting_1">
                             @if (isset($row->user_id) && $row->user_id > 0)

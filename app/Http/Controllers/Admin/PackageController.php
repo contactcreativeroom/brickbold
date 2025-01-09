@@ -64,7 +64,7 @@ class PackageController extends Controller
             'profile' => 'required',
             'property_type' => 'required',
             'name' => 'required',
-            'months' => 'required',
+            'days' => 'required',
             'price' => 'required',
             'unit' => 'required',
             'post_property' => 'required',
@@ -92,7 +92,7 @@ class PackageController extends Controller
         $package->profile = $request->profile;
         $package->property_type = $request->property_type;
         $package->name = $request->name;
-        $package->months = $request->months;
+        $package->days = $request->days;
         $package->price = $request->price;
         $package->unit = $request->unit;  
         $package->post_property = $request->post_property;

@@ -23,7 +23,7 @@
           <div class="card-body text-center">
             <div class="position-relative">
 
-              <img src="{{ App\Helper\Helper::getProfileImage('storage/admin/profile/', $admin->image) }}" alt="avatar" class="rounded-circle img-fluid"
+              <img src="{{ App\Helper\Helper::getProfileImage('storage/subadmin/'.$admin->id, $admin->image) }}" alt="avatar" class="rounded-circle img-fluid"
                 style="width: 150px;">
             </div>
 

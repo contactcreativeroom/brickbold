@@ -61,18 +61,13 @@
     var options = {
         series: [
             {
-                name: 'Bookings',
+                name: 'Properties',
                 type: 'column',
-                data: @json($thisYearTotalBookingMonthWise)
+                data: @json($thisYearTotalPropertiesMonthWise)
             }, {
-                name: 'Completed',
+                name: 'Sold',
                 type: 'column',
-                data: @json($thisYearTotalBookingCompletedMonthWise)
-            },  
-            {
-                name: 'Disputed',
-                type: 'column',
-                data: @json($thisYearTotalBookingDisputedMonthWise)
+                data: @json($thisYearTotalPropertiesSoldMonthWise)
             }
         ],
         chart: {
@@ -81,7 +76,7 @@
             stacked: false,
         },
         stroke: {
-            width: [2, 2, 2],
+            width: [2, 2],
             curve: 'smooth'
         },
         plotOptions: {
@@ -92,7 +87,7 @@
         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         yaxis: {
             title: {
-                text: 'Booking',
+                text: 'Property',
             },
 
         }
@@ -106,18 +101,13 @@
     document.querySelector('.thisYear').addEventListener('click', () => {
         chart.updateSeries([
             {
-                name: 'Bookings',
+                name: 'Properties',
                 type: 'column',
-                data: @json($thisYearTotalBookingMonthWise)
+                data: @json($thisYearTotalPropertiesMonthWise)
             }, {
-                name: 'Completed',
+                name: 'Sold',
                 type: 'column',
-                data: @json($thisYearTotalBookingCompletedMonthWise)
-            },  
-            {
-                name: 'Disputed',
-                type: 'column',
-                data: @json($thisYearTotalBookingDisputedMonthWise)
+                data: @json($thisYearTotalPropertiesSoldMonthWise)
             }
         ])
     });
@@ -125,18 +115,13 @@
     document.querySelector('.previousYear').addEventListener('click', () => {
         chart.updateSeries([
             {
-                name: 'Bookings',
+                name: 'Properties',
                 type: 'column',
-                data: @json($previousYearTotalBookingMonthWise)
+                data: @json($previousYearTotalPropertiesMonthWise)
             }, {
-                name: 'Completed',
+                name: 'Sold',
                 type: 'column',
-                data: @json($previousYearTotalBookingCompletedMonthWise)
-            },  
-            {
-                name: 'Disputed',
-                type: 'column',
-                data: @json($previousYearTotalBookingDisputedMonthWise)
+                data: @json($previousYearTotalPropertiesSoldMonthWise)
             }
         ])
     });
