@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\NewsletterController;
 use App\Http\Controllers\Front\PropertyController as FrontPropertyController;
+use App\Http\Controllers\Front\RazorpayController;
 use App\Http\Controllers\User\AuthController as UserAuthController;
 use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\FavoriteController;
@@ -50,6 +51,7 @@ Route::get('/trash', function () {
     echo"Cache Cleard Successfully!";
 }); 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/faq', [HomeController::class, 'faq'])->name('faq');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
@@ -67,7 +69,17 @@ Route::any('/forgot/password', [UserAuthController::class, 'forgotPassword'])->n
 Route::match(['get','post'], '/password-reset/{token}', [UserAuthController::class, 'passwordReset'])->name('password.reset');
 Route::get('/reset/success', [UserAuthController::class, 'passwordResetSuccess'])->name('password.reset-success'); 
 
+//Google login
+Route::get('auth/google', [UserAuthController::class, 'redirectToGoogle'])->name('login.google.redirect');
+Route::get('auth/google/callback', [UserAuthController::class, 'handleGoogleCallback'])->name('login.google.callback');
+
+//otp Login
+Route::post('/send-otp', [UserAuthController::class, 'sendOTP']);
+Route::post('/verify-otp', [UserAuthController::class, 'verifyOTP']);
+
 Route::post('/newsletter/post', [NewsletterController::class, 'postData'])->name('newsletter.post');
+Route::post('payment/create',[RazorpayController::class,'store'])->name('razorpay.payment.store');
+Route::post('payment/failure',[RazorpayController::class,'failure'])->name('razorpay.payment.failure');
 
 Route::middleware(['auth.user'])->prefix('user')->group(function () {
 // Route::group(['prefix' => 'user'], function () {

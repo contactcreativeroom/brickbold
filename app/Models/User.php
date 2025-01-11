@@ -40,6 +40,7 @@ class User extends Authenticatable
         'password',
         'password_confirmation',
         'token',
+        'google_id',
         'status',
     ];
 

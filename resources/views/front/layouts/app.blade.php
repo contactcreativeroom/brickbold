@@ -45,6 +45,11 @@
         const maxPrice = "{{ request('max_price', '') }}";
         const minSize = "{{ request('min_size', '') }}";
         const maxSize = "{{ request('max_size', '') }}";
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
     </script>
     <script type="text/javascript" src="{{url('frontend/js/custom.js')}}"></script> 
     @stack('scripts')

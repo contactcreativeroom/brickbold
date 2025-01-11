@@ -27,7 +27,7 @@
                     <form action="{{ route('packages') }}" method="get" enctype='multipart/form-data'>
                         <div class="d-flex justify-content-between align-items-center row pt-4 gap-4 gap-md-0 g-6 mb-3">
                             
-                            <div class="col-md-4 user_plan">
+                            <div class="col-md-3 user_plan">
                                 <select  class="form-select nice-select" name="profile">
                                     <option value="">Select Profile </option>
                                     @foreach (config('constants.PACKAGE_PROFILE') as $key=>$value)
@@ -35,7 +35,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-md-4 user_role">
+                            <div class="col-md-3 user_role">
                                 <select  class="form-select nice-select" name="type">
                                     <option value="">Select For </option>
                                     @foreach (config('constants.PACKAGE_TYPE') as $key=>$value)
@@ -43,7 +43,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-md-4 user_role">
+                            <div class="col-md-3 user_role">
                                 <select class="form-control form-select nice-select" name="property_type">
                                     <option value="">Select Property Type</option>
                                     @foreach (config('constants.TYPE') as $key=>$value)
@@ -51,11 +51,14 @@
                                     @endforeach
                                 </select>
                             </div>
+                            <div class="col-md-3 user_role">
+                                <div class="bot flex items-center">
+                                    <button class="tf-btn bg-color-primary pd-3 me-3" type="submit" >Submit</button>
+                                    <a href="{{ route('packages') }}"  class="tf-btn style-border pd-4" >Reset</a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="bot flex items-center">
-                            <button class="tf-btn bg-color-primary pd-3 me-3" type="submit" >Submit</button>
-                            <a href="{{ route('packages') }}"  class="tf-btn style-border pd-4" >Reset</a>
-                        </div>
+                        
                     </form>
                 </div>
                 <div class="widget-box-2-- style-2 package">
@@ -77,15 +80,26 @@
                                             @endforeach 
                                         </ul>
                                         <div class="button-pricing">
-                                            <a class="tf-btn bg-color-primary pd-20" href="#">
-                                                <span>Buy</span>
-                                            </a>
+                                            <form action="{{ route('razorpay.payment.store') }}" method="POST">
+                                                @csrf
+                                                <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+                                                <button class="tf-btn bg-color-primary pd-20" id="payBtn1">
+                                                    <span>Buy</span>
+                                                </button>
+                                            </form>
+                                            
                                         </div>
                                     </div>
                                 </div> 
                             </div>
                         @endforeach
-                        
+                        <form action="{{ route('razorpay.payment.store') }}" method="POST">
+                                                @csrf
+                                                <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+                                                <button class="tf-btn bg-color-primary pd-20" id="payBtn">
+                                                    <span>Buy</span>
+                                                </button>
+                                            </form>
                     </div>
                 </div>
             </div>
@@ -96,4 +110,88 @@
 @endsection
 
 @push('scripts') 
+<script>
+    var options = {
+        "key": "{{ env('RAZORPAY_API_KEY') }}",
+        "amount": "10000",
+        "name": "Dhanar98",
+        "description": "Razorpay payment",
+        "image": "https://cdn.razorpay.com/logos/NSL3kbRT73axfn_medium.png",
+        "prefill": {
+            "name": "ABC",
+            "email": "abc@gmail.com"
+        },
+        "theme": {
+            "color": "#0F408F"
+        },
+        "handler" : function(res) {
+            console.log(res);
+
+            $.ajax({
+                url: "/payment/create",
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    _token: "{{ csrf_token() }}", 
+                    response: {
+                        razorpay_payment_id: res.razorpay_payment_id
+                    }
+                },
+                success: function(res) {
+                    console.log('Payment data sent to server', res);
+                    if (res.success = true) {
+                        window.location.href = "route('packages')"; //payment failure
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log('Error sending payment failure information:', textStatus, errorThrown);
+                }
+            });
+        },
+        "modal": {
+            "ondismiss": function() {
+                // This function is called when the user closes the modal
+                window.location.href = '/'; // Redirect to your failure page
+            }
+        }
+    };
+
+    var rzp = new Razorpay(options);
+    document.getElementById('payBtn').onclick = function(e) {
+        rzp.open();
+        e.preventDefault();
+    }
+
+    rzp.on('payment.failed', function(response) {
+
+        event.preventDefault();
+        if (response.reason = "payment_failed") {
+            const {
+                error,
+                reason
+            } = response;
+            $.ajax({
+                url: "/payment/failure",
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    _token: "{{ csrf_token() }}", // CSRF token
+                    response: {
+                        error,
+                        reason
+                    }
+                },
+                success: function(response) {
+                    console.log('Payment failure data sent to server', response);
+                    if (response.success = true) {
+                        window.location.href = '/402'; //payment failure
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log('Error sending payment failure information:', textStatus, errorThrown);
+                }
+            });
+        }
+    });
+</script>
 @endpush

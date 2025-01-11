@@ -52,3 +52,29 @@ li.has-child{
     border-radius: 0 16px 16px 0;
     margin-top: 10.5px;
 }
+ 
+ 
+ 
+.otp-input-field {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+form .otp-input-field {
+    flex-direction: row;
+    column-gap: 2px;
+    
+}
+.otp-input-field input {
+    text-align: center;
+    padding: unset !important;
+}
+.otp-input-field input:focus {
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+.otp-input-field input::-webkit-inner-spin-button,
+.otp-input-field input::-webkit-outer-spin-button {
+    display: none;
+}

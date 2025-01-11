@@ -43,6 +43,9 @@ class UserController extends Controller
                 return back()->withInput()->withErrors($validator);
             };
             $user = $this->userAuth;
+            if(isset($request->user_type) && $request->user_type !=''){
+                $user->user_type = $request->user_type;
+            }
             $user->name = $request->name;
             $user->description = $request->description;
             $user->business_name = $request->business_name;

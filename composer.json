@@ -12,7 +12,9 @@
         "laravel/framework": "^10.0",
         "laravel/passport": "^12.3",
         "laravel/sanctum": "^3.2",
+        "laravel/socialite": "^5.16",
         "laravel/tinker": "^2.8",
+        "razorpay/razorpay": "^2.9",
         "samdark/sitemap": "^2.4"
     },
     "require-dev": {

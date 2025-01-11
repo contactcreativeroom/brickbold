@@ -37,16 +37,29 @@
                             </div>
                         </div>
                         
-                        <h5 class="title">Information</h5>                    
-                        <fieldset class="box box-fieldset">
-                            <label for="name">Full name:<span>*</span></label>
-                            <input type="text" id="name" name="name" value="@if(old('name')!=null){{old('name')}}@elseif(!empty($row->name)){{$row->name}}@endif" class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}">
-                            @if($errors->has('name'))
-                                <span class="invalid-feedback">
-                                    {{ $errors->first('name') }}
-                                </span>
-                            @endif
-                        </fieldset>
+                        <h5 class="title">Information</h5>  
+                        <div class="box {{ $row->user_type ? 'grid-layout-1' : 'grid-layout-2'}} gap-30 box-info-2">  
+                            @if (!$row->user_type)
+                            <fieldset class="box box-fieldset">
+                                <label for="name">Role</label>
+                                <select class="form-control nice-select" id="user_type" name="user_type">
+                                    <option value="">Select Role</option>
+                                    @foreach(config('constants.USER_TYPE') as $key => $value)
+                                        <option value="{{$value}}" @if(old('user_type')!=null && old('user_type')==$value) selected @elseif(!empty($row) && $row->user_type==$value) selected @endif>{{$value}}</option>
+                                    @endforeach
+                                </select>
+                            </fieldset>    
+                            @endif                
+                            <fieldset class="box box-fieldset">
+                                <label for="name">Full name:<span>*</span></label>
+                                <input type="text" id="name" name="name" value="@if(old('name')!=null){{old('name')}}@elseif(!empty($row->name)){{$row->name}}@endif" class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}">
+                                @if($errors->has('name'))
+                                    <span class="invalid-feedback">
+                                        {{ $errors->first('name') }}
+                                    </span>
+                                @endif
+                            </fieldset>
+                        </div>
                         <fieldset class="box box-fieldset">
                             <label>Description:</label>
                             <textarea name="description">@if(old('description')!=null){{old('description')}}@elseif(!empty($row->description)){{$row->description}}@endif</textarea>
