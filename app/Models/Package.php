@@ -19,4 +19,14 @@ class Package extends Model
     public function fields(){
         return $this->hasMany(PackageField::class) ; 
     } 
+
+    public function Orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function Order()
+    {
+        return $this->hasOne(Order::class);
+    }
 }

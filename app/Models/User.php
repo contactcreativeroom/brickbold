@@ -90,5 +90,35 @@ class User extends Authenticatable
     {
         return $this->hasMany(Favorite::class);
     }
+
+    public function Orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function Order()
+    {
+        return $this->hasOne(Order::class);
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
+    public function payment()
+    {
+        return $this->hasOne(Payment::class);
+    }
+
+    public function subscription()
+    {
+        return $this->hasOne(UserSubscription::class)->latest();
+    }
+    
+    public function subscriptions()
+    {
+        return $this->hasMany(UserSubscription::class);
+    }
       
 }

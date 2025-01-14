@@ -43,7 +43,7 @@
                                         <label for="profile" class="form-label">Profile</label>
                                         <select class="form-control form-select {{ $errors->has('profile') ? ' is-invalid' : '' }}" name="profile">
                                             <option value="">Select Profile Type</option>
-                                            @foreach (config('constants.PACKAGE_PROFILE') as $key=>$value)
+                                            @foreach (config('constants.USER_TYPE') as $key=>$value)
                                                 <option value="{{$value}}" @if(old('profile', $row->profile ?? null) == $value) selected @endif >{{$value}}</option>
                                             @endforeach
                                         </select>

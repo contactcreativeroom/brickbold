@@ -285,7 +285,7 @@
                                 <ul>
                                     <li class="flex">
                                         <p class="fw-6">Rooms</p>
-                                        <p>{{$row->bathroom + $row->bedroom}}</p>
+                                        <p>{{(int)$row->bathroom + (int)$row->bedroom}}</p>
                                     </li>
                                     <li class="flex">
                                         <p class="fw-6">Baths</p>

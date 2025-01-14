@@ -227,6 +227,8 @@ class PropertyController extends Controller
     }
 
     public function enquiries(Request $request){ 
+        $userAccess = Helper::userAccess();
+        //dd($userAccess->posts);
         $user = $this->userAuth;
         $propertyEnquiries = $user->PropertyEnquiries()->paginate($this->pagerecords);
         $data=array('rows'=>$propertyEnquiries);

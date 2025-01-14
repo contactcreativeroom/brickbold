@@ -13,9 +13,10 @@ class UserController extends Controller
 {
     private $prefix = 'user';
     protected $userAuth;
-
+    private $pagerecords;
     public function __construct()
     {
+        $this->pagerecords = config('constants.FRONT_PAGE_RECORDS');
         $this->middleware(function ($request, $next) {
             $this->userAuth = Auth::guard('user')->user();
             return $next($request);
@@ -101,7 +102,9 @@ class UserController extends Controller
 
     public function package(){
         $user = $this->userAuth;
-        return view('user.package', compact('user'));
+        $orders = $user->Orders()->where('status',1)->latest()->paginate($this->pagerecords);
+        $data=array('rows'=>$orders); 
+        return view($this->prefix.'.package')->with($data);
     }
 
     public function favorites(){

@@ -1,35 +1,16 @@
 <?php
 namespace App\Helper;
-
-use App\Models\User;
-
-
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-
-use Srmklive\PayPal\Services\PayPal as PayPalClient;
-
-use Image;
-
-use Twilio\Rest\Client;
 use Carbon\Carbon;
-use Auth;
 use Session;
-use DB;
-use Arr;
-use Route; 
-use Str;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 
-use Mail;
-use App\Models\Category;
-use App\Models\Media;
 use App\Models\MetaDetails;
 use App\Models\Page;
-use App\Models\Service;
-use App\Models\ServiceTravellingRate;
 use App\Models\Setting;
+use Exception;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 
@@ -648,6 +629,23 @@ class Helper
     public static function propertyid($number) {
         $formattedNumber = str_pad($number, 4, '0', STR_PAD_LEFT);
         return $formattedNumber; 
-    }    
+    }
+
+    public static function userAccess($key="") {
+        if (Auth::guard('user')->check()) {
+            $user = Auth::guard('user')->user();
+            $subscription = $user->subscription->select('*', 'post_property as posts')->first();
+            if($key == "contacts"){
+                return $subscription->contacts;
+            } else if($key == "days"){
+                return $subscription->days;
+            }else if($key == "posts"){
+                return $subscription->post_property;
+            } else{
+                return $subscription ;
+            }
+        }
+        return false;
+    }
  
 }

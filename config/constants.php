@@ -101,7 +101,6 @@ return [
     'AMENITIES' =>['Air Conditioner', 'Security', 'Lift', 'Piped Gas', 'Power Backup', 'Ro Water System', 'Internet/Wifi Community', 'Extra pillows & blankets', 'Fingerprint access', 'TV with standard cable', 'Fire Alarm', 'Laundry Service', 'Microwave', 'Dishwasher', 'Rain Water Harvesting', 'Swimming Pool', 'Car Parking Facility', 'Visitors Parking'],
     'PLOT_TYPE' => ['SqFt', 'SqYd', 'SqMtr', 'Acre', 'Marla'],
     'PACKAGE_TYPE' => ['SELL', 'BUY', 'RENT'],
-    'PACKAGE_PROFILE' => ['OWNER', 'BUILDER', 'AGENT'],
     'USER_ROLES' => [
         'INDIVIDUAL', 'OWNER', 'AGENT', 'BUILDER'
     ],

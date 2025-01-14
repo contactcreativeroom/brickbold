@@ -10,7 +10,9 @@ use App\Models\Page;
 use App\Models\Property;
 use App\Models\Testimonial;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Razorpay\Api\Api;
 
 class HomeController extends Controller
 {
@@ -84,12 +86,18 @@ class HomeController extends Controller
     }
 
     public function packages(Request $request){  
-        $packages = Package::where('status', 1);
         
-        if ($request->filled('profile')) {
-            $profile = $request->profile; 
-            $packages->where('profile', $profile) ;
-        } 
+
+        $packages = Package::where('status', 1);
+        if (Auth::guard('user')->check()) {
+            $user = Auth::guard('user')->user();
+            $packages->where('profile', $user->user_type) ;
+        } else{
+            if ($request->filled('profile')) {
+                $profile = $request->profile; 
+                $packages->where('profile', $profile) ;
+            } 
+        }       
 
         if ($request->filled('type')) {
             $type = $request->type; 

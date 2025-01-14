@@ -37,4 +37,8 @@ return [
         'redirect'      => env('GOOGLE_REDIRECT_URL'),
     ],
 
+    'razorpay' => [
+        'key' => env('RAZORPAY_API_KEY'),
+        'secret' => env('RAZORPAY_API_SECRET'),
+    ],
 ];

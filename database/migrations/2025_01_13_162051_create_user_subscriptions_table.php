@@ -11,21 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('user_subscriptions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable()->index();
-            $table->unsignedBigInteger('package_id')->nullable();
-            $table->string('razorpay_order_id')->nullable(); 
-            $table->string('package_name')->nullable(); 
-            $table->float('package_price')->nullable()->default(0);
-            $table->float('discount')->nullable()->default(0);
-            $table->float('grand_price')->nullable()->default(0);
-            $table->longText('package_value')->nullable()->default(0);
+            $table->integer('order_id')->nullable()->default(1);
             $table->integer('post_property')->nullable()->default(1);
             $table->integer('contacts')->nullable()->default(1);
             $table->integer('days')->nullable()->default(1);
+            $table->string('start_date')->nullable();
+            $table->string('end_date')->nullable();
             $table->integer('status')->nullable()->default(1);
-            $table->string('adminorder_date')->nullable(); 
             $table->timestamps();
         });
     }
@@ -35,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('user_subscriptions');
     }
 };

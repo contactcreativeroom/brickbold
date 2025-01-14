@@ -33,7 +33,7 @@
                         <div class="col-md-4 user_plan">
                             <select  class="form-select text-capitalize" name="profile">
                                 <option value="">Select Profile </option>
-                                @foreach (config('constants.PACKAGE_PROFILE') as $key=>$value)
+                                @foreach (config('constants.USER_TYPE') as $key=>$value)
                                     <option value="{{$value}}" {{ old('profile', request('profile')) == $value ? 'selected' : '' }} >{{$value}}</option>
                                 @endforeach
                             </select>

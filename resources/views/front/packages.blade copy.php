@@ -29,22 +29,10 @@
                             
                             <div class="col-md-3 user_plan">
                                 <select  class="form-select nice-select" name="profile">
-                                    @auth('user') <!-- Checks if a user is authenticated using the 'user' guard -->
-                                        @php
-                                            $user = Auth::guard('user')->user();
-                                        @endphp
-
-                                        @if(!empty($user->user_type))  
-                                            <option value="{{ $user->user_type }}">{{ $user->user_type }}</option>
-                                        @else
-                                            <option value="">Select Profile</option>
-                                        @endif
-                                    @else
-                                        <option value="">Select Profile </option>
-                                        @foreach (config('constants.USER_TYPE') as $key=>$value)
-                                            <option value="{{$value}}" {{ old('profile', request('profile')) == $value ? 'selected' : '' }} >{{$value}}</option>
-                                        @endforeach
-                                    @endauth
+                                    <option value="">Select Profile </option>
+                                    @foreach (config('constants.USER_TYPE') as $key=>$value)
+                                        <option value="{{$value}}" {{ old('profile', request('profile')) == $value ? 'selected' : '' }} >{{$value}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-md-3 user_role">
@@ -75,17 +63,6 @@
                 </div>
                 <div class="widget-box-2-- style-2 package">
                     <div class="row">
-                        @auth('user') 
-                            @php
-                                $user = Auth::guard('user')->user();
-                            @endphp
-
-                            @if(empty($user->user_type))  
-                                <div class="text text-center">Update your "Role" in <a href="{{route('user.profile')}}" class="text-color-primary">Profile section</a> first.</div>
-                            @endif
-                        
-                        @endauth
-
                         @foreach ($rows as $row)
                             <div class="package-col col-xl-3">
                                 <div class="flat-pricing">
@@ -102,21 +79,19 @@
                                                 <li class="flex-three">{{ $field->heading}}: {{ $field->value}}</li>
                                             @endforeach 
                                         </ul>
-                                        <div >
-                                        @auth('user')
-                                            <button class="tf-btn bg-color-primary pd-20" onclick="payNow('{{ $row->id }}')">Buy</button> 
-                                        @endauth
-                                        @guest('user')
-                                            <a href="#modalLogin" data-bs-toggle="modal" class="tf-btn bg-color-primary pd-20">Buy</a>                                        
-                                        @endguest
+                                        <div class="button-pricing">
+                                            <button class="btn btn-primary" onclick="payNow('{{ $row->id }}')">Buy</button>                                         
                                         </div>
                                     </div>
                                 </div> 
                             </div>
-                        @endforeach 
-                        <div class="col-xl-12">
-                        {{ $rows->links('vendor.pagination.frontend-bootstrap-4') }}
-                        </div>
+                        @endforeach
+                        <form action="{{ route('razorpay.payment.store') }}" method="POST">
+                            @csrf
+                            <button class="tf-btn bg-color-primary pd-20" id="payBtn">
+                                <span>Buy</span>
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -126,66 +101,90 @@
     <!-- /main-content -->
 @endsection
 
-@push('scripts') 
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-<script>
-    function payNow(packageId) {
-        fetch(site_url+'/create-order', { 
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            body: JSON.stringify({ package_id: packageId })
-        })
-        .then(response => response.json())
-        .then(data => {
-            const options = {
-                "key": data.key,
-                "amount": data.amount,
-                "currency": "{{config('constants.CURRENCIES.name')}}",
-                "name": data.name,
-                "description": data.description,
-                "order_id": data.api_order_id,
-                "handler": function (response) {
-                    console.log("Razor pay Payment Successful!");
-                    verifyPayment(response, data.order_id, packageId);
-                },
-                "theme": {
-                    "color": "#3399cc"
-                }
-            };
+@push('scripts')  
+<script> 
+    
+    var options = {
+        "key": "{{ env('RAZORPAY_API_KEY') }}",
+        "amount": "10000",
+        "name": "Dhanar98",
+        "description": "Razorpay payment",
+        "image": "https://cdn.razorpay.com/logos/NSL3kbRT73axfn_medium.png",
+        "prefill": {
+            "name": "ABC",
+            "email": "abc@gmail.com"
+        },
+        "theme": {
+            "color": "#0F408F"
+        },
+        "handler" : function(res) {
+            console.log(res);
 
-            const rzp = new Razorpay(options);
-            rzp.open();
-        })
-        .catch(error => console.error('Error:', error));
+            $.ajax({
+                url: "/payment/create",
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    _token: "{{ csrf_token() }}", 
+                    response: {
+                        razorpay_payment_id: res.razorpay_payment_id
+                    }
+                },
+                success: function(res) {
+                    console.log('Payment data sent to server', res);
+                    if (res.success = true) {
+                        window.location.href = "route('packages')"; //payment failure
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log('Error sending payment failure information:', textStatus, errorThrown);
+                }
+            });
+        },
+        "modal": {
+            "ondismiss": function() {
+                // This function is called when the user closes the modal
+                window.location.href = '/'; // Redirect to your failure page
+            }
+        }
+    };
+
+    var rzp = new Razorpay(options);
+    document.getElementById('payBtn').onclick = function(e) {
+        rzp.open();
+        e.preventDefault();
     }
 
-    function verifyPayment(paymentResponse, orderId, packageId) {
-        fetch(site_url+'/verify-payment', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            body: JSON.stringify({ 
-                razorpay_payment_id: paymentResponse.razorpay_payment_id,
-                razorpay_order_id: paymentResponse.razorpay_order_id,
-                razorpay_signature: paymentResponse.razorpay_signature,
-                order_id: orderId,
-                package_id: packageId
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert("Payment verified successfully!");
-            } else {
-                alert("Payment verification failed.");
-            }
-        })
-        .catch(error => console.error('Error:', error));
-    } 
+    rzp.on('payment.failed', function(response) {
+
+        event.preventDefault();
+        if (response.reason = "payment_failed") {
+            const {
+                error,
+                reason
+            } = response;
+            $.ajax({
+                url: "/payment/failure",
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    _token: "{{ csrf_token() }}", // CSRF token
+                    response: {
+                        error,
+                        reason
+                    }
+                },
+                success: function(response) {
+                    console.log('Payment failure data sent to server', response);
+                    if (response.success = true) {
+                        window.location.href = '/402'; //payment failure
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log('Error sending payment failure information:', textStatus, errorThrown);
+                }
+            });
+        }
+    });
 </script>
 @endpush

@@ -13,14 +13,17 @@ return new class extends Migration
     {
         Schema::create('payments',function(Blueprint $table) {
             $table->increments('id');
-            $table->string('r_payment_id');
-            $table->string('method');
-            $table->string('currency');
-            $table->string('email');
-            $table->string('phone');
-            $table->string('amount');
-            $table->string('status');
-            $table->longText('json_response');
+            $table->integer('user_id')->nullable();
+            $table->string('r_payment_id')->unique();
+            $table->integer('order_id')->nullable();
+            $table->integer('product_id')->nullable();
+            $table->string('method')->nullable();
+            $table->string('currency')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->decimal('amount', 10, 2);
+            $table->text('json_response')->nullable();
+            $table->integer('status')->nullable();
             $table->timestamps();
           });
     }

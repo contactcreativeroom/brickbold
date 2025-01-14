@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Helper\Helper;
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\Package;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -34,6 +35,7 @@ class PackageController extends Controller
             $status = $request->status; 
             $packages->where('status', $status) ;
         } 
+        $packages->latest() ;
         $packages = $packages->paginate($this->pagerecords)->appends([
             'type' => $request->get('type'),
             'profile' => $request->get('profile'),
@@ -140,27 +142,23 @@ class PackageController extends Controller
     }
 
     public function orders(Request $request){
-        $packages = Package::query();
-        if ($request->has('type') && $request->type != "") {
-            $type = $request->type; 
-            $packages->where('type', $type) ;
-        } 
-        if ($request->has('profile') && $request->profile != "") {
-            $profile = $request->profile; 
-            $packages->where('profile', $profile) ;
-        } 
-        if ($request->has('status') && $request->status > 0) {
+        $orders = Order::query();
+        if ($request->has('package_name') && $request->package_name != "") {
+            $package_name = $request->package_name; 
+            $orders->where('package_name', $package_name) ;
+        }  
+        if ($request->has('status') && $request->status !="") {
             $status = $request->status; 
-            $packages->where('status', $status) ;
+            $orders->where('status', $status) ;
         } 
-        $packages = $packages->paginate($this->pagerecords)->appends([
-            'type' => $request->get('type'),
-            'profile' => $request->get('profile'),
+        $orders->latest() ;
+        $orders = $orders->paginate($this->pagerecords)->appends([
+            'package_name' => $request->get('package_name'), 
             'status' => $request->get('status'),
         ]);
-
-        $data=array('rows'=>$packages);
-        return view($this->prefix.'.package.list')->with($data);
+        $packages = Order::select('package_name')->distinct()->get();
+        $data=array('rows'=>$orders, 'packages' => $packages);
+        return view($this->prefix.'.package.orders')->with($data);
     } 
 
     

@@ -16,8 +16,8 @@ use App\Http\Controllers\Admin\SubAdminController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\NewsletterController;
+use App\Http\Controllers\Front\PaymentController;
 use App\Http\Controllers\Front\PropertyController as FrontPropertyController;
-use App\Http\Controllers\Front\RazorpayController;
 use App\Http\Controllers\User\AuthController as UserAuthController;
 use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\FavoriteController;
@@ -51,7 +51,7 @@ Route::get('/trash', function () {
     echo"Cache Cleard Successfully!";
 }); 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index']);
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/faq', [HomeController::class, 'faq'])->name('faq');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
@@ -78,8 +78,16 @@ Route::post('/send-otp', [UserAuthController::class, 'sendOTP']);
 Route::post('/verify-otp', [UserAuthController::class, 'verifyOTP']);
 
 Route::post('/newsletter/post', [NewsletterController::class, 'postData'])->name('newsletter.post');
-Route::post('payment/create',[RazorpayController::class,'store'])->name('razorpay.payment.store');
-Route::post('payment/failure',[RazorpayController::class,'failure'])->name('razorpay.payment.failure');
+ 
+Route::post('/create-order', [PaymentController::class, 'createOrder'])->name('payment.create');
+Route::post('/verify-payment', [PaymentController::class, 'handlePayment'])->name('payment.verify');
+
+Route::get('/payment-success', function () {
+    return 'Payment Successful!';
+})->name('payment.success');
+Route::get('/payment-failed', function () {
+    return 'Payment Failed!';
+})->name('payment.failed');
 
 Route::middleware(['auth.user'])->prefix('user')->group(function () {
 // Route::group(['prefix' => 'user'], function () {
@@ -159,6 +167,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/package/delete/{id}', [PackageController::class, 'delete'])->name('admin.package.delete');
         Route::post('/package/status/change', [PackageController::class, 'changeStatus'])->name('admin.package.status.change');
         Route::get('/package/orders', [PackageController::class, 'orders'])->name('admin.package.orders');
+        Route::get('/package/order/delete/{id}', [PackageController::class, 'orders'])->name('admin.package.order');
 
         Route::get('/contact-enquiries', [Dashboard::class, 'contactEnquiries'])->name('admin.contact-enquiries');
         Route::get('/property-enquiries', [Dashboard::class, 'propertyEnquiries'])->name('admin.property-enquiries');
