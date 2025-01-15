@@ -20,7 +20,7 @@ class PropertyController extends Controller
     }
 
     public function properties(Request $request) {
-        $properties = Property::query();
+        $properties = Property::whereIn('status', [1,3]);
         
         if ($request->filled('availability')) {
             $availability = $request->availability; 
@@ -128,8 +128,8 @@ class PropertyController extends Controller
             'sort' => $request->get('sort'),
         ]); 
 
-        // $properties = Property::orderBy('id', 'desc')->paginate($this->pagerecords);
-        $featured = Property::orderBy('is_luxury', 'desc')->orderBy('id', 'desc')->limit(5)->get();
+        // $properties = Property::whereIn('status', [1,3])->orderBy('id', 'desc')->paginate($this->pagerecords);
+        $featured = Property::whereIn('status', [1,3])->orderBy('is_luxury', 'desc')->orderBy('id', 'desc')->limit(5)->get();
         return view($this->prefix.'.property.properties',['rows' => $properties, 'featured' => $featured]);
     }
 
@@ -141,7 +141,7 @@ class PropertyController extends Controller
         } 
         $property->views = ($property->views +1 ) ;
         $property->save();
-        $similarProperties = Property::where('id', '!=', $property->id)->where('type', $property->type)->where('for_type', $property->for_type)->latest()->limit(3)->get();
+        $similarProperties = Property::whereIn('status', [1,3])->where('id', '!=', $property->id)->where('type', $property->type)->where('for_type', $property->for_type)->latest()->limit(3)->get();
         return view($this->prefix.'.property.detail',['row' => $property, 'similarProperties' => $similarProperties]);
     }
 

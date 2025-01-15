@@ -192,7 +192,7 @@
                 </div>
                 <div class="col-12">
                     <div class="footer-bottom">
-                        <p>Copyright © 2024. Designed & Developed by <a href="https://www.creativeroom.in/">Creative Room</a> </p>
+                        <p>Copyright © {{date('Y')}} BrickBold. All Rights Reserved. Designed & Developed by <a href="https://www.creativeroom.in/">Creative Room</a> </p>
                         <div class="wrap-social">
                             <div class="text-3  fw-6 text-white">Follow us</div>
                             <ul class="tf-social ">

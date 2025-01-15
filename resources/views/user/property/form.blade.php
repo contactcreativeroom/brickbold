@@ -708,7 +708,7 @@
 
 @push('scripts')
 <script type="text/javascript" src="{{url('frontend/js/custom-maps.js') }}"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQe-4d-xDKRGSzs6IQNYXdv3g3Uw3X6MI&libraries=places&callback=initAutocomplete"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&libraries=places&callback=initAutocomplete"></script>
 <script src="{{ url('backend/plugins/spartan-multi-image-picker-master/spartan-multi-image-picker-min.js') }}"></script>
   <script>
     $("#images").spartanMultiImagePicker({

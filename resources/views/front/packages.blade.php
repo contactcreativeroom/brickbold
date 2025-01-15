@@ -180,9 +180,10 @@
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                alert("Payment verified successfully!");
+                toastr.success("Payment verified successfully!", 'Successfull');
+                window.location.href = "{{route('user.package')}}";
             } else {
-                alert("Payment verification failed.");
+                toastr.error("Payment verification failed.", 'Error');
             }
         })
         .catch(error => console.error('Error:', error));

@@ -7,10 +7,12 @@ use Illuminate\Support\Facades\File;
 
 use App\Models\MetaDetails;
 use App\Models\Page;
+use App\Models\Seo;
 use App\Models\Setting;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Route;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 
@@ -473,6 +475,32 @@ class Helper
         
     }
 
+    public static function getSeoValues() {
+
+        $routeKey = Route::current()->uri();
+        //print_R($routeKey); die;
+        $seo = Seo::where('page',$routeKey)->first();
+        //print '<pre>'; print_r($seo); die;
+
+        $seoTitleDB=Setting::where('key','seo_title')->first();
+        $seoTitle = ($seoTitleDB && $seoTitleDB->value) ? $seoTitleDB->value :  null;
+
+        $seoDescriptionDB=Setting::where('key','seo_description')->first();
+        $seoDescription = ($seoDescriptionDB && $seoDescriptionDB->value) ? $seoDescriptionDB->value :  null;
+
+        $seoKeywordsDB=Setting::where('key','seo_keywords')->first();
+        $seoKeywords = ($seoKeywordsDB && $seoKeywordsDB->value) ? $seoKeywordsDB->value :  null;
+
+        if($seo){
+            return $seo ;
+        }elseif($seoTitle || $seoDescription || $seoKeywords){
+            return array('seo_title'=> $seoTitle, 'seo_keywords' => $seoKeywords, 'seo_description' => $seoDescription);
+        }else{
+            return array('seo_title'=> config('constants.CONFIG.seo_title') , 'seo_keywords' => config('constants.CONFIG.seo_keywords'), 'seo_description' => config('constants.CONFIG.seo_description'));
+        }
+    
+    }
+    
     public static function saveMetaDetails($data)
     {
         $meta = [
@@ -593,32 +621,25 @@ class Helper
       return $tens;
     }
 
-    public static function priceFormat($num){       
-        
-        $ext="";//thousand,lac, crore
-        $number_of_digits = strlen($num); 
-        if($number_of_digits>3) {
-            if($number_of_digits%2!=0)
-                $divider = self::divider($number_of_digits-1);
-            else
-                $divider = self::divider($number_of_digits);
-                
-        } else{            
-            $divider=1;
+    public static function priceFormat($num) {       
+        $ext = ""; 
+        $divider = 1;
+    
+        if ($num >= 1e7) { 
+            $ext = "Cr";
+            $divider = 1e7;
+        } elseif ($num >= 1e5) { 
+            $ext = "Lac";
+            $divider = 1e5;
+        } elseif ($num >= 1e3) { 
+            $ext = "k";
+            $divider = 1e3;
         }
-        $fraction=$num/$divider;
-        $fraction=number_format($fraction,2);
-        if($number_of_digits==4 ||$number_of_digits==5)
-            $ext="k";
-        if($number_of_digits==6 ||$number_of_digits==7)
-            $ext="Lac";
-        if($number_of_digits==8 ||$number_of_digits==9)
-            $ext="Cr";
-        
-          
-        $priceData =  $fraction." ".$ext;
-            
-        return $priceData;
+    
+        $fraction = $num / $divider;
+        $fraction = number_format($fraction, 2);
+    
+        return $fraction . " " . $ext;
     }
 
     public static function pages() {
@@ -634,15 +655,57 @@ class Helper
     public static function userAccess($key="") {
         if (Auth::guard('user')->check()) {
             $user = Auth::guard('user')->user();
-            $subscription = $user->subscription->select('*', 'post_property as posts')->first();
-            if($key == "contacts"){
-                return $subscription->contacts;
-            } else if($key == "days"){
-                return $subscription->days;
-            }else if($key == "posts"){
-                return $subscription->post_property;
+            if($user->user_type=="Owner"){
+                $subscriptions = $user->subscriptions()->get();
+                if (!$subscriptions) {
+                    return false;  
+                }
+                $data['subscriptions'] =  $subscriptions;
+                $data['properties'] = $subscriptions->pluck('property_id')->toArray();
+                return $data ;
             } else{
+                $subscription = $user->subscription()->latest()->first();
+                if (!$subscription) {
+                    return false;  
+                }
                 return $subscription ;
+            }
+        }
+        return false;
+    }
+
+    public static function assignPropertyToPackage($propertyId){
+        if (Auth::guard('user')->check()) {
+            $user = Auth::guard('user')->user();
+ 
+            if ($user->user_type == "Owner") { 
+                $subscriptions = $user->subscriptions()->where('start_date', '<=', now())->where('end_date', '>=', now())->latest()->get();
+                if ($subscriptions->isEmpty()) {
+                    Helper::toastMsg(false, "You do not have an active plan. Please select");
+                    return false;
+                }
+                // if ($subscriptions->count() == 1) {
+                //     $subscription = $subscriptions->first();
+                //     $subscription->property_id = $propertyId;
+                //     $subscription->save();
+                //     Helper::toastMsg(true, "Plan is assigned to Property");
+                //     return true;
+                // }
+
+                $emptyPackage = $subscriptions->where('property_id', null)->first();
+                if ($emptyPackage) {
+                    $emptyPackage->property_id = $propertyId;
+                    $emptyPackage->save();
+
+                    Helper::toastMsg(true, "Plan is assigned to Property");
+                    return true;
+                } else {
+                    // $firstSubscription = $subscriptions->first();
+                    // $firstSubscription->property_id = $propertyId;
+                    // $firstSubscription->save();
+                }
+
+                
             }
         }
         return false;

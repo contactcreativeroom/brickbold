@@ -18,7 +18,7 @@
                                 <select class="form-control form-select nice-select" name="status" id="status">
                                     <option value="">All</option>
                                     @foreach (config('constants.PROPERTY_STATUSES') as $key=>$value)
-                                        <option value="{{$key}}" {{ old('status', request('status')) == $key ? 'selected' : '' }} >{{$value}}</option>
+                                        <option value="{{$key}}" {{ old('status', request('status')) == (string)$key ? 'selected' : '' }} >{{$value}}</option>
                                     @endforeach
                                 </select> 
                             </fieldset> 
@@ -79,6 +79,16 @@
                                                 {{config('constants.TYPE')[$row->type]}}
                                             </td>
                                             <td>
+                                                @if ($activateButton)
+                                                    @php
+                                                        $isAssigned = $row->subscriptions()->where('end_date', '>=', now())->count();
+                                                    @endphp
+                                                    @if (!$isAssigned)
+                                                        <div class="status-wrap mb-2">
+                                                            <a href="{{route('user.property.assign', $row->id)}}" class="btn-status bg-secondary">Activate</a>
+                                                        </div>
+                                                    @endif                                                                                                        
+                                                @endif 
                                                 <ul class="list-action">
                                                     <li>
                                                         <a href="{{route('user.property.edit', $row->id)}}" class="item">

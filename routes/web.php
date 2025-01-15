@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\MetaDetailController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\PropertyController as AdminPropertyController;
+use App\Http\Controllers\Admin\setting\SeoController;
 use App\Http\Controllers\Admin\setting\SocialController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SubAdminController;
@@ -112,6 +113,7 @@ Route::middleware(['auth.user'])->prefix('user')->group(function () {
     Route::post('/property/post', [PropertyController::class, 'postData'])->name('user.property.post');
     Route::get('/property/sold/{id}', [PropertyController::class, 'changeStatusSold'])->name('user.property.sold');
     Route::get('/property/enquiries', [PropertyController::class, 'enquiries'])->name('user.property.enquiries');
+    Route::get('/property/assign/{id}', [PropertyController::class, 'assignPackage'])->name('user.property.assign');
 
 });
 
@@ -189,8 +191,18 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/meta-details', [MetaDetailController::class, 'metaList'])->name('admin.meta.list');
         Route::any('/meta/update/{id?}', [MetaDetailController::class, 'metaUpdate'])->name('admin.meta.update');
          
-        Route::match(['get','post'], 'settings', [SettingController::class, 'logo'])->name('admin.settings');
-        Route::match(['get','post'], 'settings/social', [SocialController::class, 'social'])->name('admin.settings.social');        
+        Route::match(['get','post'], 'settings', [SettingController::class, 'settings'])->name('admin.settings');
+        Route::group( [ 'prefix' => 'settings' ], function(){
+            Route::get('seo-list', [SeoController::class, 'list'])->name('admin.settings.seo.list');
+            Route::get('seo', [SeoController::class, 'add'])->name('admin.settings.seo');
+            Route::get('seo/{id}', [SeoController::class, 'edit'])->name('admin.settings.seo.edit');
+            Route::post('seo-post-data', [SeoController::class, 'postData'])->name('admin.settings.seo.post');
+            Route::get('seo-delete/{id}', [SeoController::class, 'delete'])->name('admin.settings.seo.delete');
+
+            Route::match(['get','post'], 'social', [SocialController::class, 'social'])->name('admin.settings.social');
+        });
+
+        //Route::match(['get','post'], 'settings/social', [SocialController::class, 'social'])->name('admin.settings.social');        
 
     });
 });

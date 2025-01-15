@@ -36,7 +36,7 @@
                         <div class="title-count text-variant-1">Your listing</div>
                         <div class="box-count d-flex align-items-end">
                             <div class="number">{{ $properties->count() }}</div>
-                            <span class="text">/50 remaining</span>
+                            {{-- <span class="text">/50 remaining</span> --}}
                         </div>
 
                     </div>

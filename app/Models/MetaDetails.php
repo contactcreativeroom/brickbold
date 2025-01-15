@@ -12,8 +12,10 @@ class MetaDetails extends Model
     protected $fillable = [
         'related_id',
         'related_type',
+        'url',
         'title',
         'keywords',
         'description',
+        'status',
     ];
 }

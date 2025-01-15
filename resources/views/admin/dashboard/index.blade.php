@@ -18,7 +18,7 @@
                 <div class="card-body">
                     <div class="d-flex align-items-center mb-2">
                         <div class="avatar me-4">
-                            <span class="avatar-initial rounded bg-label-primary"><i class="bx bx-store bx-lg"></i></span>
+                            <span class="avatar-initial rounded bg-label-primary"><i class="bx bx-group bx-lg"></i></span>
                         </div>
                         <h4 class="mb-0">{{$userTotal->count()}}</h4>
                     </div>
@@ -31,7 +31,7 @@
                 <div class="card-body">
                     <div class="d-flex align-items-center mb-2">
                         <div class="avatar me-4">
-                            <span class="avatar-initial rounded bg-label-light"><i class="bx bx-wrench bx-lg"></i></span>
+                            <span class="avatar-initial rounded bg-label-light"><i class="bx bx-building-house bx-lg"></i></span>
                         </div>
                         <h4 class="mb-0">{{$userTotal->where('user_type','Owner')->count()}}</h4>
                     </div>
@@ -44,7 +44,7 @@
                 <div class="card-body">
                     <div class="d-flex align-items-center mb-2">
                         <div class="avatar me-4">
-                            <span class="avatar-initial rounded bg-label-secondary"><i class="bx bx-user bx-lg"></i></span>
+                            <span class="avatar-initial rounded bg-label-secondary"><i class="bx bx-buildings bx-lg"></i></span>
                         </div>
                         <h4 class="mb-0">{{$userTotal->where('user_type','Agent')->count()}}</h4>
                     </div>
@@ -57,7 +57,7 @@
                 <div class="card-body">
                     <div class="d-flex align-items-center mb-2">
                         <div class="avatar me-4">
-                            <span class="avatar-initial rounded bg-label-dark"><i class="bx bx-wallet bx-lg"></i></span>
+                            <span class="avatar-initial rounded bg-label-dark"><i class="bx bx-user-pin bx-lg"></i></span>
                         </div>
                         <h4 class="mb-0">{{$userTotal->where('user_type','Builder')->count()}}</h4>
                     </div>
@@ -117,12 +117,12 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 col-sm-6 g-6">
+        <div class="col-lg-3 col-sm-6 g-6">
             <div class="card card-border-shadow-primary h-100">
                 <div class="card-body">
                     <div class="d-flex align-items-center mb-2">
                         <div class="avatar me-4">
-                            <span class="avatar-initial rounded bg-label-primary"><i class="bx bx-store bx-lg"></i></span>
+                            <span class="avatar-initial rounded bg-label-primary"><i class="bx bx-wallet bx-lg"></i></span>
                         </div>
                         <h4 class="mb-0">{{$totalEarned}}</h4>
                     </div>
@@ -130,32 +130,45 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 col-sm-6 g-6">
+        <div class="col-lg-3 col-sm-6 g-6">
             <div class="card card-border-shadow-light h-100">
                 <div class="card-body">
                     <div class="d-flex align-items-center mb-2">
                         <div class="avatar me-4">
-                            <span class="avatar-initial rounded bg-label-light"><i class="bx bx-wrench bx-lg"></i></span>
+                            <span class="avatar-initial rounded bg-label-light"><i class="bx bx-wallet bx-lg"></i></span>
                         </div>
-                        <h4 class="mb-0">{{$totalEarned}}</h4>
+                        <h4 class="mb-0">{{$thisYearEarned}}</h4>
                     </div>
-                    <p class="mb-2">Total payments Month</p>
+                    <p class="mb-2">Total payments Year</p>
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 col-sm-6 g-6">
+        <div class="col-lg-3 col-sm-6 g-6">
             <div class="card card-border-shadow-secondary h-100">
                 <div class="card-body">
                     <div class="d-flex align-items-center mb-2">
                         <div class="avatar me-4">
-                            <span class="avatar-initial rounded bg-label-secondary"><i class="bx bx-user bx-lg"></i></span>
+                            <span class="avatar-initial rounded bg-label-secondary"><i class="bx bx-wallet bx-lg"></i></span>
                         </div>
-                        <h4 class="mb-0">{{$totalEarned}}</h4>
+                        <h4 class="mb-0">{{$thisMonthEarned}}</h4>
+                    </div>
+                    <p class="mb-2">Total payments Month</p>
+                </div>
+            </div>
+        </div> 
+        <div class="col-lg-3 col-sm-6 g-6">
+            <div class="card card-border-shadow-dark h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-2">
+                        <div class="avatar me-4">
+                            <span class="avatar-initial rounded bg-label-dark"><i class="bx bx-wallet bx-lg"></i></span>
+                        </div>
+                        <h4 class="mb-0">{{$todayEarned}}</h4>
                     </div>
                     <p class="mb-2">Total payments today</p>
                 </div>
             </div>
-        </div> 
+        </div>
         <!--/ Card Border Shadow -->
         <!-- Properties statistics-->
         <div class="col-md-6 col-lg-6 order-2 mb-4 g-6">
@@ -203,7 +216,7 @@
                                 <span class="badge rounded-2 bg-label-warning p-2"><i class="bx bx-wallet bx-lg text-warning"></i></span>
                             </div>
                             <div>
-                                <h6 class="mb-0">${{$totalEarned}}</h6>
+                                <h6 class="mb-0">{{$totalEarned}}</h6>
                                 <small>Total Revenue</small>
                             </div>
                         </div>

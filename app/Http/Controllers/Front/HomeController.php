@@ -26,8 +26,8 @@ class HomeController extends Controller
     }
     
     public function index(Request $request) {
-        $todayLuxury = Property::orderBy('is_luxury', 'desc')->orderBy('id', 'desc')->limit(6)->get();
-        $readyToMove = Property::orderBy('views', 'desc')->limit(4)->get();
+        $todayLuxury = Property::whereIn('status', [1,3])->orderBy('is_luxury', 'desc')->orderBy('id', 'desc')->limit(6)->get();
+        $readyToMove = Property::whereIn('status', [1,3])->orderBy('views', 'desc')->limit(4)->get();
         $testimonials = Testimonial::orderBy('priority', 'asc')->limit(10)->get();
         return view($this->prefix.'.home',['todayLuxury' => $todayLuxury, 'readyToMove' => $readyToMove, 'testimonials' => $testimonials]);
     }
@@ -38,7 +38,7 @@ class HomeController extends Controller
         return view('front.faq');
     }
     public function contact(Request $request) { 
-        $properties = Property::orderBy('id', 'desc')->get();
+        $properties = Property::whereIn('status', [1,3])->orderBy('id', 'desc')->get();
         return view('front.contact',['properties' => $properties]);
     }
     public function contactPost(Request $request) { 

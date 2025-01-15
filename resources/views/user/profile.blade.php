@@ -9,7 +9,7 @@
                     <span class="body-1">Show Dashboard</span>
                 </div>
                 <div class="widget-box-2">
-                    <div class="box">
+                    {{-- <div class="box">
                         <h3 class="title">Account Settings</h3>
                         <div class="box-agent-account">
                             <h6>Agent Account</h6>
@@ -18,7 +18,7 @@
                                 account, and return to normal account, you must click the button below</p>
                             <a href="#" class="tf-btn bg-color-primary pd-10 fw-7">Remove Agent Account</a>
                         </div>
-                    </div>
+                    </div> --}}
                     <form  method="post" action="{{ route('user.profile.edit') }}" enctype="multipart/form-data" class="form-contact mb-30">
                     @csrf
                         <div class="box">

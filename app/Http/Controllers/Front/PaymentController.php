@@ -90,7 +90,7 @@ class PaymentController extends Controller
             $user->payment()->create([
                 'r_payment_id' => $response->id,
                 'order_id' => $request->order_id,
-                'product_id' => $request->package_id,
+                'package_id' => $request->package_id,
                 'method' => $response->method,
                 'currency' => $response->currency,
                 'email' => $response->email,
@@ -102,6 +102,7 @@ class PaymentController extends Controller
 
             $user->subscription()->create([
                 'order_id' => $order->id,
+                'package_id' => $request->package_id,
                 'post_property' => $order->post_property,
                 'contacts' => $order->contacts,
                 'days' => $order->days,

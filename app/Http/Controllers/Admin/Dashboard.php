@@ -9,6 +9,7 @@ use App\Models\Booking;
 use App\Models\Category;
 use App\Models\Contact;
 use App\Models\Order;
+use App\Models\Payment;
 use App\Models\Property;
 use App\Models\PropertyEnquiry;
 use App\Models\Service;
@@ -34,6 +35,9 @@ class Dashboard extends Controller
         // return view('admin.index');
         $userTotal = User::latest()->get();
         $properties = Property::latest()->get();
+        $todayEarned = $this->todayEarned();
+        $thisMonthEarned = $this->thisMonthEarned();
+        $thisYearEarned = $this->thisYearEarned();
         $totalEarned = $this->totalEarned();
         $thisYearTotalEarnedMonthWise = $this->thisYearTotalEarnedMonthWise();
         $thisYearTotalPropertiesMonthWise = $this->thisYearTotalPropertiesMonthWise();
@@ -45,6 +49,9 @@ class Dashboard extends Controller
         $data=array(
             'userTotal'=>$userTotal,
             'properties'=>$properties,
+            'todayEarned'=>$todayEarned,
+            'thisMonthEarned'=>$thisMonthEarned,
+            'thisYearEarned'=>$thisYearEarned,
             'totalEarned'=>$totalEarned,
             'thisYearTotalEarnedMonthWise'=>$thisYearTotalEarnedMonthWise,
             'thisYearTotalPropertiesMonthWise'=>$thisYearTotalPropertiesMonthWise,
@@ -56,28 +63,38 @@ class Dashboard extends Controller
         return view($this->prefix.'.dashboard.index')->with($data);
     } 
 
+    public function todayEarned(){
+        $thisMonthEarned = Payment::where('status', 1)->whereDate('created_at', now()->toDateString())->sum('amount');      
+        return config('constants.CURRENCIES.symbol'). Helper::priceFormat($thisMonthEarned);
+    }
+
+    public function thisMonthEarned(){
+        $thisMonthEarned = Payment::where('status', 1)->whereYear('created_at', now()->year)->whereMonth('created_at', now()->month)->sum('amount');      
+        return config('constants.CURRENCIES.symbol'). Helper::priceFormat($thisMonthEarned);
+    }
+
+    public function thisYearEarned(){
+        $thisYearEarned = Payment::where('status', 1)->whereYear('created_at', now()->year)->sum('amount');    
+        return config('constants.CURRENCIES.symbol'). Helper::priceFormat($thisYearEarned);
+    }
+
     public function totalEarned(){
-        // $totalEarned = Order::where('orders.order_status', 'Completed')
-        //     // ->whereYear('orders.created_at', date('Y'))
-        //     ->sum('total_price');
-        
-        $totalEarned = 100000000000;
+        $totalEarned = Payment::where('status', 1)->sum('amount');        
         return config('constants.CURRENCIES.symbol'). Helper::priceFormat($totalEarned);
     }
 
     public function thisYearTotalEarnedMonthWise() {        
-        // $earnedData = Order::selectRaw('MONTH(orders.created_at) as month, SUM(total_price) as total_earned')
-        //     ->where('orders.order_status', 'like', 'Completed')
-        //     ->whereYear('orders.created_at', date('Y'))
-        //     ->groupBy('month')
-        //     ->orderBy('month', 'asc')
-        //     ->pluck('total_earned', 'month')
-        //     ->toArray();
+        $earnedData = Payment::selectRaw('MONTH(payments.created_at) as month, SUM(amount) as total_earned')
+            ->where('status', 1)
+            ->whereYear('payments.created_at', date('Y'))
+            ->groupBy('month')
+            ->orderBy('month', 'asc')
+            ->pluck('total_earned', 'month')
+            ->toArray();
         $months = range(1, 12);
         $totalEarnedMonthWise = [];
         foreach ($months as $month) {
-            // $totalEarnedMonthWise[] = $earnedData[$month] ?? 0 ;
-            $totalEarnedMonthWise[] = rand(100000, 1000000000) ;
+            $totalEarnedMonthWise[] = $earnedData[$month] ?? 0 ;
         }    
         return $totalEarnedMonthWise;
     }
@@ -117,18 +134,17 @@ class Dashboard extends Controller
      
 
     public function previousYearTotalEarnedMonthWise(){
-        // $earnedData = Order::selectRaw('MONTH(orders.created_at) as month, SUM(total_price) as total_earned')
-        //     ->where('orders.order_status', 'like', 'Completed')
-        //     ->whereYear('orders.created_at', date('Y')-1)
-        //     ->groupBy('month')
-        //     ->orderBy('month', 'asc')
-        //     ->pluck('total_earned', 'month')
-        //     ->toArray();
+        $earnedData = Payment::selectRaw('MONTH(payments.created_at) as month, SUM(payments.amount) as total_earned')
+            ->where('payments.status', 1)
+            ->whereYear('payments.created_at', date('Y')-1)
+            ->groupBy('month')
+            ->orderBy('month', 'asc')
+            ->pluck('total_earned', 'month')
+            ->toArray();
         $months = range(1, 12);
         $totalEarnedMonthWise = [];
         foreach ($months as $month) {
-            // $totalEarnedMonthWise[] = isset($earnedData[$month]) ? -1 * $earnedData[$month] : 0;
-            $totalEarnedMonthWise[] = rand(100000, 1000000000) ;
+            $totalEarnedMonthWise[] = isset($earnedData[$month]) ? -1 * $earnedData[$month] : 0;
         }    
         return $totalEarnedMonthWise;
     }

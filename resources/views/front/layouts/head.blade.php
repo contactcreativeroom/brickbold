@@ -1,10 +1,27 @@
 
 <meta charset="utf-8" />
-<title>Proty - Real Estate HTML Template</title>
-<meta name="description"
-content="Propty is a website specializing in buying and renting properties, connecting buyers and tenants with trusted property owners. With an easy-to-use interface and detailed information, Propty offers a fast and convenient property search experience.">
-<meta name="keywords"
-content=" RealEstate, RealEstate, Buy, Rent, Homes, Apartment, Listings, Sale, Rental, Housing">
+@php 
+    $routeKey = Route::current()->uri();
+    $seo= App\Helper\Helper::getSeoValues();
+@endphp
+
+@if($routeKey == 'page/{slug}' && isset($page) && $page->seo_title != null && $page->seo_description != null && $page->seo_keywords != null)
+    <title>{{$page['seo_title']}}</title>
+    <meta name="keywords" content="{{$page['seo_keywords']}}">
+    <meta name="description" content="{{$page['seo_description']}}">
+@elseif($routeKey == 'product/{slug}' && isset($product) && $product->seo_title != null && $product->seo_description != null && $product->seo_keywords != null)
+    <title>{{$product['seo_title']}}</title>
+    <meta name="keywords" content="{{$product['seo_keywords']}}">
+    <meta name="description" content="{{$product['seo_description']}}">
+@elseif($routeKey == 'blog/{slug}' && isset($blog) && $blog->seo_title != null && $blog->seo_description != null && $blog->seo_keywords != null)
+    <title>{{$blog['seo_title']}}</title>
+    <meta name="keywords" content="{{$blog['seo_keywords']}}">
+    <meta name="description" content="{{$blog['seo_description']}}">
+@elseif($seo)
+    <title>{{$seo['seo_title']}}</title>
+    <meta name="keywords" content="{{$seo['seo_keywords']}}">
+    <meta name="description" content="{{$seo['seo_description']}}">
+@endif
 <meta name="author" content="themesflat.com" />
 <!-- Mobile Specific Metas -->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />

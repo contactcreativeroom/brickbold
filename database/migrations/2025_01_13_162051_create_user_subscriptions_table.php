@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable()->index();
             $table->integer('order_id')->nullable()->default(1);
+            $table->integer('property_id')->nullable()->default(null);
+            $table->integer('package_id')->nullable()->default(null);
             $table->integer('post_property')->nullable()->default(1);
             $table->integer('contacts')->nullable()->default(1);
             $table->integer('days')->nullable()->default(1);

@@ -149,9 +149,9 @@ return [
     
     // this array is for sending emails
     'EMAIL' => [
-        'from' => 'contactcreativeroom@gmail.com',
+        'from' => 'info@brickbold.com',
         'contact' => 'contactcreativeroom@gmail.com',
-        'send' => 'contactcreativeroom@gmail.com',
+        'send' => 'info@brickbold.com',
     ], 
 
     'CURRENCIES' => [
@@ -213,7 +213,7 @@ return [
     ],
     'OTP_LOGIN' => [
         'USERNAME' => 'brickbold.com',
-        'PASSWORD' => 'Brickbold@2024',
+        'PASSWORD' => 'Brickbold@2025',
         'HEADER_NAME' => 'BRKBLD',
         'TEMPLATED_ID' => '1707172535624208538',
     ],

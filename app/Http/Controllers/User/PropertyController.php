@@ -9,6 +9,8 @@ use App\Models\PropertyImage;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -33,7 +35,7 @@ class PropertyController extends Controller
         $user = $this->userAuth; 
 
         $properties = $user->Properties();
-        if ($request->has('status') && $request->status > 0) {
+        if ($request->has('status') && $request->status != '') {
             $status = $request->status; 
             $properties->where('status', $status) ;
         } 
@@ -62,13 +64,25 @@ class PropertyController extends Controller
             'search' => $request->get('search'),
             'short' => $request->get('short'),
         ]); 
-
-        // $properties = $user->Properties()->paginate($this->pagerecords);
-        $data=array('rows'=>$properties);
+        $activateButton = false;
+        if ($user->user_type == "Owner") { 
+            $subscriptions = $user->subscriptions()->where('property_id', null)->where('start_date', '<=', now())->where('end_date', '>=', now())->latest()->get();
+            if ($subscriptions->count() > 0) {
+                $activateButton = true;
+            }
+        }
+        $data=array('rows'=>$properties, 'activateButton'=>$activateButton);
         return view($this->prefix.'.property.list')->with($data);
     }
 
     public function add(){
+        //$userAccess = Helper::userAccess();
+        // if (isset($userAccess->start_date, $userAccess->end_date) && now()->between(Carbon::parse($userAccess->start_date), Carbon::parse($userAccess->end_date))) {
+        //     return view($this->prefix.'.property.form');
+        // } else{
+        //     Helper::toastMsg(false, "You do not have any active packages.");
+        //     return back(); 
+        // }
         return view($this->prefix.'.property.form');
     }
 
@@ -192,7 +206,7 @@ class PropertyController extends Controller
             'meta_values' => $metaValue, 
             'status' => 1,
         ]); 
-
+        Helper::assignPropertyToPackage($property->id);
         DB::commit();
         Helper::toastMsg(true, 'Property Added/Updated successfully!');
         return redirect()->route('user.properties');
@@ -226,12 +240,67 @@ class PropertyController extends Controller
         return redirect()->route('user.properties');
     }
 
-    public function enquiries(Request $request){ 
-        $userAccess = Helper::userAccess();
-        //dd($userAccess->posts);
+    public function assignPackage(Request $request) {
+        Helper::assignPropertyToPackage($request->id);
+        return back(); 
+    }
+
+    public function enquiriesOld(Request $request){ 
         $user = $this->userAuth;
-        $propertyEnquiries = $user->PropertyEnquiries()->paginate($this->pagerecords);
+        $userAccess = Helper::userAccess();
+        //dd($userAccess);
+        $propertyEnquiries = null;
+        if (isset($userAccess->start_date, $userAccess->end_date) && now()->between(Carbon::parse($userAccess->start_date), Carbon::parse($userAccess->end_date))) {
+            $propertyEnquiries = $user->PropertyEnquiries();
+            if(isset($userAccess->properties)){
+                //$propertyEnquiries = $propertyEnquiries->whereIn('property_id', $userAccess->properties);
+            }
+            if(isset($userAccess->contacts) && $userAccess->contacts > 0){
+                $propertyEnquiries = $propertyEnquiries->limit($userAccess->contacts);
+            }
+            $propertyEnquiries = $propertyEnquiries->paginate($this->pagerecords);
+        } else{
+            $propertyEnquiries = new LengthAwarePaginator([], 0, $this->pagerecords);
+        }
         $data=array('rows'=>$propertyEnquiries);
         return view($this->prefix.'.enquiry-properties')->with($data);
     }
+
+    public function enquiries(Request $request) {
+        $user = $this->userAuth;
+        $userAccess = Helper::userAccess();   
+        //dd($userAccess);
+        $propertiesData = collect();    
+        if (isset($userAccess->start_date, $userAccess->end_date) && now()->between(Carbon::parse($userAccess->start_date), Carbon::parse($userAccess->end_date))) {
+            $filteredEnquiries = $user->PropertyEnquiries()->get();
+            $propertiesData = $propertiesData->merge($filteredEnquiries);
+        } else{
+            if (!empty($userAccess['subscriptions'])) {
+                foreach ($userAccess['subscriptions'] as $subscription) {
+                    if (isset($subscription->start_date, $subscription->end_date) && now()->between(Carbon::parse($subscription->start_date), Carbon::parse($subscription->end_date))) {
+                        $filteredEnquiries = $user->PropertyEnquiries()
+                            ->where('property_id', $subscription->property_id)
+                            ->limit($subscription->contacts)
+                            ->get();
+            
+                        $propertiesData = $propertiesData->merge($filteredEnquiries);
+                    }
+                }
+            }  
+        }      
+        $propertiesData = $propertiesData->sortByDesc('id');
+        $propertyEnquiries = new LengthAwarePaginator(
+            $propertiesData->forPage(Paginator::resolveCurrentPage(), $this->pagerecords),
+            $propertiesData->count(),
+            $this->pagerecords,
+            Paginator::resolveCurrentPage(),
+            ['path' => $request->url()]  
+        );
+
+        return view($this->prefix . '.enquiry-properties', [
+            'rows' => $propertyEnquiries
+        ]);
+    }
+
+    
 }

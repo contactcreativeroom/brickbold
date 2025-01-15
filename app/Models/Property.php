@@ -72,4 +72,8 @@ class Property extends Model
     public function histories(){
         return $this->hasMany(PropertyHistory::class);
     }
+
+    public function subscriptions(){
+        return $this->hasMany(UserSubscription::class);
+    }
 }

@@ -25,12 +25,12 @@
             </a>
         </li>
 
-        <li class="menu-item {{ in_array(Route::currentRouteName(), ['admin.banners']) ? 'active' : '' }}">
+        {{-- <li class="menu-item {{ in_array(Route::currentRouteName(), ['admin.banners']) ? 'active' : '' }}">
             <a href="{{ route('admin.banners') }}" class="menu-link">
                 <i class="menu-icon fa-solid fa-images"></i>
                 <div data-i18n="Analytics">Banners</div>
             </a>
-        </li>
+        </li> --}}
         @if (Auth::guard('admin')->user()->level ==1)
             <li class="menu-item {{ in_array(Route::currentRouteName(), ['admin.subadmins']) ? 'active' : '' }}">
                 <a href="{{ route('admin.subadmins') }}" class="menu-link">
@@ -127,7 +127,7 @@
             </li>
         @endforeach 
 
-        <li class="menu-header small text-uppercase">
+        {{-- <li class="menu-header small text-uppercase">
             <span class="menu-header-text">SEO</span>
         </li>
         <li class="menu-item {{ in_array(Route::currentRouteName(), ['admin.meta.list']) ? 'active' : '' }}">
@@ -135,7 +135,7 @@
                 <i class="menu-icon fas fa-file-alt"></i>
                 <div data-i18n="Analytics">Meta Details</div>
             </a>
-        </li>
+        </li> --}}
     </ul>
 </aside>
 
