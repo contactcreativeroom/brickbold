@@ -311,3 +311,8 @@
 img.img-thumbnail{
     max-height: 80px;
 }
+
+.input-group-text-left{
+    border-radius: .375rem 0 0 .375rem;
+    height: 38px;
+}

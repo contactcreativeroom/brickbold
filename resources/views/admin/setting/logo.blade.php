@@ -71,7 +71,7 @@
                                                                     class="text-danger">*</span></label>
                                                             <div class="input-group mb-3">
                                                                 <div class="input-group-prepend">
-                                                                    <span class="input-group-text">+@if (!empty($countryCodeDB))
+                                                                    <span class="input-group-text input-group-text-left">+@if (!empty($countryCodeDB))
                                                                             {{ $countryCodeDB }}@else{{ config('constants.CONTACT.country_code') }}
                                                                         @endif
                                                                     </span>
@@ -94,7 +94,7 @@
                                                                     class="text-danger">*</span></label>
                                                             <div class="input-group mb-3">
                                                                 <div class="input-group-prepend">
-                                                                    <span class="input-group-text">+@if (!empty($countryCodeDB))
+                                                                    <span class="input-group-text input-group-text-left">+@if (!empty($countryCodeDB))
                                                                             {{ $countryCodeDB }}@else{{ config('constants.CONTACT.country_code') }}
                                                                         @endif
                                                                     </span>

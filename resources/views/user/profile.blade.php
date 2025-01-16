@@ -1,9 +1,9 @@
 @extends('user.layouts.app')
 @section('content')
-    <div class="page-layout">
+    <div class="page-layout" >
         @include('user.layouts.sidebar')
         <!-- .main-content -->
-        <div class="main-content style-2">
+        <div class="main-content style-2 w-100" >
             <div class="main-content-inner wrap-dashboard-content-2">
                 <div class="button-show-hide show-mb">
                     <span class="body-1">Show Dashboard</span>

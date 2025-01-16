@@ -212,7 +212,7 @@
 var curLong = 75.857277 ;
 var curLat = 30.900965 ;
 var locations = [
-        @foreach ($properties as $property)
+        {{-- @foreach ($properties as $property)
         {
             coordinates: [{{ $property->longitude }}, {{ $property->latitude }}],
             properties: {
@@ -227,8 +227,7 @@ var locations = [
                 forType: "{{config('constants.FOR_TYPE')[$property->for_type]}}",
             },
         },
-        @endforeach 
-       
+        @endforeach  --}}       
     ];
 </script>
 <script type="text/javascript" src="{{url('frontend/js/map.min.js') }}"></script>

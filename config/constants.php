@@ -134,6 +134,12 @@ return [
         'addresss' => 'SCO-18, 2nd Floor, Cabin No. 208, Feroze Gandhi Market, Ludhiana, Punjab, India, 141001',
     ],    
 
+    'CONFIG' => [
+        'light_logo' => 'images/logo/logo-light.png',
+        'dark_logo' => 'images/logo/logo-main.png',
+        'favicon' => 'frontend/icons/favicon.svg'
+    ],    
+
     'SOCIAL' => [
         'facebook' => 'https://www.facebook.com/BrickBold2024/',
         'linkedin' => 'https://www.linkedin.com/in/brick-bold-209a5a31a/',

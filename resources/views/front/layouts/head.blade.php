@@ -42,6 +42,6 @@
 <link rel="stylesheet" type="text/css" href="{{url('frontend/icons/icomoon/style.css')}}" />
 
 <!-- Favicon and Touch Icons  -->
-<link rel="shortcut icon" href="{{url('frontend/icons/favicon.svg')}}" />
-<link rel="apple-touch-icon-precomposed" href="{{url('frontend/icons/favicon.svg')}}" />
+<link rel="shortcut icon" href="{{data_get($config, 'favicon', '')}}" />
+<link rel="apple-touch-icon-precomposed" href="{{data_get($config, 'favicon', '')}}" />
 @stack('head')

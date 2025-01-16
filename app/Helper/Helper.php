@@ -454,7 +454,34 @@ class Helper
             if($currencySign && $currencySign->value){
                 $config['currency_sign'] = $currencySign->value;
             }else{
-                $config['currency_sign'] = config('constants.CONFIG.currency_sign');
+                $config['currency_sign'] = config('constants.CURRENCIES.symbol');
+            }
+        }
+
+        if($method == null || ($method != null && $method == 'light_logo')){
+            $lightLogo = $settingObj->where('key', 'light_logo')->first();
+            if($lightLogo && $lightLogo->value){
+                $config['light_logo'] = url('storage/logo/'.$lightLogo->value);
+            }else{
+                $config['light_logo'] = url(config('constants.CONFIG.light_logo'));
+            }
+        }
+
+        if($method == null || ($method != null && $method == 'dark_logo')){
+            $darkLogo = $settingObj->where('key', 'dark_logo')->first();
+            if($darkLogo && $darkLogo->value){
+                $config['dark_logo'] = url('storage/logo/'.$darkLogo->value);
+            }else{
+                $config['dark_logo'] = url(config('constants.CONFIG.dark_logo'));
+            }
+        }
+
+        if($method == null || ($method != null && $method == 'favicon')){
+            $favicon = $settingObj->where('key', 'favicon')->first();
+            if($favicon && $favicon->value){
+                $config['favicon'] = url('storage/favicon/'.$favicon->value);
+            }else{
+                $config['favicon'] = url(config('constants.CONFIG.favicon'));
             }
         }
         return $config;
@@ -601,10 +628,13 @@ class Helper
 
    
     public static function getLogo($light=false) {
+        $config =  Helper::getWebsiteConfig();
         if($light){
-            return url('images/logo/logo-light.png');
+            return data_get($config, 'light_logo', 'images/logo/logo-light.png') ;
+            //return url('images/logo/logo-light.png');
         }
-        return url('images/logo/logo-main.png');
+        return data_get($config, 'dark_logo', 'images/logo/logo-main.png') ;
+        //return url('images/logo/logo-main.png');
     }
 
     public static function divider($number_of_digits) {
