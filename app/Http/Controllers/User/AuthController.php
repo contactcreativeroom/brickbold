@@ -225,7 +225,7 @@ class AuthController extends Controller
 
         $mobile = $request->mobile;
         $user = User::where('phone', $mobile)->first();
-        if ($user) {         
+        // if ($user) {         
 
             $otp = rand(100000, 999999);
             OtpCode::updateOrCreate(
@@ -259,16 +259,16 @@ class AuthController extends Controller
             $data = curl_exec($ch); 
             curl_close($ch);
             
-            return response()->json(['success' => true, 'message' => 'OTP sent successfully to mobile .'.$mobile.'. It is valid for 10 minute only.', 'otp' => $otp, 'sms_response' => $data]);
-        } else{
-            return response()->json([
-                'success' => false,
-                'message' => 'User not found with this mobile number.',
-                'errors' => array('mobile' => [
-                    "User not found with this mobile number."
-                ]),
-            ], 400);
-        }
+            return response()->json(['success' => true, 'message' => 'OTP sent successfully to mobile .'.$mobile.'. It is valid for 10 minute only.']);
+        // } else{
+        //     return response()->json([
+        //         'success' => false,
+        //         'message' => 'User not found with this mobile number.',
+        //         'errors' => array('mobile' => [
+        //             "User not found with this mobile number."
+        //         ]),
+        //     ], 400);
+        // }
     }
 
     public function verifyOTP(Request $request){

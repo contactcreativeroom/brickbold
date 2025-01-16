@@ -49,8 +49,9 @@ class UserController extends Controller
 
     public function detail(Request $request, $id){
         $user = User::find($id);
+        $subscriptions = $user->subscriptions()->where('start_date', '<=', now())->where('end_date', '>=', now())->where('status', 1)->latest()->limit(5)->get();
         $properties = $user->Properties()->paginate($this->pagerecords);
-        $data=array('user'=>$user, 'rows'=>$properties);
+        $data=array('user'=>$user, 'rows'=>$properties, 'subscriptions'=>$subscriptions );
         return view($this->prefix.'.users.detail')->with($data);
     }
 

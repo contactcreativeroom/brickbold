@@ -30,17 +30,17 @@
                                                 href="{{ route('admin.settings.seo') }}">Create</a></div>
                                     </div>
                                     <!-- /.card-header -->
-                                    <div class="card-body1">
-                                        <table class="table table-bordered">
+                                    <div class="table-responsive text-nowrap">
+                                        <table class="table">
                                             <thead>
                                                 <tr>
                                                     <th style="width: 10px">#</th>
                                                     <th>Page</th>
-                                                    <th>SEO Title</th>
-                                                    <th>SEO Description</th>
-                                                    <th>SEO Keywords</th>
+                                                    <th>Title</th>
+                                                    {{-- <th>Description</th> --}}
+                                                    <th>Keywords</th>
                                                     <th>Added on</th>
-                                                    <th style="width: 130px">Actions</th>
+                                                    <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -49,15 +49,18 @@
                                                         <td>{{ $row->id }}</td>
                                                         <td>{{ $row->page }}</td>
                                                         <td>{{ $row->seo_title }}</td>
-                                                        <td>{{ $row->seo_description }}</td>
+                                                        {{-- <td>{{ $row->seo_description }}</td> --}}
                                                         <td>{{ $row->seo_keywords }}</td>
                                                         <td>{{ $row->created_at?->format(App\Helper\Helper::universalDateTimeFormat()) ?? '' }}
                                                         </td>
                                                         <td>
-                                                            <a href="{{ route('admin.settings.seo.edit', $row->id) }}"
-                                                                class="btn btn-primary btn-sm">Edit</a>
-                                                            <a href="{{ route('admin.settings.seo.delete', $row->id) }}"
-                                                                class="btn btn-danger btn-sm delete-btn">Delete</a>
+                                                            <div class="dropdown">
+                                                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>
+                                                                <div class="dropdown-menu">
+                                                                    <a class="dropdown-item" href="{{ route('admin.settings.seo.edit', $row->id) }}"><i class="bx bx-edit-alt me-2"></i> Edit</a>
+                                                                    <a class="dropdown-item" href="{{ route('admin.settings.seo.delete', $row->id) }}"><i class="bx bx-trash me-2"></i> Delete</a>
+                                                                </div>
+                                                            </div> 
                                                         </td>
                                                     </tr>
                                                 @endforeach

@@ -29,15 +29,7 @@
                                     <option value="{{$value}}" {{ old('user_type', request('user_type')) == $value ? 'selected' : '' }} >{{$value}}</option>
                                 @endforeach
                             </select>
-                        </div>
-                        <div class="col-md-4 user_plan">
-                            <select  class="form-select text-capitalize" name="package">
-                                <option value="">Package</option>
-                                @foreach ($packages as $key=>$value)
-                                    <option value="{{$value->id}}" {{ old('package', request('package')) == $value->id ? 'selected' : '' }} >{{$value->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                        </div>                       
                         
                         <div class="col-md-4 user_status">
                             <select id="FilterTransaction" class="form-select text-capitalize" name="status">
@@ -47,9 +39,12 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div class="col-md-4 user_plan">
+                            <button class="btn btn-secondary add-new btn-primary" type="submit" >Submit</button>
+                            <a href="{{ route('admin.users') }}"  class="btn btn-secondary add-new btn-primary" >Reset</a>
+                        </div>
                     </div>
-                    <button class="btn btn-secondary add-new btn-primary" type="submit" >Submit</button>
-                    <a href="{{ route('admin.users') }}"  class="btn btn-secondary add-new btn-primary" >Reset</a>
+                    
                 </form>
             </div>
             @if($rows->isEmpty())

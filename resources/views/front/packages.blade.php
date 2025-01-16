@@ -181,7 +181,7 @@
         .then(data => {
             if (data.success) {
                 toastr.success("Payment verified successfully!", 'Successfull');
-                window.location.href = "{{route('user.package')}}";
+                window.location.href = "{{route('user.properties')}}";
             } else {
                 toastr.error("Payment verification failed.", 'Error');
             }

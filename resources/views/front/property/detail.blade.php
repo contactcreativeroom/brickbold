@@ -9,7 +9,8 @@
                     <div class="title-inner ">
                         <ul class="breadcrumb">
                             <li><a class="home fw-6 text-color-3" href="{{route('home')}}">Home</a></li>
-                            <li>Property Listing</li>
+                            <li><a class="home fw-6 text-color-3" href="{{route('properties')}}">Property Listing</a></li>
+                            <li>{{$row->title}}</li>
                         </ul>
                     </div>
                 </div>

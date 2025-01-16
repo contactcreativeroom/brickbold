@@ -137,7 +137,7 @@
                         </fieldset>
 
                     </div>
-                    <div class="box box-btn">
+                    <div class="box box-btn mb-2">
                         <button type="submit" class="tf-btn bg-color-primary w-full">Sign Up</button>
                         <div class="text text-center">Don’t you have an account? <a href="#modalLogin" data-bs-toggle="modal" class="text-color-primary">Sign In</a></div>
                     </div>
@@ -232,7 +232,7 @@
                             </div> 
                         </fieldset>
                     </div>
-                    <div class="box box-btn">
+                    <div class="box box-btn mb-2">
                         <button type="submit" class="tf-btn bg-color-primary w-100">Login</button>
                         <div class="text text-center">Don’t you have an account? <a href="#modalRegister" data-bs-toggle="modal" class="text-color-primary">Register</a></div>
                     </div>

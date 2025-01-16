@@ -709,7 +709,7 @@ class Helper
             $user = Auth::guard('user')->user();
  
             if ($user->user_type == "Owner") { 
-                $subscriptions = $user->subscriptions()->where('start_date', '<=', now())->where('end_date', '>=', now())->latest()->get();
+                $subscriptions = $user->subscriptions()->where('start_date', '<=', now())->where('end_date', '>=', now())->where('status', 1)->latest()->get();
                 if ($subscriptions->isEmpty()) {
                     Helper::toastMsg(false, "You do not have an active plan. Please select");
                     return false;

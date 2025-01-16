@@ -15,12 +15,8 @@
         </div>
         <!-- Content wrapper -->
         <div class="content-wrapper">
-
             <!-- Content -->
-
             <div class="container-xxl flex-grow-1 container-p-y">
-
-
                 <div class="row">
                     <!-- User Sidebar -->
                     <div class="col-xl-4 col-lg-5 order-1 order-md-0">
@@ -33,7 +29,7 @@
                                             height="120" width="120" alt="User avatar">
                                         <div class="user-info text-center">
                                             <h5>{{ $user->name }}</h5>
-                                            <span class="badge bg-label-secondary">role here</span>
+                                            <span class="badge bg-label-secondary">{{ $user->user_type }}</span>
                                         </div>
                                     </div>
                                 </div> 
@@ -105,41 +101,42 @@
                         </div>
                         <!-- /User Card -->
                         <!-- Plan Card -->
+                        @foreach ($subscriptions as $subscription)
                         <div class="card mb-6 border border-2 border-primary rounded primary-shadow">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-start">
-                                    <span class="badge bg-label-primary">Standard</span>
+                                    <span class="badge bg-label-primary">{{$subscription->order->package_name}}</span>
                                     <div class="d-flex justify-content-center">
-                                        <sub class="h5 pricing-currency mb-auto mt-1 text-primary">$</sub>
-                                        <h1 class="mb-0 text-primary">99</h1>
-                                        <sub class="h6 pricing-duration mt-auto mb-3 fw-normal">month</sub>
+                                        <sub class="h5 pricing-currency mb-auto mt-1 text-primary">{{ config('constants.CURRENCIES.symbol')}}</sub>
+                                        <h1 class="mb-0 text-primary">{{ App\Helper\Helper::priceFormat($subscription->order->package_price)}}</h1>
                                     </div>
                                 </div>
                                 <ul class="list-unstyled g-2 my-6">
-                                    <li class="mb-2 d-flex align-items-center"><i
-                                            class="bx bxs-circle bx-6px text-secondary me-2"></i><span>10 Users</span></li>
-                                    <li class="mb-2 d-flex align-items-center"><i
-                                            class="bx bxs-circle bx-6px text-secondary me-2"></i><span>Up to 10 GB
-                                            storage</span></li>
-                                    <li class="mb-2 d-flex align-items-center"><i
-                                            class="bx bxs-circle bx-6px text-secondary me-2"></i><span>Basic Support</span>
-                                    </li>
+                                    @php
+                                        $fields = unserialize($subscription->order->package_value); 
+                                         
+                                        $today = Carbon\Carbon::today();
+                                        $endDate = Carbon\Carbon::parse($subscription->end_date);
+                                        $startDate = Carbon\Carbon::parse($subscription->start_date);
+                                        $remainingDays = $endDate->diffInDays($today);                                            
+                                        $completedDays = $startDate->diffInDays($today) +1;                                            
+                                    @endphp
+                                    @foreach ($fields as $fieldKey=>$fieldVal)
+                                        <li class="mb-2 d-flex align-items-center"><i class="bx bxs-circle bx-6px text-secondary me-2"></i><span>{{ $fieldKey}}: {{ $fieldVal}}</span></li>
+                                    @endforeach 
                                 </ul>
                                 <div class="d-flex justify-content-between align-items-center mb-1">
                                     <span class="h6 mb-0">Days</span>
-                                    <span class="h6 mb-0">26 of 30 Days</span>
+                                    <span class="h6 mb-0">{{$completedDays}} of {{$subscription->days}} Days</span>
                                 </div>
                                 <div class="progress mb-1">
-                                    <div class="progress-bar" role="progressbar" style="width: 65%;" aria-valuenow="65"
-                                        aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar" role="progressbar" style="width: {{$completedDays}}%;" aria-valuenow="{{$completedDays}}" aria-valuemin="0" aria-valuemax="{{$subscription->days}}"></div>
                                 </div>
-                                <small>4 days remaining</small>
-                                <div class="d-grid w-100 mt-6">
-                                    <button class="btn btn-primary" data-bs-target="#upgradePlanModal"
-                                        data-bs-toggle="modal">Upgrade Plan</button>
-                                </div>
+                                <small>{{$remainingDays}} days remaining</small>
+                                 
                             </div>
                         </div>
+                        @endforeach
                         <!-- /Plan Card -->
                     </div>
                     <!--/ User Sidebar -->
