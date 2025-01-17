@@ -991,7 +991,7 @@ a:hover, a:focus {
 }
 
 .gap-10 {
-  gap: 10px;
+  gap: 10px !important;
 }
 
 .gap-30 {

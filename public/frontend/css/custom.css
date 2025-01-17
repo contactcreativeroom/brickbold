@@ -78,4 +78,10 @@ form .otp-input-field {
 .otp-input-field input::-webkit-outer-spin-button {
     display: none;
 }
- 
+#registerForm.flat-account .form-account {
+    padding: 30px;
+}
+
+#modalRegister .flat-account .banner-account{
+    max-width: 300px;
+}

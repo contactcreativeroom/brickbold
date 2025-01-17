@@ -24,6 +24,7 @@ class AuthController extends Controller
     public function register(Request $request){
         $validator = Validator::make($request->all(), [
             'role' => 'required',
+            'for_type' => 'required',
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email|max:255',
             'password' => 'required|min:6|confirmed',
@@ -42,6 +43,7 @@ class AuthController extends Controller
     
         $user = User::create([
             'user_type' => $request->role,
+            'for_type' => $request->for_type,
             'name' => $request->name,
             'email' => $request->email,
             'dob' => $request->dob,

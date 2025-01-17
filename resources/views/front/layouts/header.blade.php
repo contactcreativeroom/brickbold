@@ -395,7 +395,7 @@
 
                             @guest('user')
                                 <div class="btn-add">
-                                    <a class="tf-btn style-border pd-23" href="#modalLogin" data-bs-toggle="modal" >
+                                    <a class="tf-btn style-border pd-23" href="#modalRegister" data-bs-toggle="modal" >
                                         Post Property
                                         <span class="text-danger ps-3 pe-3 bg-warning rounded-4">Free</span>
                                     </a>

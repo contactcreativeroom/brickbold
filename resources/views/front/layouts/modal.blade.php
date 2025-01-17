@@ -12,8 +12,47 @@
                         <h4>Register</h4>
                         <span class="close-modal icon-close" data-bs-dismiss="modal"></span>
                     </div>
-                    <div class="box">
-                        <fieldset class="box-fieldset">
+                    <div class="box grid-layout-2 gap-10 box-info-2 mb-10">
+                        <fieldset class="box-fieldset1">
+                            <label for="name">I am<span>*</span></label>
+                            <div class="box-radio-check ">
+                                @foreach (config('constants.USER_TYPE') as $key=>$value)
+                                <fieldset class="radio-item ">
+                                    <label>
+                                        <span class="text-1">{{$value}}</span>
+                                        <input type="radio" name="role" value="{{$value}}" id="role_{{$key}}" {{($key==0)? 'checked' : ''}}>
+                                        <span class="btn-radio"></span>
+                                    </label>
+                                </fieldset>
+                                @endforeach 
+                            </div>
+                            {{-- <div class="ip-field">
+                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                    @foreach (config('constants.USER_TYPE') as $key=>$value)
+                                        <input type="radio" class="btn-check" name="btnradio" id="btnradio{{$key}}" value="{{$value}}" autocomplete="off" checked>
+                                        <label class="btn btn-outline-danger" for="btnradio{{$key}}">{{$value}}</label>
+                                    @endforeach
+                                </div>
+                            </div> --}}
+                            <span id="role-error" class="text-danger is_error"></span>
+                        </fieldset>
+                        <fieldset class="box-fieldset1">
+                            <label for="looking">I am looking<span>*</span></label>
+                            <div class="box-radio-check">
+                                @foreach (config('constants.FOR_TYPE') as $key=>$value)
+                                <fieldset class="radio-item ">
+                                    <label>
+                                        <span class="text-1">{{$value}}</span>
+                                        <input type="radio" name="for_type" value="{{$key}}" id="role_{{$key}}" {{($key=='for-sell')? 'checked' : ''}}>
+                                        <span class="btn-radio"></span>
+                                    </label>
+                                </fieldset>
+                                @endforeach 
+                            </div>
+                            <span id="for_type-error" class="text-danger is_error"></span>
+                        </fieldset>
+                    </div>
+                        {{-- <fieldset class="box-fieldset1">
                             <label for="name">Role</label>
                             <div class="ip-field">
                                 <svg class="icon" width="15" height="15" viewBox="0 0 18 18" fill="none"
@@ -55,9 +94,9 @@
                                 </select>
                             </div>
                             <span id="role-error" class="text-danger is_error"></span>
-                        </fieldset>
-                        <fieldset class="box-fieldset">
-                            <label for="name">Full name</label>
+                        </fieldset> --}}
+                        <fieldset class="box-fieldset1 mb-10">
+                            <label for="name">Full name<span>*</span></label>
                             <div class="ip-field">
                                 <svg class="icon" width="18" height="18" viewBox="0 0 18 18" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -69,8 +108,9 @@
                             </div>
                             <span id="name-error" class="text-danger is_error"></span>
                         </fieldset>
-                        <fieldset class="box-fieldset">
-                            <label for="email">Email address</label>
+                    <div class="box grid-layout-2 gap-10 box-info-2">
+                        <fieldset class="box-fieldset1">
+                            <label for="email">Email address<span>*</span></label>
                             <div class="ip-field">
                                 <svg class="icon" width="18" height="18" viewBox="0 0 18 18" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -85,7 +125,7 @@
 
                         </fieldset>
                         
-                        <fieldset class="box-fieldset">
+                        <fieldset class="box-fieldset1">
                             <label for="mobile">Mobile</label>
                             <div class="ip-field">
                                 <svg class="icon" width="18" height="18" viewBox="0 0 18 18" fill="none"
@@ -99,8 +139,8 @@
                             <span id="mobile-error" class="text-danger is_error"></span>
                         </fieldset>
                         
-                        <fieldset class="box-fieldset">
-                            <label for="pass">Password</label>
+                        <fieldset class="box-fieldset1">
+                            <label for="pass">Password<span>*</span></label>
                             <div class="ip-field">
                                 <svg class="icon" width="18" height="18" viewBox="0 0 18 18" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -112,8 +152,8 @@
                             </div>
                             <span id="password-error" class="text-danger is_error"></span>
                         </fieldset>
-                        <fieldset class="box-fieldset">
-                            <label for="password_confirmation">Confirm password</label>
+                        <fieldset class="box-fieldset1">
+                            <label for="password_confirmation">Confirm password<span>*</span></label>
                             <div class="ip-field">
                                 <svg class="icon" width="18" height="18" viewBox="0 0 18 18" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -125,18 +165,18 @@
                             </div>
                             <span id="password_confirmation-error" class="text-danger is_error"></span>
                         </fieldset>
+                        </div>
                         <fieldset class="box-fieldset">
                             <div class="checkbox-item style-1">
                                 <label>
                                     <input type="checkbox" value="1" name="accept_term_condition">
                                     <span class="btn-checkbox"></span>
-                                    <span class="text">I agreed to the terms & conditions</span>
+                                    <span class="text">I agreed to the terms & conditions<span>*</span></span>
                                 </label>
                             </div>
                             <span id="accept_term_condition-error" class="text-danger is_error"></span>
                         </fieldset>
-
-                    </div>
+ 
                     <div class="box box-btn mb-2">
                         <button type="submit" class="tf-btn bg-color-primary w-full">Sign Up</button>
                         <div class="text text-center">Don’t you have an account? <a href="#modalLogin" data-bs-toggle="modal" class="text-color-primary">Sign In</a></div>
