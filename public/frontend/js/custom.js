@@ -48,6 +48,9 @@ $('#loginForm').on('submit', function(e) {
                 for (let field in errors) {
                     $(`#loginForm #${field}-error`).text(errors[field][0]);
                 }
+            } else if (xhr.responseJSON && xhr.responseJSON.message) {
+                let errors = xhr.responseJSON.message;
+                toastr.error(errors, 'Error!');
             } else {
                 toastr.error("An error occurred. Please try again.", 'Error!');
             }
@@ -98,6 +101,7 @@ function sendOTP() {
         success: function(response) {
             console.log(response.message);
             toastr.success(response.message, 'Successfully!');
+            $(".otpSentMobile").html(mobile);
             $(".get-otp-section").hide();
             $(".verify-otp-section ").show();
             

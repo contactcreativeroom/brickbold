@@ -308,7 +308,7 @@
 
                         <div class="verify-otp-section" style="display: none;">
                             <div class="box">
-                                 <div class="text mb-3">OTP sent to <span class="text-color-primary">9876543210</span>. Wrong number?  <a href="javascript:void(0)" class="text-color-primary" id="mobile-edit">Click here</a href="javascript:void(0)">.</div>
+                                 <div class="text mb-3">OTP sent to <span class="text-color-primary otpSentMobile">9876543210</span>. Wrong number?  <a href="javascript:void(0)" class="text-color-primary" id="mobile-edit">Click here</a href="javascript:void(0)">.</div>
                                 <fieldset class="box-fieldset">
                                     <label for="pass">OTP</label>
                                     <div class="otp-input-field">

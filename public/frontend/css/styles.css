@@ -7990,7 +7990,8 @@ tr {
 }
 .flat-pricing .box .title-price .month {
   margin-left: 5px;
-  margin-top: 26px;
+  font-size: 20px;
+  margin-top: 20px;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
   -ms-transition: all 0.3s ease;

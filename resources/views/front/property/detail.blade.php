@@ -620,9 +620,9 @@
                             <form class="form-contact-seller mb-30" method="post" action="{{route('property.enquiry')}}" >
                                 @csrf
                                 <h4 class="heading-title mb-30">
-                                    Contact Sellers
+                                    Contact {{$row->user->user_type ?? 'Sellers'}}
                                 </h4>
-                                @if ($row->user)
+                                {{-- @if ($row->user)
                                     <div class="seller-info">
                                         <div class="avartar">
                                             <img src="{{ App\Helper\Helper::getProfileImage('storage/user/'.$row?->user_id, $row?->user?->profile_image) }}" alt="">
@@ -635,7 +635,7 @@
                                             </ul>
                                         </div>
                                     </div>
-                                @endif
+                                @endif --}}
                                 
                                 <fieldset class="mb-12">
                                     <input type="text" class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="Your name" name="name" id="name" value="@if(old('name')!=null){{old('name')}}@endif">

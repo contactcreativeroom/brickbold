@@ -740,5 +740,17 @@ class Helper
         }
         return false;
     }
+
+    public static function redirectRouteAfterLogin(){
+        if (Auth::guard('user')->check()) {
+            $user = Auth::guard('user')->user();
+            $propertyCount = $user->Properties->count();
+            if($propertyCount > 0){
+                return route('user.properties');
+            } 
+            return route('user.property.add');
+        }
+        return false;
+    }
  
 }

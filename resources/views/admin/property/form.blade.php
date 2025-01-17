@@ -84,8 +84,8 @@
                                     </div>
                                     <div class="row mt-3">
                                         <div class="col-md-12">
-                                            <label for="title" class="form-label">Title<span>*</span></label>
-                                            <input type="text" class="form-control {{ $errors->has('title') ? ' is-invalid' : '' }}" placeholder="Title" name="title" value="@if(old('title')!=null){{old('title')}}@elseif(!empty($row->title)){{$row->title}}@endif">
+                                            <label for="title" class="form-label">Property Name<span>*</span></label>
+                                            <input type="text" class="form-control {{ $errors->has('title') ? ' is-invalid' : '' }}" placeholder="Property Name" name="title" value="@if(old('title')!=null){{old('title')}}@elseif(!empty($row->title)){{$row->title}}@endif">
                                             @if($errors->has('title'))
                                                 <span class="invalid-feedback">
                                                     {{ $errors->first('title') }}
@@ -93,13 +93,7 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="row mt-3">
-                                        <div class="col-md-12">
-                                            <label for="title" class="form-label">Description</label>
-                                            <textarea class="form-control" placeholder="Decscription" name="description">@if(old('description')!=null){{old('description')}}@elseif(!empty($row->description)){{$row->description}}@endif</textarea>
-
-                                        </div>
-                                    </div>
+                                    
                                     <div class="row mt-3">
                                         <div class="col-md-12">
                                             <label for="location" class="form-label">Location<span>*</span></label>
@@ -219,7 +213,7 @@
                                         <div class="col-md-4">
                                             <label class="form-label">Availability:<span>*</span></label>
                                             <select class="form-control form-select {{ $errors->has('availability') ? ' is-invalid' : '' }}" name="availability">
-                                                <option value="">Select Price Availability</option>
+                                                <option value="">Select Availability</option>
                                                 @foreach (config('constants.AVAILABILITY') as $key=>$value)
                                                     <option value="{{$key}}" @if(old('availability')!=null && old('availability')==$key) selected @elseif(!empty($row) && $row->availability==$key) selected @endif>{{$value}}</option>
                                                 @endforeach 
@@ -424,6 +418,13 @@
                                         </div>
                                     </div>
 
+                                    <div class="row mt-3">
+                                        <div class="col-md-12">
+                                            <label for="title" class="form-label">Description</label>
+                                            <textarea class="form-control" placeholder="Decscription" name="description">@if(old('description')!=null){{old('description')}}@elseif(!empty($row->description)){{$row->description}}@endif</textarea>
+
+                                        </div>
+                                    </div>
                                     
                                     <div class="row mt-3">
                                         <div class="col-md-12">

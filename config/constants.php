@@ -32,12 +32,10 @@ return [
         'lease-hold' =>  'Lease Hold'
     ],
     'BUILD_YEAR' => [
-        1 =>  'Plot/Land',
-        2 =>  'Newly',
-        3 =>  'Less Then 5 Years',
-        4 =>  'Less Then 15 to 20 Years',
-        5 =>  'Less Then 10 to 15 Years',
-        6 =>  'Above 20 Years'
+        1 =>  'Newly',
+        2 =>  'Less Then 5 Years',
+        3 =>  'Less Then 5 to 10 Years',
+        4 =>  'Above 10 Years'
     ], 
     'TYPE' => [
         'apartment' =>  'Apartment',

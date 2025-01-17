@@ -100,7 +100,14 @@ class PropertyController extends Controller
                 return back()->withInput();
             }
         }
- 
+        
+        if(isset($request->builtup_area) && isset($request->carpet_area) && $request->builtup_area > 0 && $request->carpet_area > 0){
+            if($request->carpet_area > $request->builtup_area){
+                Helper::toastMsg(false, "Carpet Area should not be more then Builtup Area.");
+                return back()->withInput();
+            }
+        }
+        
         $amenities = '';
         $additional = '';
         if(isset($request->amenities)){

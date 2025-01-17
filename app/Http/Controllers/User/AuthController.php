@@ -53,7 +53,7 @@ class AuthController extends Controller
             Auth::guard('user')->login($user);
             return response()->json([
                 'success' => true,
-                'redirect_url' => route('user.property.add'),
+                'redirect_url' => Helper::redirectRouteAfterLogin(),
                 'message' => 'Registered successfully!',
             ], 201);
         }
@@ -96,7 +96,7 @@ class AuthController extends Controller
                 return response()->json([
                     'success' => true,
                     'message' => 'Logged in successfully!',
-                    'redirect_url' => route('user.property.add'),
+                    'redirect_url' => Helper::redirectRouteAfterLogin(),
                 ], 200);
             }
     
@@ -190,7 +190,7 @@ class AuthController extends Controller
     
             if ($findUser) {
                 Auth::guard('user')->login($findUser);
-                return redirect()->route('user.property.add');
+                return redirect(Helper::redirectRouteAfterLogin());
             } else {
                 $existingUser = User::where('email', $user->email)->first();
                 if ($existingUser) {
@@ -205,9 +205,9 @@ class AuthController extends Controller
                     ]);
 
                     Auth::guard('user')->login($newUser);
-                    return redirect()->route('user.profile');
+                    //return redirect()->route('user.profile');
                 }    
-                return redirect()->route('user.property.add');
+                return redirect(Helper::redirectRouteAfterLogin());
             }
         } catch (Exception $e) {
             Log::error('Google Login Error: ', ['error' => $e->getMessage()]);            
@@ -293,7 +293,8 @@ class AuthController extends Controller
         );
         Auth::guard('user')->login($user);        
         $otpCode->delete();
-        $url = route('user.profile');
+        // $url = route('user.profile');
+        $url = Helper::redirectRouteAfterLogin();
 
         return response()->json(['success' => true, 'message' => 'Logged in successfully.', 'redirect_url' => $url, 'user' => $user]);
     }
