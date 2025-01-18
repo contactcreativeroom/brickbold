@@ -83,12 +83,6 @@ Route::post('/newsletter/post', [NewsletterController::class, 'postData'])->name
 Route::post('/create-order', [PaymentController::class, 'createOrder'])->name('payment.create');
 Route::post('/verify-payment', [PaymentController::class, 'handlePayment'])->name('payment.verify');
 
-Route::get('/payment-success', function () {
-    return 'Payment Successful!';
-})->name('payment.success');
-Route::get('/payment-failed', function () {
-    return 'Payment Failed!';
-})->name('payment.failed');
 
 Route::middleware(['auth.user'])->prefix('user')->group(function () {
 // Route::group(['prefix' => 'user'], function () {

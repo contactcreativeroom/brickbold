@@ -22,7 +22,7 @@
     <meta name="keywords" content="{{$seo['seo_keywords']}}">
     <meta name="description" content="{{$seo['seo_description']}}">
 @endif
-<meta name="author" content="themesflat.com" />
+<meta name="author" content="creativeroom.i/" />
 <!-- Mobile Specific Metas -->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 <meta name="csrf-token" content="{{ csrf_token() }}">
