@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
-            $table->text('type')->nullable()->default('SELL');
+            $table->string('type', 100)->nullable()->default('SELL');
             $table->string('name')->nullable();
-            $table->text('profile')->nullable()->default('OWNER');
+            $table->string('profile', 100)->nullable()->default('OWNER');
             $table->string('property_type')->nullable();
             $table->integer('unit')->nullable()->default(1);
             $table->integer('days')->nullable()->default(1);

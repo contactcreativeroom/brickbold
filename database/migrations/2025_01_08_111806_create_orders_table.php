@@ -20,7 +20,7 @@ return new class extends Migration
             $table->float('package_price')->nullable()->default(0);
             $table->float('discount')->nullable()->default(0);
             $table->float('grand_price')->nullable()->default(0);
-            $table->longText('package_value')->nullable()->default(0);
+            $table->longText('package_value')->nullable();
             $table->integer('post_property')->nullable()->default(1);
             $table->integer('contacts')->nullable()->default(1);
             $table->integer('days')->nullable()->default(1);
