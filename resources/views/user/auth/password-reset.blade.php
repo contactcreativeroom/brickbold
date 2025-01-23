@@ -7,7 +7,7 @@
                     <div class="banner-account">
                         <img src="{{url('frontend/images/section/banner-login.jpg')}}" alt="banner">
                     </div> 
-                    <form class="form-account" id="loginForm" method="POST" action="{{ route('password.reset', ['token' => request()->token, 'email' => request()->email ]) }}">
+                    <form class="form-account" method="POST" action="{{ route('password.reset', ['token' => request()->token, 'email' => request()->email ]) }}">
                         @csrf
                         <input type="hidden" name="token" value="{{ request()->token }}" >
                         <input type="hidden" name="email" value="{{ request()->email }}" >
@@ -63,7 +63,7 @@
                         </div>
                         <div class="box box-btn">
                             <button type="submit" class="tf-btn bg-color-primary w-100">Submit</button>
-                            <div class="text text-center">Already have reset your password ? <a href="{{route('login')}}" class="text-color-primary">Sign in here</a></div>
+                            <div class="text text-center">Already have reset your password ? <a href="#modalLogin" data-bs-toggle="modal" class="text-color-primary">Sign in here</a></div>
                         </div> 
                     </form>
                 </div>

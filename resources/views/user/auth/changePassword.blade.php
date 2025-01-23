@@ -7,7 +7,7 @@
                     <div class="banner-account">
                         <img src="{{url('frontend/images/section/banner-login.jpg')}}" alt="banner">
                     </div> 
-                    <form class="form-account" action="{{route('login')}}" id="loginForm" method="post" enctype='multipart/form-data' >
+                    <form class="form-account" action="{{route('login')}}"  method="post" enctype='multipart/form-data' >
                         @csrf 
                         <div class="title-box mb-40">
                             <h4>Login</h4>

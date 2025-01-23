@@ -7,7 +7,7 @@
                     <div class="banner-account">
                         <img src="{{url('frontend/images/section/banner-login.jpg')}}" alt="banner" style="height:360px">
                     </div> 
-                    <form class="form-account" action="{{route('forgot.password')}}" id="loginForm" method="post" enctype='multipart/form-data' >
+                    <form class="form-account" action="{{route('forgot.password')}}" method="post" enctype='multipart/form-data' >
                         @csrf 
                         <div class="title-box mb-40">
                             <h4>Forgot Password? 🔒</h4>

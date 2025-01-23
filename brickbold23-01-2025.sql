@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 17, 2025 at 09:19 AM
+-- Generation Time: Jan 23, 2025 at 08:51 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -47,7 +47,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `name`, `email`, `email_verified_at`, `phone`, `image`, `level`, `password`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'testingrakesh1@mailinator.com', '2024-12-09 10:07:18', NULL, NULL, 1, '$2y$10$1sHWsCqQv1kUw1gcqfJJEewmmV7OatsuTnge6fNlfekg5eAJw/qOa', 1, 'fkSTONUJ5PqCjJ4vJaWhJCPlZz1wMRL9JW7Tf0WdGHA5DxuB4C1cdjmR1S98', '2024-12-09 10:07:19', '2024-12-13 12:34:40'),
+(1, 'Admin', 'testingrakesh1@mailinator.com', '2024-12-09 10:07:18', NULL, NULL, 1, '$2y$10$1sHWsCqQv1kUw1gcqfJJEewmmV7OatsuTnge6fNlfekg5eAJw/qOa', 1, 'eaf1Hk0h8E19SOjCs1QPOpgKV3Do4yXGFYb8nrNiVkKvXLAd6fv7Pg9dqmBj', '2024-12-09 10:07:19', '2024-12-13 12:34:40'),
 (2, 'Rakesh gupta', 'ludhianaaitechnology@gmail.com', NULL, '09874563251', 'd79ad9bbbcb774d334ceb80532baf36a.jpg', 2, '$2y$10$5whlR0uot92CbBw.RFvPA.uNRXnhkK6jwErQm/9zkA1pPfSisswri', 1, NULL, '2024-12-10 11:39:56', '2024-12-10 12:08:17'),
 (5, 'Rakesh gupta11', 'testing@gmail.com', NULL, '09874563250', 'e40628102e22c409733e93bac105966a.jpg', 2, '$2y$10$lUISU51RxjCunDk97DNQH.Ii1t0pO1ZGJlc9CNFstZvzeXeLohieK', 1, 'u7FcHJW8ELOMliJGRqBwpbJi2hCKNpPdNLIjkpcp1NJJOKZqBJ7W8bTNqmde', '2025-01-06 12:31:34', '2025-01-07 06:32:23');
 
@@ -360,7 +360,7 @@ CREATE TABLE `orders` (
   `package_price` double(8,2) DEFAULT 0.00,
   `discount` double(8,2) DEFAULT 0.00,
   `grand_price` double(8,2) DEFAULT 0.00,
-  `package_value` longtext DEFAULT '0',
+  `package_value` longtext DEFAULT NULL,
   `post_property` int(11) DEFAULT 1,
   `contacts` int(11) DEFAULT 1,
   `days` int(11) DEFAULT 1,
@@ -427,9 +427,9 @@ INSERT INTO `otp_codes` (`id`, `mobile`, `otp`, `expires_at`, `created_at`, `upd
 
 CREATE TABLE `packages` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `type` text DEFAULT 'SELL',
+  `type` varchar(100) DEFAULT '''SELL''',
   `name` varchar(255) DEFAULT NULL,
-  `profile` text DEFAULT 'OWNER',
+  `profile` varchar(100) DEFAULT '''OWNER''',
   `property_type` varchar(255) DEFAULT NULL,
   `unit` int(11) DEFAULT 1,
   `days` int(11) DEFAULT 1,
