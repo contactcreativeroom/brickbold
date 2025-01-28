@@ -11,10 +11,9 @@
                             </a>
                         </div>
                         <nav class="main-menu">
-                            <ul class="navigation ">
-                                <li class="current-menu"><a href="{{route('about')}}">About Us</a></li>  
+                            <ul class="navigation ">                                
 
-                                <li class="has-child style-2"><a href="{{route('properties')}}">Buy</a>
+                                <li class="has-child style-2 current-menu"><a href="{{route('properties')}}">Buy</a>
                                     <ul class="submenu">
                                         <li>
                                             <a href="{{route('properties')}}">Popular</a>
@@ -170,6 +169,10 @@
                                         </li>
                                     </ul>
                                 </li>
+
+                                <li ><a href="{{route('homeloan')}}">Home Loan</a></li>  
+
+                                <li ><a href="{{route('about')}}">About Us</a></li>  
 
                                 <li><a href="{{route('contact')}}">Contact</a></li>
                             </ul>
@@ -390,12 +393,9 @@
                                         Logout</a>
                                 </div>
                             </div>
-                            
-                            @endauth
-
-                            @guest('user')
+                            @else                             
                                 <div class="btn-add">
-                                    <a class="tf-btn style-border pd-23" href="#modalRegister" data-bs-toggle="modal" >
+                                    <a class="tf-btn bg-color-primary pd-23" href="{{route('register')}}"  >
                                         Post Property
                                         <span class="text-danger ps-3 pe-3 bg-warning rounded-4">Free</span>
                                     </a>
@@ -416,7 +416,7 @@
                                         <a href="#modalRegister" data-bs-toggle="modal">register </a>
                                     </div>
                                 </div> --}}
-                            @endguest
+                            @endauth
                             <div class="mobile-button" data-bs-toggle="offcanvas" data-bs-target="#menu-mobile"
                                 aria-controls="menu-mobile">
                                 <i class="icon-menu"></i>

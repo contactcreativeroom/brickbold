@@ -7,7 +7,7 @@
                 <div class="col-lg-12">
                     <div class="title-inner ">
                         <ul class="breadcrumb">
-                            <li><a class="home fw-6 text-color-3" href="index.html">Home</a></li>
+                            <li><a class="home fw-6 text-color-3" href="{{route('home')}}">Home</a></li>
                             <li>Property Listing</li>
                         </ul>
                     </div>

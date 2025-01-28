@@ -262,22 +262,27 @@
                                 <td class="logo" style="text-align: center;">
                                     <a target="_blank" href=""
                                         style="width: 100%; float: left; text-align: center; display: inline-block;">
-                                        <img src="{{$logo}}" alt="Logo" style="max-width: 200px; display: inline-block; float: none;">
+                                        <img src="{{ $logo }}" alt="Logo" style="max-width: 200px; display: inline-block; float: none;">
                                     </a>
                                 </td>
                             </tr>
                         </table>
                     </td>
-                </tr> 
+                </tr>
                 <tr>
                     <td valign="middle" class="hero hero-2 bg_white" style="padding: 2em 0 2em 0;">
                         <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
                             <tr>
                                 <td style="width: 100%;">
                                     <div class="text" style="padding: 0 2.5em; text-align: center;">
-                                        <h2 style="width: 100%; float: left; display: inline-block; text-align: center; margin-bottom: 20px;">
-                                            Contact us enquiry.
-                                        </h2> 
+                                        <h2
+                                            style="width: 100%; float: left; display: inline-block; text-align: center; margin-bottom: 20px;">
+                                            WELCOME
+                                        </h2>
+                                        <p style="float: left; width: 100%; text-align: center; color: #acacac; margin-bottom: 0;" >
+                                            Hey <span>{{$email}}</span>,<br />You are registered with
+                                            <span>{{config('constants.BUSINESS.name')}} </span>.  System provide your default password <span style="color: #000;">{{$password}}</span> change it as per your choice.                                          
+                                        </p>
                                     </div>
                                 </td>
                             </tr>
@@ -287,71 +292,79 @@
 
                 <!-- end:tr -->
                 <!-- bottom shipping details -->
+                <tr>
+                    <td style="width: 100%; padding: 1em 0 0 25px;"> 
+                        Your account information is as below :-
+                    </td>
+                </tr>
+                 <tr></tr>
+                  
+                <tr>
+                    <td class="bg_white" style="padding: 5px 25px; width: 100%;">
+                        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+                            <tr>
+                                <td style="width: 50%; text-align: left; color: #000;">
+                                    Email
+                                </td>
+                                <td style="width: 50%">
+                                    <p
+                                        style="float: left; width: 100%; text-align: right; line-height: 1; color: #acacac; margin-bottom: 0; line-height: 1 padding: 0">
+                                        <span style="color: #acacac"> {{$email}} </span>
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="bg_white" style="padding: 5px 25px; width: 100%;">
+                        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+                            <tr>
+                                <td style="width: 50%; text-align: left; color: #000;">
+                                    Phone
+                                </td>
+                                <td style="width: 50%">
+                                    <p
+                                        style="float: left; width: 100%; text-align: right; line-height: 1; color: #acacac; margin-bottom: 0; line-height: 1 padding: 0">
+                                        <span style="color: #acacac"> {{$phone}} </span>
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="bg_white" style="padding: 5px 25px; width: 100%;">
+                        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+                            <tr>
+                                <td style="width: 50%; text-align: left; color: #000;">
+                                    Password
+                                </td>
+                                <td style="width: 50%">
+                                    <p
+                                        style="float: left; width: 100%; text-align: right; line-height: 1; color: #acacac; margin-bottom: 0; line-height: 1 padding: 0">
+                                        <span style="color: #acacac"> {{$password}} </span>
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <!-- end:tr -->
                
 
-                <tr>
-                    <td style="width: 100%; padding: 1em 50px 0;">
-                        <h2 style="float: left; display: inline-block; "> Details :- </h2>
-                    </td>
-                </tr>
-                
-                <tr>
-                    <td class="bg_white" style="padding: 5px 80px; width: 100%;">
-                        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
-                            <tr>
-                                <td style="width: 80%; text-align: left; margin-left:10px; color: #000;"> Name : {{ $name }}</td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="bg_white" style="padding: 5px 80px; width: 100%;">
-                        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
-                            <tr>
-                                <td style="width: 80%; text-align: left; margin-left:10px; color: #000;"> Email : {{ $email }}</td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="bg_white" style="padding: 5px 80px; width: 100%;">
-                        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
-                            <tr>
-                                <td style="width: 80%; text-align: left; margin-left:10px; color: #000;"> Phone : {{ $phone }} </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
 
                 <tr>
-                    <td class="bg_white" style="padding: 5px 80px; width: 100%;">
-                        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
-                            <tr>
-                                <td style="width: 80%; text-align: left; margin-left:10px; color: #000;"> Interest : {{ $interest }} </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
+                    <td class="bg_white" style="padding: 10px 25px 10px; width: 100%; border-top: 1px solid #ddd;text-align:center;">
+                        <p style="float: left; width: 100%; text-align: center; line-height: 1.575; color: #acacac; margin-bottom: 0; line-height: 1 padding: 0">
+                            If you need any help drop us an email: 
+                            <a href="mailto:{{config('constants.EMAIL.contact')}}" style="color: #000;">{{config('constants.EMAIL.contact')}}</a> 
+                                
+                                {{-- or call us at: <a href="javascript:;" style="color: #000;">{{config('constants.PHONE.number')}} </a>  --}}
+                            <br>
+                            <a>{{config('constants.BUSINESS.name')}}</a>
 
-                <tr>
-                    <td class="bg_white" style="padding: 5px 80px; width: 100%;">
-                        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
-                            <tr>
-                                <td style="width: 80%; text-align: left; margin-left:10px; color: #000;">Message: {{ $description }}</td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-
-                <!-- end:tr -->
-                <tr>
-                    <td style="width: 100%; padding: 1em 0 0;">
-                        &nbsp;
-                    </td>
-                </tr>
-                <tr>
-                    <td class="bg_white" style="padding: 10px 25px 10px; width: 100%; border-top: 1px solid #ddd;">
-                        <p  style="float: left; width: 100%; text-align: center; line-height: 1.575; color: #acacac; margin-bottom: 0; line-height: 1; padding: 0;">  {{config('constants.BUSINESS.name')}}</p>
+                        </p>
                     </td>
                 </tr>
             </table>

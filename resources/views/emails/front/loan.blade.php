@@ -262,7 +262,7 @@
                                 <td class="logo" style="text-align: center;">
                                     <a target="_blank" href=""
                                         style="width: 100%; float: left; text-align: center; display: inline-block;">
-                                        <img src="{{$logo}}" alt="Logo" style="max-width: 200px; display: inline-block; float: none;">
+                                        <img src="{{$logo}}" alt="Logo" style="max-width: 200px; display: inline-block; float: none; ">
                                     </a>
                                 </td>
                             </tr>
@@ -276,7 +276,7 @@
                                 <td style="width: 100%;">
                                     <div class="text" style="padding: 0 2.5em; text-align: center;">
                                         <h2 style="width: 100%; float: left; display: inline-block; text-align: center; margin-bottom: 20px;">
-                                            Contact us enquiry.
+                                            Bank Loan enquiry.
                                         </h2> 
                                     </div>
                                 </td>
@@ -299,20 +299,12 @@
                     <td class="bg_white" style="padding: 5px 80px; width: 100%;">
                         <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
                             <tr>
-                                <td style="width: 80%; text-align: left; margin-left:10px; color: #000;"> Name : {{ $name }}</td>
+                                <td style="width: 80%; text-align: left; margin-left:10px; color: #000;"> Amount : {{ $amount }}</td>
                             </tr>
                         </table>
                     </td>
                 </tr>
-                <tr>
-                    <td class="bg_white" style="padding: 5px 80px; width: 100%;">
-                        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
-                            <tr>
-                                <td style="width: 80%; text-align: left; margin-left:10px; color: #000;"> Email : {{ $email }}</td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
+               
                 <tr>
                     <td class="bg_white" style="padding: 5px 80px; width: 100%;">
                         <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -327,21 +319,21 @@
                     <td class="bg_white" style="padding: 5px 80px; width: 100%;">
                         <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
                             <tr>
-                                <td style="width: 80%; text-align: left; margin-left:10px; color: #000;"> Interest : {{ $interest }} </td>
+                                <td style="width: 80%; text-align: left; margin-left:10px; color: #000;"> City : {{ $city }} </td>
                             </tr>
                         </table>
                     </td>
-                </tr>
+                </tr>              
 
                 <tr>
                     <td class="bg_white" style="padding: 5px 80px; width: 100%;">
                         <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
                             <tr>
-                                <td style="width: 80%; text-align: left; margin-left:10px; color: #000;">Message: {{ $description }}</td>
+                                <td style="width: 80%; text-align: left; margin-left:10px; color: #000;"> Property Finalized? : {{ $finalized }} </td>
                             </tr>
                         </table>
                     </td>
-                </tr>
+                </tr>  
 
                 <!-- end:tr -->
                 <tr>

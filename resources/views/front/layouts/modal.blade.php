@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="flat-account">
                 <div class="banner-account">
-                    <img src="{{url('frontend/images/section/banner-register.jpg')}}" alt="banner">
+                    <img src="{{url('frontend/images/section/banner-login.jpg')}}" alt="banner">
                 </div> 
                 <form class="form-account" action="{{route('register')}}" id="registerForm"  method="post" enctype='multipart/form-data'>
                     @csrf 
@@ -12,15 +12,15 @@
                         <h4>Register</h4>
                         <span class="close-modal icon-close" data-bs-dismiss="modal"></span>
                     </div>
-                    <div class="box grid-layout-2 gap-10 box-info-2 mb-10">
+                    {{-- <div class="box grid-layout-2 gap-10 box-info-2 mb-10"> --}}
                         <fieldset class="box-fieldset1">
-                            <label for="name">I am<span>*</span></label>
-                            <div class="box-radio-check ">
+                            <label for="name">You are<span>*</span></label>
+                            <div class="box-radio-check d-flex">
                                 @foreach (config('constants.USER_TYPE') as $key=>$value)
-                                <fieldset class="radio-item ">
+                                <fieldset class="radio-item me-3">
                                     <label>
                                         <span class="text-1">{{$value}}</span>
-                                        <input type="radio" name="role" value="{{$value}}" id="role_{{$key}}" {{($key==0)? 'checked' : ''}}>
+                                        <input type="radio" name="role" value="{{$value}}" id="role_{{$key}}"  @if(old('role')!=null && old('role')== $key) checked  @endif >
                                         <span class="btn-radio"></span>
                                     </label>
                                 </fieldset>
@@ -36,14 +36,14 @@
                             </div> --}}
                             <span id="role-error" class="text-danger is_error"></span>
                         </fieldset>
-                        <fieldset class="box-fieldset1">
-                            <label for="looking">I am looking<span>*</span></label>
-                            <div class="box-radio-check">
+                        <fieldset class="box-fieldset1 mt-3">
+                            <label for="looking">You're looking<span>*</span></label>
+                            <div class="box-radio-check d-flex">
                                 @foreach (config('constants.FOR_TYPE') as $key=>$value)
-                                <fieldset class="radio-item ">
+                                <fieldset class="radio-item me-3">
                                     <label>
                                         <span class="text-1">{{$value}}</span>
-                                        <input type="radio" name="for_type" value="{{$key}}" id="role_{{$key}}" {{($key=='for-sell')? 'checked' : ''}}>
+                                        <input type="radio" name="for_type" value="{{$key}}" id="role_{{$key}}" @if(old('for_type')!=null && old('for_type')== $key) checked  @endif >
                                         <span class="btn-radio"></span>
                                     </label>
                                 </fieldset>
@@ -51,7 +51,7 @@
                             </div>
                             <span id="for_type-error" class="text-danger is_error"></span>
                         </fieldset>
-                    </div>
+                    {{-- </div> --}}
                         {{-- <fieldset class="box-fieldset1">
                             <label for="name">Role</label>
                             <div class="ip-field">
@@ -95,7 +95,7 @@
                             </div>
                             <span id="role-error" class="text-danger is_error"></span>
                         </fieldset> --}}
-                        <fieldset class="box-fieldset1 mb-10">
+                        {{-- <fieldset class="box-fieldset1 mb-10">
                             <label for="name">Full name<span>*</span></label>
                             <div class="ip-field">
                                 <svg class="icon" width="18" height="18" viewBox="0 0 18 18" fill="none"
@@ -107,8 +107,8 @@
                                 <input type="text" class="form-control" id="name" name="name" placeholder="full name">
                             </div>
                             <span id="name-error" class="text-danger is_error"></span>
-                        </fieldset>
-                    <div class="box grid-layout-2 gap-10 box-info-2">
+                        </fieldset> --}}
+                    <div class="box grid-layout-2 gap-10 box-info-2 mt-3">
                         <fieldset class="box-fieldset1">
                             <label for="email">Email address<span>*</span></label>
                             <div class="ip-field">
@@ -139,7 +139,7 @@
                             <span id="mobile-error" class="text-danger is_error"></span>
                         </fieldset>
                         
-                        <fieldset class="box-fieldset1">
+                        {{-- <fieldset class="box-fieldset1">
                             <label for="pass">Password<span>*</span></label>
                             <div class="ip-field">
                                 <svg class="icon" width="18" height="18" viewBox="0 0 18 18" fill="none"
@@ -164,7 +164,7 @@
                                 <input type="password" class="form-control" id="password_confirmation" name="password_confirmation"  placeholder="Confirm password">
                             </div>
                             <span id="password_confirmation-error" class="text-danger is_error"></span>
-                        </fieldset>
+                        </fieldset> --}}
                         </div>
                         <fieldset class="box-fieldset">
                             <div class="checkbox-item style-1">
@@ -179,9 +179,8 @@
  
                     <div class="box box-btn mb-2">
                         <button type="submit" class="tf-btn bg-color-primary w-full">Sign Up</button>
-                        <div class="text text-center">Don’t you have an account? <a href="#modalLogin" data-bs-toggle="modal" class="text-color-primary">Sign In</a></div>
                     </div>
-                    <p class="box text-center caption-2">or login with</p>
+                    <p class="box text-center caption-2 mt-5">or login with</p>
                     <div class="group-btn">
                         <a href="{{route('login.google.redirect')}}" class="btn-social">
                             <svg width="21" height="20" viewBox="0 0 21 20" fill="none"
@@ -211,6 +210,8 @@
                         </a>
                         <a href="#modalOTP" data-bs-toggle="modal" class="btn-social"> OTP </a>
                     </div>
+                    <div class="text text-center mt-5">Already have an account? <a href="#modalLogin" data-bs-toggle="modal" class="text-color-primary">Sign In</a></div>
+
                 </form>
             </div>
         </div>
@@ -274,9 +275,8 @@
                     </div>
                     <div class="box box-btn mb-2">
                         <button type="submit" class="tf-btn bg-color-primary w-100">Login</button>
-                        <div class="text text-center">Don’t you have an account? <a href="#modalRegister" data-bs-toggle="modal" class="text-color-primary">Register</a></div>
                     </div>
-                    <p class="box text-center caption-2">or login with</p>
+                    <p class="box text-center caption-2 mt-5">or login with</p>
                     <div class="group-btn">
                         <a href="{{route('login.google.redirect')}}" class="btn-social">
                             <svg width="21" height="20" viewBox="0 0 21 20" fill="none"
@@ -306,6 +306,7 @@
                         </a>
                         <a href="#modalOTP" data-bs-toggle="modal" class="btn-social"> OTP </a>
                     </div>
+                    <div class="text text-center mt-5">Don't have an account? <a href="#modalRegister" data-bs-toggle="modal" class="text-color-primary">Register</a></div>
                 </form>
             </div>
         </div>
@@ -376,5 +377,60 @@
         </div>
     </div>
 <!-- /.OTP -->
+
+<!-- Home Popup -->
+@guest('user')
+<div class="modal modal fade" id="HelpPopup">
+{{-- <div class="modal fade show" id="HelpPopup" aria-modal="true" role="dialog" style="display: block;"> --}}
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="flat-account">
+                
+                <form class="form-account" id="HelpPopupForm" action="{{ route('newsletter.mobile.post') }}" method="post" enctype='multipart/form-data'>
+                    @csrf 
+                    <div class="title-box">
+
+                        <div class="text text-center">
+                            <h6>Looking for help posting your property?</h6>                        
+                            <p class=" mt-3">Our property experts are here to help.</p>
+                        </div>
+                        <span class="close-modal icon-close" data-bs-dismiss="modal"></span>
+                    </div>
+                    <div class="body-box">
+                        
+                        <fieldset class="box-fieldset">
+                            {{-- <label for="mobile">Mobile</label> --}}
+                            <div class="ip-field">
+                                <svg class="icon" width="18" height="18" viewBox="0 0 18 18" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12.75 1.5H5.25C4.42157 1.5 3.75 2.17157 3.75 3V15C3.75 15.8284 4.42157 16.5 5.25 16.5H12.75C13.5784 16.5 14.25 15.8284 14.25 15V3C14.25 2.17157 13.5784 1.5 12.75 1.5Z" 
+                                        stroke="#A3ABB0" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M10.125 13.875H7.875" stroke="#A3ABB0" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <input type="text" class="form-control" name="mobile" id="mobile" placeholder="Your mobile">
+                            </div>
+                            <span id="mobile-error" class="text-danger is_error"></span>
+                        </fieldset>
+                        <div class="group-btn">
+                            <button type="button" id="helpLater" class="tf-btn style-border w-100">Later</button>
+                            <button type="submit"  class="tf-btn bg-color-primary w-100">Submit</button>
+                        </div>  
+                    </div> 
+
+                    <div class="footer-box mt-5"> 
+                        <div class="text text-center">
+                            <p>Need help? Call us at {{ data_get($config, 'phone', '') }}.</p>
+                        </div>
+                        
+                    </div> 
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endguest
+<!-- /Home Popup -->
+
+
 
 

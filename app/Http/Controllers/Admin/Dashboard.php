@@ -8,6 +8,7 @@ use App\Models\Banner;
 use App\Models\Booking;
 use App\Models\Category;
 use App\Models\Contact;
+use App\Models\Newsletter;
 use App\Models\Order;
 use App\Models\Payment;
 use App\Models\Property;
@@ -195,6 +196,11 @@ class Dashboard extends Controller
         $enquiries = PropertyEnquiry::latest()->paginate($this->pagerecords);
         $data=array('rows'=>$enquiries);
         return view($this->prefix.'.property-enquiries')->with($data);
+    } 
+    public function subscribers(Request $request){
+        $enquiries = Newsletter::latest()->paginate($this->pagerecords);
+        $data=array('rows'=>$enquiries);
+        return view($this->prefix.'.subscribers')->with($data);
     } 
 
 }

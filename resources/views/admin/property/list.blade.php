@@ -96,6 +96,7 @@
                                     <a href="{{route('property', $row->slug)}}" class="text-heading text-truncate">
                                         <span class="fw-medium">{{$row->title}}</span>
                                     </a>
+                                    <small>ID: {{$row->uid}}</small>
                                     <small>Date: {{ App\Helper\Helper::formatStringDate($row->created_at)  }}</small>
                                     <small>Views: {{$row->views}}</small>
                                     <small class="text-btn text-color-primary" >{{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($row->price)}}</small>

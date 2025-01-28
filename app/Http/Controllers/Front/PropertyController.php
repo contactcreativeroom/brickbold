@@ -150,7 +150,7 @@ class PropertyController extends Controller
             'name' => 'required',
             'email' => 'required|email',
             'phone' => 'required',
-            'message' => 'required',
+            // 'message' => 'required',
         ];
         
         $this->validate($request, $validationArray); 
@@ -164,7 +164,7 @@ class PropertyController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
-            'message' => $request->message,
+            // 'message' => $request->message,
             'status' => 1,
         ]); 
         
@@ -175,7 +175,7 @@ class PropertyController extends Controller
                 'email'=>$request->email,
                 'phone'=>$request->phone,
                 'property_name'=>$property->name,
-                'description'=>$request->message,
+                // 'description'=>$request->message,
              );
             //dispatch(new \App\Jobs\PropertyEnquiryQueue($details));
         } else{

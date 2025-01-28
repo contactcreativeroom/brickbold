@@ -71,6 +71,14 @@ class SubAdminController extends Controller
                 'level'=>2, 
                 'status' => $request->status,
             ]);
+            $details = array(
+                'logo' => Helper::getLogo(),
+                'name'=> $request->name,
+                'email'=>$request->email,
+                'phone'=>$request->phone,
+                'password'=>$request->password,
+             );
+            dispatch(new \App\Jobs\SubAdminQueue($details));
         }else{
             $subAdmin = Admin::find($id); 
             $subAdmin->update([

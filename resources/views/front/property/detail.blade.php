@@ -136,7 +136,7 @@
                                         </div>
                                         <div class="content">
                                             <div class="text-4 text-color-default">ID:</div>
-                                            <div class="text-1 text-color-heading">#{{ App\Helper\Helper::propertyid($row->id) }}</div>
+                                            <div class="text-1 text-color-heading">{{ $row->uid }}</div>
                                         </div>
                                     </div>
                                     <div class="box-icon">
@@ -185,7 +185,7 @@
                                         </div>
                                         <div class="content">
                                             <div class="text-4 text-color-default">Year Built:</div>
-                                            <div class="text-1 text-color-heading">{{config('constants.BUILD_YEAR')[$row->build_year]}}</div>
+                                            <div class="text-1 text-color-heading">{{ config('constants.BUILD_YEAR')[$row->build_year] ?? '' }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -210,7 +210,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="{{route('contact')}}" class="tf-btn bg-color-primary pd-21 fw-6">Ask a question</a>
+                            {{-- <a href="{{route('contact')}}" class="tf-btn bg-color-primary pd-21 fw-6">Ask a question</a> --}}
                         </div>
                         @if ($row->video_link)
                         <div class=" wg-property video spacing-2">
@@ -260,7 +260,7 @@
                                 <ul>
                                     <li class="flex">
                                         <p class="fw-6">ID</p>
-                                        <p>#{{ App\Helper\Helper::propertyid($row->id) }}</p>
+                                        <p>{{ $row->uid}}</p>
                                     </li>
                                     <li class="flex">
                                         <p class="fw-6">Price</p>
@@ -298,7 +298,7 @@
                                     </li>
                                     <li class="flex">
                                         <p class="fw-6">Year buit</p>
-                                        <p>{{config('constants.BUILD_YEAR')[$row->build_year]}}</p>
+                                        <p>{{ config('constants.BUILD_YEAR')[$row->build_year] ?? '' }}</p>
                                     </li>
                                     <li class="flex">
                                         <p class="fw-6">Type</p>
@@ -661,14 +661,14 @@
                                         </span>
                                     @endif
                                 </fieldset>
-                                <fieldset class="mb-30">
+                                {{-- <fieldset class="mb-30">
                                     <textarea name="message" cols="30" rows="10" placeholder="How can an agent help" id="message1" class="{{ $errors->has('message') ? ' is-invalid' : '' }}">@if(old('message')!=null){{old('message')}}@endif</textarea>
                                     @if($errors->has('message'))
                                         <span class="invalid-feedback">
                                             {{ $errors->first('message') }}
                                         </span>
                                     @endif
-                                </fieldset>
+                                </fieldset> --}}
                                 <input type="hidden" name="property_id"  value="{{$row->id}}">
                                 <input type="hidden" name="property_slug"  value="{{$row->slug}}">
                                 <button type="submit" class="tf-btn bg-color-primary w-full"> Send message</button>
@@ -723,8 +723,8 @@
                                                 <img class="lazyload" data-src="{{ App\Helper\Helper::getImage('storage/property/'.$similarProperty->id, $similarProperty?->image?->image) }}" src="{{ App\Helper\Helper::getImage('storage/property/'.$similarProperty->id, $similarProperty?->image?->image) }}" alt="">
                                             </a>
                                             <ul class="box-tag flex gap-8 ">
-                                                <li class="flat-tag text-4 bg-main fw-6 text-white">Featured</li>
-                                                <li class="flat-tag text-4 bg-3 fw-6 text-white">{{config('constants.FOR_TYPE')[$similarProperty->for_type]}}</li>
+                                                {{-- <li class="flat-tag text-4 bg-3 fw-6 text-white">Featured</li> --}}
+                                                <li class="flat-tag text-4 bg-main fw-6 text-white">{{config('constants.FOR_TYPE')[$similarProperty->for_type]}}</li>
                                             </ul>
                                             <div class="list-btn flex gap-8 ">
                                                 {{-- <a href="{{route('user.favorite.toggle', $similarProperty->id)}}" class="btn-icon save hover-tooltip"><i class="icon-save"></i>
@@ -753,7 +753,7 @@
                                                     {{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($similarProperty->price)}}
                                                 </h5>
                                                 <div class="wrap-btn flex"> 
-                                                    <a href="{{route('property', $similarProperty->slug)}}" class="tf-btn style-border pd-4">Details</a>
+                                                    <a href="{{route('property', $similarProperty->slug)}}" class="tf-btn style-border pd-4">Interested</a>
                                                 </div>
                                             </div>
                                         </div>

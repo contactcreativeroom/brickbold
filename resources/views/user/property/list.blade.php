@@ -64,6 +64,7 @@
                                                         <div class="title">
                                                             <a href="{{route('property', $row->slug)}}" class="link">{{$row->title}}</a> 
                                                         </div>
+                                                        <div class="text-date">ID: {{$row->uid}}</div>
                                                         <div class="text-date">Posting date: {{ App\Helper\Helper::formatStringDate($row->created_at)  }}</div>
                                                         <div class="text-date">Views: {{$row->views}}</div>
                                                         <div class="text-btn text-color-primary">{{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($row->price)}}</div>

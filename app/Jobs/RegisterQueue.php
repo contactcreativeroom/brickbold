@@ -9,11 +9,10 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
 
-class ContactQueue implements ShouldQueue
+class RegisterQueue implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     protected $details;
-
     /**
      * Create a new job instance.
      */
@@ -28,14 +27,14 @@ class ContactQueue implements ShouldQueue
     public function handle(): void
     {
         try{ 
-            Mail::send('emails.front.contact-us', $this->details, function($message){
+            Mail::send('emails.front.register', $this->details, function($message){
                 $message->from(config('constants.EMAIL.from'), config('constants.BUSINESS.name'));
-                $message->subject(config('constants.BUSINESS.name').' - Contact-us enquiry');
-                $message->to(config('constants.EMAIL.contact'));
+                $message->subject(config('constants.BUSINESS.name').' - Registration Successfully');
+                $message->to($this->details['email']);
             });            
         }
         catch(\Exception $e){
-            //print '<pre>'; print_r($e->getMessage()); die;
+            print '<pre>'; print_r($e->getMessage()); die;
         }
     }
 }

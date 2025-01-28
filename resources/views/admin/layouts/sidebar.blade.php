@@ -107,6 +107,12 @@
                 <div>Contact Enquiries</div>
             </a>
         </li> 
+        <li class="menu-item {{ in_array(Route::currentRouteName(), ['admin.subscribers']) ? 'active' : '' }}">
+            <a href="{{route('admin.subscribers')}}" class="menu-link">
+                <i class="menu-icon fa-solid fa-user-check"></i>
+                <div>Subscribers</div>
+            </a>
+        </li> 
 
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">CMS Pages</span>

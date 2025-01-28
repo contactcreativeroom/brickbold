@@ -3,6 +3,7 @@
 use App\Helper\Helper;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\BankController;
 use App\Http\Controllers\Admin\BannersController;
 use App\Http\Controllers\Admin\CategoryController; 
 use App\Http\Controllers\Admin\Dashboard;
@@ -54,6 +55,7 @@ Route::get('/trash', function () {
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/home', [HomeController::class, 'index']);
 Route::get('/about', [HomeController::class, 'about'])->name('about');
+Route::get('/home-loan', [HomeController::class, 'homeloan'])->name('homeloan');
 Route::get('/faq', [HomeController::class, 'faq'])->name('faq');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::post('/contact/post', [HomeController::class, 'contactPost'])->name('contact.post');
@@ -62,10 +64,11 @@ Route::get('/page/{slug}', [HomeController::class, 'page'])->name('page');
 Route::get('/properties', [FrontPropertyController::class, 'properties'])->name('properties');
 Route::get('/property/{slug}', [FrontPropertyController::class, 'property'])->name('property');
 Route::post('/property/enquiry/post', [FrontPropertyController::class, 'enquiryPost'])->name('property.enquiry');
+Route::post('/bank/enquiry/post', [HomeController::class, 'bankPost'])->name('bank.enquiry');
 Route::get('/packages', [HomeController::class, 'packages'])->name('packages');
 
-Route::post('/login', [UserAuthController::class, 'login'])->name('login');
-Route::post('/register', [UserAuthController::class, 'register'])->name('register');
+Route::any('/login', [UserAuthController::class, 'login'])->name('login');
+Route::any('/register', [UserAuthController::class, 'register'])->name('register');
 Route::any('/forgot/password', [UserAuthController::class, 'forgotPassword'])->name('forgot.password');
 Route::match(['get','post'], '/password-reset/{token}', [UserAuthController::class, 'passwordReset'])->name('password.reset');
 Route::get('/reset/success', [UserAuthController::class, 'passwordResetSuccess'])->name('password.reset-success'); 
@@ -79,6 +82,7 @@ Route::post('/send-otp', [UserAuthController::class, 'sendOTP']);
 Route::post('/verify-otp', [UserAuthController::class, 'verifyOTP']);
 
 Route::post('/newsletter/post', [NewsletterController::class, 'postData'])->name('newsletter.post');
+Route::post('/newsletter/mobile/post', [NewsletterController::class, 'postDataMobile'])->name('newsletter.mobile.post');
  
 Route::post('/create-order', [PaymentController::class, 'createOrder'])->name('payment.create');
 Route::post('/verify-payment', [PaymentController::class, 'handlePayment'])->name('payment.verify');
@@ -143,6 +147,14 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/banner/status/change', [BannersController::class, 'changeStatus'])->name('admin.banner.status.change');
         Route::post('/banner/priority-change', [BannersController::class, 'changePriority'])->name('admin.banner.priority.change');
 
+        Route::get('/banks', [BankController::class, 'list'])->name('admin.banks');
+        Route::get('/bank', [BankController::class, 'add'])->name('admin.bank');
+        Route::get('/bank/{id}', [BankController::class, 'edit'])->name('admin.bank.edit');
+        Route::post('bank-post-data', [BankController::class, 'postData'])->name('admin.bank.post');
+        Route::get('/bank/delete/{entity_id}', [BankController::class, 'delete'])->name('admin.bank.delete');
+        Route::post('/bank/status/change', [BankController::class, 'changeStatus'])->name('admin.bank.status.change');
+        Route::post('/bank/priority-change', [BankController::class, 'changePriority'])->name('admin.bank.priority.change');
+
         Route::get('/users', [AdminUserController::class, 'list'])->name('admin.users');
         Route::get('/user/detail/{id}', [AdminUserController::class, 'detail'])->name('admin.user');
         Route::get('/user/edit/{id}', [AdminUserController::class, 'edit'])->name('admin.user.edit');
@@ -167,6 +179,7 @@ Route::group(['prefix' => 'admin'], function () {
 
         Route::get('/contact-enquiries', [Dashboard::class, 'contactEnquiries'])->name('admin.contact-enquiries');
         Route::get('/property-enquiries', [Dashboard::class, 'propertyEnquiries'])->name('admin.property-enquiries');
+        Route::get('/subscribers', [Dashboard::class, 'subscribers'])->name('admin.subscribers');
 
         // Route::get('/categories', [CategoryController::class, 'list'])->name('admin.categories');
         // Route::get('/category', [CategoryController::class, 'add'])->name('admin.category');

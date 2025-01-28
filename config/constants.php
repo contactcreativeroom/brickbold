@@ -1,5 +1,6 @@
 <?php
 return [
+    'PROPERTY_UID_FROM' => 123,
     'FRONT_PAGE_RECORDS' => 10,
     'ADMIN_PAGE_RECORDS' => 10,
     'ADMIN_PAGE_BOOKING_RECORDS' => 9,
@@ -37,14 +38,45 @@ return [
         3 =>  'Less Then 5 to 10 Years',
         4 =>  'Above 10 Years'
     ], 
+    'FOR_TYPE' => [
+        'for-sell' =>  'For Sell',
+        'for-rent' =>  'For Rent'
+    ],
+
     'TYPE' => [
         'apartment' =>  'Apartment',
         'commercial' =>  'Commercial',
         'residential' =>  'Residential'
     ],
-    'FOR_TYPE' => [
-        'for-sell' =>  'For Sell',
-        'for-rent' =>  'For Rent'
+    
+
+    'PROPERTY_DETAIL_ARRAY' => [
+        'apartment' => [
+            'studio' => 'Studio',
+            'duplex' => 'Duplex',
+            'triplex' => 'Triplex',
+            'penthouses' => 'Penthouses',
+        ], 
+        'commercial' => [
+            'shop-showroom' => 'Shop/Showroom',
+            'commercial-land' => 'Commercial Land',
+            'office' => 'Office',
+            'warehouse-godown' => 'Warehouse/Godown',
+            'industrial-building' => 'Industrial Building',
+            'industrial-shed' => 'Industrial Shed',
+            'shop-cum-office' => 'shop-cum-office',
+            'shop-cum-flat' => 'Shop-Cum-Flat',
+            'townhouse' => 'Townhouse',
+            'pg' => 'PG'
+        ], 
+        'residential' => [
+            'house' => 'House',
+            'villa' => 'Villa',
+            'bungalow' => 'Bungalow',
+            'flat' => 'Flat',
+            'plot-land' => 'Plot/Land',
+            'pg' => 'PG'
+        ]
     ],
 
     'PROPERTY_DETAIL' => [
@@ -71,7 +103,9 @@ return [
         'greater-ludhiana-area-development-authority' => 'Greater Ludhiana Area Development Authority(GLADA)',
         'greater-mohali-area-development-authority' => 'Greater Mohali Area Development Authority(GMADA)',
         'rwa-cooperative-housing-society' => 'RWA/Co-Operative Housing Society',
-        'city-municipal-corporation' => 'City Municipal Corporation'
+        'city-municipal-corporation' => 'City Municipal Corporation',
+        'other' => 'Other',
+        
     ],
     'PROPERTY_STATUSES' => [
         1 =>  'Approved',
@@ -126,8 +160,8 @@ return [
     ],
 
     'CONTACT' => [
-        'country_code' => '0161',
-        'phone' => '4048145',
+        'country_code' => '91',
+        'phone' => '9041132240',
         'email' => 'support@brickbold.com',
         'addresss' => 'SCO-18, 2nd Floor, Cabin No. 208, Feroze Gandhi Market, Ludhiana, Punjab, India, 141001',
     ],    
@@ -222,6 +256,52 @@ return [
         'TEMPLATED_ID' => '1707172535624208538',
     ],
     'GOOGLE_API_KEY' => 'AIzaSyBUkrIEQStEvADw3fBKMbeVNMjrAZdON4s',
-    'MAP_TOKEN' => "pk.eyJ1IjoiaG9hbmdoYW5kbiIsImEiOiJjbHp3YnUyc2cwMTl3MmtweWo1MjU0cnQ3In0.kJvlxTy_K1nVvwR8y5O8xA"
+    'MAP_TOKEN' => "pk.eyJ1IjoiaG9hbmdoYW5kbiIsImEiOiJjbHp3YnUyc2cwMTl3MmtweWo1MjU0cnQ3In0.kJvlxTy_K1nVvwR8y5O8xA",
 
+    'MIN_PRICE_SELL' => [
+        500000 => "₹5 Lac",
+        1000000 => "₹10 Lac",
+        2000000 => "₹20 Lac",
+        3000000 => "₹30 Lac",
+        4000000 => "₹40 Lac",
+        5000000 => "₹50 Lac",
+        6000000 => "₹60 Lac",
+        7000000 => "₹70 Lac",
+        8000000 => "₹80 Lac",
+        9000000 => "₹90 Lac",
+        10000000 => "₹1 Cr",
+        12000000 => "₹1.2 Cr",
+        14000000 => "₹1.4 Cr",
+        16000000 => "₹1.6 Cr",
+        18000000 => "₹1.8 Cr",
+        20000000 => "₹2 Cr",
+        23000000 => "₹2.3 Cr",
+        26000000 => "₹2.6 Cr",
+        30000000 => "₹3 Cr",
+        35000000 => "₹3.5 Cr",
+        40000000 => "₹4 Cr",
+        45000000 => "₹4.5 Cr",
+        50000000 => "₹5 Cr",
+        100000000 => "₹10 Cr",
+        200000000 => "₹20 Cr"
+    ],
+    'MIN_PRICE_RENT' => [
+        5000 => "₹5000",
+        10000 => "₹10000",
+        15000 => "₹15000",
+        20000 => "₹20000",
+        25000 => "₹25000",
+        30000 => "₹30000",
+        35000 => "₹35000",
+        40000 => "₹40000",
+        50000 => "₹50000",
+        60000 => "₹60000",
+        85000 => "₹85000",
+        100000 => "₹1 Lac",
+        150000 => "₹1.5 Lac",
+        200000 => "₹2 Lac",
+        400000 => "₹4 Lac",
+        700000 => "₹7 Lac",
+        1000000 => "₹10 Lac"
+    ]
 ];

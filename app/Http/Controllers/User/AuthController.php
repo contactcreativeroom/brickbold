@@ -22,48 +22,60 @@ class AuthController extends Controller
     private $prefix = 'user';
 
     public function register(Request $request){
-        $validator = Validator::make($request->all(), [
-            'role' => 'required',
-            'for_type' => 'required',
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email|max:255',
-            'password' => 'required|min:6|confirmed',
-            'accept_term_condition' => 'required|in:1',
-            'dob' => 'nullable|date',
-            'mobile' => 'nullable|digits:10',
-        ]);
-    
-        if ($validator->fails()) {
+        if ($request->isMethod('post')) {
+            $validator = Validator::make($request->all(), [
+                'role' => 'required',
+                'for_type' => 'required',
+                // 'name' => 'required|string|max:255',
+                'email' => 'required|email|unique:users,email|max:255',
+                'mobile' => 'nullable|digits:10',
+                // 'password' => 'required|min:6|confirmed',
+                'accept_term_condition' => 'required|in:1',
+                // 'dob' => 'nullable|date',
+            ]);
+        
+            if ($validator->fails()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Validation errors occurred.',
+                    'errors' => $validator->errors()->toArray(),
+                ], 400);
+            }
+            $password = Helper::generatePassword();
+            $user = User::create([
+                'user_type' => $request->role,
+                'for_type' => $request->for_type,
+                // 'name' => $request->name,
+                'email' => $request->email,
+                // 'dob' => $request->dob,
+                'phone' => $request->mobile,
+                'password' => bcrypt($password),
+            ]);
+        
+            if ($user) {
+                Auth::guard('user')->login($user);
+                $details = array(
+                    'logo' => Helper::getLogo(),
+                    'user_type'=> $request->user_type,
+                    'for_type'=> $request->for_type,
+                    'email'=>$request->email,
+                    'phone'=>$request->phone,
+                    'password'=>$password,
+                );
+                dispatch(new \App\Jobs\RegisterQueue($details));
+                return response()->json([
+                    'success' => true,
+                    'redirect_url' => Helper::redirectRouteAfterLogin(),
+                    'message' => 'Registered successfully!',
+                ], 201);
+            }
+        
             return response()->json([
                 'success' => false,
-                'message' => 'Validation errors occurred.',
-                'errors' => $validator->errors()->toArray(),
-            ], 400);
+                'message' => 'Registration failed. Please try again.',
+            ], 500);
         }
-    
-        $user = User::create([
-            'user_type' => $request->role,
-            'for_type' => $request->for_type,
-            'name' => $request->name,
-            'email' => $request->email,
-            'dob' => $request->dob,
-            'phone' => $request->mobile,
-            'password' => bcrypt($request->password),
-        ]);
-    
-        if ($user) {
-            Auth::guard('user')->login($user);
-            return response()->json([
-                'success' => true,
-                'redirect_url' => Helper::redirectRouteAfterLogin(),
-                'message' => 'Registered successfully!',
-            ], 201);
-        }
-    
-        return response()->json([
-            'success' => false,
-            'message' => 'Registration failed. Please try again.',
-        ], 500);
+        return view('user.auth.register');
     }
 
     public function login(Request $request){
@@ -108,10 +120,7 @@ class AuthController extends Controller
             ], 401);
         }
     
-        return response()->json([
-            'success' => false,
-            'message' => 'Invalid request method.',
-        ], 405);
+        return view('user.auth.login');
     }
 
     public function logout(Request $request){

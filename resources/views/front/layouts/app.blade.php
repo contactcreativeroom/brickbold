@@ -52,6 +52,7 @@
         });
     </script>
     <script type="text/javascript" src="{{url('frontend/js/custom.js')}}"></script> 
+    <script type="text/javascript" src="{{url('frontend/js/help-modal.js')}}"></script> 
     @stack('scripts')
 
     @if (Session::has('message'))

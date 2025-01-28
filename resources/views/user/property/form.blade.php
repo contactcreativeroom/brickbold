@@ -60,7 +60,7 @@
                                 <label for="zip">
                                     Province/State:<span>*</span>
                                 </label>
-                                <input type="text" class="form-control {{ $errors->has('state') ? ' is-invalid' : '' }}" name="state" placeholder="Enter property zip code" value="@if(old('state')!=null){{old('state')}}@elseif(!empty($row->state)){{$row->state}}@endif" id="__address_state" readonly>
+                                <input type="text" class="form-control {{ $errors->has('state') ? ' is-invalid' : '' }}" name="state" placeholder="Enter property zip code" value="@if(old('state')!=null){{old('state')}}@elseif(!empty($row->state)){{$row->state}}@endif" id="__address_state" >
                                 @if($errors->has('state'))
 									<span class="invalid-feedback">
 										{{ $errors->first('state') }}
@@ -72,7 +72,7 @@
                                 <label for="City">
                                     City:<span>*</span>
                                 </label>
-                                <input type="text" class="form-control {{ $errors->has('city') ? ' is-invalid' : '' }}" name="city" placeholder="Enter property zip code" value="@if(old('city')!=null){{old('city')}}@elseif(!empty($row->city)){{$row->city}}@endif" id="__address_city" readonly >
+                                <input type="text" class="form-control {{ $errors->has('city') ? ' is-invalid' : '' }}" name="city" placeholder="Enter property zip code" value="@if(old('city')!=null){{old('city')}}@elseif(!empty($row->city)){{$row->city}}@endif" id="__address_city"  >
                                 @if($errors->has('city'))
 									<span class="invalid-feedback">
 										{{ $errors->first('city') }}
@@ -83,7 +83,7 @@
                                 <label for="zip">
                                     Zip Code:<span>*</span>
                                 </label>
-                                <input type="text" class="form-control {{ $errors->has('zip_code') ? ' is-invalid' : '' }}" name="zip_code" placeholder="Enter property zip code" value="@if(old('zip_code')!=null){{old('zip_code')}}@elseif(!empty($row->zip_code)){{$row->zip_code}}@endif" id="__address_postcode" readonly>
+                                <input type="text" class="form-control {{ $errors->has('zip_code') ? ' is-invalid' : '' }}" name="zip_code" placeholder="Enter property zip code" value="@if(old('zip_code')!=null){{old('zip_code')}}@elseif(!empty($row->zip_code)){{$row->zip_code}}@endif" id="__address_postcode" >
                                 @if($errors->has('zip_code'))
 									<span class="invalid-feedback">
 										{{ $errors->first('zip_code') }}
@@ -665,7 +665,7 @@
                                     <img src="{{ url('storage/property/'.$row->id.'/'.$imageVal->image)}}" alt="img">
                                     <span class="icon icon-trashcan1 custom_spartan_remove_row" data-id="{{$imageVal->id}}" ></span>
                                 </div>
-                                {{-- <div class="col-3 spartan_item_wrapper" data-spartanindexrow="{{ $imageKey.'_custom' }}"
+                                {{-- <div class="col-md-3 spartan_item_wrapper" data-spartanindexrow="{{ $imageKey.'_custom' }}"
                                     style="margin-bottom: 20px;">
                                     <div style="position: relative;">
                                         <div class="spartan_item_loader" data-spartanindexloader="{{ $imageKey.'_custom' }}"
@@ -719,7 +719,7 @@
         fieldName: 'images[]', // this configuration will send your images named "fileUpload" to the server
         maxCount: 50,
         rowHeight: '200px',
-        groupClassName: 'col-3',
+        groupClassName: 'col-md-3',
         maxFileSize: '',
         dropFileLabel: "Drop Here",
         onAddRow: function(index) {
@@ -770,7 +770,38 @@
                 });
             } 
         });
+
+        const propertyDetails = @json(config('constants.PROPERTY_DETAIL_ARRAY'));        
+        $('#property_type').change(function () {
+            let type = $(this).val();
+            let option = '<option value="">Select Property Detail</option>';
+            if (propertyDetails[type]) {
+                $.each(propertyDetails[type], function (key, val) {
+                    option += '<option value="' + key + '">' + val + '</option>';
+                });
+            }
+            $('#property_detail').html(option);
+        });
+
+        $('input[name="carpet_area"], input[name="builtup_area"]').on('input', function () {
+            const builtupArea = $('input[name="builtup_area"]');
+            const carpetArea = $('input[name="carpet_area"]');
+            const builtupAreaVal = parseFloat(builtupArea.val()) || 0;
+            const carpetAreaVal = parseFloat(carpetArea.val()) || 0;
+            
+            if (carpetAreaVal > builtupAreaVal) {
+                carpetArea.addClass('is-invalid'); 
+                if (!carpetArea.next('.invalid-feedback').length) {
+                    carpetArea.after('<span class="invalid-feedback text-danger">Carpet area cannot be greater than built-up area</span>');
+                }
+            } else {
+                carpetArea.removeClass('is-invalid');
+                carpetArea.next('.invalid-feedback').remove(); 
+            }
+        });
+
     });
 
+    
 </script>
 @endpush

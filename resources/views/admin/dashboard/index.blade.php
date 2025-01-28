@@ -15,7 +15,7 @@
         <!-- Card Border Shadow -->
         <div class="col-lg-3 col-sm-6">
             <div class="card card-border-shadow-primary h-100">
-                <div class="card-body">
+                <a href="{{route('admin.users')}}" class="card-body">
                     <div class="d-flex align-items-center mb-2">
                         <div class="avatar me-4">
                             <span class="avatar-initial rounded bg-label-primary"><i class="bx bx-group bx-lg"></i></span>
@@ -23,12 +23,12 @@
                         <h4 class="mb-0">{{$userTotal->count()}}</h4>
                     </div>
                     <p class="mb-2">Total Customers</p>
-                </div>
+                </a>
             </div>
         </div>
         <div class="col-lg-3 col-sm-6">
             <div class="card card-border-shadow-light h-100">
-                <div class="card-body">
+                <a href="{{route('admin.users', ['user_type'=>'Owner'])}}" class="card-body">
                     <div class="d-flex align-items-center mb-2">
                         <div class="avatar me-4">
                             <span class="avatar-initial rounded bg-label-light"><i class="bx bx-building-house bx-lg"></i></span>
@@ -36,12 +36,12 @@
                         <h4 class="mb-0">{{$userTotal->where('user_type','Owner')->count()}}</h4>
                     </div>
                     <p class="mb-2">Total Owners</p>
-                </div>
+                </a>
             </div>
         </div>
         <div class="col-lg-3 col-sm-6">
             <div class="card card-border-shadow-secondary h-100">
-                <div class="card-body">
+                <a href="{{route('admin.users', ['user_type'=>'Agent'])}}" class="card-body">
                     <div class="d-flex align-items-center mb-2">
                         <div class="avatar me-4">
                             <span class="avatar-initial rounded bg-label-secondary"><i class="bx bx-buildings bx-lg"></i></span>
@@ -49,12 +49,12 @@
                         <h4 class="mb-0">{{$userTotal->where('user_type','Agent')->count()}}</h4>
                     </div>
                     <p class="mb-2">Total agents</p>
-                </div>
+                </a>
             </div>
         </div>
         <div class="col-lg-3 col-sm-6">
             <div class="card card-border-shadow-dark h-100">
-                <div class="card-body">
+                <a href="{{route('admin.users', ['user_type'=>'Builder'])}}" class="card-body">
                     <div class="d-flex align-items-center mb-2">
                         <div class="avatar me-4">
                             <span class="avatar-initial rounded bg-label-dark"><i class="bx bx-user-pin bx-lg"></i></span>
@@ -62,12 +62,12 @@
                         <h4 class="mb-0">{{$userTotal->where('user_type','Builder')->count()}}</h4>
                     </div>
                     <p class="mb-2">Total builders</p>
-                </div>
+                </a>
             </div>
         </div>
         <div class="col-lg-3 col-sm-6 g-6">
             <div class="card card-border-shadow-info h-100">
-                <div class="card-body">
+                <a href="{{route('admin.properties')}}" class="card-body">
                     <div class="d-flex align-items-center mb-2">
                         <div class="avatar me-4">
                             <span class="avatar-initial rounded bg-label-info"><i class="bx bx bxs-calendar bx-lg"></i></span>
@@ -75,12 +75,12 @@
                         <h4 class="mb-0">{{$properties->count()}}</h4>
                     </div>
                     <p class="mb-2">Total properties</p>
-                </div>
+                </a>
             </div>
         </div>
         <div class="col-lg-3 col-sm-6 g-6">
             <div class="card card-border-shadow-success h-100">
-                <div class="card-body">
+                <a href="{{route('admin.properties', ['status'=>1])}}" class="card-body">
                     <div class="d-flex align-items-center mb-2">
                         <div class="avatar me-4">
                             <span class="avatar-initial rounded bg-label-success"><i class="bx bxs-calendar-check bx-lg"></i></span>
@@ -88,12 +88,12 @@
                         <h4 class="mb-0">{{$properties->where("status", 1)->count()}}</h4>
                     </div>
                     <p class="mb-2">Total properties Active</p>
-                </div>
+                </a>
             </div>
         </div>
         <div class="col-lg-3 col-sm-6 g-6">
             <div class="card card-border-shadow-danger h-100">
-                <div class="card-body">
+                <a href="{{route('admin.properties', ['status'=>2])}}" class="card-body">
                     <div class="d-flex align-items-center mb-2">
                         <div class="avatar me-4">
                             <span class="avatar-initial rounded bg-label-danger"><i class="bx bxs-calendar-x bx-lg"></i></span>
@@ -101,12 +101,12 @@
                         <h4 class="mb-0">{{$properties->where("status", 2)->count()}}</h4>
                     </div>
                     <p class="mb-2">Total properties pending</p>
-                </div>
+                </a>
             </div>
         </div>
         <div class="col-lg-3 col-sm-6 g-6">
             <div class="card card-border-shadow-warning h-100">
-                <div class="card-body">
+                <a href="{{route('admin.properties', ['status'=>3])}}" class="card-body">
                     <div class="d-flex align-items-center mb-2">
                         <div class="avatar me-4">
                             <span class="avatar-initial rounded bg-label-warning"><i class="bx bx-calendar-event bx-lg"></i></span>
@@ -114,7 +114,7 @@
                         <h4 class="mb-0">{{$properties->where("status", 3)->count()}}</h4>
                     </div>
                     <p class="mb-2">Total properties sold</p>
-                </div>
+                </a>
             </div>
         </div>
         <div class="col-lg-3 col-sm-6 g-6">

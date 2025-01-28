@@ -6,6 +6,9 @@ $('#registerForm').on('submit', function(e) {
     $.ajax({
         url: $(this).attr('action'),
         method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
         data: formData,
         success: function(response) {
             toastr.success(response.message, 'Successfully!');
@@ -35,6 +38,9 @@ $('#loginForm').on('submit', function(e) {
     $.ajax({
         url: $(this).attr('action'), 
         method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
         data: formData,
         success: function(response) {
             toastr.success(response.message, 'Successfully!');
@@ -97,6 +103,9 @@ function sendOTP() {
     $.ajax({
         url: site_url+'/send-otp', 
         method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
         data: { mobile: mobile },
         success: function(response) {
             console.log(response.message);
@@ -138,6 +147,9 @@ function verifyOTP() {
     $.ajax({
         url: site_url+'/verify-otp', 
         method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
         data: { mobile: mobile, otp: otp },
         success: function(response) {
             console.log(response);
@@ -203,3 +215,10 @@ inputs.forEach((input, index1) => {
 window.addEventListener("load", () => inputs[0].focus());
 
 // otp verification input end
+
+
+// setTimeout(function () {
+//     var myModal = new bootstrap.Modal(document.getElementById('HelpPopup'));
+//     myModal.show();
+// }, 5000);
+

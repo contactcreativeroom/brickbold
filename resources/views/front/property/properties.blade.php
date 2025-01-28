@@ -7,7 +7,7 @@
                     <div class="col-lg-12">
                         <div class="title-inner ">
                             <ul class="breadcrumb">
-                                <li><a class="home fw-6 text-color-3" href="index.html">Home</a></li>
+                                <li><a class="home fw-6 text-color-3" href="{{route('home')}}">Home</a></li>
                                 <li>Property Listing</li>
                             </ul>
                         </div>
@@ -77,7 +77,7 @@
                                     
                                 </div>
                                 <div class="wd-search-form">
-                                    <div class="group-price">
+                                    {{-- <div class="group-price">
                                         <div class="widget-price">
                                             <div class="box-title-price">
                                                 <span class="title-price">Price range</span>
@@ -92,7 +92,7 @@
                                             <input type="hidden" name="min_price" value="{{ request('min_price', '') }}" >
                                             <input type="hidden" name="max_price" value="{{ request('max_price', '') }}" >
                                         </div> 
-                                    </div>  
+                                    </div>   --}}
                                     <div class=" group-select">
                                         <div class="box-select">
                                             <select class="form-control form-select nice-select" name="availability">
@@ -153,6 +153,14 @@
                                                 @endforeach                              
                                             </select>
                                         </div>
+                                        <div class="box-select">
+                                            <select class="form-control form-select nice-select" name="min_price"> 
+                                                <option value="">Budget</option>
+                                                @foreach (config('constants.MIN_PRICE_SELL') as $key=>$value)
+                                                    <option value="{{$key}}" {{ old('min_price', request('min_price')) == $key ? 'selected' : '' }}  >{{$value}}</option>
+                                                @endforeach                                                               
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -175,7 +183,7 @@
                                 <div class="right">
                                     <ul class="nav-tab-filter group-layout" role="tablist">
                                         <li class="nav-tab-item" role="presentation">
-                                            <a href="#gridLayout" class=" btn-layout grid nav-link-item active"
+                                            <a href="#gridLayout" class="btn-layout grid nav-link-item "
                                                 data-bs-toggle="tab">
                                                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
@@ -211,7 +219,7 @@
                                             </a>
                                         </li>
                                         <li class="nav-tab-item" role="presentation">
-                                            <a href="#listLayout" class="nav-link-item btn-layout list"
+                                            <a href="#listLayout" class="nav-link-item btn-layout list active"
                                                 data-bs-toggle="tab">
                                                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
@@ -253,7 +261,7 @@
                         <div class="col-lg-8">
                             <div class="flat-animate-tab">
                                 <div class="tab-content">
-                                    <div class="tab-pane active show" id="gridLayout" role="tabpanel">
+                                    <div class="tab-pane" id="gridLayout" role="tabpanel">
                                         <div class="tf-grid-layout md-col-2">
                                             @foreach ($rows as $row)
                                                 <div class="box-house hover-img">
@@ -294,7 +302,7 @@
                                                                 {{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($row->price)}}
                                                             </h5>
                                                             <div class="wrap-btn flex"> 
-                                                                <a href="{{route('property', $row->slug)}}" class="tf-btn style-border pd-4">Details</a>
+                                                                <a href="{{route('property', $row->slug)}}" class="tf-btn style-border pd-4">Interested</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -302,7 +310,7 @@
                                             @endforeach 
                                         </div>
                                     </div>
-                                    <div class="tab-pane" id="listLayout" role="tabpanel">
+                                    <div class="tab-pane active show" id="listLayout" role="tabpanel">
                                         <div class="wrap-list">
                                             @foreach ($rows as $row)
                                             <div class="box-house style-list hover-img">
@@ -311,9 +319,9 @@
                                                         <img class="lazyload" data-src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" alt="">
                                                     </a>
                                                     <ul class="box-tag flex gap-8 ">
-                                                        <li class="flat-tag text-4 bg-main fw-6 text-white">Featured
+                                                        <li class="flat-tag text-4 bg-3 fw-6 text-white">Featured
                                                         </li>
-                                                        <li class="flat-tag text-4 bg-3 fw-6 text-white">{{config('constants.FOR_TYPE')[$row->for_type]}}</li>
+                                                        <li class="flat-tag text-4 bg-main fw-6 text-white">{{config('constants.FOR_TYPE')[$row->for_type]}}</li>
                                                     </ul>
                                                     <div class="list-btn flex gap-8 ">
                                                         {{-- <a href="{{route('user.favorite.toggle', $row->id)}}" class="btn-icon save hover-tooltip">
@@ -343,7 +351,7 @@
                                                             {{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($row->price)}}
                                                         </h5>
                                                         <div class="wrap-btn flex"> 
-                                                            <a href="{{route('property', $row->slug)}}" class="tf-btn style-border pd-4">Details</a>
+                                                            <a href="{{route('property', $row->slug)}}" class="tf-btn style-border pd-4">Interested</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -355,7 +363,7 @@
                             </div>
                             <div class="wrap-pagination">
                                 <p class="text-1">Showing {{ $rows->firstItem() }}-{{ $rows->lastItem() }} of {{ $rows->total() }} results.</p>
-                                {{ $rows->links() }}
+                                {{ $rows->links('vendor.pagination.frontend-bootstrap-4') }}
                             </div>
                         </div>
                         <div class="col-lg-4">

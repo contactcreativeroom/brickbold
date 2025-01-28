@@ -14,6 +14,12 @@ class Property extends Model
         'user_id', 'slug', 'title', 'description', 'state', 'city', 'zip_code', 'location', 'price', 'price_detail', 'is_negotiable', 'availability', 'ownership', 'build_year', 'type', 'property_detail', 'for_type', 'plot_area', 'plot_type', 'carpet_area', 'builtup_area', 'floors', 'bedroom', 'bathroom', 'balcony', 'facing', 'furnished', 'approved_by', 'additional', 'amenities', 'video_link', 'status'
     ];
 
+    protected $appends = ['uid'];
+
+    public function getUidAttribute(){
+        return '#'.$this->id + config('constants.PROPERTY_UID_FROM');
+    }
+
     protected static function boot(){
         parent::boot();
 

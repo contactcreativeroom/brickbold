@@ -57,7 +57,8 @@
   --Color-6: #fdefe2;
   --Color-7: #25c55b;
   --Color-8: #ffa920;
-  --Line: #ececec;
+  --LineOld: #ececec;
+  --Line: #a69a9a;
 }
 
 /*---------- Reset css styles ----------- */
@@ -1435,7 +1436,7 @@ a:hover, a:focus {
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
-  gap: 14px;
+  gap: 15px;
 }
 .main-menu .navigation > li.current-menu > a {
   color: var(--Primary) !important;
@@ -5256,7 +5257,7 @@ tr {
 }
 
 .radio-item label {
-  padding-left: 30px;
+  padding-left: 23px;
   cursor: pointer;
   position: relative;
   font-weight: 400;
@@ -8401,7 +8402,7 @@ tr {
 .page-title.home01, .page-title.home05, .page-title.career {
   background-image: url(../images/section/page-title-1.jpg);
   background-attachment: fixed;
-  padding: 154px 0 258px;
+  padding: 170px 0 220px;
   background-size: cover;
 }
 .page-title.home01 .heading-title, .page-title.home05 .heading-title, .page-title.career .heading-title {
@@ -9802,7 +9803,7 @@ tr {
     margin-right: 0;
   }
   .main-menu .navigation {
-    gap: 25px;
+    gap: 30px;
     margin-left: 221px;
   }
 }
@@ -10453,8 +10454,7 @@ tr {
   .wrap-dashboard-content-2 .grid-layout-4 {
     grid-template-columns: 1fr;
   }
-  .widget-box-2 .grid-layout-2,
-  .widget-box-2 .grid-layout-3 {
+  .widget-box-2 .grid-layout-2, .widget-box-2 .grid-layout-3, .grid-layout-4 {
     grid-template-columns: 1fr;
   }
   .wrap-dashboard-content .box-fieldset {

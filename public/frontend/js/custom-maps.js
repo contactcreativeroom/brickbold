@@ -123,20 +123,25 @@
         document.querySelector("#__address").value = document.getElementById("__address_saved").value;
     });
 
-      function initAutocomplete() {
-          addressField = document.querySelector("#__address");
-          //postalField = document.querySelector("#__address_postcode");
+    function initAutocomplete() {
+        addressField = document.querySelector("#__address");
+        //postalField = document.querySelector("#__address_postcode");
 
-          autocomplete = new google.maps.places.Autocomplete(addressField, {
-              //fields: ["address_components", "geometry", "place_id", "name", "formatted_address"],
-              fields: ["address_components", "place_id", "geometry", "formatted_address", "name"],
-              //types: ["address"],
-              componentRestrictions: {country: ["in"]}
-          });
-          // addressField.focus();
-          autocomplete.addListener("place_changed", fillInAddress);
+        addressField.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') { 
+                event.preventDefault(); // Prevent form submission
+            }
+        }); 
+        autocomplete = new google.maps.places.Autocomplete(addressField, {
+            //fields: ["address_components", "geometry", "place_id", "name", "formatted_address"],
+            fields: ["address_components", "place_id", "geometry", "formatted_address", "name"],
+            //types: ["address"],
+            componentRestrictions: {country: ["in"]}
+        });
+        // addressField.focus();
+        autocomplete.addListener("place_changed", fillInAddress);
 
-      }
+    }
 
 
 

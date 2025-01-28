@@ -52,4 +52,64 @@ class NewsletterController extends Controller
         Helper::toastMsg(true, 'Thank you for reaching out! You will recieved the info about latest properties.');
         return back(); 
     }
+
+    public function postDataMobileff(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'mobile' => 'nullable|digits:10',
+        ]);
+         
+        if ($validator->fails()) {
+            Helper::toastMsg(false, "Validation errors: " . json_encode($validator->errors()->toArray()));
+            return back()->withErrors($validator)->withInput();
+        }
+
+        $newsletter = new Newsletter(); 
+        $newsletter->mobile = $request->mobile;
+        $newsletter->status = 1;
+        $newsletter->save();
+        
+        if($newsletter){
+            $details = array(
+                'logo' => Helper::getLogo(),
+                'name'=> $request->name,
+                'email'=>$request->email,
+                'phone'=>$request->phone,
+                'interest'=>$request->interest,
+                'description'=>$request->message,
+             );
+            //dispatch(new \App\Jobs\ContactQueue($details));
+        } else{
+            Helper::toastMsg(false, "Opps! Some error occured.");
+            return back(); 
+        } 
+        Helper::toastMsg(true, 'Thank you for reaching out! You will recieved the info about latest properties.');
+        return back(); 
+    }
+
+    public function postDataMobile(Request $request){    	
+        $validator = Validator::make($request->all(), [
+            'mobile' => 'nullable|digits:10',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation errors occurred.',
+                'errors' => $validator->errors()->toArray(),
+            ], 400);
+        }   
+
+        $newsletter = new Newsletter(); 
+        $newsletter->mobile = $request->mobile;
+        $newsletter->status = 1;
+        $newsletter->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Thank you for reaching out! Our agent will contact you shortly.',
+            'redirect_url' => Helper::redirectRouteAfterLogin(),
+        ], 200);
+
+    }
+
 }

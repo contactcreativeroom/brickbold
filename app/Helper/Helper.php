@@ -740,7 +740,27 @@ class Helper
         }
         return false;
     }
+    public static function generatePassword(){
+        $upperCase = chr(rand(65, 90)); // Generate one uppercase letter
+        $specialChar = chr(rand(33, 47)); // Generate one special character
+        $number = chr(rand(48, 57)); // Generate one number
+        $remainingLength = 5; // Remaining characters to make it 8 in total
 
+        $remaining = '';
+        for ($i = 0; $i < $remainingLength; $i++) {
+            $randomType = rand(1, 3);
+            if ($randomType === 1) {
+                $remaining .= chr(rand(97, 122)); // Lowercase letter
+            } elseif ($randomType === 2) {
+                $remaining .= chr(rand(65, 90)); // Uppercase letter
+            } else {
+                $remaining .= chr(rand(48, 57)); // Number
+            }
+        }
+        
+        $password = str_shuffle($upperCase . $specialChar . $number . $remaining);
+        return $password;
+    }
     public static function redirectRouteAfterLogin(){
         if (Auth::guard('user')->check()) {
             $user = Auth::guard('user')->user();

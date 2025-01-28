@@ -7,62 +7,46 @@
                 <div class="col-lg-8 ">
                     <div class="content-inner">
                         <div class="heading-title">
-                            <h1 class="title">Search Luxury Homes</h1>
+                            <h1 class="title">Discover Perfect Homes.</h1>
                             <p class="h6 fw-4">Thousands of luxury home enthusiasts just like you visit our website.
                             </p>
                         </div>
                         <form  action="{{ route('properties') }}" method="get" enctype='multipart/form-data'>
                         <div class="wg-filter ">
                             <div class="form-title">
-                                <div class="tf-dropdown-sort" data-bs-toggle="dropdown">
+
+                                <i class="icon icon-home icon-input"></i>
+                                <div class="tf-dropdown-sort ms-5" data-bs-toggle="dropdown">
                                         <div class="btn-select">
-                                            <span class="text-sort-value">{{config('constants.FOR_TYPE.for-rent')}}</span><i  class="icon-CaretDown"></i>
+                                            <span class="text-sort-value">{{config('constants.PROPERTY_DETAIL.house')}}</span><i  class="icon-CaretDown"></i>
                                         </div>
                                         <div class="dropdown-menu">
-                                            @foreach (config('constants.FOR_TYPE') as $key=>$value)
+                                            @foreach (config('constants.PROPERTY_DETAIL') as $key=>$value)
                                                 <div class="select-item for_type_select" data-value="{{$key}}">
                                                     <span class="text-value-item">{{$value}}</span>
                                                 </div>
                                             @endforeach
                                         </div>
-                                    <input type="hidden" name="for_type" class="for_type" value="for-sell">
+                                    <input type="hidden" name="property_detail" class="for_type" value="house">
                                 </div> 
                                 <fieldset class="form">
-                                    <input type="text" placeholder="Address, City, ZIP..." name="search" value="{{ request('search', '') }}">
+                                    <i class="icon icon-location icon-input"></i>
+                                    <input type="text" class="ms-2" placeholder="Address, City, ZIP..." name="search" value="{{ request('search', '') }}">
                                 </fieldset>
-                                <div class="box-item wrap-btn">
-                                    <div class="btn-filter show-form">
-                                        <div class="icons">
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M21 4H14" stroke="#F1913D" stroke-width="2" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                                <path d="M10 4H3" stroke="#F1913D" stroke-width="2" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                                <path d="M21 12H12" stroke="#F1913D" stroke-width="2" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                                <path d="M8 12H3" stroke="#F1913D" stroke-width="2" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                                <path d="M21 20H16" stroke="#F1913D" stroke-width="2" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                                <path d="M12 20H3" stroke="#F1913D" stroke-width="2" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                                <path d="M14 2V6" stroke="#F1913D" stroke-width="2" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                                <path d="M8 10V14" stroke="#F1913D" stroke-width="2" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                                <path d="M16 18V22" stroke="#F1913D" stroke-width="2" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                            </svg>
-                                        </div>
-                                    </div>
+                                <div class="box-item wrap-btn"> 
+                                    <select class="form-control form-select nice-select" name="min_price">
+                                        <option value="">Budget</option>
+                                        @foreach (config('constants.MIN_PRICE_SELL') as $key=>$value)
+                                            <option value="{{$key}}" {{ old('min_price', request('min_price')) == $key ? 'selected' : '' }}  >{{$value}}</option>
+                                        @endforeach
+                                    </select>
                                     <button type="submit" class="tf-btn bg-color-primary pd-3 fw-6">
                                         Search <i class="icon-MagnifyingGlass fw-6"></i>
-                                    </button>
+                                    </button> 
                                 </div>
                             </div>
-                            <div class="wd-search-form" style="max-width: -webkit-fill-available;">
-                                <div class="group-price11">
+                            {{--<div class="wd-search-form" style="max-width: -webkit-fill-available;">
+                                 <div class="group-price11">
                                     <div class="widget-price">
                                         <div class="box-title-price mb-30">
                                             <span class="title-price">Price range</span>
@@ -77,8 +61,8 @@
                                         <input type="hidden" name="min_price" value="{{ request('min_price', '') }}" >
                                         <input type="hidden" name="max_price" value="{{ request('max_price', '') }}" >
                                     </div> 
-                                </div>  
-                            </div>
+                                </div>   
+                            </div>--}}
                         </div>
                         </form>
                     </div>
@@ -239,7 +223,7 @@
                                                 {{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($row->price)}}
                                             </h5>
                                             <div class="wrap-btn flex"> 
-                                                <a href="{{route('property', $row->slug)}}" class="tf-btn style-border pd-4">Details</a>
+                                                <a href="{{route('property', $row->slug)}}" class="tf-btn style-border pd-4">Interested</a>
                                             </div>
                                         </div>
                                         </div>
@@ -790,7 +774,7 @@
                                                             {{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($row->price)}}
                                                         </h5>
                                                         <div class="wrap-btn flex"> 
-                                                            <a href="{{route('property', $row->slug)}}" class="tf-btn style-border pd-4">Details</a>
+                                                            <a href="{{route('property', $row->slug)}}" class="tf-btn style-border pd-4">Interested</a>
                                                         </div>
                                                     </div>
                                                 </div>

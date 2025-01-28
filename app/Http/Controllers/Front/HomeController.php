@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Helper\Helper;
 use App\Http\Controllers\Controller;
+use App\Models\Bank;
 use App\Models\Contact;
 use App\Models\Package;
 use App\Models\Page;
@@ -118,5 +119,30 @@ class HomeController extends Controller
         return view($this->prefix.'.packages',['rows' => $packages]);
     }
 
-    
+    public function homeloan(Request $request){  
+        $bank =  Bank::where('status', 1)->latest()->get(); 
+        return view($this->prefix.'.home-loan',['rows' => $bank]);
+    }
+
+    public function bankPost(Request $request) { 
+        
+        $validationArray = [
+            'loan_amount' => 'required', 
+            'loan_mobile' => 'required',
+            'loan_city' => 'required',
+        ];
+        
+        $this->validate($request, $validationArray); 
+        $details = array(
+            'logo' => Helper::getLogo(),
+            'amount'=> $request->loan_amount,
+            'phone'=>$request->loan_mobile,
+            'city'=>$request->loan_city,
+            'finalized'=>$request->loan_property,
+         );
+        dispatch(new \App\Jobs\LoanEnquiryQueue($details));
+
+        Helper::toastMsg(true, 'Thank you for reaching out! One of our experts will get in touch with you soon.');
+        return back(); 
+    }
 }
