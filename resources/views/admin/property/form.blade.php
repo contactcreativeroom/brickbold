@@ -33,7 +33,7 @@
                                             <label class="form-label">Status<span>*</span></label>
                                             <select class="form-control form-select" name="status">
                                                 @foreach (config('constants.PROPERTY_STATUSES') as $key=>$value)
-                                                    <option value="{{$key}}" {{ old('status', request('status')) === (string)$key ? 'selected' : '' }} >{{$value}}</option>
+                                                    <option value="{{$key}}" @if(old('status')!=null && old('status')==$key) selected @elseif(!empty($row) && $row->status==$key) selected @endif  >{{$value}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -84,8 +84,8 @@
                                     </div>
                                     <div class="row mt-3">
                                         <div class="col-md-12">
-                                            <label for="title" class="form-label">Property Name<span>*</span></label>
-                                            <input type="text" class="form-control {{ $errors->has('title') ? ' is-invalid' : '' }}" placeholder="Property Name" name="title" value="@if(old('title')!=null){{old('title')}}@elseif(!empty($row->title)){{$row->title}}@endif">
+                                            <label for="title" class="form-label">Area Name</label>
+                                            <input type="text" class="form-control {{ $errors->has('title') ? ' is-invalid' : '' }}" placeholder="Area Name" name="title" value="@if(old('title')!=null){{old('title')}}@elseif(!empty($row->title)){{$row->title}}@endif">
                                             @if($errors->has('title'))
                                                 <span class="invalid-feedback">
                                                     {{ $errors->first('title') }}

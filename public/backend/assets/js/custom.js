@@ -32,8 +32,10 @@ $(document).ready(function() {
     $('.entity-toggle').change(function() {       
         var entityId = $(this).data('entity-id');
         var entityType = $(this).data('entity-type');
+        var elseVal = 0;
+        if(entityType =="property"){ elseVal = 2; }
         var entityUrl = $(this).data('entity-url');
-        var isChecked = $(this).prop('checked') ? 1 : 0;
+        var isChecked = $(this).prop('checked') ? 1 : elseVal;
         var csrfToken = $('meta[name="csrf-token"]').attr('content'); // Retrieve CSRF token
 
         // Send AJAX request to update entity status

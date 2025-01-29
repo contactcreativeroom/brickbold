@@ -93,7 +93,7 @@
                                     </div>
                                 </div>
                                 <div class="d-flex flex-column">
-                                    <a href="{{route('property', $row->slug)}}" class="text-heading text-truncate">
+                                    <a href="{{route('property', $row->slug)}}" target="_blank" class="text-heading text-truncate">
                                         <span class="fw-medium">{{$row->title}}</span>
                                     </a>
                                     <small>ID: {{$row->uid}}</small>

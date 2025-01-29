@@ -9804,7 +9804,7 @@ tr {
   }
   .main-menu .navigation {
     gap: 30px;
-    margin-left: 221px;
+    /* margin-left: 221px; */
   }
 }
 @media (min-width: 1300px) {

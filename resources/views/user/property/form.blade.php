@@ -16,9 +16,9 @@
                         
                         <fieldset class="box box-fieldset">
                             <label for="title">
-                                Property Name: <span>*</span>
+                                Area Name: 
                             </label>
-                            <input type="text" class="form-control {{ $errors->has('title') ? ' is-invalid' : '' }}" placeholder="Property Name" name="title" value="@if(old('title')!=null){{old('title')}}@elseif(!empty($row->title)){{$row->title}}@endif">
+                            <input type="text" class="form-control {{ $errors->has('title') ? ' is-invalid' : '' }}" placeholder="Area Name" name="title" value="@if(old('title')!=null){{old('title')}}@elseif(!empty($row->title)){{$row->title}}@endif">
                             @if($errors->has('title'))
                                 <span class="invalid-feedback">
                                     {{ $errors->first('title') }}
@@ -594,7 +594,7 @@
                                 </div>
                             </div>
                             <div class="box-amenities"> 
-                                <div class="title-amenities fw-6 text-color-heading text-1"></div>
+                                <div class="title-amenities fw-6 text-color-heading text-1 opacity-0">More:</div>
                                 <div class="list-amenities">
                                     <fieldset class="checkbox-item style-1  ">
                                         <label>
@@ -613,7 +613,7 @@
                                 </div>
                             </div>
                             <div class="box-amenities"> 
-                                <div class="title-amenities fw-6 text-color-heading text-1"></div>
+                                <div class="title-amenities fw-6 text-color-heading text-1 opacity-0">More:</div>
                                 <div class="list-amenities">
                                     <fieldset class="checkbox-item style-1  ">
                                         <label>

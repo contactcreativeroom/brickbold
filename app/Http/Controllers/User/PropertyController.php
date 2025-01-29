@@ -97,7 +97,7 @@ class PropertyController extends Controller
     
     public function postData(Request $request){      
         $validator = Validator::make($request->all(), [
-            'title' => 'required',
+            // 'title' => 'required',
             'location' => 'required',
             'state' => 'required',
             'city' => 'required',

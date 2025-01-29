@@ -64,8 +64,9 @@
                                     <h5 class="title lh-30 title-desktop">Quick links</h5>
                                     <h5 class="title lh-30 title-mobile">Quick links</h5>
                                     <ul class="tf-collapse-content">
-                                        <li><a href="{{route('contact')}}">Contact us</a></li>
                                         <li><a href="{{route('about')}}">Why choose us?</a></li>
+                                        <li><a href="{{route('properties')}}">Properties</a></li>
+                                        <li><a href="{{route('contact')}}">Contact us</a></li>
                                         {{-- <li><a href="#">Customer reviews</a></li>
                                         <li><a href="agents.html">Our team</a></li>
                                         <li><a href="career.html">Careers with realty</a></li>

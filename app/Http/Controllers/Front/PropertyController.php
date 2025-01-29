@@ -149,8 +149,7 @@ class PropertyController extends Controller
         $validationArray = [
             'name' => 'required',
             'email' => 'required|email',
-            'phone' => 'required',
-            // 'message' => 'required',
+            'phone' => 'nullable|digits:10',
         ];
         
         $this->validate($request, $validationArray); 

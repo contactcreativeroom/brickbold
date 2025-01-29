@@ -65,7 +65,7 @@ class PropertyController extends Controller
 
     public function postData(Request $request){       
         $validator = Validator::make($request->all(), [
-            'title' => 'required',
+            // 'title' => 'required',
             'location' => 'required',
             'state' => 'required',
             'city' => 'required',
@@ -171,7 +171,7 @@ class PropertyController extends Controller
         $property->additional = $additional;
         $property->amenities = $amenities;
         $property->video_link = $request->video_link;
-        $property->status = $request->status;
+        $property->status = ($request->status == 0) ? 2 : $request->status;
         $property->save();
         
         // Handle image uploads

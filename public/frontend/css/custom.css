@@ -140,3 +140,17 @@ form .otp-input-field {
     max-width: 475px;
     height: 470px;
 }
+
+@media (min-width: 991px) and (max-width: 1200px) {
+    .navigation li a {
+        font-size: 13px;
+    }
+}
+
+.icon-construction:before {
+    content: "\e916"; 
+}
+
+.icon-furnished:before {
+    content: "\e928";
+}

@@ -217,8 +217,41 @@ window.addEventListener("load", () => inputs[0].focus());
 // otp verification input end
 
 
-// setTimeout(function () {
-//     var myModal = new bootstrap.Modal(document.getElementById('HelpPopup'));
-//     myModal.show();
-// }, 5000);
+$(document).on('click', '.interested-function', function () {
+    var slug = $(this).data('slug');
+    var id = $(this).data('id');
+    console.log(id);
+    console.log(slug);
+    $('#interestedForm #property_id').val(id);
+    $('#interestedForm #property_slug').val(slug);
+    $('#modalInterested').modal('show');
+});
 
+$('#interestedForm').on('submit', function(e) {
+    e.preventDefault();
+    $('#interestedForm .is_error').text('');
+    let formData = $(this).serialize();
+
+    $.ajax({
+        url: $(this).attr('action'),
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        data: formData,
+        success: function(response) {
+            toastr.success(response.message, 'Successfully!');
+            $('#modalInterested').modal('hide');
+        },
+        error: function(xhr) {
+            if (xhr.responseJSON && xhr.responseJSON.errors) {
+                let errors = xhr.responseJSON.errors;
+                for (let field in errors) {
+                    $(`#interestedForm #${field}-error`).text(errors[field][0]);
+                }
+            } else { 
+                toastr.error("An error occurred. Please try again.", 'Error!');
+            }
+        }
+    });
+});

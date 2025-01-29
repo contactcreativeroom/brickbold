@@ -123,12 +123,6 @@ return [
         1 =>  'Yes',
     ],
 
-    'PROPERTY_STATUSES' => [
-        0 =>  'Inactive',
-        1 =>  'Approved',
-        2 =>  'Pending',
-        3 =>  'Sold',
-    ],
     'ADDITIONALS' => ['Puja Room', 'Study Room', 'Store Room', 'Servent Room', 'Gym Room', 'Theater Room'],
     'AMENITIES' =>['Air Conditioner', 'Security', 'Lift', 'Piped Gas', 'Power Backup', 'Ro Water System', 'Internet/Wifi Community', 'Extra pillows & blankets', 'Fingerprint access', 'TV with standard cable', 'Fire Alarm', 'Laundry Service', 'Microwave', 'Dishwasher', 'Rain Water Harvesting', 'Swimming Pool', 'Car Parking Facility', 'Visitors Parking'],
     'PLOT_TYPE' => ['SqFt', 'SqYd', 'SqMtr', 'Acre', 'Marla'],

@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     setTimeout(function () {
         var myModal = new bootstrap.Modal(document.getElementById('HelpPopup'));
         myModal.show();
-    }, 2000);
+    }, 5000);
 
     document.getElementById("helpLater").addEventListener("click", function () {
         localStorage.setItem("hideHelpModal", "true"); 
@@ -25,6 +25,9 @@ $('#HelpPopupForm').on('submit', function(e) {
     $.ajax({
         url: $(this).attr('action'), 
         method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
         data: formData,
         success: function(response) {
             toastr.success(response.message, 'Successfully!');

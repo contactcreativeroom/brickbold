@@ -62,7 +62,7 @@
                                                     </div>
                                                     <div class="content">
                                                         <div class="title">
-                                                            <a href="{{route('property', $row->slug)}}" class="link">{{$row->title}}</a> 
+                                                            <a href="{{route('property', $row->slug)}}" target="_blank" class="link">{{$row->title}}</a> 
                                                         </div>
                                                         <div class="text-date">ID: {{$row->uid}}</div>
                                                         <div class="text-date">Posting date: {{ App\Helper\Helper::formatStringDate($row->created_at)  }}</div>
