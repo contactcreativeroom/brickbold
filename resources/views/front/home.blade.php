@@ -29,12 +29,12 @@
                                         </div>
                                     <input type="hidden" name="property_detail" class="for_type" value="house">
                                 </div> 
-                                <fieldset class="form">
+                                <fieldset class="form tf-dropdown-sort">
                                     <i class="icon icon-location icon-input"></i>
-                                    <input type="text" class="ms-2" placeholder="Address, City, ZIP..." name="search" value="{{ request('search', '') }}">
+                                    <input type="text" class="ms-2 search-address-home" placeholder="Address, City, ZIP..." name="search" value="{{ request('search', '') }}">
                                 </fieldset>
                                 <div class="box-item wrap-btn"> 
-                                    <select class="form-control form-select nice-select" name="min_price">
+                                    <select class="form-control form-select nice-select form-select-border-none border-0" name="min_price">
                                         <option value="">Budget</option>
                                         @foreach (config('constants.MIN_PRICE_SELL') as $key=>$value)
                                             <option value="{{$key}}" {{ old('min_price', request('min_price')) == $key ? 'selected' : '' }}  >{{$value}}</option>
@@ -97,7 +97,7 @@
                                     </div>
                                     <div class="content text-center">
                                         <h5>Apartment</h5>
-                                        <p class="mt-4 text-1">234 Property</p>
+                                        <p class="mt-4 text-1">{{$properties->where('type', 'apartment')->count()}} Properties</p>
                                     </div>
                                 </a>
                             </div>
@@ -109,7 +109,7 @@
                                     </div>
                                     <div class="content text-center">
                                         <h5>Villa</h5>
-                                        <p class="mt-4 text-1">234 Property</p>
+                                        <p class="mt-4 text-1">{{$properties->where('property_detail', 'villa')->count()}} Properties</p>
                                     </div>
                                 </a>
                             </div>
@@ -121,7 +121,7 @@
                                     </div>
                                     <div class="content text-center">
                                         <h5>Studio</h5>
-                                        <p class="mt-4 text-1">234 Property</p>
+                                        <p class="mt-4 text-1">{{$properties->where('property_detail', 'studio')->count()}} Properties</p>
                                     </div>
                                 </a>
                             </div>
@@ -133,7 +133,7 @@
                                     </div>
                                     <div class="content text-center">
                                         <h5>Office</h5>
-                                        <p class="mt-4 text-1">234 Property</p>
+                                        <p class="mt-4 text-1">{{$properties->where('property_detail', 'office')->count()}} Properties</p>
                                     </div>
                                 </a>
                             </div>
@@ -145,7 +145,7 @@
                                     </div>
                                     <div class="content text-center">
                                         <h5>Townhouse</h5>
-                                        <p class="mt-4 text-1">234 Property</p>
+                                        <p class="mt-4 text-1">{{$properties->where('property_detail', 'townhouse')->count()}} Properties</p>
                                     </div>
                                 </a>
                             </div>
@@ -157,7 +157,7 @@
                                     </div>
                                     <div class="content text-center">
                                         <h5>Commercial</h5>
-                                        <p class="mt-4 text-1">234 Property</p>
+                                        <p class="mt-4 text-1">{{$properties->where('type', 'commercial')->count()}} Properties</p>
                                     </div>
                                 </a>
                             </div>
@@ -208,7 +208,7 @@
                                         </div>
                                         <div class="content">
                                         <h5 class="title">
-                                            <a href="{{route('property', $row->slug)}}">{{$row->title}}</a>
+                                            <a href="{{route('property', $row->slug)}}" class="line-clamp-2" >{{ App\Helper\Helper::propertyTitle($row)}}</a>
                                         </h5>
                                         <p class="location text-1 line-clamp-1 ">
                                             <i class="icon-location"></i> {{$row->location}}
@@ -223,7 +223,7 @@
                                                 {{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($row->price)}}
                                             </h5>
                                             <div class="wrap-btn flex"> 
-                                                <a href="{{route('property', $row->slug)}}" class="tf-btn style-border pd-4">Interested</a>
+                                                <a href="{{route('property', $row->slug)}}" class="tf-btn style-border pd-4">Details</a>
                                             </div>
                                         </div>
                                         </div>
@@ -745,7 +745,7 @@
                                                 </div>
                                                 <div class="content">
                                                     <h5 class="title">
-                                                        <a href="{{route('property', $row->slug)}}">{{$row->title}}</a>
+                                                        <a href="{{route('property', $row->slug)}}" class="line-clamp-1">{{ App\Helper\Helper::propertyTitle($row)}}</a>
                                                     </h5>
                                                     <p class="location text-1 line-clamp-1 ">
                                                         <i class="icon-location"></i> {{$row->location}}
@@ -774,7 +774,7 @@
                                                             {{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($row->price)}}
                                                         </h5>
                                                         <div class="wrap-btn flex"> 
-                                                            <a href="{{route('property', $row->slug)}}" class="tf-btn style-border pd-4">Interested</a>
+                                                            <a href="{{route('property', $row->slug)}}" class="tf-btn style-border pd-4">Details</a>
                                                         </div>
                                                     </div>
                                                 </div>

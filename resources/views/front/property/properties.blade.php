@@ -266,8 +266,8 @@
                                             @foreach ($rows as $row)
                                                 <div class="box-house hover-img">
                                                     <div class="image-wrap">
-                                                        <a href="{{route('property', $row->slug)}}">
-                                                            <img class="lazyload" data-src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" alt="">
+                                                        <a href="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}">
+                                                            <img class="lazyload" data-fancybox="gallery" data-src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" alt="">
                                                         </a>
                                                         <ul class="box-tag flex gap-8 ">
                                                             <li class="flat-tag text-4 bg-main fw-6 text-white">{{config('constants.FOR_TYPE')[$row->for_type]}}
@@ -279,17 +279,17 @@
                                                                 <i class="icon-save"></i>
                                                                 <span class="tooltip">Add Favorite</span>
                                                             </a> --}}
-                                                            <a href="{{route('property', $row->slug)}}" class="btn-icon find hover-tooltip"><i
-                                                                    class="icon-find-plus"></i>
+                                                            <a href="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" data-fancybox="gallery" class="btn-icon find hover-tooltip">
+                                                                <i class="icon-find-plus"></i>
                                                                 <span class="tooltip">Quick View</span>
                                                             </a>
                                                         </div>
                                                     </div>
                                                     <div class="content">
                                                         <h5 class="title">
-                                                            <a href="{{route('property', $row->slug)}}">{{$row->title}}</a>
+                                                            <a href="{{route('property', $row->slug)}}" class="line-clamp-1" >{{ App\Helper\Helper::propertyTitle($row)}}</a>
                                                         </h5>
-                                                        <p class="location text-1 flex items-center gap-6">
+                                                        <p class="location text-1 flex items-center gap-6 line-clamp-2">
                                                             <i class="icon-location"></i> {{$row->location}}
                                                         </p>
                                                         <ul class="meta-list flex">
@@ -300,9 +300,10 @@
                                                         <div class="bot flex justify-between items-center">
                                                             <h5 class="price">
                                                                 {{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($row->price)}}
+                                                                <p class="text-3 text-secondary">{{App\Helper\Helper::perUnitPrice($row)}}</p>
                                                             </h5>
                                                             <div class="wrap-btn flex"> 
-                                                                <a href="{{route('property', $row->slug)}}" class="tf-btn style-border pd-4">Interested</a>
+                                                                <a href="javascript:void(0)" class="tf-btn style-border pd-4 interested-function" data-slug="{{$row->slug}}" data-id="{{$row->id}}">Interested</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -333,54 +334,80 @@
                                                         </a>
                                                     </div>
                                                 </div>
-                                                <div class="content">
+                                                <div class="content box-overview position-relative">
+                                                    <a href="#sharePopup" data-bs-toggle="modal" class="share-button position-absolute" data-url="{{route('property', $row->slug)}}" >
+                                                        <svg viewBox="0 0 40 40" fill="#df4234"><path d="M6,30 C8,18 19,16 23,16 L23,16 L23,10 L33,20 L23,29 L23,24 C19,24 8,27 6,30 Z"></path></svg>
+                                                        <span class="opacity-0">share</span>
+                                                    </a>
                                                     <h5 class="title">
-                                                        <a href="{{route('property', $row->slug)}}">{{$row->title}}</a>
+                                                        <a href="{{route('property', $row->slug)}}" class="line-clamp-1" >{{ App\Helper\Helper::propertyTitle($row)}}</a>
                                                     </h5>
-                                                    <p class="location text-1 flex items-center gap-6">
+                                                    <p class="mb-3 flex items-center line-clamp-1">
                                                         <i class="icon-location"></i> {{$row->location}}
                                                     </p>
                                                     <ul class="meta-list flex">
                                                         <li class="meta-item">
-                                                            <div class="text-9 flex"><i
-                                                                    class="icon-bed"></i>Beds<span>{{$row->bedroom}}</span>
+                                                            <div class="text-9 flex">
+                                                                <i class="icon-bed"></i>
+                                                                <span>
+                                                                    <div class="text-c-1 text-color-default">Beds:</div>
+                                                                    <div class="text-c-2">{{$row->bedroom}}</div>
+                                                                </span>
                                                             </div>
-                                                            <div class="text-9 flex"><i
-                                                                    class="icon-sqft"></i>Sqft<span>{{$row->plot_area}}</span>
+                                                            <div class="text-9 flex">
+                                                                <i class="icon-sqft"></i>
+                                                                <span>
+                                                                    <div class="text-c-1 text-color-default">Area:</div>
+                                                                    <div class="text-c-2">{{$row->plot_area}} {{$row->plot_type??'Sqft'}} </div>
+                                                                </span>
                                                             </div>
                                                         </li>
                                                         <li class="meta-item">
-                                                            <div class="text-9 flex"><i
-                                                                    class="icon-bath"></i>Baths<span>{{$row->bathroom}}</span>
+                                                            <div class="text-9 flex">
+                                                                <i class="icon-bath"></i>
+                                                                <span>
+                                                                    <div class="text-c-1 text-color-default">Baths:</div>
+                                                                    <div class="text-c-2">{{$row->bathroom}}</div>
+                                                                </span>
                                                             </div>
-                                                            <div class="text-9 flex"><i
-                                                                    class="icon-garage"></i>Carpet<span>{{$row->carpet_area}}</span>
+                                                            <div class="text-9 flex">
+                                                                <i class="icon-Crop"></i>
+                                                                <span>
+                                                                    <div class="text-c-1 text-color-default">Carpet:</div>
+                                                                    <div class="text-c-2">{{$row->carpet_area}} Sqft</div>
+                                                                </span>
                                                             </div>
                                                         </li>
                                                         <li class="meta-item">
-                                                            <div class="text-9 flex"><i
-                                                                    class="icon-furnished"></i><span>{{config('constants.FURNISHED_DETAIL')[$row->furnished] ?? ''}}</span>
+                                                            <div class="text-9 flex">
+                                                                <i class="icon-furnished"></i>
+                                                                <span>
+                                                                    <div class="text-c-1 text-color-default">Furnished:</div>
+                                                                    <div class="text-c-2">{{config('constants.FURNISHED_DETAIL')[$row->furnished] ?? ''}}</div>
+                                                                </span> 
                                                             </div>
-                                                            <div class="text-9 flex"><i
-                                                                    class="icon-construction"></i><span>{{config('constants.AVAILABILITY')[$row->availability] ?? ''}}</span>
+                                                            <div class="text-9 flex">
+                                                                <i class="icon-construction"></i>
+                                                                <span>
+                                                                    <div class="text-c-1 text-color-default">Availability:</div>
+                                                                    <div class="text-c-2">{{config('constants.AVAILABILITY')[$row->availability] ?? ''}}</div>
+                                                                </span>
                                                             </div>
                                                         </li>
-                                                    </ul>
-                                                    {{-- <ul class="meta-list flex">
-                                                        <li class="text-1 flex"><span>{{config('constants.AVAILABILITY')[$row->availability] ?? ''}}</span></li>
-                                                        <li class="text-1 flex"><span>{{config('constants.TYPE')[$row->type] ?? ''}}</span></li>
-                                                        <li class="text-1 flex"><span>{{config('constants.FURNISHED_DETAIL')[$row->furnished] ?? ''}}</span></li>
- 
-                                                    
-                                                        <li class="text-1 flex"></li> 
-                                                        <li class="text-1 flex"><span>{{$row->bedroom}}</span>Beds</li> 
-                                                        <li class="text-1 flex"><span>{{$row->bathroom}}</span>Baths</li>
-                                                        <li class="text-1 flex"><span>{{$row->plot_area}}</span>Sqft</li>
-                                                    </ul> --}}
+                                                    </ul>                                                
+                                                    <p >
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-compass" viewBox="0 0 16 16">
+                                                            <path d="M8 16.016a7.5 7.5 0 0 0 1.962-14.74A1 1 0 0 0 9 0H7a1 1 0 0 0-.962 1.276A7.5 7.5 0 0 0 8 16.016m6.5-7.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0"/>
+                                                            <path d="m6.94 7.44 4.95-2.83-2.83 4.95-4.949 2.83 2.828-4.95z"/>
+                                                        </svg>
+                                                        {{$row->facing}} Facing Property
+                                                    </p>
                                                     <div class="bot flex justify-between items-center">
-                                                        <h5 class="price">
-                                                            {{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($row->price)}}
-                                                        </h5>
+                                                        
+                                                        <h6 class="price">
+                                                            {{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($row->price)}} /
+                                                            <span class="text-3 text-secondary">{{App\Helper\Helper::perUnitPrice($row)}}</span>
+                                                        </h6>
                                                         <div class="wrap-btn flex"> 
                                                             {{-- <a href="{{route('property', $row->slug)}}" class="tf-btn style-border pd-4">Interested</a> --}}
                                                             <a href="javascript:void(0)" class="tf-btn style-border pd-4 interested-function" data-slug="{{$row->slug}}" data-id="{{$row->id}}">Interested</a>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helper\Helper;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -24,14 +25,14 @@ class Property extends Model
         parent::boot();
 
         static::created(function ($model) {
-            $model->slug = $model->createSlug($model->title);
+            $model->slug = $model->createSlug(Helper::propertyTitle($model));
             $model->save();
         });
 
         // Update slug when the model is updated
         static::updating(function ($model) {
-            if ($model->isDirty('title')) { // Check if the title is being changed
-                $model->slug = $model->createSlug($model->title);
+            if ($model->isDirty('property_detail')) { // Check if the property_detail is being changed
+                $model->slug = $model->createSlug(Helper::propertyTitle($model));
             }
         });
     }

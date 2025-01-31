@@ -5970,8 +5970,8 @@ tr {
 }
 .box-house.style-list .meta-list {
   gap: 8px 45px;
-  padding-bottom: 24px;
-  margin-bottom: 24px;
+  padding-bottom: 18px;
+  margin-bottom: 10px;
 }
 .box-house.style-list .meta-list .meta-item {
   display: -webkit-box;

@@ -117,8 +117,22 @@
                                 </div>
                                 <span id="name-error" class="text-danger is_error"></span>
                             </fieldset> --}}
-                        <div class="box grid-layout-2 gap-10 box-info-2 mt-3">
+                        <div class="box grid-layout-1 gap-10 box-info-2 mt-3">
                             <fieldset class="box-fieldset1">
+                                <label for="mobile">Mobile</label>
+                                <div class="ip-field">
+                                    <svg class="icon" width="18" height="18" viewBox="0 0 18 18" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12.75 1.5H5.25C4.42157 1.5 3.75 2.17157 3.75 3V15C3.75 15.8284 4.42157 16.5 5.25 16.5H12.75C13.5784 16.5 14.25 15.8284 14.25 15V3C14.25 2.17157 13.5784 1.5 12.75 1.5Z" 
+                                            stroke="#A3ABB0" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M10.125 13.875H7.875" stroke="#A3ABB0" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    <input type="text" class="form-control" name="mobile" id="mobile" placeholder="Your mobile">
+                                </div>
+                                <span id="mobile-error" class="text-danger is_error"></span>
+                            </fieldset>
+
+                            <fieldset class="box-fieldset1 mt-3">
                                 <label for="email">Email address<span>*</span></label>
                                 <div class="ip-field">
                                     <svg class="icon" width="18" height="18" viewBox="0 0 18 18" fill="none"
@@ -134,19 +148,7 @@
 
                             </fieldset>
                             
-                            <fieldset class="box-fieldset1">
-                                <label for="mobile">Mobile</label>
-                                <div class="ip-field">
-                                    <svg class="icon" width="18" height="18" viewBox="0 0 18 18" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M12.75 1.5H5.25C4.42157 1.5 3.75 2.17157 3.75 3V15C3.75 15.8284 4.42157 16.5 5.25 16.5H12.75C13.5784 16.5 14.25 15.8284 14.25 15V3C14.25 2.17157 13.5784 1.5 12.75 1.5Z" 
-                                            stroke="#A3ABB0" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M10.125 13.875H7.875" stroke="#A3ABB0" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                    <input type="text" class="form-control" name="mobile" id="mobile" placeholder="Your mobile">
-                                </div>
-                                <span id="mobile-error" class="text-danger is_error"></span>
-                            </fieldset>
+                            
                             
                             {{-- <fieldset class="box-fieldset1">
                                 <label for="pass">Password<span>*</span></label>

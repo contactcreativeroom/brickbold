@@ -682,6 +682,22 @@ class Helper
         return $formattedNumber; 
     }
 
+    public static function propertyTitle($row) {
+        $title ="";
+        if($row->bedroom){
+            $title .= $row->bedroom.'BHK, ';
+        }
+        $title .= $row->type.' '.ucwords($row->property_detail).' '.config('constants.FOR_TYPE')[$row->for_type].' in '. $row->city .', '. $row->state;
+        return $title;
+    }
+
+    public static function perUnitPrice($row) {
+        $perUnitNumber = Helper::priceFormat((float)$row->price / (float)$row->plot_area);
+        $measureUnit = $row->plot_type? $row->plot_type : 'sqft';
+        $perUnit = config('constants.CURRENCIES.symbol').$perUnitNumber .' per '.$measureUnit ;
+        return $perUnit; 
+    }
+
     public static function userAccess($key="") {
         if (Auth::guard('user')->check()) {
             $user = Auth::guard('user')->user();

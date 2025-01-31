@@ -2,11 +2,19 @@
     #modalRegister .grid-layout-2 { 
         grid-template-columns: repeat(1, 1fr) !important; 
     }
+    .single-property-map .info-map{
+        grid-template-columns: auto !important;
+    }
+}
+@media (min-width: 991px) and (max-width: 1200px) {
+    .navigation li a {
+        font-size: 13px;
+    }
 }
 
-@media (max-width: 776px) {
+@media (max-width: 767px) {
     .icon-input{ 
-        top: 27% !important; 
+        top: 21% !important; 
     }
     .page-layout .footer-dashboard, .page-layout .footer-dashboard .list{
         display: block !important; 
@@ -15,6 +23,12 @@
 
     .page-layout .footer-dashboard .list li::after{
         display: none !important;
+    }
+    .social-share svg{
+        width: 40px !important;
+    }
+    .social-share p{
+        font-size: 12px !important;
     }
 }
 
@@ -141,11 +155,7 @@ form .otp-input-field {
     height: 470px;
 }
 
-@media (min-width: 991px) and (max-width: 1200px) {
-    .navigation li a {
-        font-size: 13px;
-    }
-}
+
 
 .icon-construction:before {
     content: "\e916"; 
@@ -153,4 +163,84 @@ form .otp-input-field {
 
 .icon-furnished:before {
     content: "\e928";
+}
+.text-c-1{
+    font-size: 12px;
+    line-height: 14px;
+}
+.text-c-2{
+    font-size: 12px;
+    line-height: 16px;
+}
+
+.box-house .box-overview .meta-list i{
+    font-size: 25px;
+    margin-right: 2px;
+}
+
+.box-house .box-overview h5.title{
+    font-size: 17px;
+    line-height: 22px;
+}
+.box-house.style-list .box-overview .meta-list{
+    margin-bottom: 4px;
+}
+.box-house .box-overview .tf-btn {
+    height: 38px;
+}
+.social-share{
+    text-align: center;
+}
+.social-share a{
+    margin-right: 10px;
+}
+.share-button{
+    right: 0;
+    top: -6px;
+}
+.section-property-detail .share-button {
+    right: -7px;
+    top: -12px;
+}
+.share-field #shareUrl{
+    padding-right: 60px;
+}
+.share-field span{
+    position: absolute;
+    right: 9px;
+    top: 25%;
+    color: #df4234;
+    cursor: pointer;
+}
+
+.tf-dropdown-sort .dropdown-menu {
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
+.tf-dropdown-sort .dropdown-menu .select-item:hover{
+    background-color: #df4234;
+}
+.tf-dropdown-sort .dropdown-menu .select-item .text-value-item{
+    color: #2c2e33;
+}
+.tf-dropdown-sort .dropdown-menu .select-item:hover .text-value-item{
+    color: #fff;
+}
+.form-select option {
+    border-color: #df4234; 
+}
+
+.form-select-border-none{
+    width: 100%;
+    max-width: 100px;
+}
+.form-select-border-none:focus, .form-select-border-none:focus-visible{
+    border: none;
+}
+.tf-dropdown-sort{
+    height: 25px;
+}
+input.search-address-home {
+    height: 16px !important; 
 }

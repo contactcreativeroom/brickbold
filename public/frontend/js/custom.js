@@ -255,3 +255,30 @@ $('#interestedForm').on('submit', function(e) {
         }
     });
 });
+
+
+
+ 
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".share-button").forEach(button => {
+        button.addEventListener("click", function () {
+            let propertyUrl = this.getAttribute("data-url");
+            console.log(propertyUrl);
+            document.querySelector("#sharePopup #shareUrl").value = propertyUrl;
+            // Update social media links
+            document.querySelector("#sharePopup #emailShare").href = `mailto:?subject=Check out this property&body=View this property: ${propertyUrl}`;
+            document.querySelector("#sharePopup #whatsappShare").href = `https://api.whatsapp.com/send?text=Check out this property: ${propertyUrl}`;
+            document.querySelector("#sharePopup #facebookShare").href = `https://www.facebook.com/sharer/sharer.php?u=${propertyUrl}`;
+            document.querySelector("#sharePopup #twitterShare").href = `https://twitter.com/intent/tweet?text=Check out this property: ${propertyUrl}`;
+            
+        });
+    });
+
+    // Copy to Clipboard Functionality
+    document.querySelector(".share-field #copyUrl").addEventListener("click", function () {
+        let copyText = document.querySelector("#sharePopup #shareUrl");
+        copyText.select();
+        document.execCommand("copy");
+        toastr.success("URL Copied: " + copyText.value, 'Successfully!');
+    });
+}); 

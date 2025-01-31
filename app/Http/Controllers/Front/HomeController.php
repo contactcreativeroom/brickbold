@@ -29,8 +29,9 @@ class HomeController extends Controller
     public function index(Request $request) {
         $todayLuxury = Property::whereIn('status', [1,3])->orderBy('is_luxury', 'desc')->orderBy('id', 'desc')->limit(6)->get();
         $readyToMove = Property::whereIn('status', [1,3])->orderBy('views', 'desc')->limit(4)->get();
+        $properties = Property::whereIn('status', [1,3])->orderBy('views', 'desc')->get();
         $testimonials = Testimonial::orderBy('priority', 'asc')->limit(10)->get();
-        return view($this->prefix.'.home',['todayLuxury' => $todayLuxury, 'readyToMove' => $readyToMove, 'testimonials' => $testimonials]);
+        return view($this->prefix.'.home',['properties' => $properties,'todayLuxury' => $todayLuxury, 'readyToMove' => $readyToMove, 'testimonials' => $testimonials]);
     }
     public function about (Request $request) { 
         return view('front.about');

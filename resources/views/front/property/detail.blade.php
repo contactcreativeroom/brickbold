@@ -66,36 +66,42 @@
                         </div>
                         <div class="wg-property box-overview style-2">
                             <div class="heading flex justify-between">
-                                <div class="title text-5 fw-6 text-color-heading">
-                                    {{$row->title}}
+                                <div class="title text-11 fw-6 text-color-heading">
+                                    {{ App\Helper\Helper::propertyTitle($row)}}
                                 </div>
-                                <div class="price text-5 fw-6 text-color-heading">
+                                <div class="price text-11 fw-6 text-color-heading">
                                     {{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($row->price)}}
                                     {{-- <span class="h5 lh-30 fw-4 text-color-default">/month</span> --}}
                                 </div>
                             </div>
-                            <div class="info flex justify-between">
+                            <div class="info flex justify-between position-relative">
                                 <div class="feature">
                                     <p class="location text-1 flex items-center gap-10">
                                         <i class="icon-location"></i>{{$row->location}}, {{$row->state}}, {{$row->city}} {{$row->zip_code}}
                                     </p>
                                     <ul class="meta-list flex">
-                                        <li class="text-1 flex"><span>{{$row->bedroom}}</span>Bed</li>
-                                        <li class="text-1 flex"><span>{{$row->bathroom}}</span>Bath</li>
-                                        <li class="text-1 flex"><span>{{$row->plot_area}}</span>{{$row->plot_type? $row->plot_type : 'sqft'}}</li>
+                                        <li class="text-1 flex"><i class="icon-bed"></i> <span>{{$row->bedroom}}</span>Bed</li>
+                                        <li class="text-1 flex"><i class="icon-bath"></i> <span>{{$row->bathroom}}</span>Bath</li>
+                                        <li class="text-1 flex"><i class="icon-sqft"></i> <span>{{$row->plot_area}}</span>{{$row->plot_type? $row->plot_type : 'sqft'}}</li>
                                     </ul>
+                                    <a href="#sharePopup" data-bs-toggle="modal" class="share-button position-absolute" data-url="{{route('property', $row->slug)}}" >
+                                        <svg viewBox="0 0 40 40" fill="#df4234"><path d="M6,30 C8,18 19,16 23,16 L23,16 L23,10 L33,20 L23,29 L23,24 C19,24 8,27 6,30 Z"></path></svg>
+                                        <span class="opacity-0">share</span>
+                                    </a>
                                 </div>
-                                @if (Auth::guard('user')->user())
-                                    <div class="action action-button-list">
+                                     {{--<div class="action action-button-list">
                                         <ul class="list-action">
-                                            {{-- <li>
+                                           
+                                            @if (Auth::guard('user')->user())
+                                             <li>
                                                 <a href="{{route('user.favorite.toggle', $row->id)}}" class="{{ $row->favorites()->where('user_id', Auth::guard('user')->user()->id)->count() > 0 ? 'selectedClass' : '' }}">
                                                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M15.75 6.1875C15.75 4.32375 14.1758 2.8125 12.234 2.8125C10.7828 2.8125 9.53625 3.657 9 4.86225C8.46375 3.657 7.21725 2.8125 5.76525 2.8125C3.825 2.8125 2.25 4.32375 2.25 6.1875C2.25 11.6025 9 15.1875 9 15.1875C9 15.1875 15.75 11.6025 15.75 6.1875Z" stroke="#5C5E61" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                                     </svg>
                                                 </a>
-                                            </li> --}} 
-                                            {{-- <li>
+                                            </li> 
+                                            @endif
+                                            <li>
                                                 <a href="#"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
                                                         <path
@@ -104,17 +110,11 @@
                                                             stroke-linejoin="round" />
                                                     </svg>
                                                 </a>
-                                            </li> --}}
-                                            <li>
-                                                <a href="#">
-                                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M5.41251 8.18028C5.23091 7.85351 4.94594 7.5963 4.60234 7.44902C4.25874 7.30173 3.87596 7.27271 3.51408 7.36651C3.1522 7.46032 2.83171 7.67163 2.60293 7.96728C2.37414 8.26293 2.25 8.62619 2.25 9.00003C2.25 9.37387 2.37414 9.73712 2.60293 10.0328C2.83171 10.3284 3.1522 10.5397 3.51408 10.6335C3.87596 10.7273 4.25874 10.6983 4.60234 10.551C4.94594 10.4038 5.23091 10.1465 5.41251 9.81978M5.41251 8.18028C5.54751 8.42328 5.62476 8.70228 5.62476 9.00003C5.62476 9.29778 5.54751 9.57753 5.41251 9.81978M5.41251 8.18028L12.587 4.19478M5.41251 9.81978L12.587 13.8053M12.587 4.19478C12.6922 4.39288 12.8358 4.56803 13.0095 4.70998C13.1832 4.85192 13.3834 4.95782 13.5985 5.02149C13.8135 5.08515 14.0392 5.1053 14.2621 5.08075C14.4851 5.0562 14.7009 4.98745 14.897 4.87853C15.093 4.7696 15.2654 4.62267 15.404 4.44634C15.5427 4.27001 15.6448 4.06781 15.7043 3.85157C15.7639 3.63532 15.7798 3.40937 15.751 3.18693C15.7222 2.96448 15.6494 2.75 15.5368 2.55603C15.3148 2.17378 14.9518 1.89388 14.5256 1.77649C14.0995 1.6591 13.6443 1.71359 13.2579 1.92824C12.8715 2.1429 12.5848 2.50059 12.4593 2.92442C12.3339 3.34826 12.3797 3.80439 12.587 4.19478ZM12.587 13.8053C12.4794 13.9991 12.4109 14.2121 12.3856 14.4324C12.3603 14.6526 12.3787 14.8757 12.4396 15.0888C12.5005 15.3019 12.6028 15.501 12.7406 15.6746C12.8784 15.8482 13.0491 15.993 13.2429 16.1007C13.4367 16.2083 13.6498 16.2767 13.87 16.302C14.0902 16.3273 14.3133 16.309 14.5264 16.2481C14.7396 16.1872 14.9386 16.0849 15.1122 15.9471C15.2858 15.8092 15.4306 15.6386 15.5383 15.4448C15.7557 15.0534 15.8087 14.5917 15.6857 14.1613C15.5627 13.7308 15.2737 13.3668 14.8824 13.1494C14.491 12.932 14.0293 12.879 13.5989 13.002C13.1684 13.125 12.8044 13.4139 12.587 13.8053Z" stroke="#5C5E61" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                                    </svg>
-                                                </a>
-                                            </li>
+                                            </li> 
+                                             
                                         </ul>
-                                    </div>
-                                @endif
+                                    </div>--}}
+                                
                                 
                             </div>
                             <div class="info-detail ">
@@ -130,13 +130,14 @@
                                     </div>
                                     <div class="box-icon">
                                         <div class="icons">
-                                            <i class="icon-Bathtub"></i>
+                                            <i class="icon-Crop"></i>
                                         </div>
                                         <div class="content">
-                                            <div class="text-4 text-color-default">Bathrooms:</div>
-                                            <div class="text-1 text-color-heading">{{$row->bathroom}} Rooms</div>
+                                            <div class="text-4 text-color-default">Land Size:</div>
+                                            <div class="text-1 text-color-heading">{{$row->plot_area}} {{$row->plot_type? $row->plot_type : 'sqft'}}</div>
                                         </div>
                                     </div>
+                                    
                                 </div>
                                 <div class="wrap-box">
                                     <div class="box-icon">
@@ -150,33 +151,15 @@
                                     </div>
                                     <div class="box-icon">
                                         <div class="icons">
-                                            <i class="icon-Crop"></i>
-                                        </div>
-                                        <div class="content">
-                                            <div class="text-4 text-color-default">Land Size:</div>
-                                            <div class="text-1 text-color-heading">{{$row->plot_area}} {{$row->plot_type? $row->plot_type : 'sqft'}}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="wrap-box">
-                                    <div class="box-icon">
-                                        <div class="icons">
                                             <i class="icon-Garage-1"></i>
                                         </div>
                                         <div class="content">
-                                            <div class="text-4 text-color-default">Garages</div>
-                                            <div class="text-1 text-color-heading">{{$row->plot_area}}</div>
+                                            <div class="text-4 text-color-default">Builtup Area:</div>
+                                            <div class="text-1 text-color-heading">{{$row->builtup_area}} sqft</div>
                                         </div>
                                     </div>
-                                    <div class="box-icon">
-                                        <div class="icons">
-                                            <i class="icon-Hammer"></i>
-                                        </div>
-                                        <div class="content">
-                                            <div class="text-4 text-color-default">Year Built:</div>
-                                            <div class="text-1 text-color-heading">{{ config('constants.BUILD_YEAR')[$row->build_year] ?? '' }}</div>
-                                        </div>
-                                    </div>
+
+                                    
                                 </div>
                                 <div class="wrap-box">
                                     <div class="box-icon">
@@ -193,13 +176,34 @@
                                             <i class="icon-Ruler"></i>
                                         </div>
                                         <div class="content">
-                                            <div class="text-4 text-color-default">Builtup Area:</div>
-                                            <div class="text-1 text-color-heading">{{$row->builtup_area}} sqft</div>
+                                            <div class="text-4 text-color-default">Carpet Area</div>
+                                            <div class="text-1 text-color-heading">{{$row->carpet_area}} sqft</div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="wrap-box">
+                                    <div class="box-icon">
+                                        <div class="icons">
+                                            <i class="icon-Bathtub"></i>
+                                        </div>
+                                        <div class="content">
+                                            <div class="text-4 text-color-default">Bathrooms:</div>
+                                            <div class="text-1 text-color-heading">{{$row->bathroom}} Rooms</div>
+                                        </div>
+                                    </div>
+                                    <div class="box-icon">
+                                        <div class="icons">
+                                            <i class="icon-Hammer"></i>
+                                        </div>
+                                        <div class="content">
+                                            <div class="text-4 text-color-default">Year Built:</div>
+                                            <div class="text-1 text-color-heading">{{ config('constants.BUILD_YEAR')[$row->build_year] ?? '' }}</div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
                             </div>
-                            {{-- <a href="{{route('contact')}}" class="tf-btn bg-color-primary pd-21 fw-6">Ask a question</a> --}}
+                            <a href="javascript:void(0)" class="tf-btn bg-color-primary pd-21 fw-6 interested-function" data-slug="{{$row->slug}}" data-id="{{$row->id}}">Interested</a>
                         </div>
                         @if ($row->video_link)
                         <div class=" wg-property video spacing-2">
@@ -221,9 +225,8 @@
                             </div>
                             <div class="content">
                                 <p class="description text-1 mb-10">{{$row->description}}</p>
-                                <a href="javascript:void(0);" class="tf-btn-link style-hover-rotate">
-                                    <span>Read More
-                                    </span>
+                                <a href="javascript:void(0);" class="tf-btn-link style-hover-rotate d-none">
+                                    <span>Read More </span>
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <g clip-path="url(#clip0_2348_5612)">
@@ -725,11 +728,11 @@
                                             </div>
                                         </div>
                                         <div class="content">
-                                            <h5 class="title">
-                                                <a href="{{route('property', $similarProperty->slug)}}">{{$similarProperty->title}}</a>
+                                            <h5 class="title line-clamp-2">
+                                                <a href="{{route('property', $similarProperty->slug)}}">{{App\Helper\Helper::propertyTitle($similarProperty)}}</a>
 
                                             </h5>
-                                            <p class="location text-1 flex items-center gap-8">
+                                            <p class="location text-1 flex items-center gap-8 line-clamp-1">
                                                 <i class="icon-location"></i> {{$similarProperty->location}}
                                             </p>
                                             <ul class="meta-list flex">
@@ -742,7 +745,7 @@
                                                     {{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($similarProperty->price)}}
                                                 </h5>
                                                 <div class="wrap-btn flex"> 
-                                                    <a href="{{route('property', $similarProperty->slug)}}" class="tf-btn style-border pd-4">Interested</a>
+                                                    <a href="{{route('property', $similarProperty->slug)}}" class="tf-btn style-border pd-4">Details</a>
                                                 </div>
                                             </div>
                                         </div>
