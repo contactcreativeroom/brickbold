@@ -1,6 +1,8 @@
 $('#registerForm').on('submit', function(e) {
     e.preventDefault();
     $('#registerForm .is_error').text('');
+    let $submitButton = $('#registerForm [type="submit"]');
+    $submitButton.prop('disabled', true);
     let formData = $(this).serialize();
 
     $.ajax({
@@ -25,6 +27,9 @@ $('#registerForm').on('submit', function(e) {
             } else { 
                 toastr.error("An error occurred. Please try again.", 'Error!');
             }
+        },
+        complete: function() {
+            $submitButton.prop('disabled', false); 
         }
     });
 });

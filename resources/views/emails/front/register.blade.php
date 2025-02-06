@@ -280,7 +280,7 @@
                                             WELCOME
                                         </h2>
                                         <p style="float: left; width: 100%; text-align: center; color: #acacac; margin-bottom: 0;" >
-                                            Hey <span>{{$email}}</span>,<br />Thanks for registering with
+                                            Hey <span>{{$name}}</span>,<br />Thanks for registering with
                                             <span>{{config('constants.BUSINESS.name')}} </span>.  System provide your default password <span style="color: #000;">{{$password}}</span> change it as per your choice.                                          
                                         </p>
                                     </div>

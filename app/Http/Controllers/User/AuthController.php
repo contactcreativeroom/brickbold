@@ -26,9 +26,9 @@ class AuthController extends Controller
             $validator = Validator::make($request->all(), [
                 'role' => 'required',
                 'for_type' => 'required',
-                // 'name' => 'required|string|max:255',
+                'name' => 'required|string|max:255',
                 'email' => 'required|email|unique:users,email|max:255',
-                'mobile' => 'nullable|digits:10',
+                'mobile' => 'required|digits:10',
                 // 'password' => 'required|min:6|confirmed',
                 'accept_term_condition' => 'required|in:1',
                 // 'dob' => 'nullable|date',
@@ -45,7 +45,7 @@ class AuthController extends Controller
             $user = User::create([
                 'user_type' => $request->role,
                 'for_type' => $request->for_type,
-                // 'name' => $request->name,
+                'name' => $request->name,
                 'email' => $request->email,
                 // 'dob' => $request->dob,
                 'phone' => $request->mobile,
@@ -58,6 +58,7 @@ class AuthController extends Controller
                     'logo' => Helper::getLogo(),
                     'user_type'=> $request->user_type,
                     'for_type'=> $request->for_type,
+                    'name'=>$request->name,
                     'email'=>$request->email,
                     'phone'=>$request->phone,
                     'password'=>$password,
