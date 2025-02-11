@@ -67,25 +67,27 @@ Route::post('/property/enquiry/post', [FrontPropertyController::class, 'enquiryP
 Route::post('/bank/enquiry/post', [HomeController::class, 'bankPost'])->name('bank.enquiry');
 Route::get('/packages', [HomeController::class, 'packages'])->name('packages');
 
-Route::any('/login', [UserAuthController::class, 'login'])->name('login');
-Route::any('/register', [UserAuthController::class, 'register'])->name('register');
-Route::any('/forgot/password', [UserAuthController::class, 'forgotPassword'])->name('forgot.password');
-Route::match(['get','post'], '/password-reset/{token}', [UserAuthController::class, 'passwordReset'])->name('password.reset');
-Route::get('/reset/success', [UserAuthController::class, 'passwordResetSuccess'])->name('password.reset-success'); 
-
-//Google login
-Route::get('auth/google', [UserAuthController::class, 'redirectToGoogle'])->name('login.google.redirect');
-Route::get('auth/google/callback', [UserAuthController::class, 'handleGoogleCallback'])->name('login.google.callback');
-
-//otp Login
-Route::post('/send-otp', [UserAuthController::class, 'sendOTP']);
-Route::post('/verify-otp', [UserAuthController::class, 'verifyOTP']);
-
 Route::post('/newsletter/post', [NewsletterController::class, 'postData'])->name('newsletter.post');
 Route::post('/newsletter/mobile/post', [NewsletterController::class, 'postDataMobile'])->name('newsletter.mobile.post');
  
 Route::post('/create-order', [PaymentController::class, 'createOrder'])->name('payment.create');
 Route::post('/verify-payment', [PaymentController::class, 'handlePayment'])->name('payment.verify');
+ 
+Route::middleware('guest')->group(function () {
+    Route::any('/login', [UserAuthController::class, 'login'])->name('login');
+    Route::any('/register', [UserAuthController::class, 'register'])->name('register');
+    Route::any('/forgot/password', [UserAuthController::class, 'forgotPassword'])->name('forgot.password');
+    Route::match(['get','post'], '/password-reset/{token}', [UserAuthController::class, 'passwordReset'])->name('password.reset');
+    Route::get('/reset/success', [UserAuthController::class, 'passwordResetSuccess'])->name('password.reset-success'); 
+
+    //Google login
+    Route::get('auth/google', [UserAuthController::class, 'redirectToGoogle'])->name('login.google.redirect');
+    Route::get('auth/google/callback', [UserAuthController::class, 'handleGoogleCallback'])->name('login.google.callback');
+
+    //otp Login
+    Route::post('/send-otp', [UserAuthController::class, 'sendOTP']);
+    Route::post('/verify-otp', [UserAuthController::class, 'verifyOTP']);
+});
 
 
 Route::middleware(['auth.user'])->prefix('user')->group(function () {
@@ -175,7 +177,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/package/delete/{id}', [PackageController::class, 'delete'])->name('admin.package.delete');
         Route::post('/package/status/change', [PackageController::class, 'changeStatus'])->name('admin.package.status.change');
         Route::get('/package/orders', [PackageController::class, 'orders'])->name('admin.package.orders');
-        Route::get('/package/order/delete/{id}', [PackageController::class, 'orders'])->name('admin.package.order');
+        Route::get('/package/order/delail/{id}', [PackageController::class, 'orderDetail'])->name('admin.package.order');
 
         Route::get('/contact-enquiries', [Dashboard::class, 'contactEnquiries'])->name('admin.contact-enquiries');
         Route::get('/property-enquiries', [Dashboard::class, 'propertyEnquiries'])->name('admin.property-enquiries');

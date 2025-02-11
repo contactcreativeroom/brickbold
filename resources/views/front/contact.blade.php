@@ -6,21 +6,34 @@
 @endphp
     <div class="main-content">
         <!-- section-top-map -->
-        <section class="section-top-map style-2">
-            <div class="wrap-map">
-                <div id="map" class="row-height" data-map-zoom="16" data-map-scroll="true"></div>
+        <section class="flat-title ">
+            <div class="tf-container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="title-inner ">
+                            <ul class="breadcrumb">
+                                <li><a class="home fw-6 text-color-3" href="{{route('home')}}">Home</a></li>
+                                <li>Contact Us</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </section>
+        <section class=" style-2">
+            {{-- <div class="wrap-map">
+                <div id="map" class="row-height" data-map-zoom="16" data-map-scroll="true"></div>
+            </div> --}}
             <div class="box">
                 <div class="tf-container">
                     <div class="row">
-                        <div class="col-12">
+                       
+                        <div class="col-md-6 mb-20">
                             <form id="contactform" method="post" action="{{route('contact.post')}}" class="form-contact">
                             @csrf
                                 <div class="heading-section">
-                                    <h2 class="title">We Would Love to Hear From You</h2>
-                                    <p class="text-1">We'll get to know you to understand your selling goals,
-                                        explain the
-                                        selling process so you know what to expect.</p>
+                                    <h3 class="title">We Would Love to Hear From You</h3>
+                                    <p class="text-1">We'll get to know you to understand your selling goals, explain the selling process so you know what to expect.</p>
                                 </div>
 
                                 <div class="cols">
@@ -66,7 +79,7 @@
                                 </div>
                                 <fieldset class="mb-30">
                                     <label for="message">Your Message:<span>*</span></label>
-                                    <textarea name="message" class="{{ $errors->has('message') ? ' is-invalid' : '' }}" cols="30" rows="10" placeholder="Message" id="message">@if(old('message')!=null){{old('message')}}@endif</textarea>
+                                    <textarea name="message" class="{{ $errors->has('message') ? ' is-invalid' : '' }}" cols="30" rows="5" placeholder="Message" id="message">@if(old('message')!=null){{old('message')}}@endif</textarea>
                                     @if($errors->has('message'))
                                         <span class="invalid-feedback">
                                             {{ $errors->first('message') }}
@@ -77,6 +90,10 @@
                                     <button class="tf-btn bg-color-primary fw-7 pd-8" type="submit">Contact our experts</button>
                                 </div>
                             </form>
+                        </div>
+
+                         <div class="col-md-6 min-h-300 mb-20">
+                             <iframe src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d54775.85234678832!2d75.79125201702226!3d30.900903472633424!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m5!1s0x391a8384663b474d%3A0x8048d3da5e8f627a!2sVFS%20Alliance%20Private%20Limited%2C%20Feroze%20Gandhi%20Market%20Road%2C%20Feroz%20Gandhi%20Market%2C%20Jila%20Kacheri%20Area%2C%20Model%20Gram%2C%20Ludhiana%2C%20Punjab!3m2!1d30.90091!2d75.8324517!4m0!5e0!3m2!1sen!2sin!4v1739253727489!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
                     </div>
                 </div>

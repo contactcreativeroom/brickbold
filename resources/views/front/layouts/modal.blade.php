@@ -343,7 +343,7 @@
                             </fieldset>
                             <div class="box box-btn" id="send-otp-button">
                                 <a href="javascript:void(0)" onClick="sendOTP()" class="tf-btn bg-color-primary w-100">Send</a>
-                                <div class="text text-center">Back to <a href="#modalLogin" data-bs-toggle="modal" class="text-color-primary">Sign In</a></div>
+                                <div class="text text-center">Back to <a href="{{route('login')}}" class="text-color-primary">Sign In</a></div>
                             </div>  
                         </div>  
 
@@ -367,7 +367,52 @@
                             </div>
                             <div class="box box-btn">
                                 <button type="button" onClick="verifyOTP()" class="tf-btn bg-color-primary w-100" id="verify-button">Verify</button>
-                                <div class="text text-center">Back to <a href="#modalLogin" data-bs-toggle="modal" class="text-color-primary">Sign In</a></div>
+                                <div class="text text-center">Back to <a href="{{route('login')}}" class="text-color-primary">Sign In</a></div>
+                            </div>  
+                        </div>  
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>    
+<!-- /.OTP -->
+
+<!-- .OTP Registration -->
+    <div class="modal modal-sm fade" id="modalOTPReg">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="flat-account">
+                    
+                    <form class="form-account" id="OTPRegForm" >
+                        <div class="title-box">
+                            <h4>Verify OTP</h4>
+                            <span class="close-modal icon-close" data-bs-dismiss="modal"></span>
+                        </div> 
+                        <div class="verify-otp-section">
+                            <div class="box">
+                                 <div class="text mb-3">OTP sent to <span class="text-color-primary otpRegSentMobile">9876543210</span>. Wrong number?  <a href="javascript:void(0)" class="text-color-primary" id="mobile-edit">Click here</a href="javascript:void(0)">.</div>
+                                <fieldset class="box-fieldset">
+                                    <label for="pass">OTP</label>
+                                    <div class="otp-input-field">
+                                        <input type="number" />
+                                        <input type="number" disabled />
+                                        <input type="number" disabled />
+                                        <input type="number" disabled />
+                                        <input type="number" disabled />
+                                        <input type="number" disabled />
+                                    </div>
+                                    <div class="mt-2 text-end"><button type="button" class="text-color-primary" onClick="sendOTPReg()">Resend</button></div>
+                                    
+                                    <span id="otp-error" class="text-danger is_error"></span>
+                                </fieldset>
+                            </div>
+                            <div class="box box-btn">
+                                <input type="hidden" name="mobile" id="mobile">
+                                <input type="hidden" name="role" id="role">
+                                <input type="hidden" name="for_type" id="for_type">
+                                <button type="button" onClick="verifyOTPReg()" class="tf-btn bg-color-primary w-100" id="verify-button">Verify</button>
+                                <div class="text text-center">Back to <a href="{{route('login')}}" class="text-color-primary">Sign In</a></div>
                             </div>  
                         </div>  
 
@@ -376,7 +421,7 @@
             </div>
         </div>
     </div>
-<!-- /.OTP -->
+<!-- /.OTP Registration -->
 
 <!-- Home Popup -->
 @guest('user')

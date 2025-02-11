@@ -3,25 +3,25 @@
 <section class="flat-title style-2 login-page">
     <div class="tf-container">
         <div class="row"> 
-            <div class="col-lg-12">
+            {{-- <div class="col-lg-12">
                 <div class="title-inner ">
                     <ul class="breadcrumb">
                         <li><a class="home fw-6 text-color-3" href="{{route('home')}}">Home</a></li>
                         <li>Login</li>
                     </ul>
                 </div>
-            </div>
-            <div class="col-xl-12 "> 
+            </div> --}}
+            <div class="col-xl-12 mt-5"> 
                 <div class="flat-account">
                     <div class="banner-account">
                         <img src="{{url('frontend/images/section/banner-login.jpg')}}" alt="banner">
                     </div> 
-                    <form class="form-account" action="{{route('login')}}" id="loginForm" method="post" enctype='multipart/form-data' >
+                    <form class="form-account pt-5" action="{{route('login')}}" id="loginForm" method="post" enctype='multipart/form-data' >
                         @csrf 
                         <div class="title-box">
                             <h4>Login</h4>
                         </div>
-                        <div class="box mt-5">
+                        <div class="box mt-5  mb-0">
                             <fieldset class="box-fieldset">
                                 <label for="email">Email Account</label>
                                 <div class="ip-field">
@@ -61,10 +61,10 @@
                                 </div> 
                             </fieldset>
                         </div>
-                        <div class="box box-btn mb-2">
+                        <div class="box box-btn mb-2 mt-3">
                             <button type="submit" class="tf-btn bg-color-primary w-100">Login</button>
                         </div>
-                        <p class="box text-center caption-2 mt-5">or login with</p>
+                        <p class="box text-center caption-2 mb-3 mt-3">or login with</p>
                         <div class="group-btn">
                             <a href="{{route('login.google.redirect')}}" class="btn-social">
                                 <svg width="21" height="20" viewBox="0 0 21 20" fill="none"
@@ -94,7 +94,7 @@
                             </a>
                             <a href="#modalOTP" data-bs-toggle="modal" class="btn-social"> OTP </a>
                         </div>
-                        <div class="text text-center mt-5">Don't have an account? <a href="{{route('register')}}" class="text-color-primary">Register</a></div>
+                        <div class="text text-center mt-3">Don't have an account? <a href="{{route('register')}}" class="text-color-primary">Register</a></div>
                     </form>
                 </div>            
             </div>

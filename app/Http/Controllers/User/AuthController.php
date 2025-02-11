@@ -26,11 +26,75 @@ class AuthController extends Controller
             $validator = Validator::make($request->all(), [
                 'role' => 'required',
                 'for_type' => 'required',
-                'name' => 'required|string|max:255',
-                'email' => 'required|email|unique:users,email|max:255',
+                // 'name' => 'required|string|max:255',
+                // 'email' => 'required|email|unique:users,email|max:255',
                 'mobile' => 'required|digits:10',
                 // 'password' => 'required|min:6|confirmed',
-                'accept_term_condition' => 'required|in:1',
+                // 'accept_term_condition' => 'required|in:1',
+                // 'dob' => 'nullable|date',
+            ]);
+        
+            if ($validator->fails()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Validation errors occurred.',
+                    'errors' => $validator->errors()->toArray(),
+                ], 400);
+            }
+            $mobile = $request->mobile ;
+            $role = $request->role ;
+            $for_type = $request->for_type ;
+            $this->sendMobileOTP($mobile);
+            return response()->json(['success' => true, 'role' => $role, 'for_type' => $for_type, 'mobile' => $mobile, 'message' => 'OTP sent successfully to mobile .'.$mobile.'. It is valid for 10 minute only.']);
+            
+            // $password = Helper::generatePassword();
+            // $user = User::create([
+            //     'user_type' => $request->role,
+            //     'for_type' => $request->for_type,
+            //     // 'name' => $request->name,
+            //     // 'email' => $request->email,
+            //     // 'dob' => $request->dob,
+            //     'phone' => $request->mobile,
+            //     'password' => bcrypt($password),
+            // ]);
+        
+            // if ($user) {
+            //     Auth::guard('user')->login($user);
+            //     $details = array(
+            //         'logo' => Helper::getLogo(),
+            //         'user_type'=> $request->user_type,
+            //         'for_type'=> $request->for_type,
+            //         'name'=>$request->name,
+            //         'email'=>$request->email,
+            //         'phone'=>$request->phone,
+            //         'password'=>$password,
+            //     );
+            //     dispatch(new \App\Jobs\RegisterQueue($details));
+            //     return response()->json([
+            //         'success' => true,
+            //         'redirect_url' => Helper::redirectRouteAfterLogin(),
+            //         'message' => 'Registered successfully!',
+            //     ], 201);
+            // }
+        
+            // return response()->json([
+            //     'success' => false,
+            //     'message' => 'Registration failed. Please try again.',
+            // ], 500);
+        }
+        return view('user.auth.register');
+    }
+
+    public function registerSubmit(Request $request){
+        if ($request->isMethod('post')) {
+            $validator = Validator::make($request->all(), [
+                'role' => 'required',
+                'for_type' => 'required',
+                // 'name' => 'required|string|max:255',
+                // 'email' => 'required|email|unique:users,email|max:255',
+                'mobile' => 'required|digits:10',
+                // 'password' => 'required|min:6|confirmed',
+                // 'accept_term_condition' => 'required|in:1',
                 // 'dob' => 'nullable|date',
             ]);
         
@@ -45,8 +109,8 @@ class AuthController extends Controller
             $user = User::create([
                 'user_type' => $request->role,
                 'for_type' => $request->for_type,
-                'name' => $request->name,
-                'email' => $request->email,
+                // 'name' => $request->name,
+                // 'email' => $request->email,
                 // 'dob' => $request->dob,
                 'phone' => $request->mobile,
                 'password' => bcrypt($password),
@@ -229,58 +293,49 @@ class AuthController extends Controller
     }
     //Google login end
 
-    //Otp login start
     public function sendOTP(Request $request){
         $request->validate([
             'mobile' => 'required|digits:10',
         ]);
+        $mobile = $request->mobile ;
+        $this->sendMobileOTP($mobile);
+        return response()->json(['success' => true, 'message' => 'OTP sent successfully to mobile .'.$mobile.'. It is valid for 10 minute only.']);
+    }
+    //Otp login start
+    public function sendMobileOTP($mobile){
+        $user = User::where('phone', $mobile)->first();             
 
-        $mobile = $request->mobile;
-        $user = User::where('phone', $mobile)->first();
-        // if ($user) {         
+        $otp = rand(100000, 999999);
+        OtpCode::updateOrCreate(
+            ['mobile' => $mobile],
+            [
+                'otp' => $otp,
+                'expires_at' => now()->addMinutes(10),
+            ]
+        );
+        
+        //send otp code
+        $username = config('constants.OTP_LOGIN.USERNAME');
+        $password = config('constants.OTP_LOGIN.PASSWORD');
+        $headerName = config('constants.OTP_LOGIN.HEADER_NAME');
+        $templateId = config('constants.OTP_LOGIN.TEMPLATED_ID');
+        $message = "Your OTP for www.brickbold.com is ".$otp.". Enter this code to verify your account and access your real estate listings. It's valid for 10 minutes. BRKBLD";
 
-            $otp = rand(100000, 999999);
-            OtpCode::updateOrCreate(
-                ['mobile' => $mobile],
-                [
-                    'otp' => $otp,
-                    'expires_at' => now()->addMinutes(10),
-                ]
-            );
-
-            
-            //send otp code
-            $username = config('constants.OTP_LOGIN.USERNAME');
-            $password = config('constants.OTP_LOGIN.PASSWORD');
-            $headerName = config('constants.OTP_LOGIN.HEADER_NAME');
-            $templateId = config('constants.OTP_LOGIN.TEMPLATED_ID');
-            $message = "Your OTP for www.brickbold.com is ".$otp.". Enter this code to verify your account and access your real estate listings. It's valid for 10 minutes. BRKBLD";
-
-            $ch = curl_init('https://www.textguru.in/api/v22.0/?');
-            curl_setopt($ch, CURLOPT_POST, 1);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
-                'username' => $username,
-                'password' => $password,
-                'source'   => $headerName,
-                'dmobile'  => $mobile,
-                'dlttempid'=> $templateId,
-                'message'  => $message,
-            ]));
-            //curl_setopt($ch, CURLOPT_POSTFIELDS, "username=$username&password=$password&source=$headerName&dmobile=$mobile&dlttempid=$templateId&message=$message");
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
-            $data = curl_exec($ch); 
-            curl_close($ch);
-            
-            return response()->json(['success' => true, 'message' => 'OTP sent successfully to mobile .'.$mobile.'. It is valid for 10 minute only.']);
-        // } else{
-        //     return response()->json([
-        //         'success' => false,
-        //         'message' => 'User not found with this mobile number.',
-        //         'errors' => array('mobile' => [
-        //             "User not found with this mobile number."
-        //         ]),
-        //     ], 400);
-        // }
+        $ch = curl_init('https://www.textguru.in/api/v22.0/?');
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
+            'username' => $username,
+            'password' => $password,
+            'source'   => $headerName,
+            'dmobile'  => $mobile,
+            'dlttempid'=> $templateId,
+            'message'  => $message,
+        ]));
+        //curl_setopt($ch, CURLOPT_POSTFIELDS, "username=$username&password=$password&source=$headerName&dmobile=$mobile&dlttempid=$templateId&message=$message");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+        $data = curl_exec($ch); 
+        curl_close($ch);           
+        return $data ;          
     }
 
     public function verifyOTP(Request $request){
@@ -297,15 +352,42 @@ class AuthController extends Controller
         if (!$otpCode) {
             return response()->json(['message' => 'Invalid or expired OTP.', 'error'=>true], 200);
         }
+        $password = Helper::generatePassword();
+        $dataInsert = [
+            'password' => Hash::make($password),
+        ];
+        
+        if ($request->has('role')) {
+            $dataInsert['user_type'] = $request->role;
+        }
+        
+        if ($request->has('for_type')) {
+            $dataInsert['for_type'] = $request->for_type;
+        }
 
         // Create or find the user
-        $user = User::firstOrCreate(
-            ['phone' => $request->mobile],
-            ['password' => Hash::make('123456')]
-        );
+        $user = User::firstOrCreate( ['phone' => $request->mobile], $dataInsert );
+
         Auth::guard('user')->login($user);        
         $otpCode->delete();
         // $url = route('user.profile');
+        if ($user->wasRecentlyCreated) {
+            // $details = array(
+            //     'logo' => Helper::getLogo(),
+            //     'user_type'=> $request->user_type,
+            //     'for_type'=> $request->for_type,
+            //     // 'name'=>$request->name,
+            //     'email'=>$request->email,
+            //     'phone'=>$request->phone,
+            //     'password'=>$password,
+            // );
+            // dispatch(new \App\Jobs\RegisterQueue($details));
+            return response()->json([
+                'success' => true,
+                'redirect_url' => Helper::redirectRouteAfterLogin(),
+                'message' => 'Registered successfully!',
+            ], 201);
+        }
         $url = Helper::redirectRouteAfterLogin();
 
         return response()->json(['success' => true, 'message' => 'Logged in successfully.', 'redirect_url' => $url, 'user' => $user]);

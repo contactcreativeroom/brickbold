@@ -127,7 +127,8 @@ class PackageController extends Controller
     public function delete(Request $request){
         $package = Package::find($request->id);
         $package->delete();
-        return response()->json(['status' => 'success',]);
+        Helper::toastMsg(true, 'Package deleted successfully!');
+        return redirect()->back();
     }  
 
     public function changeStatus(Request $request)

@@ -14,8 +14,13 @@ $('#registerForm').on('submit', function(e) {
         data: formData,
         success: function(response) {
             toastr.success(response.message, 'Successfully!');
-            if (response.success) {
-                window.location.href = response.redirect_url || '/';
+            $(".otpRegSentMobile").html(response.mobile);
+            $("#OTPRegForm #mobile").val(response.mobile);
+            $("#OTPRegForm #role").val(response.role);
+            $("#OTPRegForm #for_type").val(response.for_type);
+            $("#modalOTPReg").modal("show")
+            if (response.success){
+                //window.location.href = response.redirect_url || '/';
             }
         },
         error: function(xhr) {
@@ -34,6 +39,55 @@ $('#registerForm').on('submit', function(e) {
     });
 });
 
+function sendOTPReg() {
+    $('#registerForm').submit(); 
+}
+
+function verifyOTPReg() {
+    var mobile = $("#OTPRegForm #mobile").val();
+    var role = $("#OTPRegForm #role").val();
+    var for_type = $("#OTPRegForm #for_type").val();
+     
+    const otp = Array.from(document.querySelectorAll("#OTPRegForm .otp-input-field input"))
+        .map(input => input.value)
+        .join("");
+    if (!otp) {
+        $("#OTPRegForm #otp-error").text("Please fill the OTP.");
+        return false;
+    }
+    $("#OTPRegForm #otp-error").text(""); 
+    
+    $.ajax({
+        url: site_url+'/verify-otp', 
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        data: { role: role, for_type: for_type, mobile: mobile, otp: otp },
+        success: function(response) {
+            console.log(response);
+            if (response.error) {
+                toastr.error(response.message, 'Error!');
+            } else{
+                toastr.success(response.message, 'Successfully!');
+                if (response.success) {
+                    window.location.href = response.redirect_url;
+                }
+            }
+        },
+        error: function(xhr) {           
+            if (xhr.responseJSON && xhr.responseJSON.errors) {
+                let errors = xhr.responseJSON.errors;
+                console.log(errors);
+                for (let field in errors) {
+                    $(`#OTPRegForm #${field}-error`).text(errors[field][0]);
+                }
+            } else {
+                toastr.error("An error occurred. Please try again.", 'Error!');
+            }
+        }
+    });
+}
 
 $('#loginForm').on('submit', function(e) {
     e.preventDefault(); 
@@ -140,7 +194,7 @@ function verifyOTP() {
        $("#OTPForm #mobile-error").text("The mobile field is required.");
        //return false;
     }
-    const otp = Array.from(document.querySelectorAll(".otp-input-field input"))
+    const otp = Array.from(document.querySelectorAll("#OTPForm .otp-input-field input"))
         .map(input => input.value)
         .join("");
     if (!otp) {

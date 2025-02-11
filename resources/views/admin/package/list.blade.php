@@ -98,6 +98,10 @@
                             <a href="{{route("admin.package.edit", $row->id)}}">
                                 <span class="btn-primary badge" text-capitalized="">Edit</span>
                             </a> 
+
+                            {{-- <a href="{{route("admin.package.delete", $row->id)}}">
+                                <span class="btn-primary badge" text-capitalized="">Delete</span>
+                            </a>  --}}
                         </td>
                     </tr>
                     @endforeach

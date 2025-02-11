@@ -41,9 +41,11 @@
   --Text: #5c5e61;
   --Text-2: #161e2d;
   --Heading: #2c2e33;
+  --Heading2: #DF4234;
   --Note: #a8abae;
   --Note-2: #8e8e93;
   --Primary: #DF4234;
+  --Primary2: #2c2e33;
   --Sub-primary-1: #fef7f1;
   --Sub-primary-2: rgba(241, 145, 61, 0.15);
   --Sub-primary-3: rgba(241, 145, 61, 0.1);
@@ -1024,7 +1026,7 @@ a:hover, a:focus {
 }
 
 .bg-1 {
-  background-color: var(--Heading);
+  background-color: var(--Heading2);
 }
 
 .bg-2 {
@@ -1258,7 +1260,11 @@ a:hover, a:focus {
   align-items: center;
   cursor: pointer;
 }
-#header-main .header-right .box-user .name {
+#header-main .bg-1 .header-right .box-user .name {
+  color: var(--White);
+}
+
+#header-main .header-right .box-user .name, .is-fixed#header-main .header-right .box-user .name  {
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -1270,6 +1276,7 @@ a:hover, a:focus {
   gap: 6px;
   color: var(--Heading);
 }
+
 #header-main .header-right .box-user .name i {
   font-size: 20px;
 }
@@ -1293,9 +1300,15 @@ a:hover, a:focus {
   height: 44px;
   border-radius: 12px;
 }
-#header-main .icons svg path {
+
+#header-main .bg-1 .icons svg path {
+  stroke: var(--White);
+}
+
+#header-main .icons svg path, .is-fixed#header-main .bg-1 .icons svg path {
   stroke: var(--Primary);
 }
+
 #header-main.style-2 .header-inner {
   position: relative;
   z-index: 999;
@@ -1323,18 +1336,27 @@ a:hover, a:focus {
 #header-main.style-3 .main-menu .navigation > li > a {
   color: var(--White);
 }
-#header-main.style-3 .main-menu li a:hover {
+#header-main.style-3.is-fixed .main-menu li a:hover {
   color: var(--Primary);
 }
+
 #header-main.style-3 .header-right .phone-number p {
   color: var(--White);
 }
-#header-main.style-3 .header-right .user {
-  border-color: rgba(255, 255, 255, 0.1);
+#header-main.style-3 .bg-1 .header-right .user {
+  border-color: var(--White);
 }
-#header-main.style-3 .header-right .user svg path {
+#header-main.style-3 .bg-1 .header-right .user svg path {
+  stroke: var(--White);
+}
+
+#header-main.style-3 .header-right .user, .is-fixed#header-main.style-3 .header-right .user {
+  border-color: var(--Primary);
+}
+#header-main.style-3 .header-right .user svg path, .is-fixed#header-main.style-3 .header-right .user svg path {
   stroke: var(--Primary);
 }
+
 #header-main.style-4 {
   box-shadow: unset;
 }
@@ -1438,10 +1460,18 @@ a:hover, a:focus {
   display: flex;
   gap: 15px;
 }
-.main-menu .navigation > li.current-menu > a {
+
+
+.bg-1 .main-menu .navigation > li.current-menu > a {
+  color: var(--White) !important;
+  font-weight: 700;
+}
+
+.main-menu .navigation > li.current-menu > a,  .is-fixed .bg-1 .main-menu .navigation > li.current-menu > a{
   color: var(--Primary) !important;
   font-weight: 700;
 }
+
 .main-menu .navigation > li > a {
   padding: 29px 0px;
 }
@@ -1713,7 +1743,7 @@ a:hover, a:focus {
   font-size: 18px;
 }
 .mobile-nav-wrap .offcanvas-title img {
-  max-width: 136px;
+  /* max-width: 136px; */
   height: 42px;
 }
 
@@ -2288,6 +2318,18 @@ a:hover, a:focus {
   background-color: var(--Primary);
   color: var(--White);
 }
+
+.bg-1 .tf-btn.style-border {
+  border: 1px solid var(--Primary);
+  color: var(--Primary);
+  background-color: var(--White);
+}
+.bg-1 .tf-btn.style-border:hover {
+  border: 1px solid var(--White);
+  background-color: var(--Primary);
+  color: var(--White);
+}
+
 .tf-btn.style-border:hover svg path {
   stroke: var(--White);
 }
@@ -3164,7 +3206,7 @@ textarea.is-invalid{
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 16px;
+  padding: 12px;
   border: 1px solid var(--Line);
   border-radius: 999px;
 }
@@ -3337,7 +3379,7 @@ textarea.is-invalid{
   position: fixed;
   min-width: 304px;
   background: var(--White);
-  top: 78px;
+  top: 81px;
   padding: 32px;
   overflow-y: auto;
   z-index: 998;
@@ -8402,7 +8444,7 @@ tr {
 .page-title.home01, .page-title.home05, .page-title.career {
   background-image: url(../images/section/page-title-1.jpg);
   background-attachment: fixed;
-  padding: 170px 0 220px;
+  padding: 70px 0 130px;
   background-size: cover;
 }
 .page-title.home01 .heading-title, .page-title.home05 .heading-title, .page-title.career .heading-title {

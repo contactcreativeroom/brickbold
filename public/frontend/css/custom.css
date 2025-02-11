@@ -30,6 +30,15 @@
     .social-share p{
         font-size: 12px !important;
     }
+
+    .page-title.home01 h1 {
+        font-size: 30px;
+        line-height: 40px;
+    }
+
+    .page-title.home01 .h6 {
+        font-size: 17px;
+    }
 }
 
 .arrow.disabled a {
@@ -138,13 +147,13 @@ form .otp-input-field {
 }
 
 .login-page .flat-account .banner-account{
-    max-width: 475px;
-    height: 657px;
+    max-width: 650px;
+    height: 560px;
 }
 .register-page .flat-account .banner-account{
     max-width: 710px;
     width: 70%;
-    height: 810px;
+    height: 525px;
 }
 .forgot-page .flat-account .banner-account{
     max-width: 475px;
@@ -248,4 +257,45 @@ input.search-address-home {
 
 [type='submit']:disabled {
     background-color: #2c2e33;
+}
+
+.site-logo, .is-fixed .site-logo-fixed{
+    display: block;
+}
+
+.site-logo-fixed, .is-fixed .site-logo{
+    display: none;
+}
+
+.box-radio-check label{
+    margin-bottom: 0px;
+}
+.ht-45{
+    height: 45px !important;
+}
+.section-testimonials .box-testimonials{
+    flex-direction: column;
+}
+
+.text-limit-6{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    line-clamp: 6;
+    -webkit-box-orient: vertical;
+}
+
+form#contactform  textarea{
+    height: 80px !important;
+}
+
+#contactform{
+    border: none;
+}
+.min-h-300{
+    min-height: 300px !important;
+}
+
+#header-main:not(.is-fixed) .bg-1 .mobile-button { 
+    color: var(--White);  
 }

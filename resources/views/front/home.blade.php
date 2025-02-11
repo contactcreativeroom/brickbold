@@ -76,7 +76,7 @@
     <div class="main-content ">
 
         <!-- .Categories -->
-        <section class="tf-spacing-1 section-categories pb-0">
+        <section class="tf-spacing-3 section-categories pb-0">
             <div class="tf-container">
                 <div class="heading-section text-center mb-48">
                     <h2 class="title text-anime-wave">Try Searching For</h2>
@@ -170,7 +170,7 @@
         <!-- /.Categories -->
 
         <!-- .section-listing -->
-        <section class="section-listing tf-spacing-1">
+        <section class="section-listing tf-spacing-1 pb-0">
             <div class="tf-container">
                 <div class="row">
                     <div class="col-12">
@@ -218,12 +218,14 @@
                                             <li class="text-1 flex"><span>{{$row->bathroom}}</span>Baths</li>
                                             <li class="text-1 flex"><span>{{$row->plot_area}}</span>Sqft</li>
                                         </ul>
+                                        <p>{{$row?->user?->name}}</p>
                                         <div class="bot flex justify-between items-center">
                                             <h5 class="price">
                                                 {{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($row->price)}}
                                             </h5>
                                             <div class="wrap-btn flex"> 
-                                                <a href="{{route('property', $row->slug)}}" class="tf-btn style-border pd-4">Details</a>
+                                                {{-- <a href="{{route('property', $row->slug)}}" class="tf-btn style-border pd-4">Detail</a> --}}
+                                                <a href="javascript:void(0)" class="tf-btn style-border pd-4 interested-function" data-slug="{{$row->slug}}" data-id="{{$row->id}}">Interested</a>
                                             </div>
                                         </div>
                                         </div>
@@ -769,12 +771,14 @@
                                                         </li>
 
                                                     </ul>
+                                                    <p>{{$row?->user?->name}}</p>
                                                     <div class="bot flex justify-between items-center">
                                                         <h5 class="price">
                                                             {{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($row->price)}}
                                                         </h5>
                                                         <div class="wrap-btn flex"> 
-                                                            <a href="{{route('property', $row->slug)}}" class="tf-btn style-border pd-4">Details</a>
+                                                            {{-- <a href="{{route('property', $row->slug)}}" class="tf-btn style-border pd-4">Details</a> --}}
+                                                            <a href="javascript:void(0)" class="tf-btn style-border pd-4 interested-function" data-slug="{{$row->slug}}" data-id="{{$row->id}}">Interested</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1462,7 +1466,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="wg-appraisal ">
+                    <div class="wg-appraisal pb-0">
                         <div class="tf-container">
                             <div class="row">
                                 <div class="col-12">
@@ -1505,7 +1509,7 @@
                         </div>
                         <div class="tf-grid-layout md-col-3 loadmore-item-8">
                             @foreach ($testimonials as $testimonial)
-                                <div class="box-testimonials">
+                            <div class="box-testimonials h-100">
                                 <div class="wg-testimonial style-2">
                                     <div class="ratings ">
                                         <i class="icon-start"></i>
@@ -1514,7 +1518,7 @@
                                         <i class="icon-start"></i>
                                         <i class="icon-start"></i>
                                     </div>
-                                    <p class="text-1 description">{{$testimonial->descriptions}}</p>
+                                    <p class="text-1 description text-limit-6">{{$testimonial->descriptions}}</p>
                                     <div class="author">
                                         <div class="avatar">
                                             <img src="{{ url('frontend/images/avatar/'.$testimonial->image) }}" alt="">

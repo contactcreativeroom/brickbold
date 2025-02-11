@@ -87,14 +87,14 @@
                         @endauth
 
                         @foreach ($rows as $row)
-                            <div class="package-col col-xl-3">
+                            <div class="package-col col-xl-3 mb-3">
                                 <div class="flat-pricing">
                                     <div class="box box-style">
                                         <h3 class="sub-title  fw-7">{{$row->name}}</h3>
                                         <p class="text-sub fw-6 ">Upgrade your {{$row->profile}} account to the {{$row->name}} package.</p>
                                         <div class="title-price flex">
-                                            <h2 class="text-color-primary">{{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($row->grand_price)}} </h2>
-                                            <div class="month fw-7"> / <span class="text-decoration-line-through">{{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($row->price)}}</span></div>
+                                            <h2 class="text-color-primary">{{ config('constants.CURRENCIES.symbol'). $row->grand_price}} </h2>
+                                            <div class="month fw-7"> / <span class="text-decoration-line-through">{{ config('constants.CURRENCIES.symbol'). $row->price}}</span></div>
                                         </div>
                                         <p class="texts">Get benefits for {{$row->property_type}} {{$row->type}} properties account for {{$row->days}} days.</p>
                                         <ul class="check">

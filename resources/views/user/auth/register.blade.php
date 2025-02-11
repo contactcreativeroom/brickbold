@@ -3,26 +3,26 @@
 <section class="flat-title style-2 register-page">
     <div class="tf-container">
         <div class="row"> 
-            <div class="col-lg-12">
+            {{-- <div class="col-lg-12">
                 <div class="title-inner ">
                     <ul class="breadcrumb">
                         <li><a class="home fw-6 text-color-3" href="{{route('home')}}">Home</a></li>
                         <li>Register</li>
                     </ul>
                 </div>
-            </div>
-            <div class="col-xl-12 "> 
+            </div> --}}
+            <div class="col-xl-12 mt-5"> 
                 <div class="flat-account">
                     <div class="banner-account">
                         <img src="{{url('frontend/images/section/banner-register.jpg')}}" alt="banner">
                     </div> 
-                    <form class="form-account" action="{{route('register')}}" id="registerForm"  method="post" enctype='multipart/form-data'>
+                    <form class="form-account pt-5" action="{{route('register')}}" id="registerForm"  method="post" enctype='multipart/form-data'>
                         @csrf 
                         <div class="title-box">
                             <h4>Register</h4>
                         </div>
                         {{-- <div class="box grid-layout-2 gap-10 box-info-2 mb-10"> --}}
-                            <fieldset class="box-fieldset1 mt-5">
+                            <fieldset class="box-fieldset1 mt-20 mb-15">
                                 <label for="name">You are<span>*</span></label>
                                 <div class="box-radio-check d-flex">
                                     @foreach (config('constants.USER_TYPE') as $key=>$value)
@@ -45,7 +45,7 @@
                                 </div> --}}
                                 <span id="role-error" class="text-danger is_error"></span>
                             </fieldset>
-                            <fieldset class="box-fieldset1 mt-3">
+                            <fieldset class="box-fieldset1">
                                 <label for="looking">You're looking<span>*</span></label>
                                 <div class="box-radio-check d-flex">
                                     @foreach (config('constants.FOR_TYPE') as $key=>$value)
@@ -104,7 +104,7 @@
                                 </div>
                                 <span id="role-error" class="text-danger is_error"></span>
                             </fieldset> --}}
-                        <fieldset class="box-fieldset1 mb-10">
+                        {{-- <fieldset class="box-fieldset1 mb-10">
                             <label for="name">Full name<span>*</span></label>
                             <div class="ip-field">
                                 <svg class="icon" width="18" height="18" viewBox="0 0 18 18" fill="none"
@@ -116,8 +116,8 @@
                                 <input type="text" class="form-control" id="name" name="name" placeholder="Full name">
                             </div>
                             <span id="name-error" class="text-danger is_error"></span>
-                        </fieldset>
-                        <div class="box grid-layout-1 gap-10 box-info-2 mt-3">
+                        </fieldset> --}}
+                        <div class="box grid-layout-1 gap-10 box-info-2 mt-3 mb-3">
                             <fieldset class="box-fieldset1">
                                 <label for="mobile">Mobile<span>*</span></label>
                                 <div class="ip-field">
@@ -132,7 +132,7 @@
                                 <span id="mobile-error" class="text-danger is_error"></span>
                             </fieldset>
 
-                            <fieldset class="box-fieldset1 mt-3">
+                            {{-- <fieldset class="box-fieldset1 mt-3">
                                 <label for="email">Email address<span>*</span></label>
                                 <div class="ip-field">
                                     <svg class="icon" width="18" height="18" viewBox="0 0 18 18" fill="none"
@@ -146,7 +146,7 @@
                                 </div>
                                 <span id="email-error" class="text-danger is_error"></span>
 
-                            </fieldset>
+                            </fieldset> --}}
                             
                             
                             
@@ -176,24 +176,24 @@
                                 </div>
                                 <span id="password_confirmation-error" class="text-danger is_error"></span>
                             </fieldset> --}}
-                            </div>
-                            <fieldset class="box-fieldset">
-                                <div class="checkbox-item style-1">
-                                    <label>
-                                        <input type="checkbox" value="1" name="accept_term_condition">
-                                        <span class="btn-checkbox"></span>
-                                        <span class="text">I agreed to the terms & conditions<span>*</span></span>
-                                    </label>
-                                </div>
-                                <span id="accept_term_condition-error" class="text-danger is_error"></span>
-                            </fieldset>
-    
-                        <div class="box box-btn mb-2">
-                            <button type="submit" class="tf-btn bg-color-primary w-full">Sign Up</button>
                         </div>
-                        <p class="box text-center caption-2  mt-5">or login with</p>
+                        {{-- <fieldset class="box-fieldset">
+                            <div class="checkbox-item style-1">
+                                <label>
+                                    <input type="checkbox" value="1" name="accept_term_condition">
+                                    <span class="btn-checkbox"></span>
+                                    <span class="text">I agreed to the terms & conditions<span>*</span></span>
+                                </label>
+                            </div>
+                            <span id="accept_term_condition-error" class="text-danger is_error"></span>
+                        </fieldset> --}}
+    
+                        <div class="box box-btn mb-2 mt-20">
+                            <button type="submit" class="tf-btn bg-color-primary w-full ht-45">Sign Up</button>
+                        </div>
+                        <p class="box text-center caption-2  mb-3 mt-3">or login with</p>
                         <div class="group-btn">
-                            <a href="{{route('login.google.redirect')}}" class="btn-social">
+                            <a href="{{route('login.google.redirect')}}" class="btn-social w-100">
                                 <svg width="21" height="20" viewBox="0 0 21 20" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <g clip-path="url(#clip0_2478_12036)">
@@ -219,9 +219,9 @@
 
                                 Google
                             </a>
-                            <a href="#modalOTP" data-bs-toggle="modal" class="btn-social"> OTP </a>
+                            {{-- <a href="#modalOTP" data-bs-toggle="modal" class="btn-social"> OTP </a> --}}
                         </div>
-                        <div class="text text-center mt-5">Already have an account? <a href="{{route('login')}}" class="text-color-primary">Sign In</a></div>
+                        <div class="text text-center mt-3">Already have an account? <a href="{{route('login')}}" class="text-color-primary">Sign In</a></div>
 
                     </form>
                 </div>

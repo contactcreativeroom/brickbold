@@ -280,7 +280,7 @@
                                             WELCOME
                                         </h2>
                                         <p style="float: left; width: 100%; text-align: center; color: #acacac; margin-bottom: 0;" >
-                                            Hey <span>{{$name}}</span>,<br />Thanks for registering with
+                                            Hey <span>{{ $name ?? 'User' }}</span>,<br />Thanks for registering with
                                             <span>{{config('constants.BUSINESS.name')}} </span>.  System provide your default password <span style="color: #000;">{{$password}}</span> change it as per your choice.                                          
                                         </p>
                                     </div>
@@ -331,7 +331,7 @@
                             </tr>
                         </table>
                     </td>
-                </tr>
+                </tr> 
                 <tr>
                     <td class="bg_white" style="padding: 5px 25px; width: 100%;">
                         <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -348,7 +348,7 @@
                             </tr>
                         </table>
                     </td>
-                </tr>
+                </tr> 
                 <tr>
                     <td class="bg_white" style="padding: 5px 25px; width: 100%;">
                         <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">

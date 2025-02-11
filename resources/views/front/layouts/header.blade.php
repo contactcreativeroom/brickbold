@@ -1,14 +1,19 @@
  <!-- .header -->
-<header id="header-main" class="header header-fixed">
-    <div class="header-inner">
-        <div class="tf-container xl">
+<header id="header-main" class="header style-3 header-fixed">
+    <div class="header-inner bg-1">
+        <div class="tf-container lg">
             <div class="row">
                 <div class="col-12">
                     <div class="header-inner-wrap">
                         <div class="header-logo">
                             <a href="{{route('home')}}" class="site-logo">
+                                <img id="logo_header" alt="" src="{{ App\Helper\Helper::getLogo(true); }}">
+                            </a>
+
+                            <a href="{{route('home')}}" class="site-logo-fixed">
                                 <img id="logo_header" alt="" src="{{ App\Helper\Helper::getLogo(); }}">
                             </a>
+
                         </div>
                         <nav class="main-menu">
                             <ul class="navigation ">                                
@@ -149,7 +154,7 @@
                                                 <li>
                                                     <a href="{{route('user.dashboard')}}">My Dashboard</a>
                                                 </li>
-                                                <li>
+                                                <li class="d-none">
                                                     <a href="{{route('packages')}}">Sell / Rent Ad Packages</a>
                                                 </li>                                                  
                                             </ul>
@@ -159,7 +164,7 @@
                                             <ul class="submenu2">
                                                 <li>
                                                     <a href="{{route('user.dashboard')}}">My Dashboard</a>
-                                                <li>
+                                                <li class="d-none">
                                                     <a href="{{route('packages')}}">Ad Packages</a>
                                                 </li> 
                                                 <li>
@@ -172,7 +177,7 @@
 
                                 <li ><a href="{{route('homeloan')}}">Home Loan</a></li>  
 
-                                <li ><a href="{{route('about')}}">About Us</a></li>  
+                                <li ><a href="javascript:void(0)">Elite Services</a> </li>                                
 
                                 <li><a href="{{route('contact')}}">Contact</a></li>
                             </ul>
@@ -395,7 +400,7 @@
                             </div>
                             @else                             
                                 <div class="btn-add">
-                                    <a class="tf-btn bg-color-primary pd-23" href="{{route('register')}}"  >
+                                    <a class="tf-btn style-border pd-23" href="{{route('register')}}"  >
                                         Post Property
                                         <span class="text-danger ps-3 pe-3 bg-warning rounded-4">Free</span>
                                     </a>
