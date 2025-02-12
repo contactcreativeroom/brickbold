@@ -8,6 +8,7 @@ use App\Models\Banner;
 use App\Models\Booking;
 use App\Models\Category;
 use App\Models\Contact;
+use App\Models\HomeLoanEnquiry;
 use App\Models\Newsletter;
 use App\Models\Order;
 use App\Models\Payment;
@@ -197,6 +198,13 @@ class Dashboard extends Controller
         $data=array('rows'=>$enquiries);
         return view($this->prefix.'.property-enquiries')->with($data);
     } 
+
+    public function loanEnquiries(Request $request){
+        $enquiries = HomeLoanEnquiry::latest()->paginate($this->pagerecords);
+        $data=array('rows'=>$enquiries);
+        return view($this->prefix.'.homeloan-enquiries')->with($data);
+    } 
+
     public function subscribers(Request $request){
         $enquiries = Newsletter::latest()->paginate($this->pagerecords);
         $data=array('rows'=>$enquiries);

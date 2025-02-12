@@ -609,7 +609,7 @@
                     </div>
                     <div class="col-xl-4 col-lg-5">
                         <div class=" tf-sidebar sticky-sidebar ">
-                            <form class="form-contact-seller mb-30" method="post" action="{{route('property.enquiry')}}" >
+                            <form class="form-contact-seller mb-30 d-none" method="post" action="{{route('property.enquiry')}}" >
                                 @csrf
                                 <h4 class="heading-title mb-30">
                                     Contact {{$row->user->user_type ?? 'Sellers'}}
@@ -745,7 +745,8 @@
                                                     {{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($similarProperty->price)}}
                                                 </h5>
                                                 <div class="wrap-btn flex"> 
-                                                    <a href="{{route('property', $similarProperty->slug)}}" class="tf-btn style-border pd-4">Details</a>
+                                                    {{-- <a href="{{route('property', $similarProperty->slug)}}" class="tf-btn style-border pd-4">Details</a> --}}
+                                                    <a href="javascript:void(0)" class="tf-btn style-border pd-4 interested-function" data-slug="{{$row->slug}}" data-id="{{$row->id}}">Interested</a>
                                                 </div>
                                             </div>
                                         </div>

@@ -178,7 +178,7 @@
                         <h5 class="mb-1">Properties statistics</h5>
                         <p class="card-subtitle">Total Properties {{$properties->count()}}</p>
                     </div>
-                    <div class="btn-group">
+                    <div class="btn-group d-none">
                         <button type="button" class="btn btn-label-primary">{{date('Y')}}</button>
                         <button type="button" class="btn btn-label-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
                         <span class="visually-hidden">Toggle Dropdown</span>
@@ -199,7 +199,7 @@
             <div class="card h-100">
                 <div class="card-header d-flex align-items-center justify-content-between">
                     <h5 class="card-title m-0 me-2">Revenue statistics</h5>
-                    <div class="dropdown">
+                    <div class="dropdown d-none">
                         <button class="btn p-0" type="button" id="totalBalance" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="bx bx-dots-vertical-rounded bx-lg text-muted"></i>
                         </button>

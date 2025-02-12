@@ -147,9 +147,9 @@ class PropertyController extends Controller
 
     public function enquiryPost(Request $request) { 
         $validationArray = [
-            'name' => 'required',
+            'name' => ['required', 'regex:/^[A-Za-z\s]+$/', 'min:3', 'max:30'],
             'email' => 'required|email',
-            'phone' => 'nullable|digits:10',
+            'phone' => ['required', 'regex:/^[6-9]\d{9}$/'],
         ];
         
         $this->validate($request, $validationArray); 

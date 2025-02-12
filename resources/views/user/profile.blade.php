@@ -76,7 +76,8 @@
                             </div>
                             <div class="box-fieldset">
                                 <label for="phone">Your Phone:<span>*</span></label>
-                                <input type="number" id="phone" name="phone" value="@if(old('phone')!=null){{old('phone')}}@elseif(!empty($row->phone)){{$row->phone}}@endif" class="form-control {{ $errors->has('phone') ? ' is-invalid' : '' }}">
+                                <input type="number" id="phone" name="phone" value="@if(old('phone')!=null){{old('phone')}}@elseif(!empty($row->phone)){{$row->phone}}@endif" class="form-control {{ $errors->has('phone') ? ' is-invalid' : '' }}" 
+                                @if(!empty($row->phone)) readonly @endif >
                                 @if($errors->has('phone'))
                                     <span class="invalid-feedback">
                                         {{ $errors->first('phone') }}

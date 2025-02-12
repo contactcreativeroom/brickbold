@@ -107,6 +107,12 @@
                 <div>Contact Enquiries</div>
             </a>
         </li> 
+        <li class="menu-item {{ in_array(Route::currentRouteName(), ['admin.loan-enquiries']) ? 'active' : '' }}">
+            <a href="{{route('admin.loan-enquiries')}}" class="menu-link">
+                <i class="menu-icon fa-solid fa-house-user"></i>
+                <div>Home Loan Enquiries</div>
+            </a>
+        </li> 
         <li class="menu-item {{ in_array(Route::currentRouteName(), ['admin.subscribers']) ? 'active' : '' }}">
             <a href="{{route('admin.subscribers')}}" class="menu-link">
                 <i class="menu-icon fa-solid fa-user-check"></i>

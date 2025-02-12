@@ -31,11 +31,12 @@ class UserController extends Controller
 
     public function editProfile(Request $request)
     {
+        $user = $this->userAuth;
         if ($request->method() == 'POST') {
             $validator = Validator::make($request->all(), [
-                'name' => 'required',
-                'email' => 'required|email',
-                'phone' => 'required',
+                'name' => ['required', 'regex:/^[A-Za-z\s]+$/', 'min:3', 'max:30'],
+                'email' => 'required|email|max:255|unique:users,email,' . $user->id,
+                'phone' => ['required', 'regex:/^[6-9]\d{9}$/'],
                 'address' => 'required',
             ]);
 
@@ -43,7 +44,6 @@ class UserController extends Controller
                 Helper::toastMsg(false, 'Validation Error!');
                 return back()->withInput()->withErrors($validator);
             };
-            $user = $this->userAuth;
             if(isset($request->user_type) && $request->user_type !=''){
                 $user->user_type = $request->user_type;
             }

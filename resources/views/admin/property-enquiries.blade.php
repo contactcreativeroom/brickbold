@@ -16,20 +16,20 @@
     <!-- Content wrapper -->
     <div class="content-wrapper">
         <!-- Content -->
-        <div class="container">
+        <div class="container table-responsive">
             <h2>Product Eenquiries</h2>
             @if($rows->isEmpty())
             <div class="alert alert-danger text-center">
                 No Records found.
             </div>
             @else
-            <table class="table table-hover">
+            <table class="table table-hover ">
                 <thead class="table-primary">
                     <tr>
                         <th scope="col" class="border">#</th>
                         <th scope="col" class="border">Property</th>
                         <th scope="col" class="border">Property-Owner</th>
-                        <th scope="col" class="border">Name</th>
+                        <th scope="col" class="border">Interested Name</th>
                         <th scope="col" class="border">Email</th>
                         <th scope="col" class="border">Phone</th>
                         <th scope="col" class="border">Message</th>
@@ -77,7 +77,7 @@
                             @endif                           
 
                         </td>   
-                        <td>{{$row->name}} </td>   
+                        <td>{{$row->name}}</td>   
                         <td>{{$row->email}} </td>   
                         <td>{{$row->phone}} </td>   
                         <td>{{$row->message}} </td>   

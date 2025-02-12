@@ -6,6 +6,7 @@ use App\Helper\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Bank;
 use App\Models\Contact;
+use App\Models\HomeLoanEnquiry;
 use App\Models\Package;
 use App\Models\Page;
 use App\Models\Property;
@@ -45,9 +46,9 @@ class HomeController extends Controller
     }
     public function contactPost(Request $request) { 
         $validationArray = [
-            'name' => 'required',
+            'name' => ['required', 'regex:/^[A-Za-z\s]+$/', 'min:3', 'max:30'],
             'email' => 'required|email',
-            'phone' => 'required',
+            'phone' => ['required', 'regex:/^[6-9]\d{9}$/'],
             'message' => 'required',
         ];
         
@@ -129,16 +130,25 @@ class HomeController extends Controller
         
         $validationArray = [
             'loan_amount' => 'required', 
-            'loan_mobile' => 'required',
-            'loan_city' => 'required',
+            'phone' => ['required', 'regex:/^[6-9]\d{9}$/'],
+            'city' => 'required',
         ];
         
         $this->validate($request, $validationArray); 
+
+        $homeLoanEnquiry = new HomeLoanEnquiry();
+        $homeLoanEnquiry->amount = $request->loan_amount;
+        $homeLoanEnquiry->phone = $request->phone;
+        $homeLoanEnquiry->city = $request->city;
+        $homeLoanEnquiry->finalized = $request->loan_property;
+        $homeLoanEnquiry->status = 1;
+        $homeLoanEnquiry->save();
+
         $details = array(
             'logo' => Helper::getLogo(),
-            'amount'=> $request->loan_amount,
-            'phone'=>$request->loan_mobile,
-            'city'=>$request->loan_city,
+            'amount'=> config('constants.CURRENCIES.symbol').Helper::priceFormat($request->loan_amount),
+            'phone'=>$request->phone,
+            'city'=>$request->city,
             'finalized'=>$request->loan_property,
          );
         dispatch(new \App\Jobs\LoanEnquiryQueue($details));

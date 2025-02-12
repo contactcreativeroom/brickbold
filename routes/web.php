@@ -181,6 +181,7 @@ Route::group(['prefix' => 'admin'], function () {
 
         Route::get('/contact-enquiries', [Dashboard::class, 'contactEnquiries'])->name('admin.contact-enquiries');
         Route::get('/property-enquiries', [Dashboard::class, 'propertyEnquiries'])->name('admin.property-enquiries');
+        Route::get('/loan-enquiries', [Dashboard::class, 'loanEnquiries'])->name('admin.loan-enquiries');
         Route::get('/subscribers', [Dashboard::class, 'subscribers'])->name('admin.subscribers');
 
         // Route::get('/categories', [CategoryController::class, 'list'])->name('admin.categories');

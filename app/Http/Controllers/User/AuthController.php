@@ -28,7 +28,7 @@ class AuthController extends Controller
                 'for_type' => 'required',
                 // 'name' => 'required|string|max:255',
                 // 'email' => 'required|email|unique:users,email|max:255',
-                'mobile' => 'required|digits:10',
+                'mobile' => ['required', 'regex:/^[6-9]\d{9}$/'],
                 // 'password' => 'required|min:6|confirmed',
                 // 'accept_term_condition' => 'required|in:1',
                 // 'dob' => 'nullable|date',

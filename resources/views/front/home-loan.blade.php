@@ -45,32 +45,47 @@
                                  
                                 <form class="flat-tab flat-tab-form widget-filter-search widget-box" action="{{route('bank.enquiry')}}" method="POST">
                                     @csrf
-                                    <div class="row"> 
+                                    <div class="row">
+                                        <fieldset class="box-fieldset mb-3">
+                                            <input type="number" class="form-control {{ $errors->has('loan_amount') ? ' is-invalid' : '' }}" name="loan_amount" placeholder="Loan Amount" value="@if(old('loan_amount')!=null){{old('loan_amount')}}@endif">
+                                            @if($errors->has('loan_amount'))
+                                                <span class="invalid-feedback">
+                                                    {{ $errors->first('loan_amount') }}
+                                                </span>
+                                            @endif
+                                        </fieldset>
 
                                         <fieldset class="box-fieldset mb-3">
-                                            <input type="number" class="form-control" name="loan_amount" required="" placeholder="Enter loan Amount">
+                                            <input type="number" class="form-control {{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" placeholder="Mobile Number" value="@if(old('phone')!=null){{old('phone')}}@endif">
+                                            @if($errors->has('phone'))
+                                                <span class="invalid-feedback">
+                                                    {{ $errors->first('phone') }}
+                                                </span>
+                                            @endif
                                         </fieldset>
+
                                         <fieldset class="box-fieldset mb-3">
-                                            <input type="number" class="form-control" name="loan_mobile" required="" placeholder="Mobile Number">
-                                        </fieldset>
-                                        <fieldset class="box-fieldset mb-3">
-                                            <input type="text" class="form-control" name="loan_city" required="" placeholder="Property City">
-                                        </fieldset>
-                                         
+                                            <input type="text" class="form-control {{ $errors->has('city') ? ' is-invalid' : '' }}" name="city" placeholder="Property City" value="@if(old('city')!=null){{old('city')}}@endif">
+                                            @if($errors->has('city'))
+                                                <span class="invalid-feedback">
+                                                    {{ $errors->first('city') }}
+                                                </span>
+                                            @endif
+                                        </fieldset> 
                                         <fieldset class="box-fieldset1 mt-3">
                                             <label for="looking">Is Property Finalized?</label>
                                             <div class="box-radio-check d-flex">
                                                 <fieldset class="radio-item me-3">
                                                     <label>
                                                         <span class="text-1">Yes</span>
-                                                        <input type="radio" name="loan_property" value="Yes" >
+                                                        <input type="radio" name="loan_property" value="Yes" @if(old('loan_property')!=null && old('loan_property')== "Yes") checked  @endif>
                                                         <span class="btn-radio"></span>
                                                     </label>
                                                 </fieldset>
                                                 <fieldset class="radio-item me-3">
                                                     <label>
                                                         <span class="text-1">No</span>
-                                                        <input type="radio" name="loan_property" value="No" >
+                                                        <input type="radio" name="loan_property" value="No" @if(old('loan_property')!=null && old('loan_property')== "No") checked  @endif>
                                                         <span class="btn-radio"></span>
                                                     </label>
                                                 </fieldset>
