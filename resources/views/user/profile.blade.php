@@ -19,7 +19,7 @@
                             <a href="#" class="tf-btn bg-color-primary pd-10 fw-7">Remove Agent Account</a>
                         </div>
                     </div> --}}
-                    <form  method="post" action="{{ route('user.profile.edit') }}" enctype="multipart/form-data" class="form-contact mb-30">
+                    <form  method="post" id="profileUpdate" action="{{ route('user.profile.edit') }}" enctype="multipart/form-data" class="form-contact mb-30">
                     @csrf
                         <div class="box">
                             <h6 class="title">Profile Picture</h6>
@@ -66,8 +66,16 @@
                         </fieldset>
                         <div class="box grid-layout-2 gap-30 box-info-2">                             
                             <div class="box-fieldset">
-                                <label for="email">Email address:<span>*</span></label>
+                                <label for="email">Email address:<span>*</span>
+                                @if (Auth::user()->hasVerifiedEmail()) 
+                                    <img src="{{URL('images/verified.png')}}" class="ht-21" alt="Verified">
+                                @else  
+                                    <a href="javascript:void(0)" id="verifyEmail" class="badge bg-label-danger" data-url="{{route('email.verify.link')}}">Verify Now</a>
+                                @endif 
+                                
+                                </label>
                                 <input type="text" id="email" name="email" value="@if(old('email')!=null){{old('email')}}@elseif(!empty($row->email)){{$row->email}}@endif" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}">
+                                <span class="error text-danger" id="email-error" ><span>
                                 @if($errors->has('email'))
                                     <span class="invalid-feedback">
                                         {{ $errors->first('email') }}
@@ -132,71 +140,71 @@
                         </div>
                     </form>
 
-                    <form method="post" action="{{ route('user.change.password') }}" enctype="multipart/form-data" class="form-contact">
-                    @csrf
-                    <h5 class="title">Change Password</h5>
-                    <div class="box grid-layout-3 gap-30">
-                        
-                        <!-- Old Password Field -->
-                        <div class="box-fieldset">
-                            <label for="old-pass">Old Password:<span>*</span></label>
-                            <div class="box-password">
-                                <input type="password"  id="old-pass"  name="old_password"  class="form-contact password-field {{ $errors->has('old_password') ? 'is-invalid' : '' }}"  value="{{ old('old_password') }}"  placeholder="Old Password"  >
-                                @if ($errors->has('old_password'))
-                                    <span class="invalid-feedback">
-                                        {{ $errors->first('old_password') }}
-                                    </span>
-                                @endif
-                                <span class="show-pass">
-                                    <i class="icon-pass icon-hide"></i>
-                                    <i class="icon-pass icon-view"></i>
-                                </span>
-                            </div>
+                    {{-- <form method="post" action="{{ route('user.change.password') }}" enctype="multipart/form-data" class="form-contact">
+                        @csrf
+                        <h5 class="title">Change Password</h5>
+                        <div class="box grid-layout-3 gap-30">
                             
+                            <!-- Old Password Field -->
+                            <div class="box-fieldset">
+                                <label for="old-pass">Old Password:<span>*</span></label>
+                                <div class="box-password">
+                                    <input type="password"  id="old-pass"  name="old_password"  class="form-contact password-field {{ $errors->has('old_password') ? 'is-invalid' : '' }}"  value="{{ old('old_password') }}"  placeholder="Old Password"  >
+                                    @if ($errors->has('old_password'))
+                                        <span class="invalid-feedback">
+                                            {{ $errors->first('old_password') }}
+                                        </span>
+                                    @endif
+                                    <span class="show-pass">
+                                        <i class="icon-pass icon-hide"></i>
+                                        <i class="icon-pass icon-view"></i>
+                                    </span>
+                                </div>
+                                
+                            </div>
+
+                            <!-- New Password Field -->
+                            <div class="box-fieldset">
+                                <label for="new-pass">New Password:<span>*</span></label>
+                                <div class="box-password">
+                                    <input type="password" id="new-pass" name="new_password" class="form-contact password-field2 {{ $errors->has('new_password') ? 'is-invalid' : '' }}" value="{{ old('new_password') }}" placeholder="New Password" >
+                                    @if ($errors->has('new_password'))
+                                        <span class="invalid-feedback">
+                                            {{ $errors->first('new_password') }}
+                                        </span>
+                                    @endif
+                                    <span class="show-pass2">
+                                        <i class="icon-pass icon-hide"></i>
+                                        <i class="icon-pass icon-view"></i>
+                                    </span>
+                                </div>
+                                
+                            </div>
+
+                            <!-- Confirm Password Field -->
+                            <div class="box-fieldset mb-30">
+                                <label for="confirm-pass">Confirm Password:<span>*</span></label>
+                                <div class="box-password">
+                                    <input type="password" id="confirm-pass" name="new_password_confirmation" class="form-contact password-field3 {{ $errors->has('new_password_confirmation') ? 'is-invalid' : '' }}" value="{{ old('new_password_confirmation') }}" placeholder="Confirm Password" >
+                                    @if ($errors->has('new_password_confirmation'))
+                                        <span class="invalid-feedback">
+                                            {{ $errors->first('new_password_confirmation') }}
+                                        </span>
+                                    @endif
+                                    <span class="show-pass3">
+                                        <i class="icon-pass icon-hide"></i>
+                                        <i class="icon-pass icon-view"></i>
+                                    </span>
+                                </div>
+                                
+                            </div>
+
                         </div>
 
-                        <!-- New Password Field -->
-                        <div class="box-fieldset">
-                            <label for="new-pass">New Password:<span>*</span></label>
-                            <div class="box-password">
-                                <input type="password" id="new-pass" name="new_password" class="form-contact password-field2 {{ $errors->has('new_password') ? 'is-invalid' : '' }}" value="{{ old('new_password') }}" placeholder="New Password" >
-                                @if ($errors->has('new_password'))
-                                    <span class="invalid-feedback">
-                                        {{ $errors->first('new_password') }}
-                                    </span>
-                                @endif
-                                <span class="show-pass2">
-                                    <i class="icon-pass icon-hide"></i>
-                                    <i class="icon-pass icon-view"></i>
-                                </span>
-                            </div>
-                            
+                        <div class="box">
+                            <button type="submit" class="tf-btn bg-color-primary pd-20">Update Password</button>
                         </div>
-
-                        <!-- Confirm Password Field -->
-                        <div class="box-fieldset mb-30">
-                            <label for="confirm-pass">Confirm Password:<span>*</span></label>
-                            <div class="box-password">
-                                <input type="password" id="confirm-pass" name="new_password_confirmation" class="form-contact password-field3 {{ $errors->has('new_password_confirmation') ? 'is-invalid' : '' }}" value="{{ old('new_password_confirmation') }}" placeholder="Confirm Password" >
-                                @if ($errors->has('new_password_confirmation'))
-                                    <span class="invalid-feedback">
-                                        {{ $errors->first('new_password_confirmation') }}
-                                    </span>
-                                @endif
-                                <span class="show-pass3">
-                                    <i class="icon-pass icon-hide"></i>
-                                    <i class="icon-pass icon-view"></i>
-                                </span>
-                            </div>
-                            
-                        </div>
-
-                    </div>
-
-                    <div class="box">
-                        <button type="submit" class="tf-btn bg-color-primary pd-20">Update Password</button>
-                    </div>
-                </form>
+                    </form> --}}
                     
                 </div>
                 @include('user.layouts.footer')

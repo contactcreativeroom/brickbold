@@ -3,10 +3,12 @@
     <div class="page-layout">
         @include('user.layouts.sidebar')
         <div class="main-content w-100">
-            <div class="main-content-inner wrap-dashboard-content">
+            <div class="main-content-inner wrap-dashboard-content">                
+                @include('user.layouts.verify-email')   
                 <div class="button-show-hide show-mb">
                     <span class="body-1">Show Dashboard</span>
                 </div>
+
                 <form action="{{ route('user.properties') }}" method="get" enctype='multipart/form-data'>
                  
                 <div class="row">
@@ -58,7 +60,7 @@
                                             <td>
                                                 <div class="listing-box">
                                                     <div class="images">
-                                                        <img src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" alt="images" style="height:110px;">
+                                                        <img src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" alt="images" class="cover-img ht-125">
                                                     </div>
                                                     <div class="content">
                                                         <div class="title">

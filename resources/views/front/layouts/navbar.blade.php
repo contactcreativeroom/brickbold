@@ -228,6 +228,11 @@
                             <span class="text-danger ps-3 pe-3 bg-warning rounded-4">Free</span>
                         </a>
                     </div>
+                    <div class="btn-add mt-2">
+                        <a class="tf-btn bg-color-primary pd-23" href="{{route('login')}}" >
+                            Login
+                        </a>
+                    </div>
                 </div>
 
 

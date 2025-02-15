@@ -1,6 +1,6 @@
  <!-- .header -->
 <header id="header-main" class="header style-3 header-fixed">
-    <div class="header-inner bg-1">
+    <div class="header-inner bg-1 header-position">
         <div class="tf-container lg">
             <div class="row">
                 <div class="col-12">

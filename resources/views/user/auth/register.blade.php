@@ -19,27 +19,31 @@
                     <form class="form-account pt-5" action="{{route('register')}}" id="registerForm"  method="post" enctype='multipart/form-data'>
                         @csrf 
                         <div class="title-box">
-                            <h4>Register</h4>
+                            <h4 class="mb-3 text-danger">List your property now- It's Free</h4>
+                            <h6>Add Basic Details</h6>
                         </div>
                         {{-- <div class="box grid-layout-2 gap-10 box-info-2 mb-10"> --}}
-                            <fieldset class="box-fieldset1 mt-20 mb-15">
+                            <fieldset class="box-fieldset1 mt-20 mb-10">
                                 <label for="name">You are<span>*</span></label>
-                                <div class="box-radio-check d-flex">
+                                <div class="box-radio-check d-flex radio-custom">
                                     @foreach (config('constants.USER_TYPE') as $key=>$value)
-                                    <fieldset class="radio-item me-3">
+                                    <input type="radio" class="btn-check" name="role" value="{{$value}}" id="role_{{$key}}"  @if(old('role')!=null && old('role')== $key) checked  @endif >
+                                    <label class="btn btn-outline-danger" for="role_{{$key}}">{{$value}}</label>
+                                    {{-- <fieldset class="radio-item me-3">
                                         <label>
                                             <span class="text-1">{{$value}}</span>
                                             <input type="radio" name="role" value="{{$value}}" id="role_{{$key}}"  @if(old('role')!=null && old('role')== $key) checked  @endif >
                                             <span class="btn-radio"></span>
                                         </label>
-                                    </fieldset>
+                                    </fieldset> --}}
                                     @endforeach 
                                 </div>
+
                                 {{-- <div class="ip-field">
                                     <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                         @foreach (config('constants.USER_TYPE') as $key=>$value)
-                                            <input type="radio" class="btn-check" name="btnradio" id="btnradio{{$key}}" value="{{$value}}" autocomplete="off" checked>
-                                            <label class="btn btn-outline-danger" for="btnradio{{$key}}">{{$value}}</label>
+                                            <input type="radio" class="btn-check" name="role" id="role_{{$key}}" value="{{$value}}" autocomplete="off" @if(old('role')!=null && old('role')== $key) checked  @endif>
+                                            <label class="btn btn-outline-danger" for="role_{{$key}}">{{$value}}</label>
                                         @endforeach
                                     </div>
                                 </div> --}}
@@ -47,17 +51,27 @@
                             </fieldset>
                             <fieldset class="box-fieldset1">
                                 <label for="looking">You're looking<span>*</span></label>
-                                <div class="box-radio-check d-flex">
+                                <div class="box-radio-check d-flex radio-custom">
                                     @foreach (config('constants.FOR_TYPE') as $key=>$value)
-                                    <fieldset class="radio-item me-3">
+                                    <input type="radio" class="btn-check" name="for_type" value="{{$value}}" id="for_type_{{$key}}"  @if(old('for_type')!=null && old('for_type')== $key) checked  @endif >
+                                    <label class="btn btn-outline-danger" for="for_type_{{$key}}">{{$value}}</label>
+                                    {{-- <fieldset class="radio-item me-3">
                                         <label>
                                             <span class="text-1">{{$value}}</span>
-                                            <input type="radio" name="for_type" value="{{$key}}" id="role_{{$key}}" @if(old('for_type')!=null && old('for_type')== $key) checked  @endif >
+                                            <input type="radio" name="for_type" value="{{$key}}" id="for_type_{{$key}}" @if(old('for_type')!=null && old('for_type')== $key) checked  @endif >
                                             <span class="btn-radio"></span>
                                         </label>
-                                    </fieldset>
+                                    </fieldset>--}}
                                     @endforeach 
-                                </div>
+                                </div> 
+                                {{-- <div class="ip-field">
+                                    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                        @foreach (config('constants.FOR_TYPE') as $key=>$value)
+                                            <input type="radio" class="btn-check" name="for_type" id="for_type_{{$key}}" value="{{$key}}" autocomplete="off" @if(old('for_type')!=null && old('for_type')== $key) checked  @endif>
+                                            <label class="btn btn-outline-danger" for="for_type_{{$key}}">{{$value}}</label>
+                                        @endforeach
+                                    </div>
+                                </div> --}}
                                 <span id="for_type-error" class="text-danger is_error"></span>
                             </fieldset>
                         {{-- </div> --}}
@@ -191,7 +205,7 @@
                         <div class="box box-btn mb-2 mt-20">
                             <button type="submit" class="tf-btn bg-color-primary w-full ht-45">Sign Up</button>
                         </div>
-                        <p class="box text-center caption-2  mb-3 mt-3">or login with</p>
+                        <p class="box text-center caption-2  mb-3 mt-3">or</p>
                         <div class="group-btn">
                             <a href="{{route('login.google.redirect')}}" class="btn-social w-100">
                                 <svg width="21" height="20" viewBox="0 0 21 20" fill="none"

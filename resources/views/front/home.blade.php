@@ -186,11 +186,10 @@
                             <div class="swiper-wrapper tf-layout-mobile-md md-col-2  lg-col-3 ">
                                 @foreach ($todayLuxury as $row)
                                 <div class="swiper-slide">
-                                    <div class="box-house hover-img ">
-                                        <div class="image-wrap">
+                                    <div class="box-house hover-img h-100">
+                                        <div class="image-wrap ht-210">
                                             <a href="{{route('property', $row->slug)}}">
-                                            <img class="lazyload"
-                                            data-src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" alt="">
+                                                <img class="lazyload cover-img" data-src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" alt="">
                                             </a>
                                             <ul class="box-tag flex gap-8 ">
                                                 <li class="flat-tag text-4 bg-main fw-6 text-white">{{config('constants.FOR_TYPE')[$row->for_type]}}</li>
@@ -218,7 +217,7 @@
                                             <li class="text-1 flex"><span>{{$row->bathroom}}</span>Baths</li>
                                             <li class="text-1 flex"><span>{{$row->plot_area}}</span>Sqft</li>
                                         </ul>
-                                        <p>{{$row?->user?->name}}</p>
+                                        {{-- <p>{{$row?->user?->name}}</p> --}}
                                         <div class="bot flex justify-between items-center">
                                             <h5 class="price">
                                                 {{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($row->price)}}
@@ -727,7 +726,7 @@
                                         @foreach ($readyToMove as $row)
                                         <div class="swiper-slide">
                                             <div class="box-house hover-img style-list ">
-                                                <div class="image-wrap">
+                                                <div class="image-wrap wd-250">
                                                     <a href="{{route('property', $row->slug)}}">
                                                         <img class="lazyload" data-src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" alt="">
                                                     </a>
@@ -771,7 +770,7 @@
                                                         </li>
 
                                                     </ul>
-                                                    <p>{{$row?->user?->name}}</p>
+                                                    {{-- <p>{{$row?->user?->name}}</p> --}}
                                                     <div class="bot flex justify-between items-center">
                                                         <h5 class="price">
                                                             {{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($row->price)}}

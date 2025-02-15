@@ -216,8 +216,11 @@ class PropertyController extends Controller
         Helper::assignPropertyToPackage($property->id);
         DB::commit();
         Helper::toastMsg(true, 'Property Added/Updated successfully!');
-        return redirect()->route('user.properties');
-        
+        $check = Helper::isUserProfileNotCompleted();
+        if ($check) {
+            return redirect()->route('user.profile');
+        }
+        return redirect()->route('user.properties');        
     }
 
 

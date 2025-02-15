@@ -70,7 +70,7 @@
                         <th scope="col" class="border">Days</th>
                         <th scope="col" class="border">Price</th>
                         <th scope="col" class="border">Discount(%)</th>
-                        <th scope="col" class="border">Grand Total</th>
+                        <th scope="col" class="border text-nowrap">Grand Total</th>
                         <th scope="col" class="border">Contacts</th>
                         <th scope="col" class="border">Status</th>
                         <th scope="col" class="border">Operations</th>

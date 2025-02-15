@@ -2,7 +2,7 @@
 {{-- <link rel="stylesheet" type="text/css" href="{{url('frontend/css/map.min.css')}}" /> --}}
 @section('content')
     <!-- flat-title -->
-    <section class="flat-title ">
+    <section class="mb-15 mt-20">
         <div class="tf-container">
             <div class="row">
                 <div class="col-lg-12">
@@ -30,7 +30,7 @@
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
                                     <a href="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" data-fancybox="gallery" class="image-wrap relative d-block">
-                                        <img class="lazyload" data-src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}"
+                                        <img class="lazyload cover-img" data-src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}"
                                             src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" alt="" style="height:500px;">
                                         <div class="tag-property ">
                                             <div class="icon">
@@ -51,7 +51,7 @@
                                 @foreach($row->images as $imageKey => $imageVal)
                                 <div class="swiper-slide">
                                     <a href="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $imageVal->image) }}" data-fancybox="gallery" class="image-wrap d-block">
-                                        <img class="lazyload" data-src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $imageVal->image) }}" src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $imageVal->image) }}" alt="" style="height:500px;">
+                                        <img class="lazyload cover-img" data-src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $imageVal->image) }}" src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $imageVal->image) }}" alt="" style="height:500px;">
                                     </a>
                                 </div> 
                                 @endforeach
@@ -709,10 +709,10 @@
                                 data-wow-delay=".2s">
                                 @foreach ($similarProperties as $similarProperty)
                                     <div class="swiper-slide">
-                                    <div class="box-house hover-img">
-                                        <div class="image-wrap">
+                                    <div class="box-house hover-img h-100">
+                                        <div class="image-wrap ht-210">
                                             <a href="{{route('property', $similarProperty->slug)}}">
-                                                <img class="lazyload" data-src="{{ App\Helper\Helper::getImage('storage/property/'.$similarProperty->id, $similarProperty?->image?->image) }}" src="{{ App\Helper\Helper::getImage('storage/property/'.$similarProperty->id, $similarProperty?->image?->image) }}" alt="">
+                                                <img class="lazyload cover-img " data-src="{{ App\Helper\Helper::getImage('storage/property/'.$similarProperty->id, $similarProperty?->image?->image) }}" src="{{ App\Helper\Helper::getImage('storage/property/'.$similarProperty->id, $similarProperty?->image?->image) }}" alt="">
                                             </a>
                                             <ul class="box-tag flex gap-8 ">
                                                 {{-- <li class="flat-tag text-4 bg-3 fw-6 text-white">Featured</li> --}}
@@ -762,7 +762,7 @@
         </section>
         <!-- /section-opinion -->
 
-         @include('front.layouts.pre-footer')
+         {{-- @include('front.layouts.pre-footer') --}}
 
     </div>
     <!-- /main-content -->

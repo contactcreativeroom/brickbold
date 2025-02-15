@@ -1,20 +1,20 @@
 @extends('front.layouts.app')
 @section('content')
     <!-- flat-title -->
-        <section class="flat-title style-2">
+        <section class="style-2 bg-4 mb-3 pt-2 pb-2">
             <div class="tf-container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="title-inner ">
+                        {{-- <div class="title-inner ">
                             <ul class="breadcrumb">
                                 <li><a class="home fw-6 text-color-3" href="{{route('home')}}">Home</a></li>
                                 <li>Property Listing</li>
                             </ul>
-                        </div>
+                        </div> --}}
                         <form id="filter_form" action="{{ route('properties') }}" method="get" enctype='multipart/form-data'>
                             <input type="hidden" name="sort" id="sort_value" value="desc">
-                            <div class="wg-filter style-2 relative z-31">
-                                <div class="form-title style-2">
+                            <div class="wg-filter style-2 relative z-31 mt-2 mb-2">
+                                <div class="form-title style-2 bg-4">
                                     
                                     <fieldset class="form">
                                         <input type="text" placeholder="Address, City, ZIP..." name="search" value="{{ request('search', '') }}">
@@ -178,8 +178,8 @@
                 <div class="tf-container">
                     <div class="row">
                         <div class="col-12">
-                            <div class="box-title">
-                                <h2>Property listing</h2>
+                            <div class="box-title mb-3">
+                                <h4>Property listing</h4>
                                 <div class="right">
                                     <ul class="nav-tab-filter group-layout" role="tablist">
                                         <li class="nav-tab-item" role="presentation">
@@ -264,10 +264,10 @@
                                     <div class="tab-pane" id="gridLayout" role="tabpanel">
                                         <div class="tf-grid-layout md-col-2">
                                             @foreach ($rows as $row)
-                                                <div class="box-house hover-img">
-                                                    <div class="image-wrap">
-                                                        <a href="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}">
-                                                            <img class="lazyload" data-fancybox="gallery" data-src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" alt="">
+                                                <div class="box-house hover-img h-100">
+                                                    <div class="image-wrap ht-210">
+                                                        <a href="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" data-fancybox="gallery">
+                                                            <img class="lazyload cover-img" data-src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" alt="">
                                                         </a>
                                                         <ul class="box-tag flex gap-8 ">
                                                             <li class="flat-tag text-4 bg-main fw-6 text-white">{{config('constants.FOR_TYPE')[$row->for_type]}}
@@ -302,7 +302,7 @@
                                                                 {{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($row->price)}}
                                                                 <p class="text-3 text-secondary">{{App\Helper\Helper::perUnitPrice($row)}}</p>
                                                             </h5>
-                                                            <div class="wrap-btn flex"> 
+                                                            <div class="wrap-btn flex">
                                                                 <a href="javascript:void(0)" class="tf-btn style-border pd-4 interested-function" data-slug="{{$row->slug}}" data-id="{{$row->id}}">Interested</a>
                                                             </div>
                                                         </div>
@@ -315,9 +315,9 @@
                                         <div class="wrap-list">
                                             @foreach ($rows as $row)
                                             <div class="box-house style-list hover-img">
-                                                <div class="image-wrap">
+                                                <div class="image-wrap wd-250">
                                                     <a href="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" data-fancybox="gallery">
-                                                        <img class="lazyload" data-src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" alt="">
+                                                        <img class="lazyload cover-img" data-src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" alt="">
                                                     </a>
                                                     <ul class="box-tag flex gap-8 ">
                                                         <li class="flat-tag text-4 bg-3 fw-6 text-white">Featured
@@ -428,12 +428,12 @@
                         <div class="col-lg-4">
                             <div class="tf-sidebar">
                                 <div class="sidebar-item sidebar-featured style-2  pb-36 mb-28">
-                                    <h4 class="sidebar-title mb-28 ">Featured Listings</h4>
+                                    <h5 class="sidebar-title mb-28 ">Featured Listings</h5>
                                     <ul>
                                         @foreach ($featured as $featuredRow)
                                         <li class="box-listings style-2 hover-img">
                                             <div class="image-wrap">
-                                                <img class="lazyload" data-src="{{ App\Helper\Helper::getImage('storage/property/'.$featuredRow->id, $featuredRow?->image?->image) }}"
+                                                <img class="lazyload cover-img" data-src="{{ App\Helper\Helper::getImage('storage/property/'.$featuredRow->id, $featuredRow?->image?->image) }}"
                                                     src="{{ App\Helper\Helper::getImage('storage/property/'.$featuredRow->id, $featuredRow?->image?->image) }}" alt="">
                                             </div>
                                             <div class="content">
@@ -480,7 +480,7 @@
                 </div>
             </section>
 
-            @include('front.layouts.pre-footer')
+            {{-- @include('front.layouts.pre-footer') --}}
         </div>
         <!-- /main-content -->
 @endsection

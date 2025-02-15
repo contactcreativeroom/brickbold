@@ -278,9 +278,7 @@ window.addEventListener("load", () => inputs[0].focus());
 
 $(document).on('click', '.interested-function', function () {
     var slug = $(this).data('slug');
-    var id = $(this).data('id');
-    console.log(id);
-    console.log(slug);
+    var id = $(this).data('id'); 
     $('#interestedForm #property_id').val(id);
     $('#interestedForm #property_slug').val(slug);
     $('#modalInterested').modal('show');
@@ -315,7 +313,39 @@ $('#interestedForm').on('submit', function(e) {
     });
 });
 
-
+$(document).on('click', '#verifyEmail', function () {
+    $(".error").html("");
+    var $this = $(this);
+    var url = $this.data('url');
+    var email = $("#email").val();
+    $this.html("Wait..");
+    $this.prop('disabled', true); 
+    $.ajax({
+        url: url,
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        data: {email : email},
+        success: function(response) {
+            $this.html("Verification link sent");
+            toastr.success(response.message, 'Successfully!'); 
+        },
+        error: function(xhr) {
+            $this.prop('disabled', false); 
+            $this.html("Verify Now");
+            if (xhr.responseJSON && xhr.responseJSON.errors) {
+                let errors = xhr.responseJSON.errors;
+                for (let field in errors) {
+                    console.log(errors[field][0]);
+                    $(`#profileUpdate #${field}-error`).text(errors[field][0]);
+                }
+            } else { 
+                toastr.error("An error occurred. Please try again.", 'Error!');
+            }
+        }
+    });
+});
 
  
 document.addEventListener("DOMContentLoaded", function () {

@@ -29,6 +29,7 @@ use App\Models\Package;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,6 +40,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 
 Route::get('/linkstorage', function () {
     Artisan::call('storage:link');
@@ -72,6 +74,7 @@ Route::post('/newsletter/mobile/post', [NewsletterController::class, 'postDataMo
  
 Route::post('/create-order', [PaymentController::class, 'createOrder'])->name('payment.create');
 Route::post('/verify-payment', [PaymentController::class, 'handlePayment'])->name('payment.verify');
+Route::post('/email-verify/link-sent', [UserController::class, 'verifyEmailLinkSent'])->name('email.verify.link');
  
 Route::middleware('guest')->group(function () {
     Route::any('/login', [UserAuthController::class, 'login'])->name('login');
@@ -96,6 +99,7 @@ Route::middleware(['auth.user'])->prefix('user')->group(function () {
     Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
     Route::any('/profile/edit', [UserController::class, 'editProfile'])->name('user.profile.edit');
     Route::any('/change/password', [UserController::class, 'changePassword'])->name('user.change.password');
+    Route::get('/email/verify/{id}/{hash}', [UserController::class, 'verifyEmail'])->middleware(['auth.user', 'signed'])->name('verification.verify');
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('user.dashboard');
     Route::get('/my-package', [UserController::class, 'package'])->name('user.package');

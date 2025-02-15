@@ -16,7 +16,7 @@
 
 <body class="popup-loader">
     <!-- wrapper -->
-    <div id="wrapper">
+    <div id="wrapper" class="bg-4 user">
 
         <!-- .preload -->
         <div id="loading">
@@ -32,7 +32,7 @@
                 </div>
             </div>
         </div><!-- /.preload -->
-        @include('front.layouts.header')
+        @include('front.layouts.header')     
         @yield('content')
     </div> <!-- /.wrapper -->
     @include('front.layouts.modal')

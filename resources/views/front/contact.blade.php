@@ -6,7 +6,7 @@
 @endphp
     <div class="main-content">
         <!-- section-top-map -->
-        <section class="flat-title ">
+        <section class="mb-15 mt-20">
             <div class="tf-container">
                 <div class="row">
                     <div class="col-lg-12">

@@ -117,6 +117,7 @@ return [
         
     ],
     'PROPERTY_STATUSES' => [
+        0 =>  'Declined',
         1 =>  'Approved',
         2 =>  'Pending',
         3 =>  'Sold',

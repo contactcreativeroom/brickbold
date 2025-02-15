@@ -74,7 +74,7 @@
                         <th scope="col" class="border">#</th>
                         <th scope="col" class="border">Property</th>
                         <th scope="col" class="border">Address</th>
-                        <th scope="col" class="border">For-Type</th>
+                        <th scope="col" class="border text-nowrap">For-Type</th>
                         <th scope="col" class="border">Type</th>
                         <th scope="col" class="border">Status</th>
                         <th scope="col" class="border">user</th>
@@ -109,7 +109,7 @@
                             <small>{{ $row->city }}</small>
                             <small>{{ $row->zip_code }}</small> 
                         </td>   
-                        <td>{{config('constants.FOR_TYPE')[$row->for_type]}} </td>   
+                        <td class="text-nowrap">{{config('constants.FOR_TYPE')[$row->for_type]}} </td>   
                         <td>{{config('constants.TYPE')[$row->type]}}</td>   
                         <td>
                             @if ($row->status==3)

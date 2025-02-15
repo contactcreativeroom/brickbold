@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 class UserController extends Controller
 {
@@ -47,6 +48,9 @@ class UserController extends Controller
             if(isset($request->user_type) && $request->user_type !=''){
                 $user->user_type = $request->user_type;
             }
+            $oldEmail = $user->email;
+            $newEmail = $request->email ;
+
             $user->name = $request->name;
             $user->description = $request->description;
             $user->business_name = $request->business_name;
@@ -64,7 +68,14 @@ class UserController extends Controller
             } 
 
             if ($user->save()) {
-                Helper::toastMsg(true, 'Profile Updated Successfully!');
+                if($oldEmail == $newEmail && $user->hasVerifiedEmail()){
+                    Helper::toastMsg(true, 'Profile Updated Successfully!');
+                } else{
+                    $user->email_verified_at = null;
+                    $user->save();
+                    $user->sendEmailVerificationNotification();
+                    Helper::toastMsg(true, 'A verification link sent on your email id. Please verify!');
+                }
                 return redirect()->route('user.profile');
             }
         }
@@ -118,6 +129,33 @@ class UserController extends Controller
         return view('user.reviews', compact('user'));
     }
 
-    
+    public function verifyEmailLinkSent(Request $request){
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation errors occurred.',
+                'errors' => $validator->errors()->toArray(),
+            ], 400);
+        }
+         
+        $user = $this->userAuth;
+        $user->email = $request->email;
+        $user->save();
+        $user->sendEmailVerificationNotification();
+        return response()->json([
+            'success' => true,
+            'message' => 'A verification link sent on your email id. Please verify!',
+        ], 201);
+    }
+
+    public function verifyEmail(EmailVerificationRequest $request){
+        $request->fulfill();
+        Helper::toastMsg(true, 'Email verified successfully!');
+        return redirect()->route('user.profile');
+    }
 
 }

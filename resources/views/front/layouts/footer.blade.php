@@ -66,6 +66,7 @@
                                     <ul class="tf-collapse-content">
                                         <li><a href="{{route('about')}}">About Us</a></li>
                                         <li><a href="{{route('properties')}}">Properties</a></li>
+                                        <li><a href="{{route('homeloan')}}">Home Loan</a></li>
                                         <li><a href="{{route('contact')}}">Contact us</a></li>
                                     </ul>
                                 </div>

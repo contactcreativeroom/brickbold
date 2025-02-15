@@ -29,7 +29,7 @@
                         <th scope="col" class="border">#</th>
                         <th scope="col" class="border">Property</th>
                         <th scope="col" class="border">Property-Owner</th>
-                        <th scope="col" class="border">Interested Name</th>
+                        <th scope="col" class="border text-nowrap">Interested Name</th>
                         <th scope="col" class="border">Email</th>
                         <th scope="col" class="border">Phone</th>
                         <th scope="col" class="border">Message</th>

@@ -34,7 +34,7 @@
                         <th scope="col" class="border">Icon</th>
                         <th scope="col" class="border">Title</th>
                         <th scope="col" class="border">Slug</th>
-                        <th scope="col" class="border">Sub title</th>
+                        <th scope="col" class="border text-nowrap">Sub title</th>
                         <th scope="col" class="border">Status</th>
                         <th scope="col" class="border">Added on</th>
                         <th scope="col" class="border">Operations</th> 

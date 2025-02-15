@@ -4,17 +4,18 @@
         @include('user.layouts.sidebar')
         <!-- .main-content -->
         <div class="main-content w-100">
-            <div class="main-content-inner style-3">
+            <div class="main-content-inner style-3">  
                 <div class="button-show-hide show-mb">
                     <span class="body-1">Show Dashboard</span>
                 </div>
-                <div class="widget-box-2 style-2 package">
+                <div class="widget-box-2 style-2 package">              
+                    @include('user.layouts.verify-email') 
                     <h3 class="title">My Package</h3>
                     <div class="row">
                         @foreach ($rows as $row)
-                        <div class="package-col col-xl-4 mb-30">
-                            <div class="flat-pricing">
-                                <div class="box box-style">
+                        <div class="package-col col-lg-4 mb-30">
+                            <div class="flat-pricing h-100">
+                                <div class="box box-style h-100">
                                     
                                     <h3 class="sub-title  fw-7">{{$row->order->package_name}}</h3>
                                     <p class="text-sub fw-6 "> <span class="text-color-primary">Post Properties:</span> {{$row->post_property}} ,  <span class="text-color-primary">Contacts:</span> {{$row->contacts}} ,  <span class="text-color-primary">Days:</span> {{$row->days}} </p>

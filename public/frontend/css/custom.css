@@ -11,6 +11,12 @@
         font-size: 13px;
     }
 }
+@media (min-width: 800px)  {
+    .wd-250{
+        width: 250px;
+    }
+}
+
 
 @media (max-width: 767px) {
     .icon-input{ 
@@ -93,7 +99,7 @@ li.has-child{
 }
 .plot-area-type{
     border-radius: 0 16px 16px 0;
-    margin-top: 10.5px;
+    margin-top: 11px;
 }
  
  
@@ -148,12 +154,12 @@ form .otp-input-field {
 
 .login-page .flat-account .banner-account{
     max-width: 650px;
-    height: 560px;
+    height: 520px;
 }
 .register-page .flat-account .banner-account{
     max-width: 710px;
     width: 70%;
-    height: 525px;
+    height: 555px;
 }
 .forgot-page .flat-account .banner-account{
     max-width: 475px;
@@ -273,6 +279,27 @@ input.search-address-home {
 .ht-45{
     height: 45px !important;
 }
+.ht-21{
+    height: 21px !important;
+}
+
+.ht-125{
+    height: 125px;
+}
+.ht-210{
+    height: 210px;
+}
+
+
+.min-h-300{
+    min-height: 300px !important;
+}
+
+.cover-img{
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
 .section-testimonials .box-testimonials{
     flex-direction: column;
 }
@@ -292,10 +319,59 @@ form#contactform  textarea{
 #contactform{
     border: none;
 }
-.min-h-300{
-    min-height: 300px !important;
-}
+
 
 #header-main:not(.is-fixed) .bg-1 .mobile-button { 
     color: var(--White);  
+}
+
+.custom-style-border {
+    border: 1px solid var(--Primary);
+    color: var(--Primary);
+    background-color: transparent;
+    border-radius: 16px;
+    padding: 4px;
+    /* gap: 10px; */
+    /* font-size: 16px; */
+    /* line-height: 22.4px; */
+    /* height: 50px; */
+    /* display: flex; */
+    align-items: center;
+    justify-content: center;
+}
+
+.bg-label-danger {
+    background-color: #ffe0db !important;
+    color: #ff3e1d !important;
+}
+
+.bg-label-success {
+    background-color: #e8fadf !important;
+    color: #71dd37 !important;
+}
+
+
+.radio-custom label {
+    margin-bottom: 2px;
+    font-size: 13px;
+    padding: 5px 20px;
+    margin-right: 12px;
+    border-radius: 13px;
+}
+
+.user .page-layout .main-content-inner {
+    padding: 35px 56px 0;
+}
+
+.btn-outline-danger{
+    --bs-btn-color: var(--Heading);
+    --bs-btn-border-color: var(--Line);
+}
+.header-position{
+    z-index: 999;
+    position: relative;
+}
+
+.user .main-content-inner{
+    min-height: 690px;
 }

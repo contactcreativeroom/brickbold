@@ -55,7 +55,7 @@ class NewsletterController extends Controller
 
     public function postDataMobileff(Request $request) {
         $validator = Validator::make($request->all(), [
-            'mobile' => 'nullable|digits:10',
+            'mobile' => ['required', 'regex:/^[6-9]\d{9}$/'],
         ]);
          
         if ($validator->fails()) {
@@ -88,7 +88,7 @@ class NewsletterController extends Controller
 
     public function postDataMobile(Request $request){    	
         $validator = Validator::make($request->all(), [
-            'mobile' => 'nullable|digits:10',
+            'mobile' => ['required', 'regex:/^[6-9]\d{9}$/'],
         ]);
 
         if ($validator->fails()) {

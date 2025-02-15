@@ -788,5 +788,22 @@ class Helper
         }
         return false;
     }
- 
+
+    public static function isUserProfileNotCompleted(){
+        if (Auth::guard('user')->check()) {
+            $user = Auth::guard('user')->user(); 
+            if(empty($user->name) || empty($user->email) || empty($user->phone) || empty($user->user_type) ){
+                return true ;
+            }
+        }
+        return false;
+    }
+    
+    public static function redirectRouteAfterPropertyAdd(){
+        $check = Helper::isUserProfileNotCompleted();
+        if ($check) {
+            return route('user.profile');
+        }
+        return route('user.properties');
+    }
 }

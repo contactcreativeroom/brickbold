@@ -276,6 +276,7 @@ class AuthController extends Controller
                     $newUser = User::create([
                         'name'      => $user->name,
                         'email'     => $user->email,
+                        'email_verified_at' => now(),
                         'password' => bcrypt('123456'),
                         'google_id' => $user->id,
                     ]);

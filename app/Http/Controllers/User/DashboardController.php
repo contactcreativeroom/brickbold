@@ -25,7 +25,8 @@ class DashboardController extends Controller
     {
         $user = $this->userAuth;
         $properties = $user->Properties()->get();
-        $data=array('properties'=>$properties, 'user'=>$user);
+        $rows = $user->Properties()->paginate($this->pagerecords);
+        $data=array('rows'=>$rows, 'properties'=>$properties, 'user'=>$user);
         return view($this->prefix.'.dashboard')->with($data);
     }
 }
