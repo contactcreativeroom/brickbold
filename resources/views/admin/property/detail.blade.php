@@ -1,228 +1,367 @@
-@extends('admin.layouts.app')
-
-
+@extends('front.layouts.app-no-header')
+{{-- <link rel="stylesheet" type="text/css" href="{{url('frontend/css/map.min.css')}}" /> --}}
 @section('content')
-    <div class="container py-5">
-        <div class="row">
-            <div class="col">
-                <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
-                    <ol class="breadcrumb mb-0">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Users</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
-        <!-- Content wrapper -->
-        <div class="content-wrapper">
-
-            <!-- Content -->
-
-            <div class="container-xxl flex-grow-1 container-p-y">
-
-
+     <!-- .main-content -->
+    <div class="main-content">
+        <!-- section-property-detail -->
+        <section class="section-property-detail style-2 ">
+            <div class="tf-container">
                 <div class="row">
-                    <!-- User Sidebar -->
-                    <div class="col-xl-4 col-lg-5 order-1 order-md-0">
-                        <!-- User Card -->
-                        <div class="card mb-6">
-                            <div class="card-body pt-12">
-                                <div class="user-avatar-section">
-                                    <div class=" d-flex align-items-center flex-column">
-                                        <img class="img-fluid rounded mb-4" src="{{ App\Helper\Helper::getProfileImage('storage/user/'.$user->id, $user->profile_image) }}"
-                                            height="120" width="120" alt="User avatar">
-                                        <div class="user-info text-center">
-                                            <h5>{{ $user->name }}</h5>
-                                            <span class="badge bg-label-secondary">role here</span>
+                    <div class="col-xl-12 col-lg-12">
+                        <div class="swiper sw-thumbs-sigle " data-preview="1" data-space="0" data-speed="1000">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <a href="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" data-fancybox="gallery" class="image-wrap relative d-block">
+                                        <img class="lazyload cover-img" data-src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}"
+                                            src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" alt="" style="height:500px;">
+                                        <div class="tag-property ">
+                                            <div class="icon">
+                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M1.875 13.125L6.17417 8.82583C6.34828 8.65172 6.55498 8.51361 6.78246 8.41938C7.00995 8.32515 7.25377 8.27665 7.5 8.27665C7.74623 8.27665 7.99005 8.32515 8.21754 8.41938C8.44502 8.51361 8.65172 8.65172 8.82583 8.82583L13.125 13.125M11.875 11.875L13.0492 10.7008C13.2233 10.5267 13.43 10.3886 13.6575 10.2944C13.885 10.2001 14.1288 10.1516 14.375 10.1516C14.6212 10.1516 14.865 10.2001 15.0925 10.2944C15.32 10.3886 15.5267 10.5267 15.7008 10.7008L18.125 13.125M3.125 16.25H16.875C17.2065 16.25 17.5245 16.1183 17.7589 15.8839C17.9933 15.6495 18.125 15.3315 18.125 15V5C18.125 4.66848 17.9933 4.35054 17.7589 4.11612C17.5245 3.8817 17.2065 3.75 16.875 3.75H3.125C2.79348 3.75 2.47554 3.8817 2.24112 4.11612C2.0067 4.35054 1.875 4.66848 1.875 5V15C1.875 15.3315 2.0067 15.6495 2.24112 15.8839C2.47554 16.1183 2.79348 16.25 3.125 16.25ZM11.875 6.875H11.8817V6.88167H11.875V6.875ZM12.1875 6.875C12.1875 6.95788 12.1546 7.03737 12.096 7.09597C12.0374 7.15458 11.9579 7.1875 11.875 7.1875C11.7921 7.1875 11.7126 7.15458 11.654 7.09597C11.5954 7.03737 11.5625 6.95788 11.5625 6.875C11.5625 6.79212 11.5954 6.71263 11.654 6.65403C11.7126 6.59542 11.7921 6.5625 11.875 6.5625C11.9579 6.5625 12.0374 6.59542 12.096 6.65403C12.1546 6.71263 12.1875 6.79212 12.1875 6.875Z"
+                                                        stroke="white" stroke-width="1.5" stroke-linecap="round"
+                                                        stroke-linejoin="round" />
+                                                </svg>
+
+                                            </div>
+                                            <div class="text-16 text-white fw-6 lh-20">1/{{$row?->images->count()}} Photos</div>
+                                        </div>
+                                    </a>
+                                </div>
+                                @if (isset($row->images))   
+                                @foreach($row->images as $imageKey => $imageVal)
+                                <div class="swiper-slide">
+                                    <a href="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $imageVal->image) }}" data-fancybox="gallery" class="image-wrap d-block">
+                                        <img class="lazyload cover-img" data-src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $imageVal->image) }}" src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $imageVal->image) }}" alt="" style="height:500px;">
+                                    </a>
+                                </div> 
+                                @endforeach
+                                @endif
+                            </div>
+                            <div class="swiper-button-prev sw-button style-2 sw-thumbs-prev">
+                                <i class="icon-arrow-left-1"></i>
+                            </div>
+                            <div class="swiper-button-next sw-button style-2 sw-thumbs-next">
+                                <i class="icon-arrow-right-1"></i>
+                            </div>
+                        </div>
+                        <div class="wg-property box-overview style-2">
+                            <div class="heading flex justify-between">
+                                <div class="title text-11 fw-6 text-color-heading">
+                                    {{ App\Helper\Helper::propertyTitle($row)}}
+                                </div>
+                                <div class="price text-11 fw-6 text-color-heading">
+                                    {{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($row->price)}}
+                                    {{-- <span class="h5 lh-30 fw-4 text-color-default">/month</span> --}}
+                                </div>
+                            </div>
+                            <div class="info flex justify-between position-relative">
+                                <div class="feature">
+                                    <p class="location text-1 flex items-center gap-10">
+                                        <i class="icon-location"></i>{{$row->location}}, {{$row->state}}, {{$row->city}} {{$row->zip_code}}
+                                    </p>
+                                    <ul class="meta-list flex">
+                                        <li class="text-1 flex"><i class="icon-bed"></i> <span>{{$row->bedroom}}</span>Bed</li>
+                                        <li class="text-1 flex"><i class="icon-bath"></i> <span>{{$row->bathroom}}</span>Bath</li>
+                                        <li class="text-1 flex"><i class="icon-sqft"></i> <span>{{$row->plot_area}}</span>{{$row->plot_type? $row->plot_type : 'sqft'}}</li>
+                                    </ul>
+                                </div>                                
+                                
+                            </div>
+                            <div class="info-detail ">
+                                <div class="wrap-box">
+                                    <div class="box-icon">
+                                        <div class="icons">
+                                            <i class="icon-HouseLine"></i>
+                                        </div>
+                                        <div class="content">
+                                            <div class="text-4 text-color-default">ID:</div>
+                                            <div class="text-1 text-color-heading">{{ $row->uid }}</div>
                                         </div>
                                     </div>
-                                </div> 
-                                <h5 class="pb-4 border-bottom mb-4">Details</h5>
-                                <div class="info-container">
-                                    <ul class="list-unstyled mb-6">                                        
-                                        <li class="mb-2">
-                                            <span class="h6">Email:</span>
-                                            <span>{{ $user->email }}</span>
-                                        </li> 
-                                        <li class="mb-2">
-                                            <span class="h6">Status:</span>
-                                            <span>{{ $user->status==1? 'Active' : 'Inactive' }}</span>
-                                        </li>
-                                        <li class="mb-2">
-                                            <span class="h6">Role:</span>
-                                            <span>Author</span>
-                                        </li>
-                                        <li class="mb-2">
-                                            <span class="h6">GSTIN:</span>
-                                            <span>Tax-8965</span>
-                                        </li>
-                                        <li class="mb-2">
-                                            <span class="h6">Phone:</span>
-                                            <span>{{ $user->phone }}</span>
-                                        </li> 
-                                        <li class="mb-2">
-                                            <span class="h6">Address:</span>
-                                            <span>
-                                                {{ $user->address }} 
-                                                <small>{{ $user->state }}</small>
-                                                <small>{{ $user->city }}</small>
-                                                <small>{{ $user->postal_code }}</small>
-                                            </span>
-                                        </li>
-                                    </ul>
-                                    <div class="d-flex justify-content-center">
-                                        <a href="javascript:void(0);" class="btn btn-primary me-2" data-bs-target="#editUser" data-bs-toggle="modal">Edit</a>
-                                        <a href="javascript:void(0);" data-entity-url="{{ route('admin.user.status.change') }}" data-entity-id="{{ $user->id }}" data-entity-type="user" class="btn btn-label-danger suspend-user me-2">{{ $user->status == 1 ? 'Active' : 'Inactive' }}</a>
-                                        <a href="{{route("admin.user", $user->id)}}" class="btn btn-label-warning">Add property</a>
+                                    <div class="box-icon">
+                                        <div class="icons">
+                                            <i class="icon-Crop"></i>
+                                        </div>
+                                        <div class="content">
+                                            <div class="text-4 text-color-default">Land Size:</div>
+                                            <div class="text-1 text-color-heading">{{$row->plot_area}} {{$row->plot_type? $row->plot_type : 'sqft'}}</div>
+                                        </div>
                                     </div>
+                                    
+                                </div>
+                                <div class="wrap-box">
+                                    <div class="box-icon">
+                                        <div class="icons">
+                                            <i class="icon-SlidersHorizontal"></i>
+                                        </div>
+                                        <div class="content">
+                                            <div class="text-4 text-color-default">Type:</div>
+                                            <div class="text-1 text-color-heading">{{config('constants.TYPE')[$row->type]}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="box-icon">
+                                        <div class="icons">
+                                            <i class="icon-Garage-1"></i>
+                                        </div>
+                                        <div class="content">
+                                            <div class="text-4 text-color-default">Builtup Area:</div>
+                                            <div class="text-1 text-color-heading">{{$row->builtup_area}} sqft</div>
+                                        </div>
+                                    </div>
+
+                                    
+                                </div>
+                                <div class="wrap-box">
+                                    <div class="box-icon">
+                                        <div class="icons">
+                                            <i class="icon-Bed-2"></i>
+                                        </div>
+                                        <div class="content">
+                                            <div class="text-4 text-color-default">Bedrooms:</div>
+                                            <div class="text-1 text-color-heading">{{$row->bedroom}} Rooms</div>
+                                        </div>
+                                    </div>
+                                    <div class="box-icon">
+                                        <div class="icons">
+                                            <i class="icon-Ruler"></i>
+                                        </div>
+                                        <div class="content">
+                                            <div class="text-4 text-color-default">Carpet Area</div>
+                                            <div class="text-1 text-color-heading">{{$row->carpet_area}} sqft</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="wrap-box">
+                                    <div class="box-icon">
+                                        <div class="icons">
+                                            <i class="icon-Bathtub"></i>
+                                        </div>
+                                        <div class="content">
+                                            <div class="text-4 text-color-default">Bathrooms:</div>
+                                            <div class="text-1 text-color-heading">{{$row->bathroom}} Rooms</div>
+                                        </div>
+                                    </div>
+                                    <div class="box-icon">
+                                        <div class="icons">
+                                            <i class="icon-Hammer"></i>
+                                        </div>
+                                        <div class="content">
+                                            <div class="text-4 text-color-default">Year Built:</div>
+                                            <div class="text-1 text-color-heading">{{ config('constants.BUILD_YEAR')[$row->build_year] ?? '' }}</div>
+                                        </div>
+                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
-                        <!-- /User Card -->
-                        <!-- Plan Card -->
-                        <div class="card mb-6 border border-2 border-primary rounded primary-shadow">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-start">
-                                    <span class="badge bg-label-primary">Standard</span>
-                                    <div class="d-flex justify-content-center">
-                                        <sub class="h5 pricing-currency mb-auto mt-1 text-primary">$</sub>
-                                        <h1 class="mb-0 text-primary">99</h1>
-                                        <sub class="h6 pricing-duration mt-auto mb-3 fw-normal">month</sub>
-                                    </div>
-                                </div>
-                                <ul class="list-unstyled g-2 my-6">
-                                    <li class="mb-2 d-flex align-items-center"><i
-                                            class="bx bxs-circle bx-6px text-secondary me-2"></i><span>10 Users</span></li>
-                                    <li class="mb-2 d-flex align-items-center"><i
-                                            class="bx bxs-circle bx-6px text-secondary me-2"></i><span>Up to 10 GB
-                                            storage</span></li>
-                                    <li class="mb-2 d-flex align-items-center"><i
-                                            class="bx bxs-circle bx-6px text-secondary me-2"></i><span>Basic Support</span>
+                        @if ($row->video_link)
+                        <div class=" wg-property video spacing-2">
+                            <div class="wg-title text-11 fw-6 text-color-heading">
+                                Video
+                            </div>
+                            <div class="widget-video">
+                                <img class="lazyload" data-src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}"
+                                    src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" alt="">
+                                <a href="{{$row->video_link}}" class="popup-youtube">
+                                    <i class="icon-play"></i></a>
+                            </div>
+                        </div>
+                        @endif
+                        
+                        <div class="wg-property box-property-detail  spacing-1">
+                            <div class="wg-title text-11 fw-6 text-color-heading text-nowrap">
+                                Property Details <span ><h6 class="d-inline"> {{$row?->user?->name? '( '.$row?->user?->name .' )' :'' }} </h6></span>
+                            </div>
+                            <div class="content">
+                                <p class="description text-1 mb-10">{{$row->description}}</p>
+                                <a href="javascript:void(0);" class="tf-btn-link style-hover-rotate d-none">
+                                    <span>Read More </span>
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_2348_5612)">
+                                            <path
+                                                d="M1.66732 9.99999C1.66732 14.6024 5.39828 18.3333 10.0007 18.3333C14.603 18.3333 18.334 14.6024 18.334 9.99999C18.334 5.39762 14.603 1.66666 10.0007 1.66666C5.39828 1.66666 1.66732 5.39762 1.66732 9.99999Z"
+                                                stroke="#F1913D" stroke-width="1.5" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path d="M10 6.66666L10 13.3333" stroke="#F1913D" stroke-width="1.5"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M6.66732 10L10.0007 13.3333L13.334 10" stroke="#F1913D"
+                                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_2348_5612">
+                                                <rect width="20" height="20" fill="white"
+                                                    transform="translate(20) rotate(90)" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                </a>
+                            </div>
+                            <div class="box">
+                                <ul>
+                                    <li class="flex">
+                                        <p class="fw-6">ID</p>
+                                        <p>{{ $row->uid}}</p>
+                                    </li>
+                                    <li class="flex">
+                                        <p class="fw-6">Price</p>
+                                        <p>{{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($row->price)}}</p>
+                                    </li>
+                                    <li class="flex">
+                                        <p class="fw-6">Status</p>
+                                        <p>{{config('constants.FOR_TYPE')[$row->for_type]}}</p>
+                                    </li>
+                                    <li class="flex">
+                                        <p class="fw-6">Size</p>
+                                        <p>{{$row->plot_area}} {{$row->plot_type? $row->plot_type : 'sqft'}} </p>
+                                    </li>
+                                    <li class="flex">
+                                        <p class="fw-6">Builtup Area</p>
+                                        <p>{{$row->builtup_area}} sqft </p>
+                                    </li>
+                                    <li class="flex">
+                                        <p class="fw-6">Carpet Area</p>
+                                        <p>{{$row->carpet_area}} sqft </p>
                                     </li>
                                 </ul>
-                                <div class="d-flex justify-content-between align-items-center mb-1">
-                                    <span class="h6 mb-0">Days</span>
-                                    <span class="h6 mb-0">26 of 30 Days</span>
-                                </div>
-                                <div class="progress mb-1">
-                                    <div class="progress-bar" role="progressbar" style="width: 65%;" aria-valuenow="65"
-                                        aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <small>4 days remaining</small>
-                                <div class="d-grid w-100 mt-6">
-                                    <button class="btn btn-primary" data-bs-target="#upgradePlanModal"
-                                        data-bs-toggle="modal">Upgrade Plan</button>
-                                </div>
+                                <ul>
+                                    <li class="flex">
+                                        <p class="fw-6">Rooms</p>
+                                        <p>{{(int)$row->bathroom + (int)$row->bedroom}}</p>
+                                    </li>
+                                    <li class="flex">
+                                        <p class="fw-6">Baths</p>
+                                        <p>{{$row->bathroom}}</p>
+                                    </li>
+                                    <li class="flex">
+                                        <p class="fw-6">Beds</p>
+                                        <p>{{$row->bedroom}}</p>
+                                    </li>
+                                    <li class="flex">
+                                        <p class="fw-6">Year buit</p>
+                                        <p>{{ config('constants.BUILD_YEAR')[$row->build_year] ?? '' }}</p>
+                                    </li>
+                                    <li class="flex">
+                                        <p class="fw-6">Type</p>
+                                        <p>{{config('constants.TYPE')[$row->type]}}</p>
+                                    </li>
+                                    <li class="flex">
+                                        <p class="fw-6">Balcony</p>
+                                        <p>{{$row->balcony}}</p>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
-                        <!-- /Plan Card -->
-                    </div>
-                    <!--/ User Sidebar -->
-
-
-                    <!-- User Content -->
-                    <div class="col-xl-8 col-lg-7 order-0 order-md-1">
-
-
-                        <!-- Project table -->
-                        <div class="card mb-6">
-                            <h5 class="card-header pb-0 text-sm-start text-center">Properties List</h5>
-                            <div class="table-responsive mb-4">
-                                <table class="table table-hover">
-                                    <thead class="table-primary">
-                                        <tr>
-                                            <th scope="col" class="border">#</th>
-                                            <th scope="col" class="border">User</th>
-                                            <th scope="col" class="border">Role</th>
-                                            <th scope="col" class="border">Address</th>
-                                            <th scope="col" class="border">Status</th>
-                                            <th scope="col" class="border">Joined on</th>
-                                            <th scope="col" class="border">Operations</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody  data-entity-type="category"  >
-                                        @foreach($rows as $row)
-                                        <tr data-entity-id="{{ $row->id }}">
-                                            <td>{{ ($rows->currentPage() - 1) * $rows->perPage() + $loop->iteration }}.</td>
-                                            <td class="sorting_1">
-                                                <div class="d-flex justify-content-start align-items-center user-name">
-                                                    <div class="avatar-wrapper">
-                                                        <div class="avatar avatar-sm me-4">
-                                                            <img src="{{ App\Helper\Helper::getProfileImage('storage/user/'.$row->id, $row->profile_image) }}" alt="Avatar" class="rounded-circle">
-                                                        </div>
-                                                    </div>
-                                                    <div class="d-flex flex-column">
-                                                        <a href="app-user-view-account.html" class="text-heading text-truncate">
-                                                            <span class="fw-medium">{{ $row->name }}</span>
-                                                        </a>
-                                                        <small>{{ $row->email }}</small>
-                                                        <small>{{ $row->phone }}</small>
-                                                    </div>
-                                                </div>
-                                            </td>   
-                                            <td> role </td>   
-                                            <td> 
-                                                {{ $row->address }} 
-                                                <small>{{ $row->state }}</small>
-                                                <small>{{ $row->city }}</small>
-                                                <small>{{ $row->postal_code }}</small>
-                                            </td>   
-                                            <td>
-                                                <div class="form-check form-switch">
-                                                    <input class="form-check-input entity-toggle" type="checkbox" data-entity-url="{{ route('admin.user.status.change') }}" data-entity-id="{{ $row->id }}" data-entity-type="user" {{ $row->status == 1 ? 'checked' : '' }}>
-                                                </div>
-                                            </td>
-                                            <td><span class="row-number"></span> {{ App\Helper\Helper::formatStringDate($row->created_at, true)  }}</td>
-                                            <td>                             
-                                                <a href="{{route("admin.user", $row->id)}}">
-                                                    <span class="btn-info badge" text-capitalized="">View</span>
-                                                </a>
-
-                                                <a href="{{route("admin.user.edit", $row->id)}}">
-                                                    <span class="btn-primary badge" text-capitalized="">Edit</span>
-                                                </a>
-
-                                                <a href="{{route("admin.user", $row->id)}}">
-                                                    <span class="btn-warning badge" text-capitalized="">Add property</span>
-                                                </a>
-                                                
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                                <div class="row custom-row ">
-                                    <div class="col-sm-6 text-center text-sm-right order-sm-1">
-                                        Showing {{ $rows->firstItem() }} to {{ $rows->lastItem() }} of {{ $rows->total() }} results
+                        <div class="wg-property box-amenities spacing-3">
+                            <div class="wg-title text-11 fw-6 text-color-heading">
+                                Amenities And Features
+                            </div>
+                            @php
+                                $amenities = explode(',', $row->amenities);
+                                $boxCount = 3;
+                                $boxes = array_fill(0, $boxCount, []);
+                                foreach ($amenities as $index => $amenitie) {
+                                    $boxIndex = $index % $boxCount;
+                                    $boxes[$boxIndex][] = trim($amenitie);
+                                }
+                            @endphp
+                            <div class="wrap-feature">
+                                @foreach ($boxes as $box)
+                                    <div class="box-feature">
+                                        <ul>
+                                            @foreach ($box as $amenitie)
+                                                <li class="feature-item">
+                                                    {{ $amenitie }}
+                                                </li>
+                                            @endforeach
+                                        </ul>
                                     </div>
-                                    <div class="col-sm-6 text-center text-sm-left mt-3 mt-sm-0">
-                                        {{ $rows->links() }}
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
-                        <!-- /Project table -->
-
-
-
-                    </div>
-                    <!--/ User Content -->
+                        <div class="wg-property box-amenities spacing-3">
+                            <div class="wg-title text-11 fw-6 text-color-heading">
+                                Addtional Room
+                            </div>
+                            
+                            <div class="wrap-feature">
+                                <div class="box-feature">
+                                    <ul>
+                                    @foreach (explode(',', $row->additional) as $addtional)
+                                        <li class="feature-item">
+                                            {{ $addtional }}
+                                        </li>
+                                    @endforeach 
+                                    </ul>
+                                </div> 
+                            </div>
+                        </div>
+                        <div class="wg-property single-property-map spacing-9">
+                            <div class="wg-title text-11 fw-6 text-color-heading">Get Direction</div>                            
+                            <iframe class="map" 
+                            {{-- src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d135905.11693909427!2d-73.95165795400088!3d41.17584829642291!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1727094281524!5m2!1sen!2s"   --}}
+                            
+                             src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d135905.11693909427!2d{{$row->longitude}}!3d{{$row->latitude}}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s{{$row->location}}!5m2!1sen!2s"  
+    
+                            style="border:0;" allowfullscreen="" loading="lazy"  referrerpolicy="no-referrer-when-downgrade"></iframe> 
+                            {{-- <div id="map"  data-map-zoom="16" data-map-scroll="true" style="height:500px;"></div> --}}
+                            <div class="info-map">
+                                <ul class="box-left">
+                                    <li>
+                                        <span class="label fw-6">Address</span>
+                                        <div class="text text-variant-1">{{$row->location}}</div>
+                                    </li>
+                                    
+                                    <li>
+                                        <span class="label fw-6">State/county</span>
+                                        <div class="text text-variant-1">{{$row->state}}</div>
+                                    </li>
+                                </ul>
+                                <ul class="box-right">
+                                    <li>
+                                        <span class="label fw-6">City</span>
+                                        <div class="text text-variant-1">{{$row->city}}</div>
+                                    </li>
+                                    <li>
+                                        <span class="label fw-6">Postal code</span>
+                                        <div class="text text-variant-1">{{$row->zip_code}}</div>
+                                    </li> 
+                                </ul>
+                            </div>
+                        </div> 
+                    </div> 
                 </div>
-
-
             </div>
-            <!-- / Content -->
-
-
-
-
-
-            <div class="content-backdrop fade"></div>
-        </div>
+        </section>
+        <!-- section-property-detail --> 
     </div>
-    <!-- / Content -->
-@include('admin.layouts.modal')
+    <!-- /main-content -->
+
 @endsection
 
-@push('scripts')
+@push('scripts') 
+<script>
+var curLong = {{ $row->longitude }} ;
+var curLat = {{ $row->latitude }} ;
+var locations = [
+    {
+        coordinates: [{{ $row->longitude }}, {{ $row->latitude }}],
+        properties: {
+            image: "{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}",
+            url: "{{route('property', $row->slug)}}",
+            title: "{{ $row->title }}",
+            location: "{{ $row->location }}",
+            price: "{{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($row->price)}}",
+            beds: {{ $row->bedroom }},
+            baths: {{ $row->bathroom }},
+            sqft: "{{ $row->plot_area }}",
+            forType: "{{config('constants.FOR_TYPE')[$row->for_type]}}",
+        },
+    },
+] ;   
+</script>
+{{-- <script type="text/javascript" src="{{url('frontend/js/map.min.js') }}"></script>
+<script type="text/javascript" src="{{url('frontend/js/map.js') }}"></script>  --}}
 @endpush

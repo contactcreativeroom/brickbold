@@ -319,3 +319,9 @@ img.img-thumbnail{
 .apexcharts-toolbar {
     display: none !important;
 }
+
+.radio-custom label{
+    padding: 3px 7px;
+    font-size: 12px;
+    margin-right: 7px;
+}

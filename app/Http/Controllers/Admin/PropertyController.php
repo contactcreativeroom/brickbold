@@ -24,7 +24,7 @@ class PropertyController extends Controller
         $this->pagerecords = config('constants.ADMIN_PAGE_RECORDS');
     }
 
-    public function list(Request $request){ 
+    public function list(Request $request){
         $properties = Property::query();
         if ($request->has('type') && $request->type != "") {
             $type = $request->type; 
@@ -227,4 +227,21 @@ class PropertyController extends Controller
         }
         return response()->json(['status' => false, 'message' => 'Property not found']);
     }
+
+    public function property(Request $request) { 
+        $property = Property::where('slug', $request->slug)->first();
+        if( !$property ){  
+            Helper::toastMsg(false, "Property not found.");
+            return back();  
+        }  
+        return view($this->prefix.'.property.detail',['row' => $property]);
+    }
+
+    public function viewPreview(Request $request){
+        $id = $request->id ;
+        $property = Property::find($id);
+        $url = route('admin.property', $property->slug);   
+        return response()->json(['status' => $property->status, 'url' => $url]); 
+    }
+
 }

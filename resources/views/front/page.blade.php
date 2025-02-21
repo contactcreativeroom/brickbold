@@ -27,7 +27,7 @@
                         <div class="heading-section  mb-48">
                             <h2 class="title ">{{$page->title}}</h2>
                         </div> 
-                        <div class="tf-faq mb-49">                        
+                        <div class="tf-faq mb-49 table-responsive">                        
                             <p class="faq-body">{!! $page->description !!}</p>                             
                         </div>
                        

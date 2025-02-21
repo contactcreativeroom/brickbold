@@ -177,7 +177,7 @@
 
                                 <li ><a href="{{route('homeloan')}}">Home Loan</a></li>  
 
-                                <li ><a href="javascript:void(0)">Elite Services</a> </li>                                
+                                <li ><a href="{{route('page', 'elite-services')}}">Elite Services</a> </li>                                
 
                                 <li><a href="{{route('contact')}}">Contact</a></li>
                             </ul>

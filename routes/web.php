@@ -168,11 +168,13 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/user/status/change', [AdminUserController::class, 'changeStatus'])->name('admin.user.status.change');
 
         Route::get('/properties', [AdminPropertyController::class, 'list'])->name('admin.properties');
+        Route::get('/property/{slug}', [AdminPropertyController::class, 'property'])->name('admin.property');
         Route::get('/property/add/{user_id?}', [AdminPropertyController::class, 'add'])->name('admin.property.add');
         Route::get('/property/edit/{id}', [AdminPropertyController::class, 'edit'])->name('admin.property.edit');
         Route::post('property-post-data', [AdminPropertyController::class, 'postData'])->name('admin.property.post');
         Route::post('/property/image/delete', [AdminPropertyController::class, 'deleteImage'])->name('admin.property.image.delete');
         Route::post('/property/status/change', [AdminPropertyController::class, 'changeStatus'])->name('admin.property.status.change');
+        Route::get('/property/view/{id}', [AdminPropertyController::class, 'viewPreview'])->name('admin.property.view');
         
         Route::get('/packages', [PackageController::class, 'list'])->name('admin.packages');
         Route::get('/package/add', [PackageController::class, 'add'])->name('admin.package.add');

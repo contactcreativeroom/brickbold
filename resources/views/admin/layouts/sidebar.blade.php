@@ -126,18 +126,18 @@
         <li class="menu-item {{ in_array(Route::currentRouteName(), ['admin.pages']) ? 'active' : '' }}">
             <a href="{{route('admin.pages')}}" class="menu-link">
                 <i class="menu-icon fa-solid fa-file"></i>
-                <div data-i18n="Analytics">All Pages</div>
+                <div data-i18n="Analytics">Pages</div>
             </a>
         </li>
 
-        @foreach (App\Helper\Helper::pages() as $page)
+        {{-- @foreach (App\Helper\Helper::pages() as $page)
             <li class="menu-item {{ (Route::currentRouteName() == 'admin.page.edit' && Route::current()->parameter('id') == $page->id) ? 'active' : '' }}">
                 <a href="{{route('admin.page.edit', $page->id)}}" class="menu-link">
                     <i class="menu-icon fa-solid {{$page->icon}}"></i>
                     <div data-i18n="Analytics">{{$page->title}}</div>
                 </a>
             </li>
-        @endforeach 
+        @endforeach  --}}
 
         {{-- <li class="menu-header small text-uppercase">
             <span class="menu-header-text">SEO</span>

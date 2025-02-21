@@ -375,3 +375,7 @@ form#contactform  textarea{
 .user .main-content-inner{
     min-height: 690px;
 }
+
+.custom-pages tr{
+    white-space: unset !important;
+}

@@ -111,13 +111,18 @@
                         </td>   
                         <td class="text-nowrap">{{config('constants.FOR_TYPE')[$row->for_type]}} </td>   
                         <td>{{config('constants.TYPE')[$row->type]}}</td>   
-                        <td>
-                            @if ($row->status==3)
-                                <span class="badge bg-label-danger me-1">Sold</span>
-                            @else
-                            <div class="form-check form-switch">
+                        <td id="property_status_{{$row->id}}">
+                            @if ($row->status==1)
+                                <span class="badge bg-label-success me-1">Approved</span>
+                            @elseif ($row->status==2)
+                                <span class="badge bg-label-warning me-1">Pending</span>
+                            @elseif ($row->status==3)
+                                <span class="badge bg-label-secondary me-1">Sold</span>
+                            @else 
+                                <span class="badge bg-label-danger me-1">Declined</span>
+                            {{-- <div class="form-check form-switch">
                                 <input class="form-check-input entity-toggle" type="checkbox" data-entity-url="{{ route('admin.property.status.change') }}" data-entity-id="{{ $row->id }}" data-entity-type="property" {{ $row->status == 1 ? 'checked' : '' }}>
-                            </div>
+                            </div> --}}
                             @endif
                         </td> 
                         <td class="sorting_1">
@@ -140,12 +145,9 @@
                             @endif                           
 
                         </td>
-                        <td>  
-
-                            <a href="{{route("admin.property.edit", $row->id)}}">
-                                <span class="btn-primary badge" text-capitalized="">Edit</span>
-                            </a>
-                             
+                        <td class="text-nowrap">
+                            <a href="{{route("admin.property.edit", $row->id)}}"><span class="btn-primary badge" text-capitalized="">Edit</span></a>
+                            <a href="javascript:void(0)" data-url="{{route('admin.property.view', $row->id)}}" data-id="{{$row->id}}" class="view-preview"><span class="btn-primary badge" text-capitalized="">View</span></a>  
                         </td>
                     </tr>
                     @endforeach

@@ -438,7 +438,7 @@
                                             </div>
                                             <div class="content">
                                                 <div class="text-1 title fw-5 lh-20">
-                                                    <a href="{{route('property', $featuredRow->id)}}">{{$featuredRow->title}}</a>
+                                                    <a href="{{route('property', $featuredRow->slug)}}">{{$featuredRow->title}}</a>
                                                 </div>
                                                 <ul class="meta-list flex">
                                                     <li class="text-1 flex"><span>{{$featuredRow->bedroom}}</span>Beds</li>

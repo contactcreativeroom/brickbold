@@ -155,3 +155,57 @@ function renumberRows() {
         $(this).find('.row-number').text(index + 1);
     });
 }
+
+$('body').on('click', '.view-preview', function () {
+    var that = $(this);
+    var $modal = $('#previewModal');
+    var id = that.data('id');
+    var getUrl = that.data('url');
+    $modal.find('iframe').attr('src','');
+    $('#preview').html('');
+    $('.loader').removeClass('d-none');
+    $.ajax({
+        type: "GET",
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+        url: getUrl,
+        success: function (response) {
+            console.log(response);
+            $("#property_id").val(id);
+            $("[name='property_status'][value='"+response.status+"']").prop('checked', true);
+            $modal.modal('show');
+            $modal.find('iframe').attr('src', response.url);
+            return false;            
+        }
+    });
+    return false;
+
+});
+
+$('body').on('change', "[name='property_status']", function () {
+    var that = $(this);
+    var val = that.val();
+    var id = $("#property_id").val();
+    var getUrl = $("#action_url").val();
+    console.log(val); 
+    $.ajax({
+        type: "POST",
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+        url: getUrl,
+        data: {entity_id: id, status: val},
+        success: function (response) {
+            var st = '<span class="badge bg-label-danger me-1">Declined</span>';
+            if(val == 1){
+                st = '<span class="badge bg-label-success me-1">Approved</span>';
+            } else if(val == 2){
+                st = '<span class="badge bg-label-warning me-1">Pending</span>';
+            } else if(val == 3){
+                st = '<span class="badge bg-label-secondary me-1">Sold</span>';
+            } 
+            $("#property_status_"+id).html(st);
+            
+            toastr.success(response.message, 'true');       
+        }
+    })
+    return false;
+
+});

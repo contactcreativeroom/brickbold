@@ -271,7 +271,7 @@ inputs.forEach((input, index1) => {
         button.classList.remove("active");
     });
 });
-window.addEventListener("load", () => inputs[0].focus());
+window.addEventListener("load", () => inputs[0]?.focus());
 
 // otp verification input end
 
@@ -364,10 +364,17 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Copy to Clipboard Functionality
-    document.querySelector(".share-field #copyUrl").addEventListener("click", function () {
-        let copyText = document.querySelector("#sharePopup #shareUrl");
-        copyText.select();
-        document.execCommand("copy");
-        toastr.success("URL Copied: " + copyText.value, 'Successfully!');
-    });
+    let copyButton = document.querySelector(".share-field #copyUrl");
+    if (copyButton) {
+        copyButton.addEventListener("click", function () {
+            let copyText = document.querySelector("#sharePopup #shareUrl");
+            if (copyText) {
+                copyText.select();
+                document.execCommand("copy");
+                toastr.success("URL Copied: " + copyText.value, 'Successfully!');
+            } else {
+                console.error("Element #sharePopup #shareUrl not found.");
+            }
+        });
+    }
 }); 

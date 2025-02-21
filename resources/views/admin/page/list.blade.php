@@ -31,7 +31,7 @@
                 <thead class="table-primary">
                     <tr>
                         <th scope="col" class="border">#</th>
-                        <th scope="col" class="border">Icon</th>
+                        {{-- <th scope="col" class="border">Icon</th> --}}
                         <th scope="col" class="border">Title</th>
                         <th scope="col" class="border">Slug</th>
                         <th scope="col" class="border text-nowrap">Sub title</th>
@@ -44,7 +44,7 @@
                     @foreach($rows as $row)
                     <tr data-entity-id="{{ $row->id }}">
                         <td>{{ ($rows->currentPage() - 1) * $rows->perPage() + $loop->iteration }}.</td>
-                        <td><span class="row-number"></span>{!! $row->icon? '<i class="menu-icon fa-solid '.$row->icon.'"></i>' :'-' !!}</td>
+                        {{-- <td><span class="row-number"></span>{!! $row->icon? '<i class="menu-icon fa-solid '.$row->icon.'"></i>' :'-' !!}</td> --}}
                         <td><span class="row-number"></span>{{$row->title}}</td>
                         <td><span class="row-number"></span>{{$row->slug}}</td>
                         <td><span class="row-number"></span>{{$row->sub_title}}</td>                          

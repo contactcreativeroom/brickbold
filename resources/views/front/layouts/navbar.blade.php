@@ -215,7 +215,7 @@
                         </li>
 
                         <li class="menu-item ">
-                            <a href="javascript:void(0)" class="tem-menu-mobile ">Elite Services</a>
+                            <a href="{{route('page', 'elite-services')}}" class="tem-menu-mobile ">Elite Services</a>
                         </li>
 
                         <li class="menu-item ">
