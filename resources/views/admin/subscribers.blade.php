@@ -26,9 +26,9 @@
             <table class="table table-hover">
                 <thead class="table-primary">
                     <tr>
-                        <th scope="col" class="border">#</th>
+                        <th scope="col" class="border">Sr.</th>
                         <th scope="col" class="border">Contact</th> 
-                        <th scope="col" class="border">Created On</th>
+                        <th scope="col" class="border">Subscribed On</th>
                     </tr>
                 </thead>
                 <tbody  data-entity-type="category"  >

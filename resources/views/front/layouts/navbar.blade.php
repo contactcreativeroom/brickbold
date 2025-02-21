@@ -214,9 +214,9 @@
                             <a href="{{route('homeloan')}}" class="tem-menu-mobile ">Home Loan</a>
                         </li>
 
-                        <li class="menu-item ">
+                        {{-- <li class="menu-item ">
                             <a href="{{route('page', 'elite-services')}}" class="tem-menu-mobile ">Elite Services</a>
-                        </li>
+                        </li> --}}
 
                         <li class="menu-item ">
                             <a href="{{route('contact')}}" class="tem-menu-mobile "> Contact</a>

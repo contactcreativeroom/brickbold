@@ -158,10 +158,10 @@
                                 <table class="table table-hover">
                                     <thead class="table-primary">
                                         <tr>
-                                            <th scope="col" class="border">#</th>
+                                            <th scope="col" class="border">Sr.</th>
                                             <th scope="col" class="border">Property</th>
                                             <th scope="col" class="border">Address</th>
-                                            <th scope="col" class="border">For-Type</th>
+                                            {{-- <th scope="col" class="border">Sell/Rent</th> --}}
                                             <th scope="col" class="border">Type</th>
                                             <th scope="col" class="border">Status</th>
                                         </tr>
@@ -181,6 +181,7 @@
                                                         <a href="{{route('property', $row->slug)}}" class="text-heading text-truncate">
                                                             <span class="fw-medium">{{$row->title}}</span>
                                                         </a>
+                                                        <small>{{config('constants.FOR_TYPE')[$row->for_type]}}</small>
                                                         <small>Date: {{ App\Helper\Helper::formatStringDate($row->created_at)  }}</small>
                                                         <small>Views: {{$row->views}}</small>
                                                         <small class="text-btn text-color-primary" >{{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($row->price)}}</small>
@@ -198,7 +199,7 @@
                                                 <small>{{ $row->city }}</small>
                                                 <small>{{ $row->zip_code }}</small> 
                                             </td>   
-                                            <td>{{config('constants.FOR_TYPE')[$row->for_type]}} </td>   
+                                            {{-- <td>{{config('constants.FOR_TYPE')[$row->for_type]}} </td>    --}}
                                             <td>{{config('constants.TYPE')[$row->type]}}</td>   
                                             <td>
                                                 <div class="form-check form-switch">

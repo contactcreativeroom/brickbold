@@ -50,7 +50,7 @@
                                         <th>Listing</th>
                                         <th>Status</th>
                                         <th>Type</th>
-                                        <th>Action</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>

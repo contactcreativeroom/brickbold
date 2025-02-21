@@ -31,13 +31,13 @@
             <table class="table table-hover">
                 <thead class="table-primary">
                     <tr>
-                        <th scope="col" class="border">#</th>
+                        <th scope="col" class="border">Sr.</th>
                         <th scope="col" class="border">Name</th>
                         <th scope="col" class="border">Email</th>
                         <th scope="col" class="border">Phone</th>
                         <th scope="col" class="border">Image</th>
                         <th scope="col" class="border">Status</th>
-                        <th scope="col" class="border">Operations</th>
+                        <th scope="col" class="border">Actions</th>
                     </tr>
                 </thead>
                 <tbody>

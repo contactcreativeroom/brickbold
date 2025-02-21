@@ -108,6 +108,7 @@ Route::middleware(['auth.user'])->prefix('user')->group(function () {
     Route::get('/property/favorite/add/{id}', [FavoriteController::class, 'add'])->name('user.favorite.add');
     Route::get('/property/favorite/toggle/{id}', [FavoriteController::class, 'toggle'])->name('user.favorite.toggle');
     Route::get('/property/favorites', [FavoriteController::class, 'list'])->name('user.favorites');
+    // Route::get('/property/interested', [FavoriteController::class, 'list'])->name('user.interested');
     Route::get('/property/favorite/delete/{favorite_id}', [FavoriteController::class, 'delete'])->name('user.favorite.delete');
 
     Route::get('/properties', [PropertyController::class, 'list'])->name('user.properties');

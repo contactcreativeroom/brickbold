@@ -1,36 +1,21 @@
 @extends('front.layouts.app')
 @section('content')
-<section class="mb-15 mt-20">
+<section class="flat-title style-2 register-page">
     <div class="tf-container">
-        <div class="row">
-            <div class="col-lg-12">
+        <div class="row"> 
+            {{-- <div class="col-lg-12">
                 <div class="title-inner ">
                     <ul class="breadcrumb">
                         <li><a class="home fw-6 text-color-3" href="{{route('home')}}">Home</a></li>
                         <li>Register</li>
                     </ul>
                 </div>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="flat-title style-2 register-page">
-    <div class="tf-container">
-        <div class="row">
-            <div class="col-xl-12 mt-5">
+            </div> --}}
+            <div class="col-xl-12 mt-5"> 
                 <div class="flat-account">
                     <div class="banner-account">
-                        <img src="{{url('frontend/images/items/brickbold-mobile.png')}}" alt="banner">
-                    </div>
-                    <div class="banner-content">
-                        <h3>Sale or rent your property Online Instantly with <span>Brickbold.com</span></h3>
-                        <ul>
-                            <li><span></span> Quailty Support</li>
-                            <li><span></span> Free Advertisement</li>
-                            <li><span></span> Acquire Unlimited Enquiries</li>
-                            <li><span></span> Obtain potential buyer and tenants</li>
-                        </ul>
-                    </div>
+                        <img src="{{url('frontend/images/section/banner-register.jpg')}}" alt="banner">
+                    </div> 
                     <form class="form-account pt-5" action="{{route('register')}}" id="registerForm"  method="post" enctype='multipart/form-data'>
                         @csrf 
                         <div class="title-box">
@@ -258,107 +243,6 @@
         </div>
     </div>
 </section>
-<section class="tf-spacing-1 bg_light_gray pb-0">
-    <div class="tf-container">
-        <div class="row">
-            <div class="col-12">
-                <h3 class="title text-center mb-40 pb-5 color-main">
-                    How to sell your property effortlessly  with BrickBold
-                </h3>
-            </div>
-            <div class="col-12 img-box">
-                <div class="img__">
-                    <img src="{{url('frontend/images/items/step1.png')}}" class="img-fluid">
-                </div>
-                <div class="img-content">
-                    <h5>Step-1  Post your property Ad</h5>
-                    <p>After logging in, Click on "Post Property" and enter all necessary details about your property such as locality name, amenities and upload the photos of the property.</p>
-                </div>
-            </div>
-            <div class="col-12 img-box">
-                <div class="img__">
-                    <img src="{{url('frontend/images/items/step2.png')}}" class="img-fluid">
-                </div>
-                <div class="img-content">
-                    <h5>Step 2: Access Responses Through Your Dashboard</h5>
-                    <p>You can then monitor the responses in your dashboard and reach the contact details of interested buyers or tenants.</p>
-                </div>
-            </div>
-            <div class="col-12 img-box">
-                <div class="img__">
-                    <img src="{{url('frontend/images/items/step3.png')}}" class="img-fluid">
-                </div>
-                <div class="img-content">
-                    <h5>Step 3: Connect with Buyers/ Tenants</h5>
-                    <p>Negotiating with potential buyers or tenants is the final step. Connect directly with the interested buyer or tenants without any third party.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="tf-spacing-1 bg_light_gray">
-    <div class="tf-container">
-        <div class="row">
-            <div class="col-12 mb-40 pb-5  text-center">
-                <h3 class="title text-center color-main">
-                    Tips for selling a property online
-                </h3>
-                <p class="sub-heading">There are multiple listings and sellers but you can still get the maximum attraction. if you follow these <span style="color: #df4234;">tips for selling a Property online.</span></p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 col-xl-6 col-lg-6">
-                <div class="tips">
-                    <div class="tip-icon"><img src="{{url('frontend/images/items/upload-quality-photos.png')}}" class="img-fluid"></div>
-                    <div class="tips-content">
-                        <h5>Upload quality photos</h5>
-                        <ul>
-                            <li>• Wisely capture the property's features and interior.</li>
-                            <li>• Regularly change the photos.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-xl-6 col-lg-6">
-                <div class="tips">
-                    <div class="tip-icon"><img src="{{url('frontend/images/items/early reply.png')}}" class="img-fluid"></div>
-                    <div class="tips-content">
-                        <h5>Early reply to buyers</h5>
-                        <ul>
-                            <li>• Try to give them the responses as early as possible.</li>
-                            <li>• Answer question from interested buyers.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-xl-6 col-lg-6">
-                <div class="tips">
-                    <div class="tip-icon"><img src="{{url('frontend/images/items/negotiative.png')}}" class="img-fluid"></div>
-                    <div class="tips-content">
-                        <h5>Negotiate effectively</h5>
-                        <ul>
-                            <li>• Be open to reasonable offers and willing to negotiate terms</li>
-                            <li>• Accept an offer.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-xl-6 col-lg-6">
-                <div class="tips">
-                    <div class="tip-icon"><img src="{{url('frontend/images/items/set-competitive-price.png')}}" class="img-fluid"></div>
-                    <div class="tips-content">
-                        <h5>Set a competitive price</h5>
-                        <ul>
-                            <li>• Compare similar homes in your area and check their price</li>
-                            <li>• Offer extra incentives to buyer in your selling price.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
 @endsection
 
 @push('scripts') 

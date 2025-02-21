@@ -221,7 +221,7 @@
                         
                         <div class="wg-property box-property-detail  spacing-1">
                             <div class="wg-title text-11 fw-6 text-color-heading text-nowrap">
-                                Property Details <span ><h6 class="d-inline"> {{$row?->user?->name? '( '.$row?->user?->name .' )' :'' }} </h6></span>
+                                Property Details <span ><h6 class="d-inline"> {{$row?->user?->user_type? '( '.$row?->user?->user_type .' )' :'' }} </h6></span>
                             </div>
                             <div class="content">
                                 <p class="description text-1 mb-10">{{$row->description}}</p>

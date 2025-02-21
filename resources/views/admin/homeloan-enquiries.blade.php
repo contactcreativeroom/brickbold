@@ -26,12 +26,12 @@
             <table class="table table-hover">
                 <thead class="table-primary">
                     <tr>
-                        <th scope="col" class="border">#</th>
+                        <th scope="col" class="border">Sr.</th>
                         <th scope="col" class="border">Phone</th>
                         <th scope="col" class="border">Amount</th>
                         <th scope="col" class="border">City</th> 
                         <th scope="col" class="border">Finalized</th>
-                        <th scope="col" class="border">Created On</th>
+                        <th scope="col" class="border">Enquired On</th>
                     </tr>
                 </thead>
                 <tbody>

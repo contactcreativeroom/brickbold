@@ -30,14 +30,14 @@
             <table class="table table-hover">
                 <thead class="table-primary">
                     <tr>
-                        <th scope="col" class="border">#</th>
+                        <th scope="col" class="border">Sr.</th>
                         {{-- <th scope="col" class="border">Icon</th> --}}
                         <th scope="col" class="border">Title</th>
-                        <th scope="col" class="border">Slug</th>
+                        <th scope="col" class="border">URL</th>
                         <th scope="col" class="border text-nowrap">Sub title</th>
                         <th scope="col" class="border">Status</th>
-                        <th scope="col" class="border">Added on</th>
-                        <th scope="col" class="border">Operations</th> 
+                        <th scope="col" class="border">Created on</th>
+                        <th scope="col" class="border">Actions</th> 
                     </tr>
                 </thead>
                 <tbody  data-entity-type="page"  >
@@ -48,7 +48,7 @@
                         <td><span class="row-number"></span>{{$row->title}}</td>
                         <td><span class="row-number"></span>{{$row->slug}}</td>
                         <td><span class="row-number"></span>{{$row->sub_title}}</td>                          
-                        <td><span class="row-number"></span>{{$row->status}}</td>                          
+                        <td><span class="row-number"></span>{{$row->status == 1 ? 'Active' : 'In-active'}}</td>                          
                         <td><span class="row-number"></span> {{ App\Helper\Helper::formatStringDate($row->created_at, true)  }}</td>
                         <td>
                             <div class="btn-group">

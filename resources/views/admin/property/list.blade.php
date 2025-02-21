@@ -71,14 +71,14 @@
             <table class="table table-hover">
                 <thead class="table-primary">
                     <tr>
-                        <th scope="col" class="border">#</th>
+                        <th scope="col" class="border">Sr.</th>
                         <th scope="col" class="border">Property</th>
                         <th scope="col" class="border">Address</th>
-                        <th scope="col" class="border text-nowrap">For-Type</th>
+                        <th scope="col" class="border text-nowrap">Sell/Rent</th>
                         <th scope="col" class="border">Type</th>
                         <th scope="col" class="border">Status</th>
                         <th scope="col" class="border">user</th>
-                        <th scope="col" class="border">Operations</th>
+                        <th scope="col" class="border">Actions</th>
                     </tr>
                 </thead>
                 <tbody  data-entity-type="category"  >

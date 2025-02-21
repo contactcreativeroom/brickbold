@@ -56,14 +56,14 @@
             <table class="table table-hover">
                 <thead class="table-primary">
                     <tr>
-                        <th scope="col" class="border">#</th>
+                        <th scope="col" class="border">Sr.</th>
                         <th scope="col" class="border">Package</th>
                         <th scope="col" class="border">Razorpay order</th>
-                        <th scope="col" class="border">post_property</th>
+                        <th scope="col" class="border">Post property</th>
                         <th scope="col" class="border">Contacts</th>
-                        <th scope="col" class="border">Days</th>
+                        <th scope="col" class="border">Validity</th>
                         <th scope="col" class="border">Status</th>
-                        <th scope="col" class="border">User</th>
+                        <th scope="col" class="border">User Info</th>
                         {{-- <th scope="col" class="border">Operations</th> --}}
                     </tr>
                 </thead>
@@ -83,7 +83,7 @@
                         <td>{{ $row->razorpay_order_id }}</td>    
                         <td>{{ $row->post_property }}</td>   
                         <td>{{ $row->contacts }}</td>   
-                        <td>{{ $row->days }} </td>  
+                        <td>{{ $row->days }} Days</td>  
                         <td>
                             @if ($row->status==1)
                                 <span class="badge bg-label-success me-1">Active</span>

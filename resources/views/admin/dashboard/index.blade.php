@@ -22,7 +22,7 @@
                         </div>
                         <h4 class="mb-0">{{$userTotal->count()}}</h4>
                     </div>
-                    <p class="mb-2">Total Customers</p>
+                    <p class="mb-2">Total customers</p>
                 </a>
             </div>
         </div>
@@ -35,7 +35,7 @@
                         </div>
                         <h4 class="mb-0">{{$userTotal->where('user_type','Owner')->count()}}</h4>
                     </div>
-                    <p class="mb-2">Total Owners</p>
+                    <p class="mb-2">Total owners</p>
                 </a>
             </div>
         </div>
@@ -87,7 +87,7 @@
                         </div>
                         <h4 class="mb-0">{{$properties->where("status", 1)->count()}}</h4>
                     </div>
-                    <p class="mb-2">Total properties Active</p>
+                    <p class="mb-2">Total active properties </p>
                 </a>
             </div>
         </div>
@@ -100,7 +100,7 @@
                         </div>
                         <h4 class="mb-0">{{$properties->where("status", 2)->count()}}</h4>
                     </div>
-                    <p class="mb-2">Total properties pending</p>
+                    <p class="mb-2">Total in-active properties</p>
                 </a>
             </div>
         </div>
@@ -113,7 +113,7 @@
                         </div>
                         <h4 class="mb-0">{{$properties->where("status", 3)->count()}}</h4>
                     </div>
-                    <p class="mb-2">Total properties sold</p>
+                    <p class="mb-2">Total sold properties</p>
                 </a>
             </div>
         </div>
@@ -139,7 +139,7 @@
                         </div>
                         <h4 class="mb-0">{{$thisYearEarned}}</h4>
                     </div>
-                    <p class="mb-2">Total payments Year</p>
+                    <p class="mb-2">Total this year</p>
                 </div>
             </div>
         </div>
@@ -152,7 +152,7 @@
                         </div>
                         <h4 class="mb-0">{{$thisMonthEarned}}</h4>
                     </div>
-                    <p class="mb-2">Total payments Month</p>
+                    <p class="mb-2">Total this month</p>
                 </div>
             </div>
         </div> 
@@ -165,7 +165,7 @@
                         </div>
                         <h4 class="mb-0">{{$todayEarned}}</h4>
                     </div>
-                    <p class="mb-2">Total payments today</p>
+                    <p class="mb-2">Total today</p>
                 </div>
             </div>
         </div>
