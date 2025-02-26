@@ -39,6 +39,7 @@ class PaymentController extends Controller
             'package_id' => $package->id, 
             'package_name' => $package->property_type.' '.$package->type.' '.$package->name,
             'package_id' => $package->id, 
+            'package_type' => $package->type,
             'package_value' => serialize($fields),
             'package_price' => $package->price, 
             'discount' => $package->discount, 
@@ -103,6 +104,7 @@ class PaymentController extends Controller
             $user->subscription()->create([
                 'order_id' => $order->id,
                 'package_id' => $request->package_id,
+                'package_type' => $order->package_type,
                 'post_property' => $order->post_property,
                 'contacts' => $order->contacts,
                 'days' => $order->days,

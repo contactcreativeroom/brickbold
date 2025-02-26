@@ -10,7 +10,7 @@ class UserSubscription extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'order_id', 'package_id', 'post_property', 'contacts', 'days', 'start_date', 'end_date',  'status'
+        'user_id', 'order_id', 'package_id', 'package_type', 'post_property', 'contacts', 'days', 'start_date', 'end_date',  'status'
     ];
 
     public function user()

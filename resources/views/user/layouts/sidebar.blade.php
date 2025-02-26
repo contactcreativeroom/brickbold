@@ -63,8 +63,8 @@
                                     Profile
                                 </a>
                             </li>
-                            {{-- <li class="nav-menu-item {{ in_array(Route::currentRouteName(), ['user.interested']) ? 'active' : '' }}">
-                                <a class="nav-menu-link" href="{{route('user.interested')}}">
+                            <li class="nav-menu-item {{ in_array(Route::currentRouteName(), ['user.interests']) ? 'active' : '' }}">
+                                <a class="nav-menu-link" href="{{route('user.interests')}}">
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -80,9 +80,9 @@
                                             stroke="#A8ABAE" stroke-width="1.4" stroke-linecap="round"
                                             stroke-linejoin="round" />
                                     </svg>
-                                    My Interested
+                                    My Interests
                                 </a>
-                            </li> --}}
+                            </li>
                             <li class="nav-menu-item {{ in_array(Route::currentRouteName(), ['user.package']) ? 'active' : '' }}">
                                 <a class="nav-menu-link" href="{{route('user.package')}}">
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"

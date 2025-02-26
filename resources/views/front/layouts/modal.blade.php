@@ -477,14 +477,58 @@
 <!-- /Home Popup -->
 
 
+@auth('user')
+<!-- Interested loggedIn-->
+<div class="modal modal-md fade " id="modalInterested">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="flat-account">
+                <form class="form-account" action="{{route('property.enquiry')}}" id="interestedForm"  method="post" enctype='multipart/form-data'>
+                    @csrf 
+                    <div class="title-box mb-3">
+                        <h4>Contact Owner</h4>
+                        <span class="close-modal icon-close" data-bs-dismiss="modal"></span>
+                    </div> 
+                         
+                    <h5 class="mb-3 fs-15">Are you sure you want to show interest with the details below?</h5>
 
+                    <div class="content mb-2">
+                        <span class="fw-5">Name</span>: 
+                        <span class="text-2"> {{ auth('user')->user()->name ?? '' }}   </span>
+                   </div>
+
+                   <div class="content mb-2">
+                        <span class="fw-5">Email</span>: 
+                        <span class="text-2">{{ auth('user')->user()->email ?? '' }}  </span>
+                   </div>
+
+                   <div class="content mb-2">
+                        <span class="fw-5">Phone</span>:
+                        <span class="text-2"> {{ auth('user')->user()->phone ?? '' }}  </span>
+                   </div>
+                   
+                    <div class="box box-btn mb-2 mt-5">   
+                        <input type="hidden" name="name" id="name" value="{{ auth('user')->user()->name ?? '' }} ">
+                        <input type="hidden" name="email" id="email" value="{{ auth('user')->user()->email ?? '' }} ">
+                        <input type="hidden" name="phone" id="phone" value="{{ auth('user')->user()->phone ?? '' }} ">
+                        <input type="hidden" name="property_id" id="property_id" value="">
+                        <input type="hidden" name="property_slug" id="property_slug" value="">
+                        <button type="submit" class="tf-btn bg-color-primary w-full">Send</button>
+                    </div>  
+                </form>
+            </div>
+        </div>
+    </div>
+</div> 
+<!-- /Interested loggedIn-->
+@else   
 
 <!-- Interested -->
 <div class="modal modal-md fade " id="modalInterested">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="flat-account">
-                <form class="form-account" action="{{route('property.enquiry')}}" id="interestedForm"  method="post" enctype='multipart/form-data'>
+                <form class="form-account" action="{{route('property.enquiry.register')}}" id="interestedForm"  method="post" enctype='multipart/form-data'>
                     @csrf 
                     <div class="title-box">
                         <h4>Contact Owner</h4>
@@ -545,7 +589,53 @@
     </div>
 </div> 
 <!-- /Interested -->
+@endauth
 
+<!-- .OTP Property Interested -->
+    <div class="modal modal-sm fade" id="modalOTPPropEnq">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="flat-account">
+                    
+                    <form class="form-account" id="OTPPropEnqForm" >
+                        <div class="title-box">
+                            <h4>Verify OTP</h4>
+                            <span class="close-modal icon-close" data-bs-dismiss="modal"></span>
+                        </div> 
+                        <div class="verify-otp-section">
+                            <div class="box">
+                                 <div class="text mb-3">OTP sent to <span class="text-color-primary otpPropEnqSentMobile"></span>. Wrong number?  <a href="javascript:void(0)" class="text-color-primary" id="mobile-edit">Click here</a href="javascript:void(0)">.</div>
+                                <fieldset class="box-fieldset">
+                                    <label for="pass">OTP</label>
+                                    <div class="otp-input-field">
+                                        <input type="number" />
+                                        <input type="number" disabled />
+                                        <input type="number" disabled />
+                                        <input type="number" disabled />
+                                        <input type="number" disabled />
+                                        <input type="number" disabled />
+                                    </div>
+                                    <div class="mt-2 text-end"><button type="button" class="text-color-primary" onClick="sendOTPPropEnq()">Resend</button></div>
+                                    
+                                    <span id="otp-error" class="text-danger is_error"></span>
+                                </fieldset>
+                            </div>
+                            <div class="box box-btn">
+                                <input type="hidden" name="mobile" id="mobile">
+                                <input type="hidden" name="property_slug" id="property_slug">
+                                <input type="hidden" name="property_id" id="property_id">
+                                <input type="hidden" id="submit_form_id">
+                                <button type="button" onClick="verifyOTPPropEnq()" class="tf-btn bg-color-primary w-100" id="verify-button">Verify</button>
+                                <div class="text text-center">Back to <a href="{{route('login')}}" class="text-color-primary">Sign In</a></div>
+                            </div>  
+                        </div>  
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- /.OTP Property Interested -->
 
 <!-- Social sharing Popup -->
 {{-- <div class="modal fade show" id="sharePopup" aria-modal="true" role="dialog" style="display: block;"> --}}
@@ -595,3 +685,19 @@
 <!-- /Social sharing Popup -->
 
 
+<div class="modal modal-md fade " id="modalPackageRedirect">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="flat-account">
+                <form class="form-account">
+                    @csrf 
+                    <div class="title-box mb-3">
+                        <h4>Buy Package</h4>
+                        <span class="close-modal icon-close" data-bs-dismiss="modal"></span>
+                    </div>                         
+                    <h5 class="mb-3 fs-15">Buy a package to access owner details. <a href="{{route('packages', ['type'=>'BUY'])}}" class="text-color-primary">Click here!!</a></h5>  
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

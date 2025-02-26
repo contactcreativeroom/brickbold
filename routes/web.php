@@ -90,6 +90,9 @@ Route::middleware('guest')->group(function () {
     //otp Login
     Route::post('/send-otp', [UserAuthController::class, 'sendOTP']);
     Route::post('/verify-otp', [UserAuthController::class, 'verifyOTP']);
+    
+    Route::post('/property/enquiry/register', [UserAuthController::class, 'otpSentPostPropertyEnquiry'])->name('property.enquiry.register');
+    Route::post('/property/enquery/verify-otp', [UserAuthController::class, 'otpVerifyPostPropertyEnquiry']);
 });
 
 
@@ -104,11 +107,11 @@ Route::middleware(['auth.user'])->prefix('user')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('user.dashboard');
     Route::get('/my-package', [UserController::class, 'package'])->name('user.package');
     Route::get('/my-reviews', [UserController::class, 'reviews'])->name('user.reviews');
+    Route::get('/my-interests', [UserController::class, 'interests'])->name('user.interests');
 
     Route::get('/property/favorite/add/{id}', [FavoriteController::class, 'add'])->name('user.favorite.add');
     Route::get('/property/favorite/toggle/{id}', [FavoriteController::class, 'toggle'])->name('user.favorite.toggle');
     Route::get('/property/favorites', [FavoriteController::class, 'list'])->name('user.favorites');
-    // Route::get('/property/interested', [FavoriteController::class, 'list'])->name('user.interested');
     Route::get('/property/favorite/delete/{favorite_id}', [FavoriteController::class, 'delete'])->name('user.favorite.delete');
 
     Route::get('/properties', [PropertyController::class, 'list'])->name('user.properties');

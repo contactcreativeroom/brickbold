@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Helper\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\OtpCode;
+use App\Models\Property;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -294,6 +295,56 @@ class AuthController extends Controller
     }
     //Google login end
 
+    public function otpSentPostPropertyEnquiry(Request $request){      
+        $this->validate($request, [
+            'name' => ['required', 'regex:/^[A-Za-z\s]+$/', 'min:3', 'max:30'],
+            'email' => 'required|email',
+            'phone' => ['required', 'regex:/^[6-9]\d{9}$/'],
+        ]);
+
+        $phone = $request->phone ;
+        $name = $request->name ;
+        $email = $request->email ;
+        $property_id = $request->property_id ;
+        $property_slug = $request->property_slug ;
+        $this->sendMobileOTP($phone);
+        return response()->json(['success' => true, 'name' => $name, 'email' => $email, 'property_id' => $property_id, 'property_slug' => $property_slug, 'mobile' => $phone, 'message' => 'OTP sent successfully to phone .'.$phone.'. It is valid for 10 minute only.']);
+    }
+
+    public function otpVerifyPostPropertyEnquiry(Request $request){ 
+       $result = $this->verifyOTP($request);
+        if ($result instanceof \Illuminate\Http\JsonResponse) {
+            $result = $result->getData(true);
+            if (!empty($result['success'])) {
+                $isEligibleToShowInterest = Helper::isEligibleToShowInterest();
+                if(!$isEligibleToShowInterest){
+                    return response()->json([
+                        'error' => true,
+                        'message' => 'Buy a buyer package to get the Owner details',
+                    ], 422);
+                }
+                $property = Property::find($request->property_id);
+                if(!$property){
+                    Helper::toastMsg(false, "Opps! Some error in Property detail.");
+                    return back()->withInput();
+                }
+                $user = Auth::guard('user')->user();
+                $propertyEnquiry = $property->enquiry()->create([
+                    'user_id' => $property->user_id,
+                    'interested_user_id' => $user->id,
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'phone' => $request->mobile,
+                    'status' => 1,
+                ]); 
+                
+                Helper::toastMsg(true, 'Thank you for reaching out! Your enquiry has been successfully submitted. One of our real estate experts will get in touch with you soon.');
+                return response()->json(['success' => true, 'message' => 'Thank you for reaching out! Your enquiry has been successfully submitted. One of our real estate experts will get in touch with you soon.']);
+            }
+        }
+        return $result;
+    }
+
     public function sendOTP(Request $request){
         $request->validate([
             'mobile' => 'required|digits:10',
@@ -302,6 +353,7 @@ class AuthController extends Controller
         $this->sendMobileOTP($mobile);
         return response()->json(['success' => true, 'message' => 'OTP sent successfully to mobile .'.$mobile.'. It is valid for 10 minute only.']);
     }
+    
     //Otp login start
     public function sendMobileOTP($mobile){
         $user = User::where('phone', $mobile)->first();             
@@ -344,54 +396,45 @@ class AuthController extends Controller
             'mobile' => 'required|digits:10',
             'otp' => 'required|digits:6',
         ]);
-
+    
         $otpCode = OTPCode::where('mobile', $request->mobile)
             ->where('otp', $request->otp)
             ->where('expires_at', '>', now())
             ->first();
-
+    
         if (!$otpCode) {
             return response()->json(['message' => 'Invalid or expired OTP.', 'error'=>true], 200);
         }
+    
         $password = Helper::generatePassword();
         $dataInsert = [
             'password' => Hash::make($password),
-        ];
-        
-        if ($request->has('role')) {
-            $dataInsert['user_type'] = $request->role;
+            'name' => $request->name ?? null,
+            'email' => $request->email ?? null,
+            'user_type' => $request->role ?? null,
+            'for_type' => $request->for_type ?? null,
+        ];    
+        $user = User::where('phone', $request->mobile)->first();    
+        if (!$user) {
+            $emailCheck = User::where('email', $request->email)->first(); 
+            if ($emailCheck) {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'This email is already registered with an another account.',
+                ], 422);
+            }   
+            $user = User::create(array_merge(['phone' => $request->mobile], $dataInsert));
         }
-        
-        if ($request->has('for_type')) {
-            $dataInsert['for_type'] = $request->for_type;
-        }
-
-        // Create or find the user
-        $user = User::firstOrCreate( ['phone' => $request->mobile], $dataInsert );
-
-        Auth::guard('user')->login($user);        
+    
+        Auth::guard('user')->login($user);
         $otpCode->delete();
-        // $url = route('user.profile');
-        if ($user->wasRecentlyCreated) {
-            // $details = array(
-            //     'logo' => Helper::getLogo(),
-            //     'user_type'=> $request->user_type,
-            //     'for_type'=> $request->for_type,
-            //     // 'name'=>$request->name,
-            //     'email'=>$request->email,
-            //     'phone'=>$request->phone,
-            //     'password'=>$password,
-            // );
-            // dispatch(new \App\Jobs\RegisterQueue($details));
-            return response()->json([
-                'success' => true,
-                'redirect_url' => Helper::redirectRouteAfterLogin(),
-                'message' => 'Registered successfully!',
-            ], 201);
-        }
-        $url = Helper::redirectRouteAfterLogin();
-
-        return response()->json(['success' => true, 'message' => 'Logged in successfully.', 'redirect_url' => $url, 'user' => $user]);
+    
+        return response()->json([
+            'success' => true,
+            'redirect_url' => Helper::redirectRouteAfterLogin(),
+            'message' => $user->wasRecentlyCreated ? 'Registered successfully!' : 'Logged in successfully.',
+            'user' => $user
+        ]);
     }
     //Otp login end
 

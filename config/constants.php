@@ -173,7 +173,10 @@ return [
     'CONFIG' => [
         'light_logo' => 'images/logo/logo-light.png',
         'dark_logo' => 'images/logo/logo-main.png',
-        'favicon' => 'frontend/icons/favicon.svg'
+        'favicon' => 'frontend/icons/favicon.svg',
+        'seo_title' => 'Brickbold',
+        'seo_keywords' => 'keywords here',
+        'seo_description' => 'description here'
     ],    
 
     'SOCIAL' => [

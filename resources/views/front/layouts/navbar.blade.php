@@ -184,7 +184,7 @@
                                                 <li class="menu-item " >
                                                     <a class="item-menu-mobile" href="{{route('user.dashboard')}}">My Dashboard</a>
                                                 </li>
-                                                <li class="menu-item d-none" >
+                                                <li class="menu-item" >
                                                     <a class="item-menu-mobile" href="{{route('packages')}}">Sell / Rent Ad Packages</a>
                                                 </li> 
                                             </ul>
@@ -197,7 +197,7 @@
                                             <ul class="sub-mobile">
                                             <li class="menu-item " >
                                                     <a class="item-menu-mobile" href="{{route('user.dashboard')}}">My Dashboard</a>
-                                                <li class="menu-item d-none" >
+                                                <li class="menu-item" >
                                                     <a class="item-menu-mobile" href="{{route('packages')}}">Ad Packages</a>
                                                 </li> 
                                                 <li class="menu-item " >

@@ -379,7 +379,9 @@ form#contactform  textarea{
 .custom-pages tr{
     white-space: unset !important;
 }
-
+.fs-15{
+    font-size: 15px;
+}
 /**********registration page css start******************/
 .register-page .flat-account .banner-account {
     max-width: 280px;

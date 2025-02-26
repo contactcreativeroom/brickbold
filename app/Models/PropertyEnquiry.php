@@ -9,7 +9,7 @@ class PropertyEnquiry extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'user_id', 'property_id', 'name', 'email', 'phone', 'message', 'status'
+        'user_id', 'property_id', 'interested_user_id', 'name', 'email', 'phone', 'message', 'status'
     ];
 
     public function property()

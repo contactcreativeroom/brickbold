@@ -18,7 +18,7 @@ $('#registerForm').on('submit', function(e) {
             $("#OTPRegForm #mobile").val(response.mobile);
             $("#OTPRegForm #role").val(response.role);
             $("#OTPRegForm #for_type").val(response.for_type);
-            $("#modalOTPReg").modal("show")
+            $("#modalOTPReg").modal("show");
             if (response.success){
                 //window.location.href = response.redirect_url || '/';
             }
@@ -284,6 +284,10 @@ $(document).on('click', '.interested-function', function () {
     $('#modalInterested').modal('show');
 });
 
+function sendOTPPropEnq() {
+    $('#interestedForm').submit(); 
+}
+
 $('#interestedForm').on('submit', function(e) {
     e.preventDefault();
     $('#interestedForm .is_error').text('');
@@ -297,8 +301,22 @@ $('#interestedForm').on('submit', function(e) {
         },
         data: formData,
         success: function(response) {
-            toastr.success(response.message, 'Successfully!');
-            $('#modalInterested').modal('hide');
+            console.log(response);
+            if(response.success){
+                toastr.success(response.message, 'Successfully!');
+                $(".otpPropEnqSentMobile").html(response.mobile);
+                $("#OTPPropEnqForm #mobile").val(response.mobile);
+                $("#OTPPropEnqForm #property_id").val(response.property_id);
+                $("#OTPPropEnqForm #property_slug").val(response.property_slug);
+                $("#modalOTPPropEnq").modal("show");
+                $('#modalInterested').modal('hide');
+            } else if(response.success_end){
+                toastr.success(response.message, 'Successfully!');
+                $('#modalInterested').modal('hide');
+            }  else {
+                toastr.error("Opps! An error occurred.", 'Error!');
+            }
+            
         },
         error: function(xhr) {
             if (xhr.responseJSON && xhr.responseJSON.errors) {
@@ -306,12 +324,81 @@ $('#interestedForm').on('submit', function(e) {
                 for (let field in errors) {
                     $(`#interestedForm #${field}-error`).text(errors[field][0]);
                 }
-            } else { 
+            } else if (xhr.responseJSON && xhr.responseJSON.error) {
+                let msg = xhr.responseJSON.message;
+                toastr.error(msg, 'Error!');
+                $('#modalInterested').modal('hide');
+                $("#modalPackageRedirect").modal("show")
+            } else {
                 toastr.error("An error occurred. Please try again.", 'Error!');
             }
         }
     });
 });
+
+function verifyOTPPropEnq() {
+    var mobile = $("#OTPPropEnqForm #mobile").val();
+    // var property_id = $("#OTPPropEnqForm #property_id").val();
+    // var property_slug = $("#OTPPropEnqForm #property_slug").val();
+    // var name = $("#OTPPropEnqForm #property_slug").val();
+    // var email = $("#OTPPropEnqForm #property_slug").val();
+    
+    const otp = Array.from(document.querySelectorAll("#OTPPropEnqForm .otp-input-field input"))
+        .map(input => input.value)
+        .join("");
+    if (!otp) {
+        $("#OTPPropEnqForm #otp-error").text("Please fill the OTP.");
+        return false;
+    }
+    $("#OTPPropEnqForm #otp-error").text(""); 
+    let formData = $("#interestedForm").serialize(); 
+    formData += "&otp=" + encodeURIComponent(otp) + "&mobile=" + encodeURIComponent(mobile);
+
+    $.ajax({
+        url: site_url+'/property/enquery/verify-otp', 
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        data: formData,
+        // data: { 
+        //     property_id: property_id, 
+        //     property_slug: property_slug, 
+        //     name: name, 
+        //     email: email, 
+        //     mobile: mobile, 
+        //     otp: otp 
+        // },
+        success: function(response) {
+            console.log(response);
+            if (response.error) {
+                toastr.error(response.message, 'Error!');
+            } else{
+                if (response.success) {
+                    // toastr.success(response.message, 'Successfully!');
+                    location.reload() ;
+                }
+            }
+        },
+        error: function(xhr) {           
+            if (xhr.responseJSON && xhr.responseJSON.errors) {
+                let errors = xhr.responseJSON.errors;
+                console.log(errors);
+                for (let field in errors) {
+                    $(`#modalOTPPropEnq #${field}-error`).text(errors[field][0]);
+                }
+            }  else if (xhr.responseJSON && xhr.responseJSON.error) {
+                let msg = xhr.responseJSON.message;
+                toastr.error(msg, 'Error!');
+                $("#modalOTPPropEnq").modal("hide");
+                $("#modalPackageRedirect").modal("show")
+            } else {
+                console.log(xhr);
+                toastr.error("An error occurred. Please try again.", 'Error!');
+            }
+        }
+    });
+}
 
 $(document).on('click', '#verifyEmail', function () {
     $(".error").html("");

@@ -79,7 +79,7 @@ class UserController extends Controller
                 return redirect()->route('user.profile');
             }
         }
-        return view('user.profile');
+        return view($this->prefix.'.profile');
     }
 
     public function changePassword(Request $request){ 
@@ -99,14 +99,14 @@ class UserController extends Controller
             $user->password = Hash::make($request->new_password);
             if ($user->save()) {
                 Helper::toastMsg(true, 'Password changed successfully!');
-                return redirect()->route('user.profile');
+                return redirect()->route($this->prefix.'.profile');
             }
  
             Helper::toastMsg(false, 'Failed to change the password. Please try again.');
             return back();
         }
  
-        return view('user.auth.changePassword');
+        return view($this->prefix.'.auth.changePassword');
     }
 
 
@@ -119,14 +119,21 @@ class UserController extends Controller
         return view($this->prefix.'.package')->with($data);
     }
 
+    public function interests(){
+        $user = $this->userAuth; 
+        $interests = $user->interests()->paginate($this->pagerecords);
+        $data=array('rows'=>$interests);
+        return view($this->prefix.'.property.interests')->with($data);
+    }
+
     public function favorites(){
         $user = $this->userAuth;
-        return view('user.favorites', compact('user'));
+        return view($this->prefix.'.favorites', compact('user'));
     }
 
     public function reviews(){
         $user = $this->userAuth;
-        return view('user.reviews', compact('user'));
+        return view($this->prefix.'.reviews', compact('user'));
     }
 
     public function verifyEmailLinkSent(Request $request){
@@ -155,7 +162,7 @@ class UserController extends Controller
     public function verifyEmail(EmailVerificationRequest $request){
         $request->fulfill();
         Helper::toastMsg(true, 'Email verified successfully!');
-        return redirect()->route('user.profile');
+        return redirect()->route($this->prefix.'.profile');
     }
 
 }

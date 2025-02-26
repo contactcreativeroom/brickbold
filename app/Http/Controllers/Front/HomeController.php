@@ -99,12 +99,19 @@ class HomeController extends Controller
             if ($request->filled('profile')) {
                 $profile = $request->profile; 
                 $packages->where('profile', $profile) ;
-            } 
+            } else{
+                $packages->where('profile', 'Owner') ;
+            }
+
+            // Helper::toastMsg(false, "Please log in first to view compatible packages.");
+            // return redirect()->route('login'); 
         }       
 
         if ($request->filled('type')) {
             $type = $request->type; 
             $packages->where('type', $type) ;
+        } else{
+            $packages->where('type', 'SELL') ;
         }
 
         if ($request->filled('property_type')) {

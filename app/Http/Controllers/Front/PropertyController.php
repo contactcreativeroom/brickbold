@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Property;
 use App\Models\PropertyEnquiry;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PropertyController extends Controller
 {
@@ -146,24 +147,32 @@ class PropertyController extends Controller
     }
 
     public function enquiryPost(Request $request) { 
-        $validationArray = [
-            'name' => ['required', 'regex:/^[A-Za-z\s]+$/', 'min:3', 'max:30'],
-            'email' => 'required|email',
-            'phone' => ['required', 'regex:/^[6-9]\d{9}$/'],
-        ];
+        // $validationArray = [
+        //     'name' => ['required', 'regex:/^[A-Za-z\s]+$/', 'min:3', 'max:30'],
+        //     'email' => 'required|email',
+        //     'phone' => ['required', 'regex:/^[6-9]\d{9}$/'],
+        // ];
         
-        $this->validate($request, $validationArray); 
+        // $this->validate($request, $validationArray); 
         $property = Property::find($request->property_id);
         if(!$property){
             Helper::toastMsg(false, "Opps! Some error in Property detail.");
             return back()->withInput();
         }
+        $user = Auth::guard('user')->user();
+        $isEligibleToShowInterest = Helper::isEligibleToShowInterest();
+        if(!$isEligibleToShowInterest){
+            return response()->json([
+                'error' => true,
+                'message' => 'Buy a buyer package to get the Owner details',
+            ], 422);
+        }
         $propertyEnquiry = $property->enquiry()->create([
             'user_id' => $property->user_id,
+            'interested_user_id' => $user->id,
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
-            // 'message' => $request->message,
             'status' => 1,
         ]); 
         
@@ -181,7 +190,9 @@ class PropertyController extends Controller
             Helper::toastMsg(false, "Opps! Some error occured.");
             return back()->withInput();
         } 
-        Helper::toastMsg(true, 'Thank you for reaching out! Your enquiry has been successfully submitted. One of our real estate experts will get in touch with you soon.');
-        return back();
+        return response()->json(['success_end' => true, 'message' => 'Thank you for reaching out! Your enquiry has been successfully submitted. One of our real estate experts will get in touch with you soon.']);
+
+        // Helper::toastMsg(true, 'Thank you for reaching out! Your enquiry has been successfully submitted. One of our real estate experts will get in touch with you soon.');
+        // return back();
     }
 }

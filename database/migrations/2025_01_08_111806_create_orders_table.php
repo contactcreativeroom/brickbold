@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('package_id')->nullable();
             $table->string('razorpay_order_id')->nullable(); 
             $table->string('package_name')->nullable(); 
+            $table->string('package_type')->nullable(); 
             $table->float('package_price')->nullable()->default(0);
             $table->float('discount')->nullable()->default(0);
             $table->float('grand_price')->nullable()->default(0);

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\File;
 
 use App\Models\MetaDetails;
 use App\Models\Page;
+use App\Models\PropertyEnquiry;
 use App\Models\Seo;
 use App\Models\Setting;
 use Exception;
@@ -805,5 +806,27 @@ class Helper
             return route('user.profile');
         }
         return route('user.properties');
+    }
+
+    public static function isEligibleToShowInterest(){
+        if (Auth::guard('user')->check()) {
+            $user = Auth::guard('user')->user();
+            $propertyEnquiryCount = $user->interests()->count();            
+            if ($propertyEnquiryCount < 2) {
+                return true;
+            } 
+            $subscriptions = $user->subscriptionsBuy()->where('start_date', '<=', now())->where('end_date', '>=', now())->where('status', 1)->latest()->get();
+            if ($subscriptions->isEmpty()) {
+                Helper::toastMsg(false, "You do not have an active buyer plan. Please select");
+                return false;
+            }  
+
+            $totalContacts = $subscriptions->sum(fn($subscription) => $subscription->contacts);
+            if ($totalContacts > $propertyEnquiryCount) {
+                return true;
+            }           
+        }
+        Helper::toastMsg(false, "Buy a buyer package to get the Owner's details");
+        return false;
     }
 }
