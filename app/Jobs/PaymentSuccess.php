@@ -9,10 +9,11 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
 
-class PropertyEnquiryQueue implements ShouldQueue
+class PaymentSuccess implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     protected $details;
+
     /**
      * Create a new job instance.
      */
@@ -27,14 +28,14 @@ class PropertyEnquiryQueue implements ShouldQueue
     public function handle(): void
     {
         try{ 
-            Mail::send('emails.front.property', $this->details, function($message){
+            Mail::send('emails.front.payment-success', $this->details, function($message){
                 $message->from(config('constants.EMAIL.from'), config('constants.BUSINESS.name'));
-                $message->subject(config('constants.BUSINESS.name').' - Interested in your property');
+                $message->subject(config('constants.BUSINESS.name').' - Payment Successful');
                 $message->to($this->details['email']);
             });            
         }
         catch(\Exception $e){
-            //print '<pre>'; print_r($e->getMessage()); die;
+            print '<pre>'; print_r($e->getMessage()); die;
         }
     }
 }

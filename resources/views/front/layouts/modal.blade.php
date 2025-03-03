@@ -349,7 +349,7 @@
 
                         <div class="verify-otp-section" style="display: none;">
                             <div class="box">
-                                 <div class="text mb-3">OTP sent to <span class="text-color-primary otpSentMobile">9876543210</span>. Wrong number?  <a href="javascript:void(0)" class="text-color-primary" id="mobile-edit">Click here</a href="javascript:void(0)">.</div>
+                                 <div class="text mb-3">OTP sent to <span class="text-color-primary otpSentMobile"></span>. If wrong number?  <a href="javascript:void(0)" class="text-color-primary" id="mobile-edit">Click here</a href="javascript:void(0)">.</div>
                                 <fieldset class="box-fieldset">
                                     <label for="pass">OTP</label>
                                     <div class="otp-input-field">
@@ -391,7 +391,7 @@
                         </div> 
                         <div class="verify-otp-section">
                             <div class="box">
-                                 <div class="text mb-3">OTP sent to <span class="text-color-primary otpRegSentMobile">9876543210</span>. Wrong number?  <a href="javascript:void(0)" class="text-color-primary" id="mobile-edit">Click here</a href="javascript:void(0)">.</div>
+                                 <div class="text mb-3">OTP sent to <span class="text-color-primary otpRegSentMobile"></span>. If wrong number?  <a href="javascript:void(0)" class="text-color-primary" id="mobile-edit" data-bs-dismiss="modal">Click here</a>.</div>
                                 <fieldset class="box-fieldset">
                                     <label for="pass">OTP</label>
                                     <div class="otp-input-field">
@@ -486,7 +486,7 @@
                 <form class="form-account" action="{{route('property.enquiry')}}" id="interestedForm"  method="post" enctype='multipart/form-data'>
                     @csrf 
                     <div class="title-box mb-3">
-                        <h4>Contact Owner</h4>
+                        <h4>Contact Now</h4>
                         <span class="close-modal icon-close" data-bs-dismiss="modal"></span>
                     </div> 
                          
@@ -531,7 +531,7 @@
                 <form class="form-account" action="{{route('property.enquiry.register')}}" id="interestedForm"  method="post" enctype='multipart/form-data'>
                     @csrf 
                     <div class="title-box">
-                        <h4>Contact Owner</h4>
+                        <h4>Contact Now</h4>
                         <span class="close-modal icon-close" data-bs-dismiss="modal"></span>
                     </div> 
                          
@@ -604,7 +604,7 @@
                         </div> 
                         <div class="verify-otp-section">
                             <div class="box">
-                                 <div class="text mb-3">OTP sent to <span class="text-color-primary otpPropEnqSentMobile"></span>. Wrong number?  <a href="javascript:void(0)" class="text-color-primary" id="mobile-edit">Click here</a href="javascript:void(0)">.</div>
+                                 <div class="text mb-3">OTP sent to <span class="text-color-primary otpPropEnqSentMobile"></span>. If wrong number?  <a href="javascript:void(0)" class="text-color-primary" id="mobile-edit">Click here</a href="javascript:void(0)">.</div>
                                 <fieldset class="box-fieldset">
                                     <label for="pass">OTP</label>
                                     <div class="otp-input-field">

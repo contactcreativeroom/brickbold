@@ -1297,7 +1297,7 @@ a:hover, a:focus {
   height: 38px;
 }
 #header-main .tf-btn {
-  height: 44px;
+  height: 40px;
   border-radius: 12px;
 }
 
@@ -2207,7 +2207,7 @@ a:hover, a:focus {
 .tf-btn {
   font-size: 16px;
   line-height: 22.4px;
-  height: 45px;
+  height: 40px;
   background-color: var(--White);
   display: -webkit-box;
   display: -moz-box;
@@ -3106,8 +3106,8 @@ textarea.is-invalid{
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 67px;
-  width: 67px;
+  height: 40px;
+  width: 40px;
   border: none;
   background: rgba(0, 0, 0, 0.5);
   font-size: 24px;
@@ -3791,7 +3791,7 @@ textarea.is-invalid{
   padding: 16px 30px 16px 12px;
 }
 
-thead tr {
+table:not(.zui-table) thead tr {
   background-color: #3a3a3c;
   color: #fff;
   border-radius: 8px;
@@ -7105,7 +7105,7 @@ tr {
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
-  margin-bottom: 40px;
+  margin-bottom: 15px;
   flex-wrap: wrap;
   gap: 30px;
   justify-content: space-between;
@@ -7691,7 +7691,7 @@ tr {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 15px 21px;
+  padding: 8px 17px;
   position: absolute;
   bottom: 16px;
   left: 16px;
@@ -8037,8 +8037,8 @@ tr {
 }
 .flat-pricing .box .title-price .month {
   margin-left: 5px;
-  font-size: 20px;
-  margin-top: 20px;
+  font-size: 15px;
+  margin-top: 14px;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
   -ms-transition: all 0.3s ease;
@@ -8655,7 +8655,7 @@ tr {
   padding-left: 134px;
 }
 .section-CTA:not(.style-2) .content-inner .tf-btn {
-  height: 54px;
+  height: 40px;
   padding: 0 29.5px;
 }
 .section-CTA.style-2 .content-inner {
@@ -8701,7 +8701,7 @@ tr {
   z-index: 2;
 }
 .section-CTA.style-2 .tf-btn {
-  height: 54px;
+  height: 40px;
 }
 
 /*section-realty
@@ -9056,7 +9056,7 @@ tr {
   color: var(--Primary);
 }
 .section-why .tf-btn {
-  height: 54px;
+  height: 40px;
 }
 
 /*section-box-team
@@ -9539,7 +9539,7 @@ tr {
 /*section-local-agent
 ===============================================================================*/
 .section-local-agent .tf-btn {
-  height: 54px;
+  height: 40px;
 }
 
 /*section-featured-listings
@@ -10656,7 +10656,7 @@ tr {
   }
   .box-location .tf-btn {
     padding: 15px 11px;
-    height: 43px;
+    height: 40px;
     font-size: 13px;
     gap: 3px;
   }

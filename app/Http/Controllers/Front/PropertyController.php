@@ -177,15 +177,15 @@ class PropertyController extends Controller
         ]); 
         
         if($propertyEnquiry){
+            
             $details = array(
                 'logo' => Helper::getLogo(),
-                'name'=> $request->name,
-                'email'=>$request->email,
-                'phone'=>$request->phone,
-                'property_name'=>$property->name,
-                // 'description'=>$request->message,
+                'name'=> $property?->user?->name,
+                'email'=>$property?->user?->email,
+                'property_name'=>$property->title,
+                'property_url'=> route('property', $property->slug),
              );
-            //dispatch(new \App\Jobs\PropertyEnquiryQueue($details));
+            dispatch(new \App\Jobs\PropertyEnquiryQueue($details));
         } else{
             Helper::toastMsg(false, "Opps! Some error occured.");
             return back()->withInput();

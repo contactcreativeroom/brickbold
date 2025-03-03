@@ -75,7 +75,7 @@ class PaymentController extends Controller
     public function handlePayment(Request $request)
     {
         $api = new Api(config('services.razorpay.key'), config('services.razorpay.secret'));
-
+        $user = Auth::guard('user')->user();
         // Capture the payment using the Razorpay Payment ID
         try {
             $payment = $api->payment->fetch($request->razorpay_payment_id);
@@ -86,7 +86,7 @@ class PaymentController extends Controller
             }
             $captureAmmount = $order->grand_price*100 ;
             $response = $payment->capture(['amount' => $captureAmmount]);
-            $user = Auth::guard('user')->user();
+            $amount = $response->amount / 100 ; 
             // Store successful payment details in the database
             $user->payment()->create([
                 'r_payment_id' => $response->id,
@@ -96,7 +96,7 @@ class PaymentController extends Controller
                 'currency' => $response->currency,
                 'email' => $response->email,
                 'phone' => $response->contact,
-                'amount' => $response->amount / 100,
+                'amount' => $amount,
                 'json_response' => json_encode((array) $response),
                 'status' => 1,
             ]);
@@ -112,9 +112,31 @@ class PaymentController extends Controller
                 'end_date' => Carbon::now()->addDays($order->days),
                 'status' => 1,
             ]);
-
+            $package = Package::find($request->package_id);
+            if($user->email){
+                $details = array(
+                    'logo' => Helper::getLogo(),
+                    'name'=> $user->name,
+                    'amount'=> config('constants.CURRENCIES.symbol').$amount,
+                    'email'=> $user->email,
+                    'package_name'=>$package?->name,
+                    'package_days'=>$package?->days,
+                 );
+                dispatch(new \App\Jobs\PaymentSuccess($details));
+            }
             return response()->json(['success' => true, 'message' => 'Payment successfully captured']);
+
         } catch (\Exception $e) {
+            $order = Order::where('razorpay_order_id', $request->razorpay_order_id)->first();
+            $failedAmount = $order ? $order->grand_price : 0;
+
+            $details = array(
+                'logo' => Helper::getLogo(),
+                'name'=> $user->name,
+                'amount'=> config('constants.CURRENCIES.symbol').$failedAmount,
+                'error'=>$e->getMessage(),
+             );
+            dispatch(new \App\Jobs\PaymentFail($details));
             return response()->json(['success' => false, 'message' => 'Payment failed', 'error' => $e->getMessage()]);
         }
     }

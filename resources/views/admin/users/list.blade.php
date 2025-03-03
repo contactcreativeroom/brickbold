@@ -97,7 +97,7 @@
                             </div>
                         </td>
                         <td><span class="row-number"></span> {{ App\Helper\Helper::formatStringDate($row->created_at, true)  }}</td>
-                        <td>                             
+                        <td class="text-nowrap">                             
                             <a href="{{route("admin.user", $row->id)}}">
                                 <span class="btn-info badge" text-capitalized="">View</span>
                             </a>

@@ -5,6 +5,10 @@
     .single-property-map .info-map{
         grid-template-columns: auto !important;
     }
+
+    .info-detail .wrap-box{
+        width: 135px !important;
+    }
 }
 @media (min-width: 991px) and (max-width: 1200px) {
     .navigation li a {
@@ -16,6 +20,7 @@
         width: 250px;
     }
 }
+
 
 
 @media (max-width: 767px) {
@@ -44,6 +49,15 @@
 
     .page-title.home01 .h6 {
         font-size: 17px;
+    }
+}
+
+@media (max-width: 400px)  {
+    .radio-custom label {
+        padding: 5px 14px !important;
+    }
+    .text-11 {
+        font-size: 21px !important;
     }
 }
 
@@ -290,11 +304,16 @@ input.search-address-home {
     height: 210px;
 }
 
-
+.info-detail .wrap-box{
+    width: 155px;
+}
 .min-h-300{
     min-height: 300px !important;
 }
 
+.br-16 {
+    border-radius: 16px !important;
+}
 .cover-img{
     object-fit: cover;
     height: 100%;
@@ -382,6 +401,14 @@ form#contactform  textarea{
 .fs-15{
     font-size: 15px;
 }
+
+.login-menu{
+    color: var(--White);
+}
+.is-fixed .login-menu{
+    color: var(--Heading) !important;
+}
+.pk-bg-red{background: #df42341f;}
 /**********registration page css start******************/
 .register-page .flat-account .banner-account {
     max-width: 280px;
@@ -555,3 +582,121 @@ p.sub-heading {
     }
 }
 /**********registration page css end******************/
+
+
+/**********package page css start******************/
+.zui-table {
+    border-collapse: separate;
+    border-spacing: 0;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 0;
+    border-radius: 16px;
+    
+}
+
+.package-buy-btn{
+    display: unset;
+    padding: 6px 30px !important;
+    height: 36px;
+}
+
+.zui-table tr:nth-child(even) {
+  background: #F3F3F3;
+}
+
+.zui-table thead th {
+    padding: 15px 20px;
+    text-align: center;
+    vertical-align: top;
+    min-width: 180px;
+}
+.zui-table tbody td {
+    color: #333;
+    font-size: 16px;
+    padding: 15px 20px;
+    white-space: normal;
+    vertical-align: top;
+    border-top: 1px solid #ccc;
+}
+.zui-wrapper {
+  max-width: 1200px;
+  position: relative;
+}
+.zui-scroller {
+    /* overflow-x: scroll; */
+    /* overflow-y: visible; */
+    padding-bottom: 5px;
+    width: 100%;
+    border: 1px solid var(--Line);
+    border-radius: 13px;
+}
+
+.zui-table .zui-sticky-col {
+    left: -10px;
+    position: sticky;
+    top: auto;
+    font-weight: 700;
+    min-width: 200px;
+    background-color: #FFFFFF;
+    box-shadow: inset -15px 0 10px -7px rgba(0,0,0,0.15);
+}
+
+.zui-sticky-col.zui-stripe-row {
+    background-color: #F3F3F3;
+}
+
+.zui-table th:not(:first-child),
+.zui-table td:not(:first-child) {
+    border-left: 1px solid lightgrey;
+    text-align: center;
+}
+
+
+.ribbon {
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+}
+.ribbon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    line-height: 1.4;
+    padding-inline: 1lh;
+    clip-path: polygon(
+        100% 100%,0 100%,999px calc(100% - 999px),calc(100% - 999px) calc(100% - 999px));
+    transform: translate(calc((1 - cos(45deg))*100%), -100%) rotate(45deg);
+    transform-origin: 0% 100%;
+    background-color: var(--Primary);
+    opacity: 0.8
+}
+
+.package .flat-pricing .box {
+    border: 1px solid var(--Primary);
+}
+
+ 
+/* Phone */
+@media screen and (max-width: 768px) and (min-width: 320px)  {
+  .zui-table .zui-sticky-col {
+        min-width: 125px;
+    }
+    
+    .zui-table thead th {
+        min-width: 190px;
+    }
+    
+    .zui-table tbody td {
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width: 1280px) and (min-width: 768px)  {
+  .zui-table .zui-sticky-col {
+        min-width: 175px;
+    }
+      .zui-table thead th {
+        min-width: 180px;
+    }
+}
+/**********package page css end******************/

@@ -275,128 +275,18 @@
                             <tr>
                                 <td style="width: 100%;">
                                     <div class="text" style="padding: 0 2.5em; text-align: center;">
-                                        <h2
-                                            style="width: 100%; float: left; display: inline-block; text-align: center; margin-bottom: 20px;">
-                                            WELCOME
+                                        <h2 style="width: 100%; float: left; display: inline-block; text-align: center; margin-bottom: 20px;">
+                                            Hey <span>{{ $name ?? 'User' }}</span>!!,
                                         </h2>
                                         <p style="float: left; width: 100%; text-align: center; color: #acacac; margin-bottom: 0;" >
-                                            Hey <span>{{ $name ?? 'User' }}</span>,<br />Thanks for registering with
-                                            <span>{{config('constants.BUSINESS.name')}} </span>.  System provide your default password <span style="color: #000;">{{$password}}</span> change it as per your choice.                                          
-                                        </p>
+                                            Payment of amount {{$amount}} is successfully done. You purchaged {{$package_name}} package is valid for {{$package_days}} days                                         
+                                        </p> 
                                     </div>
                                 </td>
                             </tr>
                         </table>
                     </td>
-                </tr>
-
-                <!-- end:tr -->
-                <!-- bottom shipping details -->
-                <tr>
-                    <td style="width: 100%; padding: 1em 0 0 25px;"> 
-                        Your account information is as below :-
-                    </td>
-                </tr>
-                <tr></tr>
-
-                @if (isset($user_type))
-                <tr>
-                    <td class="bg_white" style="padding: 5px 25px; width: 100%;">
-                        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
-                            <tr>
-                                <td style="width: 50%; text-align: left; color: #000;">
-                                    You are
-                                </td>
-                                <td style="width: 50%">
-                                    <p style="float: left; width: 100%; text-align: right; line-height: 1; color: #acacac; margin-bottom: 0; line-height: 1 padding: 0">
-                                        <span style="color: #acacac"> {{$user_type}} </span>
-                                    </p>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                @endif 
-
-                @if (isset($for_type))
-                <tr>
-                    <td class="bg_white" style="padding: 5px 25px; width: 100%;">
-                        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
-                            <tr>
-                                <td style="width: 50%; text-align: left; color: #000;">
-                                    You're looking
-                                </td>
-                                <td style="width: 50%">
-                                    <p
-                                        style="float: left; width: 100%; text-align: right; line-height: 1; color: #acacac; margin-bottom: 0; line-height: 1 padding: 0">
-                                        <span style="color: #acacac"> {{$for_type}} </span>
-                                    </p>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
                 </tr> 
-                @endif 
-                @if (isset($email))
-                <tr>
-                    <td class="bg_white" style="padding: 5px 25px; width: 100%;">
-                        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
-                            <tr>
-                                <td style="width: 50%; text-align: left; color: #000;">
-                                    Email
-                                </td>
-                                <td style="width: 50%">
-                                    <p
-                                        style="float: left; width: 100%; text-align: right; line-height: 1; color: #acacac; margin-bottom: 0; line-height: 1 padding: 0">
-                                        <span style="color: #acacac"> {{$email}} </span>
-                                    </p>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr> 
-                @endif 
-                @if (isset($phone))
-                <tr>
-                    <td class="bg_white" style="padding: 5px 25px; width: 100%;">
-                        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
-                            <tr>
-                                <td style="width: 50%; text-align: left; color: #000;">
-                                    Phone
-                                </td>
-                                <td style="width: 50%">
-                                    <p
-                                        style="float: left; width: 100%; text-align: right; line-height: 1; color: #acacac; margin-bottom: 0; line-height: 1 padding: 0">
-                                        <span style="color: #acacac"> {{$phone}} </span>
-                                    </p>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                @endif 
-                @if (isset($password))
-                <tr>
-                    <td class="bg_white" style="padding: 5px 25px; width: 100%;">
-                        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
-                            <tr>
-                                <td style="width: 50%; text-align: left; color: #000;">
-                                    Password
-                                </td>
-                                <td style="width: 50%">
-                                    <p
-                                        style="float: left; width: 100%; text-align: right; line-height: 1; color: #acacac; margin-bottom: 0; line-height: 1 padding: 0">
-                                        <span style="color: #acacac"> {{$password}} </span>
-                                    </p>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                @endif 
-                <!-- end:tr -->
-               
-
 
                 <tr>
                     <td class="bg_white" style="padding: 10px 25px 10px; width: 100%; border-top: 1px solid #ddd;text-align:center;">

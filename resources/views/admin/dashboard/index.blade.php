@@ -65,58 +65,7 @@
                 </a>
             </div>
         </div>
-        <div class="col-lg-3 col-sm-6 g-6">
-            <div class="card card-border-shadow-info h-100">
-                <a href="{{route('admin.properties')}}" class="card-body">
-                    <div class="d-flex align-items-center mb-2">
-                        <div class="avatar me-4">
-                            <span class="avatar-initial rounded bg-label-info"><i class="bx bx bxs-calendar bx-lg"></i></span>
-                        </div>
-                        <h4 class="mb-0">{{$properties->count()}}</h4>
-                    </div>
-                    <p class="mb-2">Total properties</p>
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-3 col-sm-6 g-6">
-            <div class="card card-border-shadow-success h-100">
-                <a href="{{route('admin.properties', ['status'=>1])}}" class="card-body">
-                    <div class="d-flex align-items-center mb-2">
-                        <div class="avatar me-4">
-                            <span class="avatar-initial rounded bg-label-success"><i class="bx bxs-calendar-check bx-lg"></i></span>
-                        </div>
-                        <h4 class="mb-0">{{$properties->where("status", 1)->count()}}</h4>
-                    </div>
-                    <p class="mb-2">Total active properties </p>
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-3 col-sm-6 g-6">
-            <div class="card card-border-shadow-danger h-100">
-                <a href="{{route('admin.properties', ['status'=>2])}}" class="card-body">
-                    <div class="d-flex align-items-center mb-2">
-                        <div class="avatar me-4">
-                            <span class="avatar-initial rounded bg-label-danger"><i class="bx bxs-calendar-x bx-lg"></i></span>
-                        </div>
-                        <h4 class="mb-0">{{$properties->where("status", 2)->count()}}</h4>
-                    </div>
-                    <p class="mb-2">Total in-active properties</p>
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-3 col-sm-6 g-6">
-            <div class="card card-border-shadow-warning h-100">
-                <a href="{{route('admin.properties', ['status'=>3])}}" class="card-body">
-                    <div class="d-flex align-items-center mb-2">
-                        <div class="avatar me-4">
-                            <span class="avatar-initial rounded bg-label-warning"><i class="bx bx-calendar-event bx-lg"></i></span>
-                        </div>
-                        <h4 class="mb-0">{{$properties->where("status", 3)->count()}}</h4>
-                    </div>
-                    <p class="mb-2">Total sold properties</p>
-                </a>
-            </div>
-        </div>
+        
         <div class="col-lg-3 col-sm-6 g-6">
             <div class="card card-border-shadow-primary h-100">
                 <div class="card-body">
@@ -169,7 +118,114 @@
                 </div>
             </div>
         </div>
+        <div class="col-lg-3 col-sm-6 g-6">
+            <div class="card card-border-shadow-info h-100">
+                <a href="{{route('admin.properties')}}" class="card-body">
+                    <div class="d-flex align-items-center mb-2">
+                        <div class="avatar me-4">
+                            <span class="avatar-initial rounded bg-label-info"><i class="bx bx bxs-calendar bx-lg"></i></span>
+                        </div>
+                        <h4 class="mb-0">{{$properties->count()}}</h4>
+                    </div>
+                    <p class="mb-2">Total properties</p>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 g-6">
+            <div class="card card-border-shadow-success h-100">
+                <a href="{{route('admin.properties', ['status'=>1])}}" class="card-body">
+                    <div class="d-flex align-items-center mb-2">
+                        <div class="avatar me-4">
+                            <span class="avatar-initial rounded bg-label-success"><i class="bx bxs-calendar-check bx-lg"></i></span>
+                        </div>
+                        <h4 class="mb-0">{{$properties->where("status", 1)->count()}}</h4>
+                    </div>
+                    <p class="mb-2">Total active properties </p>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 g-6">
+            <div class="card card-border-shadow-danger h-100">
+                <a href="{{route('admin.properties', ['status'=>2])}}" class="card-body">
+                    <div class="d-flex align-items-center mb-2">
+                        <div class="avatar me-4">
+                            <span class="avatar-initial rounded bg-label-danger"><i class="bx bxs-calendar-x bx-lg"></i></span>
+                        </div>
+                        <h4 class="mb-0">{{$properties->where("status", 2)->count()}}</h4>
+                    </div>
+                    <p class="mb-2">Total in-active properties</p>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 g-6">
+            <div class="card card-border-shadow-warning h-100">
+                <a href="{{route('admin.properties', ['status'=>3])}}" class="card-body">
+                    <div class="d-flex align-items-center mb-2">
+                        <div class="avatar me-4">
+                            <span class="avatar-initial rounded bg-label-warning"><i class="bx bx-calendar-event bx-lg"></i></span>
+                        </div>
+                        <h4 class="mb-0">{{$properties->where("status", 3)->count()}}</h4>
+                    </div>
+                    <p class="mb-2">Total sold properties</p>
+                </a>
+            </div>
+        </div>
+         <div class="col-lg-3 col-sm-6 g-6">
+            <div class="card card-border-shadow-danger h-100">
+                <a href="{{route('admin.properties', ['status'=>0])}}" class="card-body">
+                    <div class="d-flex align-items-center mb-2">
+                        <div class="avatar me-4">
+                            <span class="avatar-initial rounded bg-label-danger"><i class="bx bxs-calendar-x bx-lg"></i></span>
+                        </div>
+                        <h4 class="mb-0">{{$properties->where("status", 0)->count()}}</h4>
+                    </div>
+                    <p class="mb-2">Total declined properties</p>
+                </a>
+            </div>
+        </div>
+        
+        <div class="col-lg-3 col-sm-6 g-6 d-none">
+            <div class="card card-border-shadow-info h-100">
+                <a href="{{route('admin.properties')}}" class="card-body">
+                    <div class="d-flex align-items-center mb-2">
+                        <div class="avatar me-4">
+                            <span class="avatar-initial rounded bg-label-info"><i class="bx bx bxs-calendar bx-lg"></i></span>
+                        </div>
+                        {{-- <h4 class="mb-0">{{$properties->count()}}</h4> --}}
+                    </div>
+                    {{-- <p class="mb-2">Total properties</p> --}}
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 g-6 d-none">
+            <div class="card card-border-shadow-success h-100">
+                <a href="{{route('admin.properties', ['status'=>1])}}" class="card-body">
+                    <div class="d-flex align-items-center mb-2">
+                        <div class="avatar me-4">
+                            <span class="avatar-initial rounded bg-label-success"><i class="bx bxs-calendar-check bx-lg"></i></span>
+                        </div>
+                        {{-- <h4 class="mb-0">{{$properties->where("status", 1)->count()}}</h4> --}}
+                    </div>
+                    {{-- <p class="mb-2">Total active properties </p> --}}
+                </a>
+            </div>
+        </div>
+       
+        <div class="col-lg-3 col-sm-6 g-6 d-none">
+            <div class="card card-border-shadow-warning h-100">
+                <a href="{{route('admin.properties', ['status'=>3])}}" class="card-body">
+                    <div class="d-flex align-items-center mb-2">
+                        <div class="avatar me-4">
+                            <span class="avatar-initial rounded bg-label-warning"><i class="bx bx-calendar-event bx-lg"></i></span>
+                        </div>
+                        {{-- <h4 class="mb-0">{{$properties->where("status", 3)->count()}}</h4> --}}
+                    </div>
+                    {{-- <p class="mb-2">Total sold properties</p> --}}
+                </a>
+            </div>
+        </div>
         <!--/ Card Border Shadow -->
+        <div class="clearfix"></div>
         <!-- Properties statistics-->
         <div class="col-md-6 col-lg-6 order-2 mb-4 g-6">
             <div class="card h-100">

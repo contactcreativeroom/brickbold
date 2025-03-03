@@ -119,16 +119,18 @@ class AuthController extends Controller
         
             if ($user) {
                 Auth::guard('user')->login($user);
-                $details = array(
-                    'logo' => Helper::getLogo(),
-                    'user_type'=> $request->user_type,
-                    'for_type'=> $request->for_type,
-                    'name'=>$request->name,
-                    'email'=>$request->email,
-                    'phone'=>$request->phone,
-                    'password'=>$password,
-                );
-                dispatch(new \App\Jobs\RegisterQueue($details));
+                if(isset($request->email) && $request->email !=''){
+                    $details = array(
+                        'logo' => Helper::getLogo(),
+                        'user_type'=> $request->user_type,
+                        'for_type'=> $request->for_type,
+                        'name'=>$request->name,
+                        'email'=>$request->email,
+                        'phone'=>$request->phone,
+                        'password'=>$password,
+                    );
+                    dispatch(new \App\Jobs\RegisterQueue($details));
+                }
                 return response()->json([
                     'success' => true,
                     'redirect_url' => Helper::redirectRouteAfterLogin(),
@@ -185,7 +187,9 @@ class AuthController extends Controller
                 'message' => 'Invalid credentials. Please try again.',
             ], 401);
         }
-    
+        if ($request->has('redirect')) {
+            session(['redirect' => $request->input('redirect')]);
+        }
         return view('user.auth.login');
     }
 
@@ -311,7 +315,7 @@ class AuthController extends Controller
         return response()->json(['success' => true, 'name' => $name, 'email' => $email, 'property_id' => $property_id, 'property_slug' => $property_slug, 'mobile' => $phone, 'message' => 'OTP sent successfully to phone .'.$phone.'. It is valid for 10 minute only.']);
     }
 
-    public function otpVerifyPostPropertyEnquiry(Request $request){ 
+    public function otpVerifyPostPropertyEnquiry(Request $request){
        $result = $this->verifyOTP($request);
         if ($result instanceof \Illuminate\Http\JsonResponse) {
             $result = $result->getData(true);
@@ -337,7 +341,16 @@ class AuthController extends Controller
                     'phone' => $request->mobile,
                     'status' => 1,
                 ]); 
-                
+
+                $details = array(
+                    'logo' => Helper::getLogo(),
+                    'name'=> $property?->user?->name,
+                    'email'=>$property?->user?->email,
+                    'property_name'=>$property->title,
+                    'property_url'=> route('property', $property->slug),
+                 );
+                dispatch(new \App\Jobs\PropertyEnquiryQueue($details));
+
                 Helper::toastMsg(true, 'Thank you for reaching out! Your enquiry has been successfully submitted. One of our real estate experts will get in touch with you soon.');
                 return response()->json(['success' => true, 'message' => 'Thank you for reaching out! Your enquiry has been successfully submitted. One of our real estate experts will get in touch with you soon.']);
             }
@@ -424,6 +437,19 @@ class AuthController extends Controller
                 ], 422);
             }   
             $user = User::create(array_merge(['phone' => $request->mobile], $dataInsert));
+            if(isset($request->email) && $request->email !=''){
+                $details = array(
+                    'logo' => Helper::getLogo(),
+                    'user_type'=> $user->user_type,
+                    'for_type'=> $user->for_type,
+                    'name'=>$user->name,
+                    'email'=>$user->email,
+                    'phone'=>$user->phone,
+                    'password'=>$password,
+                );
+                dispatch(new \App\Jobs\RegisterQueue($details));
+            }
+            
         }
     
         Auth::guard('user')->login($user);

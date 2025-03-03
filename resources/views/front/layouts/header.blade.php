@@ -183,7 +183,7 @@
                             </ul>
                         </nav>
                         <div class="header-right">
-                            <div class="phone-number">
+                            {{-- <div class="phone-number">
                                 <div class="icons">
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -195,7 +195,7 @@
 
                                 </div>
                                 <p>{{ data_get($config, 'phone', '') }}</p>
-                            </div>
+                            </div> --}}
                             @auth('user')
                             <div class="box-user tf-action-btns">
                                 <div class="user ">
@@ -417,7 +417,8 @@
                                         Logout</a>
                                 </div>
                             </div>
-                            @else                             
+                            @else     
+                                <a href="{{route('login')}}" class="fw-5 text-1 login-menu" >Login </a>                
                                 <div class="btn-add">
                                     <a class="tf-btn style-border pd-23" href="{{route('register')}}"  >
                                         Post Property

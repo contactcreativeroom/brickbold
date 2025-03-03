@@ -44,9 +44,9 @@ return [
     ],
 
     'TYPE' => [
-        'apartment' =>  'Apartment',
+        'residential' =>  'Residential',
         'commercial' =>  'Commercial',
-        'residential' =>  'Residential'
+        'apartment' =>  'Apartment',
     ],
     
 
@@ -66,7 +66,6 @@ return [
             'industrial-shed' => 'Industrial Shed',
             'shop-cum-office' => 'shop-cum-office',
             'shop-cum-flat' => 'Shop-Cum-Flat',
-            'townhouse' => 'Townhouse',
             'pg' => 'PG'
         ], 
         'residential' => [
@@ -98,7 +97,6 @@ return [
         'industrial-shed' => 'Industrial Shed',
         'shop-cum-office' => 'shop-cum-office',
         'shop-cum-flat' => 'Shop-Cum-Flat',
-        'townhouse' => 'Townhouse',
     ],
     'LOOP5' => ['1','2','3','4','5','5+'],
     'FACING' => ['East','West','North','South','North-East','North-West','South-East','South-West'],

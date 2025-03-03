@@ -56,7 +56,6 @@
                             </div>
                             <div class="col-md-3 user_role">
                                 <select class="form-control form-select nice-select" name="property_type">
-                                    <option value="">Property Type</option>
                                     @foreach (config('constants.TYPE') as $key=>$value)
                                         <option value="{{$value}}" {{ old('property_type', request('property_type')) == $value ? 'selected' : '' }}  >{{$value}}</option>
                                     @endforeach
@@ -70,8 +69,8 @@
                         </div>
                         
                     </form>
-                </div>
-                <div class="widget-box-2-- style-2 package">
+                </div> 
+                {{-- <div class="widget-box-2-- style-2 package">
                     <div class="row">
                         @auth('user') 
                             @php
@@ -116,10 +115,72 @@
                         {{ $rows->links('vendor.pagination.frontend-bootstrap-4') }}
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </section>
         <!-- section-faq -->
+        {{-- <h2 class="accordion-header text-center mb-30">
+            <a href="#" class="collapsed tf-btn style-border package-buy-btn" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne"> Compare Packages <i class="icon-CaretDown"></i></a> 
+        </h2> --}}
+
+        <!-- section-compare -->
+        {{-- <section id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#compare-packages"> --}}
+        <section >
+             <div id="container" class="zui-scroller table-responsive container">
+                <table class="zui-table">
+                    <thead>
+                        <tr>
+                            {{-- <th class="zui-sticky-col">&nbsp;</th> --}}
+                            <th class="zui-sticky-col align-middle">
+                                <h4 class="text-color-primary">Advertising Packages</h4>
+                                <p class="text-sub fw-6">Here are Packages that will best suit your need.</p>
+                            </th>
+                            @foreach ($rows as $k=>$row)
+                            <th class="table-col {{ ($k%2==0)? 'pk-bg-red' : ''}}">
+                                <h3 class="sub-title  fw-7">{{$row->name}}</h3>
+                                {{-- <p class="text-sub fw-6 ">Upgrade your {{$row->profile}} account to the {{$row->name}} package.</p> --}}
+                                <div class="title-price mb-3">
+                                    <div class="month fw-7 text-color-primary"> <span class="text-decoration-line-through">{{ config('constants.CURRENCIES.symbol'). $row->price}}</span></div>
+                                    <h2 class="">{{ config('constants.CURRENCIES.symbol'). $row->grand_price}} </h2>
+                                </div>
+                                {{-- <p class="">Get benefits for {{$row->property_type}} {{$row->type}} properties account for {{$row->days}} days.</p> --}}
+                                @auth('user')
+                                    <button class="tf-btn bg-color-primary  package-buy-btn" onclick="payNow('{{ $row->id }}')">Buy</button> 
+                                @endauth
+                                @guest('user')
+                                    <a href="{{ route('login', ['redirect' => route('packages')]) }}" class="tf-btn bg-color-primary package-buy-btn">Buy</a>                                        
+                                @endguest
+                            </th>
+                            @endforeach
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (isset($rows[0]->fields))
+                            @foreach ($rows[0]->fields as $key => $field)
+                                <tr>
+                                    <td class="zui-sticky-col {{ ($key%2==1)? 'zui-stripe-row' : ''}}">{{$field->heading}}</td>                                   
+                                    @foreach ($rows as $row)
+                                        @php
+                                            $d= $row->fields->where('heading', 'like', $field->heading)->first();
+                                        @endphp
+                                        <td><strong>
+                                        @if (strtolower($d?->value) == 'yes')
+                                            <img src="{{URL('images/table-chk.webp')}}" />
+                                        @elseif(strtolower($d?->value) == 'no')
+                                            <img src="{{URL('images/table-cross.png')}}" />
+                                        @else
+                                            {{$d?->value}}
+                                        @endif 
+                                        </strong></td>
+                                    @endforeach  
+                                </tr>
+                            @endforeach  
+                        @endif                                                
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <!-- section-compare -->
     </div>
     <!-- /main-content -->
 @endsection

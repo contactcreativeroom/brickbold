@@ -90,6 +90,18 @@
                         data-mobile-sm="3" data-mobile="2" data-space="15" data-space-md="30" data-space-lg="30">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
+                                <a href="{{ route('properties', ['property_detail' => 'house']) }}" class="categories-item">
+                                    <div class="icon-box">
+                                        <i class="icon icon-townhouse">
+                                        </i>
+                                    </div>
+                                    <div class="content text-center">
+                                        <h5>Townhouse</h5>
+                                        <p class="mt-4 text-1">{{$properties->where('property_detail', 'house')->count()}} Properties</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="swiper-slide">
                                 <a href="{{ route('properties', ['type' => 'apartment']) }}" class="categories-item">
                                     <div class="icon-box">
                                         <i class="icon icon-apartment1">
@@ -134,18 +146,6 @@
                                     <div class="content text-center">
                                         <h5>Office</h5>
                                         <p class="mt-4 text-1">{{$properties->where('property_detail', 'office')->count()}} Properties</p>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="swiper-slide">
-                                <a href="{{ route('properties', ['property_detail' => 'townhouse']) }}" class="categories-item">
-                                    <div class="icon-box">
-                                        <i class="icon icon-townhouse">
-                                        </i>
-                                    </div>
-                                    <div class="content text-center">
-                                        <h5>Townhouse</h5>
-                                        <p class="mt-4 text-1">{{$properties->where('property_detail', 'townhouse')->count()}} Properties</p>
                                     </div>
                                 </a>
                             </div>

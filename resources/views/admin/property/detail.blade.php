@@ -8,171 +8,165 @@
             <div class="tf-container">
                 <div class="row">
                     <div class="col-xl-12 col-lg-12">
-                        <div class="swiper sw-thumbs-sigle " data-preview="1" data-space="0" data-speed="1000">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <a href="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" data-fancybox="gallery" class="image-wrap relative d-block">
-                                        <img class="lazyload cover-img" data-src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}"
-                                            src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" alt="" style="height:500px;">
-                                        <div class="tag-property ">
-                                            <div class="icon">
-                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M1.875 13.125L6.17417 8.82583C6.34828 8.65172 6.55498 8.51361 6.78246 8.41938C7.00995 8.32515 7.25377 8.27665 7.5 8.27665C7.74623 8.27665 7.99005 8.32515 8.21754 8.41938C8.44502 8.51361 8.65172 8.65172 8.82583 8.82583L13.125 13.125M11.875 11.875L13.0492 10.7008C13.2233 10.5267 13.43 10.3886 13.6575 10.2944C13.885 10.2001 14.1288 10.1516 14.375 10.1516C14.6212 10.1516 14.865 10.2001 15.0925 10.2944C15.32 10.3886 15.5267 10.5267 15.7008 10.7008L18.125 13.125M3.125 16.25H16.875C17.2065 16.25 17.5245 16.1183 17.7589 15.8839C17.9933 15.6495 18.125 15.3315 18.125 15V5C18.125 4.66848 17.9933 4.35054 17.7589 4.11612C17.5245 3.8817 17.2065 3.75 16.875 3.75H3.125C2.79348 3.75 2.47554 3.8817 2.24112 4.11612C2.0067 4.35054 1.875 4.66848 1.875 5V15C1.875 15.3315 2.0067 15.6495 2.24112 15.8839C2.47554 16.1183 2.79348 16.25 3.125 16.25ZM11.875 6.875H11.8817V6.88167H11.875V6.875ZM12.1875 6.875C12.1875 6.95788 12.1546 7.03737 12.096 7.09597C12.0374 7.15458 11.9579 7.1875 11.875 7.1875C11.7921 7.1875 11.7126 7.15458 11.654 7.09597C11.5954 7.03737 11.5625 6.95788 11.5625 6.875C11.5625 6.79212 11.5954 6.71263 11.654 6.65403C11.7126 6.59542 11.7921 6.5625 11.875 6.5625C11.9579 6.5625 12.0374 6.59542 12.096 6.65403C12.1546 6.71263 12.1875 6.79212 12.1875 6.875Z"
-                                                        stroke="white" stroke-width="1.5" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                </svg>
-
-                                            </div>
-                                            <div class="text-16 text-white fw-6 lh-20">1/{{$row?->images->count()}} Photos</div>
-                                        </div>
-                                    </a>
+                        <div class="wg-property box-overview">
+                            <div class="heading">
+                                <div class="flex justify-between ">
+                                    <div class="title text-11 fw-6 text-color-heading">
+                                        {{ App\Helper\Helper::propertyTitle($row)}}
+                                    </div>
+                                    <div class="price text-11 fw-6 text-color-heading">
+                                        {{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($row->price)}}
+                                        {{-- <span class="h5 lh-30 fw-4 text-color-default">/month</span> --}}
+                                    </div>
                                 </div>
-                                @if (isset($row->images))   
-                                @foreach($row->images as $imageKey => $imageVal)
-                                <div class="swiper-slide">
-                                    <a href="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $imageVal->image) }}" data-fancybox="gallery" class="image-wrap d-block">
-                                        <img class="lazyload cover-img" data-src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $imageVal->image) }}" src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $imageVal->image) }}" alt="" style="height:500px;">
-                                    </a>
-                                </div> 
-                                @endforeach
-                                @endif
-                            </div>
-                            <div class="swiper-button-prev sw-button style-2 sw-thumbs-prev">
-                                <i class="icon-arrow-left-1"></i>
-                            </div>
-                            <div class="swiper-button-next sw-button style-2 sw-thumbs-next">
-                                <i class="icon-arrow-right-1"></i>
-                            </div>
-                        </div>
-                        <div class="wg-property box-overview style-2">
-                            <div class="heading flex justify-between">
-                                <div class="title text-11 fw-6 text-color-heading">
-                                    {{ App\Helper\Helper::propertyTitle($row)}}
-                                </div>
-                                <div class="price text-11 fw-6 text-color-heading">
-                                    {{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($row->price)}}
-                                    {{-- <span class="h5 lh-30 fw-4 text-color-default">/month</span> --}}
-                                </div>
-                            </div>
-                            <div class="info flex justify-between position-relative">
-                                <div class="feature">
-                                    <p class="location text-1 flex items-center gap-10">
-                                        <i class="icon-location"></i>{{$row->location}}, {{$row->state}}, {{$row->city}} {{$row->zip_code}}
+                                <div class="feature position-relative mt-3">
+                                    <p class="location text-1 flex items-center gap-10 pe-5">
+                                        {{-- <i class="icon-location"></i> --}}
+                                        {{$row->location}}, {{$row->state}}, {{$row->city}} {{$row->zip_code}}
                                     </p>
-                                    <ul class="meta-list flex">
+                                    {{-- <ul class="meta-list flex">
                                         <li class="text-1 flex"><i class="icon-bed"></i> <span>{{$row->bedroom}}</span>Bed</li>
                                         <li class="text-1 flex"><i class="icon-bath"></i> <span>{{$row->bathroom}}</span>Bath</li>
                                         <li class="text-1 flex"><i class="icon-sqft"></i> <span>{{$row->plot_area}}</span>{{$row->plot_type? $row->plot_type : 'sqft'}}</li>
-                                    </ul>
-                                </div>                                
-                                
-                            </div>
-                            <div class="info-detail ">
-                                <div class="wrap-box">
-                                    <div class="box-icon">
-                                        <div class="icons">
-                                            <i class="icon-HouseLine"></i>
-                                        </div>
-                                        <div class="content">
-                                            <div class="text-4 text-color-default">ID:</div>
-                                            <div class="text-1 text-color-heading">{{ $row->uid }}</div>
-                                        </div>
-                                    </div>
-                                    <div class="box-icon">
-                                        <div class="icons">
-                                            <i class="icon-Crop"></i>
-                                        </div>
-                                        <div class="content">
-                                            <div class="text-4 text-color-default">Land Size:</div>
-                                            <div class="text-1 text-color-heading">{{$row->plot_area}} {{$row->plot_type? $row->plot_type : 'sqft'}}</div>
-                                        </div>
-                                    </div>
-                                    
+                                    </ul> --}}
                                 </div>
-                                <div class="wrap-box">
-                                    <div class="box-icon">
-                                        <div class="icons">
-                                            <i class="icon-SlidersHorizontal"></i>
-                                        </div>
-                                        <div class="content">
-                                            <div class="text-4 text-color-default">Type:</div>
-                                            <div class="text-1 text-color-heading">{{config('constants.TYPE')[$row->type]}}</div>
-                                        </div>
-                                    </div>
-                                    <div class="box-icon">
-                                        <div class="icons">
-                                            <i class="icon-Garage-1"></i>
-                                        </div>
-                                        <div class="content">
-                                            <div class="text-4 text-color-default">Builtup Area:</div>
-                                            <div class="text-1 text-color-heading">{{$row->builtup_area}} sqft</div>
-                                        </div>
-                                    </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-6">
+                                    <div class="swiper br-16 sw-thumbs-sigle mb-3" data-preview="1" data-space="0" data-speed="1000">
+                                        <div class="swiper-wrapper">
+                                            <div class="swiper-slide">
+                                                <a href="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" data-fancybox="gallery" class="image-wrap relative d-block">
+                                                    <img class="lazyload cover-img" data-src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}"
+                                                        src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" alt="" style="height:300px;">
+                                                    <div class="tag-property ">
+                                                        <div class="icon">
+                                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M1.875 13.125L6.17417 8.82583C6.34828 8.65172 6.55498 8.51361 6.78246 8.41938C7.00995 8.32515 7.25377 8.27665 7.5 8.27665C7.74623 8.27665 7.99005 8.32515 8.21754 8.41938C8.44502 8.51361 8.65172 8.65172 8.82583 8.82583L13.125 13.125M11.875 11.875L13.0492 10.7008C13.2233 10.5267 13.43 10.3886 13.6575 10.2944C13.885 10.2001 14.1288 10.1516 14.375 10.1516C14.6212 10.1516 14.865 10.2001 15.0925 10.2944C15.32 10.3886 15.5267 10.5267 15.7008 10.7008L18.125 13.125M3.125 16.25H16.875C17.2065 16.25 17.5245 16.1183 17.7589 15.8839C17.9933 15.6495 18.125 15.3315 18.125 15V5C18.125 4.66848 17.9933 4.35054 17.7589 4.11612C17.5245 3.8817 17.2065 3.75 16.875 3.75H3.125C2.79348 3.75 2.47554 3.8817 2.24112 4.11612C2.0067 4.35054 1.875 4.66848 1.875 5V15C1.875 15.3315 2.0067 15.6495 2.24112 15.8839C2.47554 16.1183 2.79348 16.25 3.125 16.25ZM11.875 6.875H11.8817V6.88167H11.875V6.875ZM12.1875 6.875C12.1875 6.95788 12.1546 7.03737 12.096 7.09597C12.0374 7.15458 11.9579 7.1875 11.875 7.1875C11.7921 7.1875 11.7126 7.15458 11.654 7.09597C11.5954 7.03737 11.5625 6.95788 11.5625 6.875C11.5625 6.79212 11.5954 6.71263 11.654 6.65403C11.7126 6.59542 11.7921 6.5625 11.875 6.5625C11.9579 6.5625 12.0374 6.59542 12.096 6.65403C12.1546 6.71263 12.1875 6.79212 12.1875 6.875Z"
+                                                                    stroke="white" stroke-width="1.5" stroke-linecap="round"
+                                                                    stroke-linejoin="round" />
+                                                            </svg>
 
-                                    
+                                                        </div>
+                                                        <div class="text-16 text-white fw-6 lh-20">1/{{$row?->images->count()}} Photos</div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            @if (isset($row->images))   
+                                            @foreach($row->images as $imageKey => $imageVal)
+                                            <div class="swiper-slide">
+                                                <a href="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $imageVal->image) }}" data-fancybox="gallery" class="image-wrap d-block">
+                                                    <img class="lazyload cover-img" data-src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $imageVal->image) }}" src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $imageVal->image) }}" alt="" style="height:300px;">
+                                                </a>
+                                            </div> 
+                                            @endforeach
+                                            @endif
+                                        </div>
+                                        <div class="swiper-button-prev sw-button style-2 sw-thumbs-prev">
+                                            <i class="icon-arrow-left-1"></i>
+                                        </div>
+                                        <div class="swiper-button-next sw-button style-2 sw-thumbs-next">
+                                            <i class="icon-arrow-right-1"></i>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="wrap-box">
-                                    <div class="box-icon">
-                                        <div class="icons">
-                                            <i class="icon-Bed-2"></i>
+                                <div class="col-xl-6 col-lg-6">
+                                    <div class="info-detail ">
+                                        <div class="wrap-box">
+                                            <div class="box-icon">
+                                                <div class="icons">
+                                                    <i class="icon-HouseLine"></i>
+                                                </div>
+                                                <div class="content">
+                                                    <div class="text-4 text-color-default">ID:</div>
+                                                    <div class="text-1 text-color-heading">{{ $row->uid }}</div>
+                                                </div>
+                                            </div>
+                                            <div class="box-icon ">
+                                                <div class="icons">
+                                                    <i class="icon-Crop"></i>
+                                                </div>
+                                                <div class="content">
+                                                    <div class="text-4 text-color-default">Land Size:</div>
+                                                    <div class="text-1 text-color-heading">{{$row->plot_area}} {{$row->plot_type? $row->plot_type : 'sqft'}}</div>
+                                                </div>
+                                            </div>
+                                            
                                         </div>
-                                        <div class="content">
-                                            <div class="text-4 text-color-default">Bedrooms:</div>
-                                            <div class="text-1 text-color-heading">{{$row->bedroom}} Rooms</div>
+                                        <div class="wrap-box">
+                                            <div class="box-icon">
+                                                <div class="icons">
+                                                    <i class="icon-SlidersHorizontal"></i>
+                                                </div>
+                                                <div class="content">
+                                                    <div class="text-4 text-color-default">Type:</div>
+                                                    <div class="text-1 text-color-heading">{{config('constants.TYPE')[$row->type]}}</div>
+                                                </div>
+                                            </div>
+                                            <div class="box-icon">
+                                                <div class="icons">
+                                                    <i class="icon-Garage-1"></i>
+                                                </div>
+                                                <div class="content">
+                                                    <div class="text-4 text-color-default">Builtup Area:</div>
+                                                    <div class="text-1 text-color-heading">{{$row->builtup_area}} sqft</div>
+                                                </div>
+                                            </div>
+
+                                            
                                         </div>
-                                    </div>
-                                    <div class="box-icon">
-                                        <div class="icons">
-                                            <i class="icon-Ruler"></i>
+                                        <div class="wrap-box">
+                                            <div class="box-icon">
+                                                <div class="icons">
+                                                    <i class="icon-Bed-2"></i>
+                                                </div>
+                                                <div class="content">
+                                                    <div class="text-4 text-color-default">Bedrooms:</div>
+                                                    <div class="text-1 text-color-heading">{{$row->bedroom}} Rooms</div>
+                                                </div>
+                                            </div>
+                                            <div class="box-icon">
+                                                <div class="icons">
+                                                    <i class="icon-Ruler"></i>
+                                                </div>
+                                                <div class="content">
+                                                    <div class="text-4 text-color-default">Carpet Area</div>
+                                                    <div class="text-1 text-color-heading">{{$row->carpet_area}} sqft</div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="content">
-                                            <div class="text-4 text-color-default">Carpet Area</div>
-                                            <div class="text-1 text-color-heading">{{$row->carpet_area}} sqft</div>
+                                        <div class="wrap-box">
+                                            <div class="box-icon">
+                                                <div class="icons">
+                                                    <i class="icon-Bathtub"></i>
+                                                </div>
+                                                <div class="content">
+                                                    <div class="text-4 text-color-default">Bathrooms:</div>
+                                                    <div class="text-1 text-color-heading">{{$row->bathroom}} Rooms</div>
+                                                </div>
+                                            </div>
+                                            <div class="box-icon">
+                                                <div class="icons">
+                                                    <i class="icon-Hammer"></i>
+                                                </div>
+                                                <div class="content">
+                                                    <div class="text-4 text-color-default">Year Built:</div>
+                                                    <div class="text-1 text-color-heading">{{ config('constants.BUILD_YEAR')[$row->build_year] ?? '' }}</div>
+                                                </div>
+                                            </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
-                                <div class="wrap-box">
-                                    <div class="box-icon">
-                                        <div class="icons">
-                                            <i class="icon-Bathtub"></i>
-                                        </div>
-                                        <div class="content">
-                                            <div class="text-4 text-color-default">Bathrooms:</div>
-                                            <div class="text-1 text-color-heading">{{$row->bathroom}} Rooms</div>
-                                        </div>
-                                    </div>
-                                    <div class="box-icon">
-                                        <div class="icons">
-                                            <i class="icon-Hammer"></i>
-                                        </div>
-                                        <div class="content">
-                                            <div class="text-4 text-color-default">Year Built:</div>
-                                            <div class="text-1 text-color-heading">{{ config('constants.BUILD_YEAR')[$row->build_year] ?? '' }}</div>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                            </div>
+                            </div>  
                         </div>
-                        @if ($row->video_link)
-                        <div class=" wg-property video spacing-2">
-                            <div class="wg-title text-11 fw-6 text-color-heading">
-                                Video
-                            </div>
-                            <div class="widget-video">
-                                <img class="lazyload" data-src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}"
-                                    src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" alt="">
-                                <a href="{{$row->video_link}}" class="popup-youtube">
-                                    <i class="icon-play"></i></a>
-                            </div>
-                        </div>
-                        @endif
+                        
                         
                         <div class="wg-property box-property-detail  spacing-1">
                             <div class="wg-title text-11 fw-6 text-color-heading text-nowrap">
-                                Property Details <span ><h6 class="d-inline"> {{$row?->user?->user_type? '( '.$row?->user?->user_type .' )' :'' }} </h6></span>
+                                Property Details 
                             </div>
                             <div class="content">
                                 <p class="description text-1 mb-10">{{$row->description}}</p>
@@ -285,19 +279,44 @@
                             <div class="wg-title text-11 fw-6 text-color-heading">
                                 Addtional Room
                             </div>
-                            
+                            @php
+                                $additionals = explode(',', $row->additional) ;
+                                $boxCountAddit = 3;
+                                $boxesAddit = array_fill(0, $boxCountAddit, []);
+                                foreach ($additionals as $index => $additional) {
+                                    $boxIndex = $index % $boxCountAddit;
+                                    $boxesAddit[$boxIndex][] = trim($additional);
+                                }
+                            @endphp
                             <div class="wrap-feature">
-                                <div class="box-feature">
-                                    <ul>
-                                    @foreach (explode(',', $row->additional) as $addtional)
-                                        <li class="feature-item">
-                                            {{ $addtional }}
-                                        </li>
-                                    @endforeach 
-                                    </ul>
-                                </div> 
+                                @foreach ($boxesAddit as $box)
+                                    <div class="box-feature">
+                                        <ul>
+                                            @foreach ($box as $additional)
+                                                <li class="feature-item">
+                                                    {{ $additional }}
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div> 
+
+                        @if ($row->video_link)
+                        <div class=" wg-property video spacing-2">
+                            <div class="wg-title text-11 fw-6 text-color-heading">
+                                Video
+                            </div>
+                            <div class="widget-video">
+                                <img class="lazyload" data-src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}"
+                                    src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" alt="">
+                                <a href="{{$row->video_link}}" class="popup-youtube">
+                                    <i class="icon-play"></i></a>
                             </div>
                         </div>
+                        @endif
+
                         <div class="wg-property single-property-map spacing-9">
                             <div class="wg-title text-11 fw-6 text-color-heading">Get Direction</div>                            
                             <iframe class="map" 

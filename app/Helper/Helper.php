@@ -781,6 +781,10 @@ class Helper
     public static function redirectRouteAfterLogin(){
         if (Auth::guard('user')->check()) {
             $user = Auth::guard('user')->user();
+            if (session()->has('redirect')) {
+                $redirectUrl = session()->pull('redirect');
+                return route('packages');
+            }
             $propertyCount = $user->Properties->count();
             if($propertyCount > 0){
                 return route('user.properties');

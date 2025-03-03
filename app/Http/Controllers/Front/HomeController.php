@@ -117,6 +117,8 @@ class HomeController extends Controller
         if ($request->filled('property_type')) {
             $property_type = $request->property_type; 
             $packages->where('property_type', $property_type) ;
+        } else{
+            $packages->where('property_type', 'Residential') ;
         }
 
         $packages = $packages->paginate($this->pagerecords)->appends([
@@ -125,6 +127,7 @@ class HomeController extends Controller
             'property_type' => $request->get('property_type')
         ]); 
         //$packages =  Package::where('status', 1)->latest()->get(); 
+        //return $headings = $packages[0]->fields;
         return view($this->prefix.'.packages',['rows' => $packages]);
     }
 
