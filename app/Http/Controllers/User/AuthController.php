@@ -381,26 +381,9 @@ class AuthController extends Controller
         );
         
         //send otp code
-        $username = config('constants.OTP_LOGIN.USERNAME');
-        $password = config('constants.OTP_LOGIN.PASSWORD');
-        $headerName = config('constants.OTP_LOGIN.HEADER_NAME');
-        $templateId = config('constants.OTP_LOGIN.TEMPLATED_ID');
+        $templateId = config('constants.MOBILE_SMS.TEMPLATED_ID_OTP');
         $message = "Your OTP for www.brickbold.com is ".$otp.". Enter this code to verify your account and access your real estate listings. It's valid for 10 minutes. BRKBLD";
-
-        $ch = curl_init('https://www.textguru.in/api/v22.0/?');
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
-            'username' => $username,
-            'password' => $password,
-            'source'   => $headerName,
-            'dmobile'  => $mobile,
-            'dlttempid'=> $templateId,
-            'message'  => $message,
-        ]));
-        //curl_setopt($ch, CURLOPT_POSTFIELDS, "username=$username&password=$password&source=$headerName&dmobile=$mobile&dlttempid=$templateId&message=$message");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
-        $data = curl_exec($ch); 
-        curl_close($ch);           
+        $data =  Helper::sentSMS($mobile, $message, $templateId);          
         return $data ;          
     }
 

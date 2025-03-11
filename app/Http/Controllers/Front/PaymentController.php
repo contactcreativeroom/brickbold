@@ -113,6 +113,12 @@ class PaymentController extends Controller
                 'status' => 1,
             ]);
             $package = Package::find($request->package_id);
+            if ($user->phone) {
+                $mobile = $user->phone;
+                $templateId = config('constants.MOBILE_SMS.TEMPLATED_ID_PAYMENT');
+                $message = "Hi, ".$user->name." your payment has been successfully processed. Your package is activated. Brickbold ";
+                Helper::sentSMS($mobile, $message, $templateId);
+            }
             if($user->email){
                 $details = array(
                     'logo' => Helper::getLogo(),
@@ -130,13 +136,24 @@ class PaymentController extends Controller
             $order = Order::where('razorpay_order_id', $request->razorpay_order_id)->first();
             $failedAmount = $order ? $order->grand_price : 0;
 
-            $details = array(
-                'logo' => Helper::getLogo(),
-                'name'=> $user->name,
-                'amount'=> config('constants.CURRENCIES.symbol').$failedAmount,
-                'error'=>$e->getMessage(),
-             );
-            dispatch(new \App\Jobs\PaymentFail($details));
+            if ($user->phone) {
+                $mobile = $user->phone;
+                $templateId = config('constants.MOBILE_SMS.TEMPLATED_ID_PAYMENT_FAIL');
+                $message = "Hi! We were unable to process your payment on Brickbold. Please check your payment details and try again. Visit ".route('packages');
+                Helper::sentSMS($mobile, $message, $templateId);
+            }
+            Helper::sentSMS($mobile, $message, $templateId);
+
+            if($user->email){
+                $details = array(
+                    'logo' => Helper::getLogo(),
+                    'name'=> $user->name,
+                    'email'=> $user->email,
+                    'amount'=> config('constants.CURRENCIES.symbol').$failedAmount,
+                    'error'=>$e->getMessage(),
+                );
+                dispatch(new \App\Jobs\PaymentFail($details));
+            }
             return response()->json(['success' => false, 'message' => 'Payment failed', 'error' => $e->getMessage()]);
         }
     }

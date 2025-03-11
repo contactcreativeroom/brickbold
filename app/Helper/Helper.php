@@ -833,4 +833,30 @@ class Helper
         Helper::toastMsg(false, "Buy a buyer package to get the Owner's details");
         return false;
     }
+
+
+    public static function sentSMS($mobile="", $message="", $templateId=""){
+        if($mobile !="" && $message !="" && $templateId !=""){
+            //send otp code
+            $username = config('constants.MOBILE_SMS.USERNAME');
+            $password = config('constants.MOBILE_SMS.PASSWORD');
+            $headerName = config('constants.MOBILE_SMS.HEADER_NAME');
+            
+            $ch = curl_init('https://www.textguru.in/api/v22.0/?');
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
+                'username' => $username,
+                'password' => $password,
+                'source'   => $headerName,
+                'dmobile'  => $mobile,
+                'dlttempid'=> $templateId,
+                'message'  => $message,
+            ]));
+            //curl_setopt($ch, CURLOPT_POSTFIELDS, "username=$username&password=$password&source=$headerName&dmobile=$mobile&dlttempid=$templateId&message=$message");
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+            $data = curl_exec($ch); 
+            curl_close($ch);           
+            return $data ; 
+        }
+    }
 }

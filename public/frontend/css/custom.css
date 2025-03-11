@@ -1,22 +1,25 @@
 @media (max-width: 1093px) {
-    #modalRegister .grid-layout-2 { 
-        grid-template-columns: repeat(1, 1fr) !important; 
+    #modalRegister .grid-layout-2 {
+        grid-template-columns: repeat(1, 1fr) !important;
     }
-    .single-property-map .info-map{
+
+    .single-property-map .info-map {
         grid-template-columns: auto !important;
     }
 
-    .info-detail .wrap-box{
+    .info-detail .wrap-box {
         width: 135px !important;
     }
 }
+
 @media (min-width: 991px) and (max-width: 1200px) {
     .navigation li a {
         font-size: 13px;
     }
 }
-@media (min-width: 800px)  {
-    .wd-250{
+
+@media (min-width: 800px) {
+    .wd-250 {
         width: 250px;
     }
 }
@@ -24,21 +27,25 @@
 
 
 @media (max-width: 767px) {
-    .icon-input{ 
-        top: 21% !important; 
+    .icon-input {
+        top: 21% !important;
     }
-    .page-layout .footer-dashboard, .page-layout .footer-dashboard .list{
-        display: block !important; 
-        text-align: center !important; 
-    } 
 
-    .page-layout .footer-dashboard .list li::after{
+    .page-layout .footer-dashboard,
+    .page-layout .footer-dashboard .list {
+        display: block !important;
+        text-align: center !important;
+    }
+
+    .page-layout .footer-dashboard .list li::after {
         display: none !important;
     }
-    .social-share svg{
+
+    .social-share svg {
         width: 40px !important;
     }
-    .social-share p{
+
+    .social-share p {
         font-size: 12px !important;
     }
 
@@ -52,10 +59,11 @@
     }
 }
 
-@media (max-width: 400px)  {
+@media (max-width: 400px) {
     .radio-custom label {
         padding: 5px 14px !important;
     }
+
     .text-11 {
         font-size: 21px !important;
     }
@@ -70,18 +78,20 @@
     color: #fff;
 }
 
-.selectedClass svg path{
+.selectedClass svg path {
     stroke: #fff;
 }
 
-.custom-pages, .custom-pages p{
+.custom-pages,
+.custom-pages p {
     line-height: 27px;
 }
-.toast-title{
+
+.toast-title {
     font-size: 18px;
 }
 
-.toast-message{
+.toast-message {
     font-size: 12px;
 }
 
@@ -95,29 +105,31 @@
     flex: 1;
 }
 
-li.has-child{
+li.has-child {
     position: relative;
 }
-.has-child.size-6 > .submenu {
+
+.has-child.size-6>.submenu {
     min-width: 600px !important;
 }
 
-.package-col{
+.package-col {
     padding-left: 8px;
     padding-right: 8px;
     font-size: 13px;
 }
 
-.plot-area{
+.plot-area {
     border-radius: 16px 0 0 16px !important;
 }
-.plot-area-type{
+
+.plot-area-type {
     border-radius: 0 16px 16px 0;
     margin-top: 11px;
 }
- 
- 
- 
+
+
+
 .otp-input-field {
     display: flex;
     flex-direction: column;
@@ -128,28 +140,32 @@ li.has-child{
 form .otp-input-field {
     flex-direction: row;
     column-gap: 2px;
-    
+
 }
+
 .otp-input-field input {
     text-align: center;
     padding: unset !important;
 }
+
 .otp-input-field input:focus {
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
 }
+
 .otp-input-field input::-webkit-inner-spin-button,
 .otp-input-field input::-webkit-outer-spin-button {
     display: none;
 }
+
 #registerForm.flat-account .form-account {
     padding: 30px;
 }
 
-#modalRegister .flat-account .banner-account{
+#modalRegister .flat-account .banner-account {
     max-width: 300px;
 }
 
-.icon-input{
+.icon-input {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -157,30 +173,32 @@ form .otp-input-field {
     font-size: 17px;
 }
 
-.header-right a.bg-color-primary{
+.header-right a.bg-color-primary {
     color: #fff !important;
 }
 
-.bank-logo{
+.bank-logo {
     max-height: 60px;
     min-width: 120px;
 }
 
-.login-page .flat-account .banner-account{
+.login-page .flat-account .banner-account {
     max-width: 650px;
     height: 520px;
 }
-.register-page .flat-account .banner-account{
+
+.register-page .flat-account .banner-account {
     max-width: 710px;
     width: 70%;
     height: 555px;
 }
-.forgot-page .flat-account .banner-account{
+
+.forgot-page .flat-account .banner-account {
     max-width: 475px;
     height: 350px;
 }
 
-.setup-new-password-page .flat-account .banner-account{
+.setup-new-password-page .flat-account .banner-account {
     max-width: 475px;
     height: 470px;
 }
@@ -188,54 +206,64 @@ form .otp-input-field {
 
 
 .icon-construction:before {
-    content: "\e916"; 
+    content: "\e916";
 }
 
 .icon-furnished:before {
     content: "\e928";
 }
-.text-c-1{
+
+.text-c-1 {
     font-size: 12px;
     line-height: 14px;
 }
-.text-c-2{
+
+.text-c-2 {
     font-size: 12px;
     line-height: 16px;
 }
 
-.box-house .box-overview .meta-list i{
+.box-house .box-overview .meta-list i {
     font-size: 25px;
     margin-right: 2px;
 }
 
-.box-house .box-overview h5.title{
+.box-house .box-overview h5.title {
     font-size: 17px;
     line-height: 22px;
 }
-.box-house.style-list .box-overview .meta-list{
+
+.box-house.style-list .box-overview .meta-list {
     margin-bottom: 4px;
 }
+
 .box-house .box-overview .tf-btn {
     height: 38px;
 }
-.social-share{
+
+.social-share {
     text-align: center;
 }
-.social-share a{
+
+.social-share a {
     margin-right: 10px;
 }
-.share-button{
+
+.share-button {
     right: 0;
     top: -6px;
 }
+
 .section-property-detail .share-button {
     right: -7px;
     top: -12px;
 }
-.share-field #shareUrl{
+
+.share-field #shareUrl {
     padding-right: 60px;
 }
-.share-field span{
+
+.share-field span {
     position: absolute;
     right: 9px;
     top: 25%;
@@ -248,82 +276,97 @@ form .otp-input-field {
     overflow-y: scroll;
 }
 
-.tf-dropdown-sort .dropdown-menu .select-item:hover{
+.tf-dropdown-sort .dropdown-menu .select-item:hover {
     background-color: #df4234;
 }
-.tf-dropdown-sort .dropdown-menu .select-item .text-value-item{
+
+.tf-dropdown-sort .dropdown-menu .select-item .text-value-item {
     color: #2c2e33;
 }
-.tf-dropdown-sort .dropdown-menu .select-item:hover .text-value-item{
+
+.tf-dropdown-sort .dropdown-menu .select-item:hover .text-value-item {
     color: #fff;
 }
+
 .form-select option {
-    border-color: #df4234; 
+    border-color: #df4234;
 }
 
-.form-select-border-none{
+.form-select-border-none {
     width: 100%;
     max-width: 100px;
 }
-.form-select-border-none:focus, .form-select-border-none:focus-visible{
+
+.form-select-border-none:focus,
+.form-select-border-none:focus-visible {
     border: none;
 }
-.tf-dropdown-sort{
+
+.tf-dropdown-sort {
     height: 25px;
 }
+
 input.search-address-home {
-    height: 16px !important; 
+    height: 16px !important;
 }
 
 [type='submit']:disabled {
     background-color: #2c2e33;
 }
 
-.site-logo, .is-fixed .site-logo-fixed{
+.site-logo,
+.is-fixed .site-logo-fixed {
     display: block;
 }
 
-.site-logo-fixed, .is-fixed .site-logo{
+.site-logo-fixed,
+.is-fixed .site-logo {
     display: none;
 }
 
-.box-radio-check label{
+.box-radio-check label {
     margin-bottom: 0px;
 }
-.ht-45{
+
+.ht-45 {
     height: 45px !important;
 }
-.ht-21{
+
+.ht-21 {
     height: 21px !important;
 }
 
-.ht-125{
+.ht-125 {
     height: 125px;
 }
-.ht-210{
+
+.ht-210 {
     height: 210px;
 }
 
-.info-detail .wrap-box{
+.info-detail .wrap-box {
     width: 155px;
 }
-.min-h-300{
+
+.min-h-300 {
     min-height: 300px !important;
 }
 
 .br-16 {
     border-radius: 16px !important;
 }
-.cover-img{
+
+.cover-img {
     object-fit: cover;
     height: 100%;
     width: 100%;
 }
-.section-testimonials .box-testimonials{
+
+.section-testimonials .box-testimonials {
     flex-direction: column;
 }
 
-.text-limit-6{
+.text-limit-6 {
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 6;
@@ -331,17 +374,17 @@ input.search-address-home {
     -webkit-box-orient: vertical;
 }
 
-form#contactform  textarea{
+form#contactform textarea {
     height: 80px !important;
 }
 
-#contactform{
+#contactform {
     border: none;
 }
 
 
-#header-main:not(.is-fixed) .bg-1 .mobile-button { 
-    color: var(--White);  
+#header-main:not(.is-fixed) .bg-1 .mobile-button {
+    color: var(--White);
 }
 
 .custom-style-border {
@@ -382,33 +425,40 @@ form#contactform  textarea{
     padding: 35px 56px 0;
 }
 
-.btn-outline-danger{
+.btn-outline-danger {
     --bs-btn-color: var(--Heading);
     --bs-btn-border-color: var(--Line);
 }
-.header-position{
+
+.header-position {
     z-index: 999;
     position: relative;
 }
 
-.user .main-content-inner{
+.user .main-content-inner {
     min-height: 690px;
 }
 
-.custom-pages tr{
+.custom-pages tr {
     white-space: unset !important;
 }
-.fs-15{
+
+.fs-15 {
     font-size: 15px;
 }
 
-.login-menu{
+.login-menu {
     color: var(--White);
 }
-.is-fixed .login-menu{
+
+.is-fixed .login-menu {
     color: var(--Heading) !important;
 }
-.pk-bg-red{background: #df42341f;}
+
+.pk-bg-red {
+    background: #df42341f;
+}
+
 /**********registration page css start******************/
 .register-page .flat-account .banner-account {
     max-width: 280px;
@@ -581,6 +631,7 @@ p.sub-heading {
         margin-bottom: 20px;
     }
 }
+
 /**********registration page css end******************/
 
 
@@ -591,17 +642,17 @@ p.sub-heading {
     font-family: 'Roboto', sans-serif;
     margin-bottom: 0;
     border-radius: 16px;
-    
+
 }
 
-.package-buy-btn{
+.package-buy-btn {
     display: unset;
     padding: 6px 30px !important;
     height: 36px;
 }
 
 .zui-table tr:nth-child(even) {
-  background: #F3F3F3;
+    background: #F3F3F3;
 }
 
 .zui-table thead th {
@@ -610,6 +661,7 @@ p.sub-heading {
     vertical-align: top;
     min-width: 180px;
 }
+
 .zui-table tbody td {
     color: #333;
     font-size: 16px;
@@ -618,10 +670,12 @@ p.sub-heading {
     vertical-align: top;
     border-top: 1px solid #ccc;
 }
+
 .zui-wrapper {
-  max-width: 1200px;
-  position: relative;
+    max-width: 1200px;
+    position: relative;
 }
+
 .zui-scroller {
     /* overflow-x: scroll; */
     /* overflow-y: visible; */
@@ -638,7 +692,7 @@ p.sub-heading {
     font-weight: 700;
     min-width: 200px;
     background-color: #FFFFFF;
-    box-shadow: inset -15px 0 10px -7px rgba(0,0,0,0.15);
+    box-shadow: inset -15px 0 10px -7px rgba(0, 0, 0, 0.15);
 }
 
 .zui-sticky-col.zui-stripe-row {
@@ -657,14 +711,14 @@ p.sub-heading {
     font-weight: bold;
     color: #fff;
 }
+
 .ribbon {
     position: absolute;
     top: 0;
     right: 0;
     line-height: 1.4;
     padding-inline: 1lh;
-    clip-path: polygon(
-        100% 100%,0 100%,999px calc(100% - 999px),calc(100% - 999px) calc(100% - 999px));
+    clip-path: polygon(100% 100%, 0 100%, 999px calc(100% - 999px), calc(100% - 999px) calc(100% - 999px));
     transform: translate(calc((1 - cos(45deg))*100%), -100%) rotate(45deg);
     transform-origin: 0% 100%;
     background-color: var(--Primary);
@@ -675,28 +729,53 @@ p.sub-heading {
     border: 1px solid var(--Primary);
 }
 
- 
+
 /* Phone */
-@media screen and (max-width: 768px) and (min-width: 320px)  {
-  .zui-table .zui-sticky-col {
+@media screen and (max-width: 768px) and (min-width: 320px) {
+    .zui-table .zui-sticky-col {
         min-width: 125px;
     }
-    
+
     .zui-table thead th {
         min-width: 190px;
     }
-    
+
     .zui-table tbody td {
         font-size: 15px;
     }
 }
 
-@media screen and (max-width: 1280px) and (min-width: 768px)  {
-  .zui-table .zui-sticky-col {
+@media screen and (max-width: 1280px) and (min-width: 768px) {
+    .zui-table .zui-sticky-col {
         min-width: 175px;
     }
-      .zui-table thead th {
+
+    .zui-table thead th {
         min-width: 180px;
     }
 }
+
 /**********package page css end******************/
+
+
+/**********Home Loan page css Start******************/
+.bio span {
+    color: #df4234;
+}
+
+.bio ul li span {
+    font-size: 18px;
+    line-height: 28px;
+}
+
+.home-loan .form h3 span {
+    color: #df4234;
+}
+
+.faq-loan p {
+    font-size: 17px;
+    padding: 20px 0px 0px;
+    line-height: 30px;
+}
+
+/**********Home Loan page css end******************/

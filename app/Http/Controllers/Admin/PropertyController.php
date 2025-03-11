@@ -174,6 +174,15 @@ class PropertyController extends Controller
         $property->status = ($request->status == 0) ? 2 : $request->status;
         $property->save();
         
+        if($request->status == 1){
+            if (isset($property->user->phone) && $property->user->phone != ""){
+                $mobile = $property->user->phone;
+                $templateId = config('constants.MOBILE_SMS.TEMPLATED_ID_PROPERTY_LIVE');
+                $message = "Congratulation's! Your property is now live on brickbold.com. You can manage your listing anytime via your account. Brickbold";
+                Helper::sentSMS($mobile, $message, $templateId);
+            }
+        }
+
         // Handle image uploads
         if ($images = $request->file('images')) {
             foreach($images as $image){
@@ -223,6 +232,15 @@ class PropertyController extends Controller
                 'meta_values' => "Updated to ".config('constants.PROPERTY_STATUSES')[$request->status]. " By ". $admin?->name, 
                 'status' => 1,
             ]); 
+
+            if($request->status == 1){
+                if (isset($property->user->phone) && $property->user->phone != ""){
+                    $mobile = $property->user->phone;
+                    $templateId = config('constants.MOBILE_SMS.TEMPLATED_ID_PROPERTY_LIVE');
+                    $message = "Congratulation's! Your property is now live on brickbold.com. You can manage your listing anytime via your account. Brickbold";
+                    Helper::sentSMS($mobile, $message, $templateId);
+                }
+            }
             return response()->json(['status' => 'success', 'message' => 'Status updated successfully']);
         }
         return response()->json(['status' => false, 'message' => 'Property not found']);

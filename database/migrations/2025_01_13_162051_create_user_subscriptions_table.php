@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('days')->nullable()->default(1);
             $table->string('start_date')->nullable();
             $table->string('end_date')->nullable();
+            $table->integer('email_sent')->nullable()->default(0);
             $table->integer('status')->nullable()->default(1);
             $table->timestamps();
         });
