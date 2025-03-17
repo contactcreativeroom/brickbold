@@ -190,9 +190,12 @@
                 </div>
                 <div class="col-12">
                     <div class="footer-bottom">
-                        <p>Copyright © {{date('Y')}} BrickBold. All Rights Reserved. Designed & Developed by <a href="https://www.creativeroom.in/">Creative Room</a> </p>
+                        <div>
+                        <p>All trademarks, logos, and brand names are the property of their respective owners. All rights Reserved @ Copyright {{date('Y')}} VFS Alliance Private Limited</p>
+                        <p class="d-none">Designed & Developed by <a href="https://www.creativeroom.in/">Creative Room</a> </p>
+                        </div>
                         <div class="wrap-social">
-                            <div class="text-3  fw-6 text-white">Follow us</div>
+                            {{-- <div class="text-3  fw-6 text-white">Follow us</div> --}}
                             <ul class="tf-social ">
                                 <li>
                                     <a target="_blank" href="{{ data_get($config, 'social.facebook', '') }}">

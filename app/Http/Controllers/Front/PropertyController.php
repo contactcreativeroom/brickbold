@@ -186,6 +186,18 @@ class PropertyController extends Controller
                 'property_url'=> route('property', $property->slug),
              );
             dispatch(new \App\Jobs\PropertyEnquiryQueue($details));
+
+            if (isset($property->user->phone) && $property->user->phone != ""){
+                $mobile = $property->user->phone;
+                if (isset($property->for_type) && $property->for_type == "for-sell"){
+                    $templateId = config('constants.MOBILE_SMS.TEMPLATED_ID_PROPERTY_INTEREST_BUY');
+                    $message = "Hi, ".$user?->name." ".$user?->phone." expressed interest in your property on Brickbold.";
+                } else if (isset($property->for_type) && $property->for_type == "for-rent"){
+                    $templateId = config('constants.MOBILE_SMS.TEMPLATED_ID_PROPERTY_INTEREST_RENT');
+                    $message = "Hi, ".$user?->name." ".$user?->phone." expressed interest in renting your accommodation on Brickbold.";
+                }
+                Helper::sentSMS($mobile, $message, $templateId);
+            }
         } else{
             Helper::toastMsg(false, "Opps! Some error occured.");
             return back()->withInput();
