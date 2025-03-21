@@ -45,7 +45,7 @@
                                 </div>
                                 <div class="row g-6">
                                     <div class="col-md-6">
-                                        <label for="link" class="form-label">Status</label>
+                                        <label for="link" class="form-label">Status <span class="text-danger mandatory">*</span></label>
                                         <select class="form-control {{ $errors->has('status') ? ' is-invalid' : '' }}" id="status" name="status">
                                             <option value="">--Select Status--</option>
                                             @foreach(config('constants.STATUSES') as $key => $status)
@@ -59,13 +59,18 @@
                                         @enderror
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="link" class="form-label">Role</label>
+                                        <label for="link" class="form-label">Role <span class="text-danger mandatory">*</span></label>
                                         <select class="form-control {{ $errors->has('user_type') ? ' is-invalid' : '' }}" id="user_type" name="user_type">
                                             <option value="">Select Role</option>
                                             @foreach(config('constants.USER_TYPE') as $key => $value)
                                                 <option value="{{$value}}" @if(old('user_type')!=null && old('user_type')==$value) selected @elseif(!empty($row) && $row->user_type==$value) selected @endif>{{$value}}</option>
                                             @endforeach
                                         </select>
+                                        @error('user_type')
+                                        <div class="text-danger">
+                                            <small>{{ $message }}</small>
+                                        </div>
+                                        @enderror
                                     </div>
                                     <div class="col-md-4">
                                         <label for="name" class="form-label">Name <span class="text-danger mandatory">*</span></label>
@@ -91,16 +96,16 @@
                                         <div class="input-group input-group-merge">
                                             <span class="input-group-text">IN (+91)</span>
                                             <input type="text" id="phoneNumber" name="phone" class="form-control {{ $errors->has('phone') ? ' is-invalid' : '' }}" placeholder="" value="@if(!empty($row->phone)){{$row->phone}}@elseif(old('phone')!=null){{old('phone')}}@endif" />
-                                            @error('phone')
-                                            <div class="text-danger">
-                                                <small>{{ $message }}</small>
-                                            </div>
-                                            @enderror
                                         </div>
+                                        @error('phone')
+                                        <div class="text-danger">
+                                            <small>{{ $message }}</small>
+                                        </div>
+                                        @enderror
                                     </div>
                                     @if (!empty($row->user_type) && in_array($row->user_type , ['Agent', 'Builder']))
                                     <div class="col-md-6">
-                                        <label class="form-label" for="business_name">Business Name <span class="text-danger mandatory">*</span></label>
+                                        <label class="form-label" for="business_name">Business Name </label>
                                         <input type="text" id="business_name" name="business_name" value="@if(old('business_name')!=null){{old('business_name')}}@elseif(!empty($row->business_name)){{$row->business_name}}@endif" class="form-control {{ $errors->has('business_name') ? ' is-invalid' : '' }}">
                                         @if($errors->has('business_name'))
                                             <span class="invalid-feedback">

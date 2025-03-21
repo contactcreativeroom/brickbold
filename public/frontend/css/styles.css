@@ -584,12 +584,12 @@ h6,
   color: var(--Heading);
   margin: 0;
   text-rendering: optimizeLegibility;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 h1,
 .h1 {
-  font-size: 68px;
+  font-size: 60px;
   line-height: 88px;
 }
 

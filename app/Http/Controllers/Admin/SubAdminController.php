@@ -51,15 +51,11 @@ class SubAdminController extends Controller
             $validationArray['image'] = 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048';
         }
         $validator = Validator::make($request->all(), $validationArray);
-        if($validator->fails()){
-            $errorMessage=null;
-            foreach($validator->errors()->getMessages() as $error){
-                $errorMessage=$error[0];
-                break;
-            }
-            Helper::toastMsg(false, $errorMessage);
-            return redirect()->back(); 
-        }       
+        if ($validator->fails()) {
+            Helper::toastMsg(false, "Opps! Validation Error.");
+            return back()->withErrors($validator)->withInput();
+        }
+         
 
         DB::beginTransaction();        
         if(empty($id)){ 

@@ -207,5 +207,18 @@ $('body').on('change', "[name='property_status']", function () {
         }
     })
     return false;
+});
 
+
+document.addEventListener("DOMContentLoaded", function () {
+    let form = document.querySelector(".submit-disable");
+    if (form) {
+        form.addEventListener("submit", function () {
+            let submitButton = this.querySelector("button[type='submit']");
+            if (submitButton) { 
+                submitButton.disabled = true;
+                submitButton.innerText = "Processing..."; 
+            }
+        });
+    }
 });

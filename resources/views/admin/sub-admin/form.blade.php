@@ -19,7 +19,7 @@
         <!-- Content -->
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <!-- Left side of the form -->
                     <div class="card">
                         <div class="card-header">
@@ -38,7 +38,7 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3">
-                                    <label for="email" class="form-label">Email</label>
+                                    <label for="email" class="form-label">Email <span class="text-danger mandatory">*</span></label>
                                     <input type="text" class="form-control" id="email" name="email" value="@if(!empty($row->email)){{$row->email}}@elseif(old('email')!=null){{old('email')}}@endif" />
                                     @error('email')
                                     <div class="text-danger">
@@ -58,7 +58,7 @@
                                 </div>
                                 @if (!isset($row->id))                                    
                                     <div class="mb-3">
-                                        <label for="password" class="form-label">Password</label>
+                                        <label for="password" class="form-label">Password <span class="text-danger mandatory">*</span></label>
                                         <input type="password" class="form-control" id="password" name="password" value="@if(!empty($row->password)){{$row->password}}@elseif(old('password')!=null){{old('password')}}@endif" />
                                         @error('password')
                                         <div class="text-danger">

@@ -64,14 +64,16 @@ class UserController extends Controller
     public function postData(Request $request){
         $id = trim($request->input('id'));
         $validator = Validator::make($request->all(), [
+            'user_type' => 'required',
             'name' => 'required',
             'email' => 'required|email',
             'phone' => 'required',
             'address' => 'required',  
+            'status' => 'required',  
         ]);
          
         if ($validator->fails()) {
-            Helper::toastMsg(false, "Validation errors: " . json_encode($validator->errors()->toArray()));
+            Helper::toastMsg(false, "Opps! Validation Error.");
             return back()->withErrors($validator)->withInput();
         }       
 
@@ -90,7 +92,7 @@ class UserController extends Controller
                 'gstin' => $request->gstin,
                 'rera_number' => $request->rera_number,
                 'website' => $request->website,
-                'status' => 1,
+                'status' => $request->status,
             ]);
         }else{
             $user = User::find($id); 

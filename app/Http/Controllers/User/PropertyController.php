@@ -121,7 +121,7 @@ class PropertyController extends Controller
         ]);
          
         if ($validator->fails()) {
-            Helper::toastMsg(false, "Validation errors: " . json_encode($validator->errors()->toArray()));
+            Helper::toastMsg(false, "Opps! Validation Error.");
             return back()->withErrors($validator)->withInput();
         }
 

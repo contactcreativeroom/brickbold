@@ -9,7 +9,7 @@
                 <div class="button-show-hide show-mb">
                     <span class="body-1">Show Dashboard</span>
                 </div>
-                <form class="box-info-property" action="{{ route('user.property.post') }}" method="post" enctype='multipart/form-data'>
+                <form class="box-info-property submit-disable" action="{{ route('user.property.post') }}" method="post" enctype='multipart/form-data'>
                 @csrf                    
                     <div class="widget-box-2 mb-20">
                         <h5 class="title">Information</h5>
@@ -696,7 +696,7 @@
                     @endif
                     <div class="box-btn">
                         <button type="submit" class="tf-btn bg-color-primary pd-13">{{empty($row->id)?'Add Property' : 'Update Property';}}</button>
-                        <button href="#" class="tf-btn style-border pd-10">Save & Preview</button>
+                        {{-- <button href="#" class="tf-btn style-border pd-10">Save & Preview</button> --}}
                     </div>
                 </form>
                 @include('user.layouts.footer')

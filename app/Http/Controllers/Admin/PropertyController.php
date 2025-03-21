@@ -89,7 +89,7 @@ class PropertyController extends Controller
         ]);
          
         if ($validator->fails()) {
-            Helper::toastMsg(false, "Validation errors: " . json_encode($validator->errors()->toArray()));
+            Helper::toastMsg(false, "Opps! Validation Error.");
             return back()->withErrors($validator)->withInput();
         }
 
@@ -171,7 +171,8 @@ class PropertyController extends Controller
         $property->additional = $additional;
         $property->amenities = $amenities;
         $property->video_link = $request->video_link;
-        $property->status = ($request->status == 0) ? 2 : $request->status;
+        // $property->status = ($request->status == 0) ? 2 : $request->status;
+        $property->status =  $request->status;
         $property->save();
         
         if($request->status == 1){

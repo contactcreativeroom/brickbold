@@ -172,7 +172,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/user/status/change', [AdminUserController::class, 'changeStatus'])->name('admin.user.status.change');
 
         Route::get('/properties', [AdminPropertyController::class, 'list'])->name('admin.properties');
-        Route::get('/property/{slug}', [AdminPropertyController::class, 'property'])->name('admin.property');
+        Route::get('/property/get/{slug}', [AdminPropertyController::class, 'property'])->name('admin.property');
         Route::get('/property/add/{user_id?}', [AdminPropertyController::class, 'add'])->name('admin.property.add');
         Route::get('/property/edit/{id}', [AdminPropertyController::class, 'edit'])->name('admin.property.edit');
         Route::post('property-post-data', [AdminPropertyController::class, 'postData'])->name('admin.property.post');
