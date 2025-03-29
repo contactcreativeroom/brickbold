@@ -88,13 +88,19 @@ class HomeController extends Controller
 
     }
 
-    public function packages(Request $request){  
-        
-
+    public function packages(Request $request){         
+        $msg = "";
         $packages = Package::where('status', 1);
         if (Auth::guard('user')->check()) {
             $user = Auth::guard('user')->user();
             $packages->where('profile', $user->user_type) ;
+            if ($user->user_type) {
+                $packages->where('profile', $user->user_type) ;
+            }else{
+                $msg = '<div class="alert alert-danger mb-3 text-center" role="alert">
+                    Please select role in the profile to view compatible packages. <a href="'.route('user.profile').'"> Click here </a>
+                </div>';
+            } 
         } else{
             if ($request->filled('profile')) {
                 $profile = $request->profile; 
@@ -128,7 +134,7 @@ class HomeController extends Controller
         ]); 
         //$packages =  Package::where('status', 1)->latest()->get(); 
         //return $headings = $packages[0]->fields;
-        return view($this->prefix.'.packages',['rows' => $packages]);
+        return view($this->prefix.'.packages',['rows' => $packages, "msg" => $msg]);
     }
 
     public function homeloan(Request $request){  

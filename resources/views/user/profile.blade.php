@@ -37,7 +37,7 @@
                             </div>
                         </div>
                         
-                        <h5 class="title">Information</h5>  
+                        <h5 class="title">Information (#BBCUS{{ App\Helper\Helper::formatNumber($row->id)}})</h5>  
                         <div class="box {{ $row->user_type ? 'grid-layout-1' : 'grid-layout-2'}} gap-30 box-info-2">  
                             @if (!$row->user_type)
                             <fieldset class="box box-fieldset">

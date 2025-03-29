@@ -40,7 +40,11 @@
                                     </div>
                                 </h5>
                                 <div class="info-container">
-                                    <ul class="list-unstyled mb-6">                                        
+                                    <ul class="list-unstyled mb-6">  
+                                        <li class="mb-2">
+                                            <span class="h6">CUST ID:</span>
+                                            <span>BBCUS{{ App\Helper\Helper::formatNumber($user->id)}}</span>
+                                        </li>                                      
                                         <li class="mb-2">
                                             <span class="h6">Email:</span>
                                             <span>{{ $user->email }}</span>
@@ -104,22 +108,23 @@
                         @foreach ($subscriptions as $subscription)
                         <div class="card mb-6 border border-2 border-primary rounded primary-shadow">
                             <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-start">
+                                <p class="text-1 mb-1"> #BBORD{{ App\Helper\Helper::formatNumber($subscription->order->id)}} </p>
+                                <div class="package-title justify-content-between align-items-start">
                                     <span class="badge bg-label-primary">{{$subscription->order->package_name}}</span>
-                                    <div class="d-flex justify-content-center">
+                                    <div class="justify-content-center pricing-main">
                                         <sub class="h5 pricing-currency mb-auto mt-1 text-primary">{{ config('constants.CURRENCIES.symbol')}}</sub>
-                                        <h1 class="mb-0 text-primary">{{ App\Helper\Helper::priceFormat($subscription->order->package_price)}}</h1>
+                                        <h1 class="mb-0 text-primary pricing-text">{{ $subscription->order->package_price}}</h1>
                                     </div>
                                 </div>
                                 <ul class="list-unstyled g-2 my-6">
                                     @php
-                                        $fields = unserialize($subscription->order->package_value); 
-                                         
+                                        $fields = unserialize($subscription->order->package_value);                                         
                                         $today = Carbon\Carbon::today();
                                         $endDate = Carbon\Carbon::parse($subscription->end_date);
                                         $startDate = Carbon\Carbon::parse($subscription->start_date);
                                         $remainingDays = $endDate->diffInDays($today);                                            
-                                        $completedDays = $startDate->diffInDays($today) +1;                                            
+                                        $completedDays = $startDate->diffInDays($today) +1;         
+                                        $completedDaysPer = ($completedDays*100/$subscription->days)  ;                            
                                     @endphp
                                     @foreach ($fields as $fieldKey=>$fieldVal)
                                         <li class="mb-2 d-flex align-items-center"><i class="bx bxs-circle bx-6px text-secondary me-2"></i><span>{{ $fieldKey}}: {{ $fieldVal}}</span></li>
@@ -130,7 +135,7 @@
                                     <span class="h6 mb-0">{{$completedDays}} of {{$subscription->days}} Days</span>
                                 </div>
                                 <div class="progress mb-1">
-                                    <div class="progress-bar" role="progressbar" style="width: {{$completedDays}}%;" aria-valuenow="{{$completedDays}}" aria-valuemin="0" aria-valuemax="{{$subscription->days}}"></div>
+                                    <div class="progress-bar" role="progressbar" style="width: {{$completedDaysPer}}%;" aria-valuenow="{{$completedDays}}" aria-valuemin="0" aria-valuemax="{{$subscription->days}}"></div>
                                 </div>
                                 <small>{{$remainingDays}} days remaining</small>
                                  

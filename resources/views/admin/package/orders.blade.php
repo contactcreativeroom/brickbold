@@ -57,6 +57,7 @@
                 <thead class="table-primary">
                     <tr>
                         <th scope="col" class="border">Sr.</th>
+                        <th scope="col" class="border">Order Id</th>
                         <th scope="col" class="border">Package</th>
                         <th scope="col" class="border">Razorpay order</th>
                         <th scope="col" class="border">Post property</th>
@@ -71,12 +72,19 @@
                     @foreach($rows as $row)
                     <tr data-entity-id="{{ $row->id }}">
                         <td>{{ ($rows->currentPage() - 1) * $rows->perPage() + $loop->iteration }}.</td>
+                        <td> 
+                            @if (isset($row?->UserSubscription?->id))                                
+                                #BBORD{{ App\Helper\Helper::formatNumber($row?->UserSubscription?->id)}} 
+                            @else
+                            -
+                            @endif
+                        </td>    
                         <td class="sorting_1">
                             <div class="d-flex justify-content-start align-items-center user-name">
                                 <div class="d-flex flex-column">
                                     <span class="fw-medium">{{$row->package_name}}</span>
                                     <small>Date: {{ App\Helper\Helper::formatStringDate($row->created_at)  }}</small>
-                                    <small class="text-btn text-color-primary" >{{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($row->grand_price)}}</small>
+                                    <small class="text-btn text-color-primary" >{{ config('constants.CURRENCIES.symbol'). $row->grand_price}}</small>
                                 </div>
                             </div>
                         </td>  

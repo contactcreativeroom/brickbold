@@ -106,6 +106,7 @@ Route::middleware(['auth.user'])->prefix('user')->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('user.dashboard');
     Route::get('/my-package', [UserController::class, 'package'])->name('user.package');
+    Route::get('/invoice/download/{orderid}', [UserController::class, 'invoiceDownload'])->name('user.package.invoice.download');
     Route::get('/my-reviews', [UserController::class, 'reviews'])->name('user.reviews');
     Route::get('/my-interests', [UserController::class, 'interests'])->name('user.interests');
 

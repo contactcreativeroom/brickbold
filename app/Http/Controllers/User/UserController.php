@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\User;
 
 use App\Helper\Helper;
-use App\Http\Controllers\Controller; 
+use App\Http\Controllers\Controller;
+use App\Models\UserSubscription;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -76,9 +78,16 @@ class UserController extends Controller
                     $user->sendEmailVerificationNotification();
                     Helper::toastMsg(true, 'A verification link sent on your email id. Please verify!');
                 }
+                // if (session()->has('redirect')) {
+                //     $redirectUrl = session()->pull('redirect');
+                //     return redirect()->route('packages');
+                // }
                 return redirect()->route('user.profile');
             }
         }
+        // if ($request->has('redirect')) {
+        //     session(['redirect' => $request->input('redirect')]);
+        // }
         return view($this->prefix.'.profile');
     }
 
@@ -163,6 +172,18 @@ class UserController extends Controller
         $request->fulfill();
         Helper::toastMsg(true, 'Email verified successfully!');
         return redirect()->route($this->prefix.'.profile');
+    }
+
+    public function invoiceDownload(Request $request){
+        $invoiceId = $request->orderid;
+        //$row = UserSubscription::findOrFail($invoiceId);
+        $user = $this->userAuth;
+        $row = $user->subscription()->findOrFail($invoiceId);
+        return view($this->prefix.'.invoices.invoice', compact('row'));
+
+        // Pass data to view
+        $pdf = Pdf::loadView('user.invoices.invoice', compact('row'));
+        return $pdf->download('invoice_' . $invoiceId . '.pdf');
     }
 
 }

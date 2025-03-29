@@ -307,7 +307,7 @@
                                             <path d="M10 2.5V7.5" stroke="#A8ABAE" stroke-width="1.4"
                                                 stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
-                                        My package</a>
+                                        My Orders</a>
                                     {{-- <a class="dropdown-item" href="{{route('user.favorites')}}">
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -365,7 +365,7 @@
                                                 stroke="#A8ABAE" stroke-width="1.4" stroke-linecap="round"
                                                 stroke-linejoin="round" />
                                         </svg>
-                                        My properties
+                                        My Properties
                                     </a>
                                     <a class="dropdown-item " href="{{route('user.property.add')}}">
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
@@ -381,7 +381,7 @@
                                             <path d="M6.66797 15H7.5013" stroke="#A8ABAE" stroke-width="1.4"
                                                 stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
-                                        Add property
+                                        Add Property
                                     </a> 
                                     {{-- <a class="dropdown-item " href="{{route('user.property.enquiries')}}">
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"

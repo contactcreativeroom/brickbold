@@ -374,6 +374,14 @@ input.search-address-home {
     -webkit-box-orient: vertical;
 }
 
+.text-limit-1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1 !important;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
 form#contactform textarea {
     height: 80px !important;
 }
@@ -447,13 +455,17 @@ form#contactform textarea {
     font-size: 15px;
 }
 
-.login-menu {
-    color: var(--White);
+.login-menu, .login-menu:hover {
+    color: var(--White) ;
 }
 
 .is-fixed .login-menu {
     color: var(--Heading) !important;
 }
+.is-fixed .login-menu:hover {
+    color: var(--Primary) !important;
+}
+
 
 .pk-bg-red {
     background: #df42341f;
@@ -724,7 +736,9 @@ p.sub-heading {
     background-color: var(--Primary);
     opacity: 0.8
 }
-
+.ribbon.active {
+    background-color: #000000;
+}
 .package .flat-pricing .box {
     border: 1px solid var(--Primary);
 }
@@ -779,3 +793,18 @@ p.sub-heading {
 }
 
 /**********Home Loan page css end******************/
+ 
+.info-sm{
+    height: 20px;
+    width: 20px;
+}
+
+.tooltip .tooltip-inner {
+    font-size: 15px; 
+}
+
+.download-invoice-btn{
+    font-size: 13px;
+    font-weight: 400;
+    padding: 2px 5px;
+}

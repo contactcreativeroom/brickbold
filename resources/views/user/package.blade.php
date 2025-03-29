@@ -7,20 +7,20 @@
             <div class="main-content-inner style-3">
                 <div class="widget-box-2 style-2 package">              
                     @include('user.layouts.verify-email') 
-                    <h3 class="title">My Package</h3>
+                    <h3 class="title">My Orders</h3>
                     <div class="row">
                         @foreach ($rows as $row)
                         <div class="package-col col-md-6 col-lg-4 mb-30">
                             <div class="flat-pricing h-100">
                                 <div class="box box-style h-100 position-relative">
-                                    
-                                    <h4 class="sub-title  fw-7">{{$row->order->package_name}}</h4>
-                                    <p class="text-sub fw-6 "> <span class="text-color-primary">Post Properties:</span> {{$row->post_property}} ,  <span class="text-color-primary">Contacts:</span> {{$row->contacts}} ,  <span class="text-color-primary">Days:</span> {{$row->days}} </p>
+                                    <span class="text-color-primary">#BBORD{{ App\Helper\Helper::formatNumber($row->id)}}</span>
+                                    <h5 class="sub-title  fw-7">{{$row->order->package_name}}</h5>
+                                    <p class="text-sub fw-6 ">  <span class="text-color-primary">Post Properties:</span> {{$row->post_property}} ,  <span class="text-color-primary">Contacts:</span> {{$row->contacts}} ,  <span class="text-color-primary">Days:</span> {{$row->days}} </p>
                                     <div class="title-price flex">
-                                        <h3 class="text-color-primary">{{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($row->order->grand_price)}} </h3>
-                                        <div class="month fw-7"> / <span class="text-decoration-line-through">{{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($row->order->package_price)}}</span></div>
+                                        <h3 class="text-color-primary">{{ config('constants.CURRENCIES.symbol'). $row->order->grand_price}} </h3>
+                                        <div class="month fw-7"> / <span class="text-decoration-line-through">{{ config('constants.CURRENCIES.symbol'). $row->order->package_price}}</span></div>
                                     </div> 
-                                    <p class="texts mb-3 pb-3">From <span class="text-color-primary">{{ App\Helper\Helper::formatStringDate($row->created_at)}} </span> to <span class="text-color-primary">{{ App\Helper\Helper::formatStringDate($row->created_at->addDays($row->days)) }} </span></p>
+                                    <p class="texts mb-3 pb-3">From <span class="text-color-primary">{{ App\Helper\Helper::formatStringDate($row->start_date)}} </span> to <span class="text-color-primary">{{ App\Helper\Helper::formatStringDate($row->end_date)}} </span></p>
                                     {{-- <ul class="check">
                                         @php
                                             $fields = unserialize($row->order->package_value);                                            
@@ -37,9 +37,16 @@
                                             @endforeach
                                         </select>
                                     </div> --}}
-                                    @if(now()->greaterThan($row->created_at->addDays($row->days)))
+                                    {{-- @if(now()->greaterThan($row->created_at->addDays($row->days))) --}}
+                                    @if(now()->greaterThan($row->end_date))
                                         <div class="ribbon">Expired</div>
+                                    @else
+                                        <div class="ribbon active">Active</div>
                                     @endif
+                                    
+                                    <span class="badge text-bg-danger float-end mb-3">
+                                        <a href="{{ route('user.package.invoice.download', ['orderid' => $row->id])}}" target="_blank" class="text-white download-invoice-btn">View Invoice</a>
+                                    </span>
                                 </div>
                             </div>
                         </div>

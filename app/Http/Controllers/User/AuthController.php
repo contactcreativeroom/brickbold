@@ -424,13 +424,15 @@ class AuthController extends Controller
         ];    
         $user = User::where('phone', $request->mobile)->first();    
         if (!$user) {
-            $emailCheck = User::where('email', $request->email)->first(); 
-            if ($emailCheck) {
-                return response()->json([
-                    'error' => true,
-                    'message' => 'This email is already registered with an another account.',
-                ], 422);
-            }   
+            if(isset($request->email) && $request->email != ""){
+                $emailCheck = User::where('email', $request->email)->first(); 
+                if ($emailCheck) {
+                    return response()->json([
+                        'error' => true,
+                        'message' => 'This email is already registered with an another account.',
+                    ], 422);
+                }  
+            } 
             $user = User::create(array_merge(['phone' => $request->mobile], $dataInsert));
             if(isset($request->email) && $request->email !=''){
                 $details = array(

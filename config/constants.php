@@ -166,6 +166,9 @@ return [
         'phone' => '9041132240',
         'email' => 'support@brickbold.com',
         'addresss' => 'SCO-18, 2nd Floor, Cabin No. 208, Feroze Gandhi Market, Ludhiana, Punjab, India, 141001',
+        'gst_no' => '03AAHCV8378C1Z7',
+        'HSN_Code' => '998319'
+
     ],    
 
     'CONFIG' => [
@@ -193,7 +196,7 @@ return [
     // this array is for sending emails
     'EMAIL' => [
         'from' => 'info@brickbold.com',
-        'contact' => 'contactcreativeroom@gmail.com',
+        'contact' => 'support@brickbold.com',
         'send' => 'info@brickbold.com',
     ], 
 

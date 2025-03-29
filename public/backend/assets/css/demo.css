@@ -325,3 +325,18 @@ img.img-thumbnail{
     font-size: 12px;
     margin-right: 7px;
 }
+
+h1.pricing-text{
+    line-height: 3.25rem;
+    font-size: 2rem;
+}
+
+.pricing-main{
+    display: inline-flex !important;
+}
+
+@media (min-width: 1400px) {
+    .package-title{
+        display: flex !important;
+    }
+}

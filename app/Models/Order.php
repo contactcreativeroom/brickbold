@@ -19,4 +19,8 @@ class Order extends Model
     public function package(){
         return $this->belongsTo(Package::class) ; 
     } 
+
+    public function UserSubscription(){
+        return $this->hasOne(UserSubscription::class) ; 
+    } 
 }

@@ -137,6 +137,7 @@
                                         <a href="{{route('admin.user', $row->user_id)}}" class="text-heading text-truncate">
                                             <span class="fw-medium">{{ $row->user->name }}</span>
                                         </a>
+                                        <small>#BBCUS{{ App\Helper\Helper::formatNumber($row->user->id)}} </small>
                                         <small>{{ $row->user->phone }}</small>
                                     </div>
                                 </div>

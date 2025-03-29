@@ -670,7 +670,7 @@ class Helper
         $fraction = $num / $divider;
         $fraction = number_format($fraction, 2);
     
-        return $fraction . " " . $ext;
+        return $fraction . "" . $ext;
     }
 
     public static function pages() {
@@ -683,13 +683,18 @@ class Helper
         return $formattedNumber; 
     }
 
+    public static function formatNumber($number){
+        $formattedNumber = str_pad($number, 4, '0', STR_PAD_LEFT);
+        return $formattedNumber; 
+    }
+
     public static function propertyTitle($row) {
         $title ="";
         if($row->bedroom){
             $title .= $row->bedroom.'BHK, ';
         }
         $title .= $row->type.' '.ucwords($row->property_detail).' '.config('constants.FOR_TYPE')[$row->for_type].' in '. $row->city .', '. $row->state;
-        return $title;
+        return ucwords($title);
     }
 
     public static function perUnitPrice($row) {
@@ -859,4 +864,6 @@ class Helper
             return $data ; 
         }
     }
+
+    
 }

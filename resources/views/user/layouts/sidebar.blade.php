@@ -98,7 +98,7 @@
                                         <path d="M10 2.5V7.5" stroke="#A8ABAE" stroke-width="1.4" stroke-linecap="round"
                                             stroke-linejoin="round" />
                                     </svg>
-                                    My package
+                                    My Orders
                                 </a>
                             </li>
                              
@@ -163,7 +163,7 @@
                                         <path d="M9.7513 11.8334L5.83464 14.1667L1.91797 11.8334" stroke="#A8ABAE"
                                             stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
-                                    My properties
+                                    My Properties
                                 </a>
                             </li>
                             <li class="nav-menu-item {{ in_array(Route::currentRouteName(), ['user.property.add']) ? 'active' : '' }}">
@@ -181,7 +181,7 @@
                                         <path d="M6.66797 15H7.5013" stroke="#A8ABAE" stroke-width="1.4"
                                             stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
-                                    Add property
+                                    Add Property
                                 </a>
                             </li>
                             <li class="nav-menu-item {{ in_array(Route::currentRouteName(), ['user.property.enquiries']) ? 'active' : '' }}">

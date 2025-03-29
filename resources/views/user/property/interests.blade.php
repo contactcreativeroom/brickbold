@@ -29,8 +29,8 @@
                                             {{-- <td>{{ ($rows->currentPage() - 1) * $rows->perPage() + $loop->iteration }}.</td> --}}
                                             <td>
                                                 <div class="listing-box">
-                                                    <div class="images">
-                                                        <img src="{{ App\Helper\Helper::getImage('storage/property/'.$row?->property->id, $row?->property?->image?->image) }}" alt="images" class="h-100">
+                                                    <div class="images ht-125">
+                                                        <img src="{{ App\Helper\Helper::getImage('storage/property/'.$row?->property->id, $row?->property?->image?->image) }}" alt="images" class="cover-img">
                                                     </div>
                                                     <div class="content">
                                                         <div class="title">

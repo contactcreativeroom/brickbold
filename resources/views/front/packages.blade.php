@@ -22,6 +22,7 @@
         <!-- section-faq -->
         <section class="section-faq ">
             <div class="container">
+                {!! $msg !!}
                 <div class="card-header  mb-48">
                     <h5 class="card-title mb-0">Search Filters</h5>
                     <form action="{{ route('packages') }}" method="get" enctype='multipart/form-data'>
@@ -136,12 +137,18 @@
                                 <p class="text-sub fw-6">Here are Packages that will best suit your need.</p>
                             </th>
                             @foreach ($rows as $k=>$row)
+                            @php
+                                $gst = $row->grand_price/118*18 ;
+                                $pacPrice = $row->grand_price - $gst;
+                            @endphp
                             <th class="table-col {{ ($k%2==0)? 'pk-bg-red' : ''}}">
                                 <h3 class="sub-title  fw-7">{{$row->name}}</h3>
                                 {{-- <p class="text-sub fw-6 ">Upgrade your {{$row->profile}} account to the {{$row->name}} package.</p> --}}
                                 <div class="title-price mb-3">
                                     <div class="month fw-7 text-color-primary"> <span class="text-decoration-line-through">{{ config('constants.CURRENCIES.symbol'). $row->price}}</span></div>
-                                    <h2 class="">{{ config('constants.CURRENCIES.symbol'). $row->grand_price}} </h2>
+                                    <h2 class="position-relative">
+                                        {{ config('constants.CURRENCIES.symbol'). $row->grand_price}}<sup data-bs-toggle="tooltip" data-bs-html="true" title="Price: {{ config('constants.CURRENCIES.symbol').round($pacPrice,2) }} <br> 18% GST Included: {{ config('constants.CURRENCIES.symbol').round($gst,2) }} "><img src="{{URL('images/info.png')}}" class="info-sm" height="20" /></sup>
+                                    </h2>    
                                 </div>
                                 {{-- <p class="">Get benefits for {{$row->property_type}} {{$row->type}} properties account for {{$row->days}} days.</p> --}}
                                 @auth('user')
@@ -247,5 +254,13 @@
         })
         .catch(error => console.error('Error:', error));
     } 
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    });
 </script>
 @endpush
