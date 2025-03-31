@@ -68,92 +68,98 @@
                 No Records found.
             </div>
             @else
-            <table class="table table-hover">
-                <thead class="table-primary">
-                    <tr>
-                        <th scope="col" class="border">Sr.</th>
-                        <th scope="col" class="border">Property</th>
-                        <th scope="col" class="border">Address</th>
-                        <th scope="col" class="border text-nowrap">Sell/Rent</th>
-                        <th scope="col" class="border">Type</th>
-                        <th scope="col" class="border">Status</th>
-                        <th scope="col" class="border">user</th>
-                        <th scope="col" class="border">Actions</th>
-                    </tr>
-                </thead>
-                <tbody  data-entity-type="category"  >
-                    @foreach($rows as $row)
-                    <tr data-entity-id="{{ $row->id }}">
-                        <td>{{ ($rows->currentPage() - 1) * $rows->perPage() + $loop->iteration }}.</td>
-                        <td class="sorting_1">
-                            <div class="d-flex justify-content-start align-items-center user-name">
-                                <div class="avatar-wrapper">
-                                    <div class="avatar avatar-xxl me-4">
-                                        <img src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" alt="Avatar" class="rounded">
-                                    </div>
-                                </div>
-                                <div class="d-flex flex-column">
-                                    <a href="{{route('property', $row->slug)}}" target="_blank" class="text-heading text-truncate">
-                                        <span class="fw-medium">{{$row->title}}</span>
-                                    </a>
-                                    <small>ID: {{$row->uid}}</small>
-                                    <small>Date: {{ App\Helper\Helper::formatStringDate($row->created_at)  }}</small>
-                                    <small>Views: {{$row->views}}</small>
-                                    <small class="text-btn text-color-primary" >{{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($row->price)}}</small>
-                                </div>
-                            </div>
-                        </td>      
-                        <td> 
-                            {{-- {{ $row->location }} 
-                            <small>{{ $row->state }}</small>--}}
-                            <small>{{ $row->city }}</small>
-                            <small>{{ $row->zip_code }}</small> 
-                        </td>   
-                        <td class="text-nowrap">{{config('constants.FOR_TYPE')[$row->for_type]}} </td>   
-                        <td>{{config('constants.TYPE')[$row->type]}}</td>   
-                        <td id="property_status_{{$row->id}}">
-                            @if ($row->status==1)
-                                <span class="badge bg-label-success me-1">Approved</span>
-                            @elseif ($row->status==2)
-                                <span class="badge bg-label-warning me-1">Pending</span>
-                            @elseif ($row->status==3)
-                                <span class="badge bg-label-secondary me-1">Sold</span>
-                            @else 
-                                <span class="badge bg-label-danger me-1">Declined</span>
-                            {{-- <div class="form-check form-switch">
-                                <input class="form-check-input entity-toggle" type="checkbox" data-entity-url="{{ route('admin.property.status.change') }}" data-entity-id="{{ $row->id }}" data-entity-type="property" {{ $row->status == 1 ? 'checked' : '' }}>
-                            </div> --}}
-                            @endif
-                        </td> 
-                        <td class="sorting_1">
-                            @if (isset($row->user_id) && $row->user_id > 0)
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-primary">
+                        <tr>
+                            <th scope="col" class="border">Sr.</th>
+                            <th scope="col" class="border">ID</th>
+                            <th scope="col" class="border">Property</th>
+                            <th scope="col" class="border">Address</th>
+                            <th scope="col" class="border text-nowrap">Sell/Rent</th>
+                            <th scope="col" class="border">Type</th>
+                            <th scope="col" class="border text-nowrap">Posted Date</th>
+                            <th scope="col" class="border">Status</th>
+                            <th scope="col" class="border">user</th>
+                            <th scope="col" class="border">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody  data-entity-type="category"  >
+                        @foreach($rows as $row)
+                        <tr data-entity-id="{{ $row->id }}">
+                            <td>{{ ($rows->currentPage() - 1) * $rows->perPage() + $loop->iteration }}.</td>
+                            <td class="text-nowrap">{{$row->uid}} </td>   
+                            <td class="sorting_1">
                                 <div class="d-flex justify-content-start align-items-center user-name">
                                     <div class="avatar-wrapper">
-                                        <div class="avatar avatar-sm me-4">
-                                            <img src="{{ App\Helper\Helper::getProfileImage('storage/user/'.$row->user->id, $row->user->profile_image) }}" alt="Avatar" class="rounded-circle">
+                                        <div class="avatar avatar-xxl me-4">
+                                            <img src="{{ App\Helper\Helper::getImage('storage/property/'.$row->id, $row?->image?->image) }}" alt="Avatar" class="rounded">
                                         </div>
                                     </div>
                                     <div class="d-flex flex-column">
-                                        <a href="{{route('admin.user', $row->user_id)}}" class="text-heading text-truncate">
-                                            <span class="fw-medium">{{ $row->user->name }}</span>
+                                        <a href="{{route('property', $row->slug)}}" target="_blank" class="text-heading text-truncate">
+                                            <span class="fw-medium">{{$row->title}}</span>
                                         </a>
-                                        <small>#BBCUS{{ App\Helper\Helper::formatNumber($row->user->id)}} </small>
-                                        <small>{{ $row->user->phone }}</small>
+                                        {{-- <small>ID: {{$row->uid}}</small> --}}
+                                        {{-- <small>Date: {{ App\Helper\Helper::formatStringDate($row->created_at)  }}</small> --}}
+                                        <small>Views: {{$row->views}}</small>
+                                        <small class="text-btn text-color-primary" >{{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($row->price)}}</small>
                                     </div>
                                 </div>
-                            @else 
-                                Admin
-                            @endif                           
+                            </td>      
+                            <td> 
+                                {{-- {{ $row->location }} 
+                                <small>{{ $row->state }}</small>--}}
+                                <small>{{ $row->city }}</small>
+                                <small>{{ $row->zip_code }}</small> 
+                            </td>   
+                            <td class="text-nowrap">{{config('constants.FOR_TYPE')[$row->for_type]}} </td>   
+                            <td>{{config('constants.TYPE')[$row->type]}}</td>   
+                            <td class="text-nowrap">{{ App\Helper\Helper::formatStringDate($row->created_at)  }}</td>   
+                            <td id="property_status_{{$row->id}}">
+                                @if ($row->status==1)
+                                    <span class="badge bg-label-success me-1">Approved</span>
+                                @elseif ($row->status==2)
+                                    <span class="badge bg-label-warning me-1">Pending</span>
+                                @elseif ($row->status==3)
+                                    <span class="badge bg-label-secondary me-1">Sold</span>
+                                @else 
+                                    <span class="badge bg-label-danger me-1">Declined</span>
+                                {{-- <div class="form-check form-switch">
+                                    <input class="form-check-input entity-toggle" type="checkbox" data-entity-url="{{ route('admin.property.status.change') }}" data-entity-id="{{ $row->id }}" data-entity-type="property" {{ $row->status == 1 ? 'checked' : '' }}>
+                                </div> --}}
+                                @endif
+                            </td> 
+                            <td class="sorting_1">
+                                @if (isset($row->user_id) && $row->user_id > 0)
+                                    <div class="d-flex justify-content-start align-items-center user-name">
+                                        <div class="avatar-wrapper">
+                                            <div class="avatar avatar-sm me-4">
+                                                <img src="{{ App\Helper\Helper::getProfileImage('storage/user/'.$row->user->id, $row->user->profile_image) }}" alt="Avatar" class="rounded-circle">
+                                            </div>
+                                        </div>
+                                        <div class="d-flex flex-column">
+                                            <a href="{{route('admin.user', $row->user_id)}}" class="text-heading text-truncate">
+                                                <span class="fw-medium">{{ $row->user->name }}</span>
+                                            </a>
+                                            <small>#BBCUS{{ App\Helper\Helper::formatNumber($row->user->id)}} </small>
+                                            <small>{{ $row->user->phone }}</small>
+                                        </div>
+                                    </div>
+                                @else 
+                                    Admin
+                                @endif                           
 
-                        </td>
-                        <td class="text-nowrap">
-                            <a href="{{route("admin.property.edit", $row->id)}}"><span class="btn-primary badge" text-capitalized="">Edit</span></a>
-                            <a href="javascript:void(0)" data-url="{{route('admin.property.view', $row->id)}}" data-id="{{$row->id}}" class="view-preview"><span class="btn-primary badge" text-capitalized="">View</span></a>  
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                            </td>
+                            <td class="text-nowrap">
+                                <a href="{{route("admin.property.edit", $row->id)}}"><span class="btn-primary badge" text-capitalized="">Edit</span></a>
+                                <a href="javascript:void(0)" data-url="{{route('admin.property.view', $row->id)}}" data-id="{{$row->id}}" class="view-preview"><span class="btn-primary badge" text-capitalized="">View</span></a>  
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
             <div class="row custom-row ">
                 <div class="col-sm-6 text-center text-sm-right order-sm-1">
                     Showing {{ $rows->firstItem() }} to {{ $rows->lastItem() }} of {{ $rows->total() }} results

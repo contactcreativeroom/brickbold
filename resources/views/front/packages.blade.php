@@ -152,7 +152,7 @@
                                 </div>
                                 {{-- <p class="">Get benefits for {{$row->property_type}} {{$row->type}} properties account for {{$row->days}} days.</p> --}}
                                 @auth('user')
-                                    <button class="tf-btn bg-color-primary  package-buy-btn" onclick="payNow('{{ $row->id }}')">Buy</button> 
+                                    <a href="{{ route('package.checkout', ['package_id' => $row->id]) }}" class="tf-btn bg-color-primary  package-buy-btn" target="_blank">Buy</a> 
                                 @endauth
                                 @guest('user')
                                     <a href="{{ route('login', ['redirect' => route('packages')]) }}" class="tf-btn bg-color-primary package-buy-btn">Buy</a>                                        

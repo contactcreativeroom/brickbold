@@ -15,7 +15,12 @@
                                 <div class="box box-style h-100 position-relative">
                                     <span class="text-color-primary">#BBORD{{ App\Helper\Helper::formatNumber($row->id)}}</span>
                                     <h5 class="sub-title  fw-7">{{$row->order->package_name}}</h5>
-                                    <p class="text-sub fw-6 ">  <span class="text-color-primary">Post Properties:</span> {{$row->post_property}} ,  <span class="text-color-primary">Contacts:</span> {{$row->contacts}} ,  <span class="text-color-primary">Days:</span> {{$row->days}} </p>
+                                    <p class="text-sub fw-6 ">  
+                                        @if (strtoupper(trim($row->package_type)) != 'BUY')                                         
+                                            <span class="text-color-primary">Post Properties:</span> {{App\Helper\Helper::postProperyNumberShown($row->post_property)}} ,  
+                                        @endif                                        
+                                        <span class="text-color-primary">Contacts:</span> {{$row->contacts}} ,  <span class="text-color-primary">Days:</span> {{$row->days}} 
+                                    </p>
                                     <div class="title-price flex">
                                         <h3 class="text-color-primary">{{ config('constants.CURRENCIES.symbol'). $row->order->grand_price}} </h3>
                                         <div class="month fw-7"> / <span class="text-decoration-line-through">{{ config('constants.CURRENCIES.symbol'). $row->order->package_price}}</span></div>

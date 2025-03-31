@@ -25,6 +25,7 @@
                 No Records found.
             </div>
             @else
+            <div class="table-responsive">
             <table class="table table-hover">
                 <thead class="table-primary">
                     <tr>
@@ -58,7 +59,7 @@
 
                 </tbody>
             </table>
-
+            </div>
 
             @endif
         </div>

@@ -72,6 +72,7 @@ Route::get('/packages', [HomeController::class, 'packages'])->name('packages');
 Route::post('/newsletter/post', [NewsletterController::class, 'postData'])->name('newsletter.post');
 Route::post('/newsletter/mobile/post', [NewsletterController::class, 'postDataMobile'])->name('newsletter.mobile.post');
  
+Route::get('/checkout/{package_id}', [PaymentController::class, 'checkoutPackage'])->name('package.checkout');
 Route::post('/create-order', [PaymentController::class, 'createOrder'])->name('payment.create');
 Route::post('/verify-payment', [PaymentController::class, 'handlePayment'])->name('payment.verify');
 Route::post('/email-verify/link-sent', [UserController::class, 'verifyEmailLinkSent'])->name('email.verify.link');

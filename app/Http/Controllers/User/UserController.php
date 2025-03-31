@@ -122,7 +122,7 @@ class UserController extends Controller
 
     public function package(){
         $user = $this->userAuth;
-        $subscriptions = $user->subscriptions()->where('status', 1)->latest()->paginate($this->pagerecords);
+        $subscriptions = $user->allSubscriptions()->where('status', 1)->latest()->paginate($this->pagerecords);
         $properties = $user->Properties()->get();
         $data=array('rows'=>$subscriptions, 'properties'=>$properties); 
         return view($this->prefix.'.package')->with($data);

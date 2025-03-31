@@ -27,41 +27,43 @@
                 No Records found.
             </div>
             @else
-            <table class="table table-hover">
-                <thead class="table-primary">
-                    <tr>
-                        <th scope="col" class="border">Sr.</th>
-                        {{-- <th scope="col" class="border">Icon</th> --}}
-                        <th scope="col" class="border">Title</th>
-                        <th scope="col" class="border">URL</th>
-                        <th scope="col" class="border text-nowrap">Sub title</th>
-                        <th scope="col" class="border">Status</th>
-                        <th scope="col" class="border">Created on</th>
-                        <th scope="col" class="border">Actions</th> 
-                    </tr>
-                </thead>
-                <tbody  data-entity-type="page"  >
-                    @foreach($rows as $row)
-                    <tr data-entity-id="{{ $row->id }}">
-                        <td>{{ ($rows->currentPage() - 1) * $rows->perPage() + $loop->iteration }}.</td>
-                        {{-- <td><span class="row-number"></span>{!! $row->icon? '<i class="menu-icon fa-solid '.$row->icon.'"></i>' :'-' !!}</td> --}}
-                        <td><span class="row-number"></span>{{$row->title}}</td>
-                        <td><span class="row-number"></span>{{$row->slug}}</td>
-                        <td><span class="row-number"></span>{{$row->sub_title}}</td>                          
-                        <td><span class="row-number"></span>{{$row->status == 1 ? 'Active' : 'In-active'}}</td>                          
-                        <td><span class="row-number"></span> {{ App\Helper\Helper::formatStringDate($row->created_at, true)  }}</td>
-                        <td>
-                            <div class="btn-group">
-                                <a class="btn btn-primary" href="{{ route('admin.page.edit', $row->id) }}">Edit</a>
-                            </div>
-                            <div class="btn-group">
-                                <a class="btn btn-danger delete-entity" href="javascript:void(0)" data-entity-url="{{ route('admin.page.delete', $row->id) }}" data-entity-id="{{ $row->id }}" data-entity-type="page" data-entity-title="{{ $row->name }}">Delete</a>
-                            </div>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-primary">
+                        <tr>
+                            <th scope="col" class="border">Sr.</th>
+                            {{-- <th scope="col" class="border">Icon</th> --}}
+                            <th scope="col" class="border">Title</th>
+                            <th scope="col" class="border">URL</th>
+                            <th scope="col" class="border text-nowrap">Sub title</th>
+                            <th scope="col" class="border">Status</th>
+                            <th scope="col" class="border">Created on</th>
+                            <th scope="col" class="border">Actions</th> 
+                        </tr>
+                    </thead>
+                    <tbody  data-entity-type="page"  >
+                        @foreach($rows as $row)
+                        <tr data-entity-id="{{ $row->id }}">
+                            <td>{{ ($rows->currentPage() - 1) * $rows->perPage() + $loop->iteration }}.</td>
+                            {{-- <td><span class="row-number"></span>{!! $row->icon? '<i class="menu-icon fa-solid '.$row->icon.'"></i>' :'-' !!}</td> --}}
+                            <td><span class="row-number"></span>{{$row->title}}</td>
+                            <td><span class="row-number"></span>{{$row->slug}}</td>
+                            <td><span class="row-number"></span>{{$row->sub_title}}</td>                          
+                            <td><span class="row-number"></span>{{$row->status == 1 ? 'Active' : 'In-active'}}</td>                          
+                            <td><span class="row-number"></span> {{ App\Helper\Helper::formatStringDate($row->created_at, true)  }}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <a class="btn btn-primary" href="{{ route('admin.page.edit', $row->id) }}">Edit</a>
+                                </div>
+                                <div class="btn-group">
+                                    <a class="btn btn-danger delete-entity" href="javascript:void(0)" data-entity-url="{{ route('admin.page.delete', $row->id) }}" data-entity-id="{{ $row->id }}" data-entity-type="page" data-entity-title="{{ $row->name }}">Delete</a>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
             <div class="row custom-row ">
                 <div class="col-sm-6 text-center text-sm-right order-sm-1">
                     Showing {{ $rows->firstItem() }} to {{ $rows->lastItem() }} of {{ $rows->total() }} results

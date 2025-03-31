@@ -23,6 +23,7 @@
                 No Records found.
             </div>
             @else
+            <div class="table-responsive">
             <table class="table table-hover">
                 <thead class="table-primary">
                     <tr>
@@ -41,6 +42,7 @@
                     @endforeach
                 </tbody>
             </table>
+            </div>
             <div class="row custom-row ">
                 <div class="col-sm-6 text-center text-sm-right order-sm-1">
                     Showing {{ $rows->firstItem() }} to {{ $rows->lastItem() }} of {{ $rows->total() }} results

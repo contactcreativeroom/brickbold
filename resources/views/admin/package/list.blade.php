@@ -60,53 +60,55 @@
                 No Records found.
             </div>
             @else
-            <table class="table table-hover">
-                <thead class="table-primary">
-                    <tr>
-                        <th scope="col" class="border">Sr.</th>
-                        <th scope="col" class="border">Name</th>
-                        <th scope="col" class="border">Type</th>
-                        <th scope="col" class="border">Profile</th>
-                        <th scope="col" class="border">Validity</th>
-                        <th scope="col" class="border">Amount</th>
-                        <th scope="col" class="border">Discount(%)</th>
-                        <th scope="col" class="border text-nowrap">Final Amount</th>
-                        <th scope="col" class="border">Contacts</th>
-                        <th scope="col" class="border">Status</th>
-                        <th scope="col" class="border">Actions</th>
-                    </tr>
-                </thead>
-                <tbody  data-entity-type="category"  >
-                    @foreach($rows as $row)
-                    <tr data-entity-id="{{ $row->id }}">
-                        <td>{{ ($rows->currentPage() - 1) * $rows->perPage() + $loop->iteration }}.</td>
-                            
-                        <td>{{ $row->name }} <br><small>Date: {{ App\Helper\Helper::formatStringDate($row->created_at)  }}</small></td>   
-                        <td>{{ $row->type }}</td>    
-                        <td>{{ $row->profile }}</td>   
-                        <td>{{ $row->days }} Days</td>
-                        <td>{{ config('constants.CURRENCIES.symbol'). $row->price}}</td>
-                        <td>{{ $row->discount }}</td>
-                        <td>{{ config('constants.CURRENCIES.symbol'). $row->grand_price }}</td>
-                        <td>{{ $row->unit }}</td>   
-                        <td>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input entity-toggle" type="checkbox" data-entity-url="{{ route('admin.package.status.change') }}" data-entity-id="{{ $row->id }}" data-entity-type="user" {{ $row->status == 1 ? 'checked' : '' }}>
-                            </div>
-                        </td> 
-                        <td>    
-                            <a href="{{route("admin.package.edit", $row->id)}}">
-                                <span class="btn-primary badge" text-capitalized="">Edit</span>
-                            </a> 
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-primary">
+                        <tr>
+                            <th scope="col" class="border">Sr.</th>
+                            <th scope="col" class="border">Name</th>
+                            <th scope="col" class="border">Type</th>
+                            <th scope="col" class="border">Profile</th>
+                            <th scope="col" class="border">Validity</th>
+                            <th scope="col" class="border">Amount</th>
+                            <th scope="col" class="border">Discount(%)</th>
+                            <th scope="col" class="border text-nowrap">Final Amount</th>
+                            <th scope="col" class="border">Contacts</th>
+                            <th scope="col" class="border">Status</th>
+                            <th scope="col" class="border">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody  data-entity-type="category"  >
+                        @foreach($rows as $row)
+                        <tr data-entity-id="{{ $row->id }}">
+                            <td>{{ ($rows->currentPage() - 1) * $rows->perPage() + $loop->iteration }}.</td>
+                                
+                            <td>{{ $row->name }} <br><small>Date: {{ App\Helper\Helper::formatStringDate($row->created_at)  }}</small></td>   
+                            <td>{{ $row->type }}</td>    
+                            <td>{{ $row->profile }}</td>   
+                            <td>{{ $row->days }} Days</td>
+                            <td>{{ config('constants.CURRENCIES.symbol'). $row->price}}</td>
+                            <td>{{ $row->discount }}</td>
+                            <td>{{ config('constants.CURRENCIES.symbol'). $row->grand_price }}</td>
+                            <td>{{ $row->unit }}</td>   
+                            <td>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input entity-toggle" type="checkbox" data-entity-url="{{ route('admin.package.status.change') }}" data-entity-id="{{ $row->id }}" data-entity-type="user" {{ $row->status == 1 ? 'checked' : '' }}>
+                                </div>
+                            </td> 
+                            <td>    
+                                <a href="{{route("admin.package.edit", $row->id)}}">
+                                    <span class="btn-primary badge" text-capitalized="">Edit</span>
+                                </a> 
 
-                            {{-- <a href="{{route("admin.package.delete", $row->id)}}">
-                                <span class="btn-primary badge" text-capitalized="">Delete</span>
-                            </a>  --}}
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                                {{-- <a href="{{route("admin.package.delete", $row->id)}}">
+                                    <span class="btn-primary badge" text-capitalized="">Delete</span>
+                                </a>  --}}
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
             <div class="row custom-row ">
                 <div class="col-sm-6 text-center text-sm-right order-sm-1">
                     Showing {{ $rows->firstItem() }} to {{ $rows->lastItem() }} of {{ $rows->total() }} results

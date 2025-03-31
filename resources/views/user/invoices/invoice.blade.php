@@ -340,9 +340,9 @@
                                 <td>
                                     <h6 class="para">Discount</h6>
                                 </td>
-                                <td>
+                                {{-- <td>
                                     <h6 class="para">Net Price</h6>
-                                </td>
+                                </td> --}}
 
                             </tr>
 
@@ -358,12 +358,12 @@
                                     {{ config('constants.CURRENCIES.symbol'). number_format($row->order->package_price, 2) }}
                                 </td>
                                 <td> {{config('constants.CURRENCIES.symbol').($row->order->package_price*$row->order->discount/100)}} ({{$row->order->discount}}%) </td>
-                                <td> {{ config('constants.CURRENCIES.symbol').number_format($grandPrice, 2) }}</td>
+                                {{-- <td> {{ config('constants.CURRENCIES.symbol').number_format($grandPrice, 2) }}</td> --}}
                             </tr> 
 
 
                             <tr style="border-bottom: 1px solid #ddd;">
-                                <td colspan="4" rowspan="3"></td>
+                                <td colspan="3" rowspan="3"></td>
                                 <td colspan="1" style="width:100px; display:block;">Sub Total :</td>
                                 <td colspan="1" align="right">{{ config('constants.CURRENCIES.symbol').number_format($pacPrice, 2) }}</td>
                             </tr>

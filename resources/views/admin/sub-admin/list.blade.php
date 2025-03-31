@@ -28,48 +28,50 @@
                 No data found.
             </div>
             @else
-            <table class="table table-hover">
-                <thead class="table-primary">
-                    <tr>
-                        <th scope="col" class="border">Sr.</th>
-                        <th scope="col" class="border">Name</th>
-                        <th scope="col" class="border">Email</th>
-                        <th scope="col" class="border">Phone</th>
-                        <th scope="col" class="border">Image</th>
-                        <th scope="col" class="border">Status</th>
-                        <th scope="col" class="border">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($rows as $row)
-                    <tr class="sortable-row" data-entity-id="{{ $row->id }}">
-                        <td>{{ ($rows->currentPage() - 1) * $rows->perPage() + $loop->iteration }}.</td>
-                        {{-- <td><i class="fas fa-arrows-alt"></i></td> --}}
-                        <td><span class="row-number"></span> {{ $row->name }}</td>
-                        <td><span class="row-number"></span> {{ $row->email }}</td>
-                        <td><span class="row-number"></span> {{ $row->phone }}</td>
-                        <td><img src="{{ App\Helper\Helper::getImage('storage/subadmin/'.$row->id, $row->image) }}" alt="{{ $row->title }}" class="list-images"></td>
-                        <td>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input entity-toggle" type="checkbox" data-entity-url="{{ route('admin.subadmin.status.change') }}" data-entity-id="{{ $row->id }}" data-entity-type="subadmin" {{ $row->status == 1 ? 'checked' : '' }}>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="btn-group">
-                                <a class="btn btn-primary" href="{{ route('admin.subadmin.edit', $row->id) }}">Edit</a>                                 
-                            </div>
-                            <div class="btn-group">
-                                <a class="btn btn-danger delete-entity" href="javascript:void(0)" data-entity-url="{{ route('admin.subadmin.delete', $row->id) }}" data-entity-id="{{ $row->id }}" data-entity-type="subadmin"  data-entity-title="{{ $row->title }}">Delete</a>
-                            </div>
-                            <div class="btn-group">
-                                <a class="btn btn-primary" href="{{ route('admin.subadmin.edit', $row->id) }}">Login</a>                                 
-                            </div>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-primary">
+                        <tr>
+                            <th scope="col" class="border">Sr.</th>
+                            <th scope="col" class="border">Name</th>
+                            <th scope="col" class="border">Email</th>
+                            <th scope="col" class="border">Phone</th>
+                            <th scope="col" class="border">Image</th>
+                            <th scope="col" class="border">Status</th>
+                            <th scope="col" class="border">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($rows as $row)
+                        <tr class="sortable-row" data-entity-id="{{ $row->id }}">
+                            <td>{{ ($rows->currentPage() - 1) * $rows->perPage() + $loop->iteration }}.</td>
+                            {{-- <td><i class="fas fa-arrows-alt"></i></td> --}}
+                            <td><span class="row-number"></span> {{ $row->name }}</td>
+                            <td><span class="row-number"></span> {{ $row->email }}</td>
+                            <td><span class="row-number"></span> {{ $row->phone }}</td>
+                            <td><img src="{{ App\Helper\Helper::getImage('storage/subadmin/'.$row->id, $row->image) }}" alt="{{ $row->title }}" class="list-images"></td>
+                            <td>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input entity-toggle" type="checkbox" data-entity-url="{{ route('admin.subadmin.status.change') }}" data-entity-id="{{ $row->id }}" data-entity-type="subadmin" {{ $row->status == 1 ? 'checked' : '' }}>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="btn-group">
+                                    <a class="btn btn-primary" href="{{ route('admin.subadmin.edit', $row->id) }}">Edit</a>                                 
+                                </div>
+                                <div class="btn-group">
+                                    <a class="btn btn-danger delete-entity" href="javascript:void(0)" data-entity-url="{{ route('admin.subadmin.delete', $row->id) }}" data-entity-id="{{ $row->id }}" data-entity-type="subadmin"  data-entity-title="{{ $row->title }}">Delete</a>
+                                </div>
+                                <div class="btn-group">
+                                    <a class="btn btn-primary" href="{{ route('admin.subadmin.edit', $row->id) }}">Login</a>                                 
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
 
-            </table>
+                </table>
+            </div>
             <div class="row custom-row ">
                 <div class="col-sm-6 text-center text-sm-right order-sm-1">
                     Showing {{ $rows->firstItem() }} to {{ $rows->lastItem() }} of {{ $rows->total() }} results

@@ -245,4 +245,15 @@ class PaymentController extends Controller
             'json_response' => json_encode((array) $payment),
         ]);
     }
+
+    public function checkoutPackage(Request $request)
+    {
+        $packageId = $request->package_id ;
+        $package = Package::find($packageId);
+        if(!$package){
+            Helper::toastMsg(false, "Package not found.");
+            return redirect()->route('packages'); 
+        }
+        return view($this->prefix.'.checkout',['row' => $package]);
+    }
 }

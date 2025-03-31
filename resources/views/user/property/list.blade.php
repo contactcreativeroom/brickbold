@@ -47,9 +47,11 @@
                             <table>
                                 <thead>
                                     <tr>
+                                        <th>ID</th>
                                         <th>Listing</th>
                                         <th>Status</th>
                                         <th>Type</th>
+                                        <th>Posted Date</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -57,6 +59,7 @@
                                     @foreach($rows as $key => $row)
                                         <tr class="file-delete">
                                             {{-- <td>{{ ($rows->currentPage() - 1) * $rows->perPage() + $loop->iteration }}.</td> --}}
+                                            <td> {{$row->uid}}</td>
                                             <td>
                                                 <div class="listing-box">
                                                     <div class="images ht-125">
@@ -66,8 +69,8 @@
                                                         <div class="title">
                                                             <a href="{{route('property', $row->slug)}}" target="_blank" class="link">{{$row->title}}</a> 
                                                         </div>
-                                                        <div class="text-date">ID: {{$row->uid}}</div>
-                                                        <div class="text-date">Posting date: {{ App\Helper\Helper::formatStringDate($row->created_at)  }}</div>
+                                                        {{-- <div class="text-date">ID: {{$row->uid}}</div> --}}
+                                                        {{-- <div class="text-date">Posting date: {{ App\Helper\Helper::formatStringDate($row->created_at)  }}</div> --}}
                                                         <div class="text-date">Views: {{$row->views}}</div>
                                                         <div class="text-btn text-color-primary">{{ config('constants.CURRENCIES.symbol'). App\Helper\Helper::priceFormat($row->price)}}</div>
                                                     </div>
@@ -80,6 +83,9 @@
                                             </td>
                                             <td> 
                                                 {{config('constants.TYPE')[$row->type]}}
+                                            </td>
+                                            <td> 
+                                                {{ App\Helper\Helper::formatStringDate($row->created_at)  }}
                                             </td>
                                             <td>
                                                 @if ($activateButton)

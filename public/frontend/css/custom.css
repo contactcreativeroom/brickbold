@@ -808,3 +808,12 @@ p.sub-heading {
     font-weight: 400;
     padding: 2px 5px;
 }
+
+.tax-section li {
+    font-size: 16px;
+    padding: 8px 10px;
+}
+
+.checkout-page .zui-scroller{
+    /* height: 385px; */
+}

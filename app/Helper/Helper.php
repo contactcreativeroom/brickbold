@@ -865,5 +865,17 @@ class Helper
         }
     }
 
+    public static function postProperyNumberShown($value){
+        if (Auth::guard('user')->check()) {
+            $user = Auth::guard('user')->user();
+            $userType = $user->user_type;    
+            if($userType == 'Agent' || $userType == 'Builder'){
+                if(!($value > 0)){
+                    return "Unlimited" ;
+                } 
+            }
+        } 
+        return $value ;
+    } 
     
 }
