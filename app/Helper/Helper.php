@@ -662,10 +662,11 @@ class Helper
         } elseif ($num >= 1e5) { 
             $ext = "Lac";
             $divider = 1e5;
-        } elseif ($num >= 1e3) { 
-            $ext = "k";
-            $divider = 1e3;
-        }
+        } 
+        // elseif ($num >= 1e3) { 
+        //     $ext = "k";
+        //     $divider = 1e3;
+        // }
     
         $fraction = $num / $divider;
         $fraction = number_format($fraction, 2);
@@ -876,6 +877,20 @@ class Helper
             }
         } 
         return $value ;
-    } 
+    }
+
+    public static function checkIfPackageAlreadyBuy($value){
+        if (Auth::guard('user')->check()) {
+            $user = Auth::guard('user')->user();
+            $userType = $user->user_type;    
+            if($userType == 'Agent' || $userType == 'Builder'){
+                $subscriptions = $user->allSubscriptions()->where('package_id', $value)->where('start_date', '<=', now())->where('end_date', '>=', now())->where('status', 1)->latest()->get();
+                if (!$subscriptions->isEmpty()) {
+                    return true;
+                } 
+            }            
+        } 
+        return false;
+    }
     
 }

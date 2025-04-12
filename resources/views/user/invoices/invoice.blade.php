@@ -308,9 +308,22 @@
                         <tr>
                             <td colspan="2">
                                 <h6>Billed To:</h6>
-                                <p> {{ $row->user->name }} </p>
+                                @php
+                                    $userType = $row->user->user_type;  
+                                @endphp
+                                @if($userType == 'Agent' || $userType == 'Builder')
+                                    <p> {{ $row->user->business_name ?? $row->user->name }} </p>
+                                @else
+                                    <p> {{ $row->user->name }} </p>
+                                @endif
+                                
                                 <p> {{ $row->user->address }} </p>
                                 <p><b>Mobile:</b> +91 {{ $row->user->phone }} </p>
+                                @if($userType == 'Agent' || $userType == 'Builder')
+                                    @if ($row->user->gstin)                                        
+                                        <p><b>GST No.:</b> {{ $row->user->gstin }} </p>
+                                    @endif
+                                @endif
                             </td>
                             <td colspan="1">
                                 <p><b>REF NO. :- #BBORD{{ App\Helper\Helper::formatNumber($row->id) }}</b></p>

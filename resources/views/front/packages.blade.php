@@ -152,7 +152,12 @@
                                 </div>
                                 {{-- <p class="">Get benefits for {{$row->property_type}} {{$row->type}} properties account for {{$row->days}} days.</p> --}}
                                 @auth('user')
-                                    <a href="{{ route('package.checkout', ['package_id' => $row->id]) }}" class="tf-btn bg-color-primary  package-buy-btn" target="_blank">Buy</a> 
+                                    @if (App\Helper\Helper::checkIfPackageAlreadyBuy($row->id))
+                                        <a href="javascript:void(0)" class="tf-btn bg-color-primary package-buy-btn disable" >Buy</a> 
+                                        <p class="text-color-primary"><b>Already active</b></p>
+                                    @else
+                                        <a href="{{ route('package.checkout', ['package_id' => $row->id]) }}" class="tf-btn bg-color-primary  package-buy-btn" target="_blank">Buy</a> 
+                                    @endif
                                 @endauth
                                 @guest('user')
                                     <a href="{{ route('login', ['redirect' => route('packages')]) }}" class="tf-btn bg-color-primary package-buy-btn">Buy</a>                                        

@@ -212,6 +212,7 @@
                                     <i class="icon-CaretDown"></i>
                                 </div>
                                 <div class=" menu-user">
+                                    <div class="text-center mobile-view">{{ auth('user')->user()->name ?? 'Anonymous' }} <hr> </div> 
                                     <a class="dropdown-item" href="{{route('user.dashboard')}}">
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">

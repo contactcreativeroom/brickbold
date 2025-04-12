@@ -91,6 +91,17 @@ class UserController extends Controller
         return view($this->prefix.'.profile');
     }
 
+    public function removeProfileImage(Request $request){
+        $user = $this->userAuth;
+        $user->profile_image = null;
+        $user->save();
+        Helper::toastMsg(true, 'Profile image removed successfully!');
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Profile image removed successfully!'
+        ]); 
+    }
+
     public function changePassword(Request $request){ 
         
         if ($request->isMethod('post')) { 

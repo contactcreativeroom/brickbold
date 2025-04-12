@@ -137,7 +137,7 @@
                                                         <div class="form__entry entry_block">
                                                             <div class="form__label-row ">
                                                                 <fieldset class="entry__field">
-                                                                    <input type="text" class="input input-nl {{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="Email" name="email" id="email-contact" value="@if(old('email')!=null){{old('email')}}@endif">
+                                                                    <input type="email" class="input input-nl {{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="Email" name="email" id="email-contact" value="@if(old('email')!=null){{old('email')}}@endif" required>
                                                                 </fieldset>
                                                             </div>
                                                             @if($errors->has('email'))
@@ -153,7 +153,7 @@
                                                                 <div class="checkbox-item ">
                                                                     <label>
                                                                         <span class="text-2 text-color-default">I have read and agree to the terms & conditions</span>
-                                                                        <input type="checkbox" class="input_replaced {{ $errors->has('accept_term_condition') ? ' is-invalid' : '' }}" value="1" name="accept_term_condition">
+                                                                        <input type="checkbox" class="input_replaced {{ $errors->has('accept_term_condition') ? ' is-invalid' : '' }}" value="1" name="accept_term_condition" required>
                                                                         <span class="btn-checkbox"></span>
                                                                     </label>
                                                                 </div>
@@ -178,7 +178,7 @@
                                                         </button>
                                                     </div>
                                             </div>
-                                            <input type="text" name="email_address_check" value="" class="input--hidden">
+                                            <input type="text" name="email_address_check" value="" class="input--hidden" >
                                             <input type="hidden" name="locale" value="en">
                                             </form>
                                         </div>

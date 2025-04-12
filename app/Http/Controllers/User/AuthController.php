@@ -342,14 +342,7 @@ class AuthController extends Controller
                     'status' => 1,
                 ]); 
 
-                $details = array(
-                    'logo' => Helper::getLogo(),
-                    'name'=> $property?->user?->name,
-                    'email'=>$property?->user?->email,
-                    'property_name'=>$property->title,
-                    'property_url'=> route('property', $property->slug),
-                 );
-                dispatch(new \App\Jobs\PropertyEnquiryQueue($details));
+                
                 
                 if (isset($property->user->phone) && $property->user->phone != ""){
                     $mobile = $property->user->phone;
@@ -361,6 +354,17 @@ class AuthController extends Controller
                         $message = "Hi, ".$user?->name." ".$user?->phone." expressed interest in renting your accommodation on Brickbold.";
                     }
                     Helper::sentSMS($mobile, $message, $templateId);
+                }
+
+                if (isset($property->user->email) && $property->user->email != ""){
+                    $details = array(
+                        'logo' => Helper::getLogo(),
+                        'name'=> $property?->user?->name,
+                        'email'=>$property?->user?->email,
+                        'property_name'=>$property->title,
+                        'property_url'=> route('property', $property->slug),
+                    );
+                    dispatch(new \App\Jobs\PropertyEnquiryQueue($details));
                 }
 
                 Helper::toastMsg(true, 'Thank you for reaching out! Your enquiry has been successfully submitted. One of our real estate experts will get in touch with you soon.');
@@ -445,8 +449,7 @@ class AuthController extends Controller
                     'password'=>$password,
                 );
                 dispatch(new \App\Jobs\RegisterQueue($details));
-            }
-            
+            }            
         }
     
         Auth::guard('user')->login($user);

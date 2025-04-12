@@ -102,6 +102,7 @@ Route::middleware(['auth.user'])->prefix('user')->group(function () {
     Route::get('/logout', [UserAuthController::class, 'logout'])->name('user.logout');
     Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
     Route::any('/profile/edit', [UserController::class, 'editProfile'])->name('user.profile.edit');
+    Route::post('/profile/image/remove', [UserController::class, 'removeProfileImage'])->name('user.profile.image.remove');
     Route::any('/change/password', [UserController::class, 'changePassword'])->name('user.change.password');
     Route::get('/email/verify/{id}/{hash}', [UserController::class, 'verifyEmail'])->middleware(['auth.user', 'signed'])->name('verification.verify');
 

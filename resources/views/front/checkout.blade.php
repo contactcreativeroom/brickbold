@@ -159,6 +159,11 @@
                 })
                 .then(response => response.json())
                 .then(data => {
+                    if (data.error) {
+                        window.location.href = data.redirect_url;
+                        return;
+                    }
+                    
                     const options = {
                         "key": data.key,
                         "amount": data.amount,

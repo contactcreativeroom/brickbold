@@ -178,14 +178,7 @@ class PropertyController extends Controller
         
         if($propertyEnquiry){
             
-            $details = array(
-                'logo' => Helper::getLogo(),
-                'name'=> $property?->user?->name,
-                'email'=>$property?->user?->email,
-                'property_name'=>$property->title,
-                'property_url'=> route('property', $property->slug),
-             );
-            dispatch(new \App\Jobs\PropertyEnquiryQueue($details));
+            
 
             if (isset($property->user->phone) && $property->user->phone != ""){
                 $mobile = $property->user->phone;
@@ -198,6 +191,17 @@ class PropertyController extends Controller
                 }
                 Helper::sentSMS($mobile, $message, $templateId);
             }
+            if (isset($property->user->email) && $property->user->email != ""){
+                $details = array(
+                    'logo' => Helper::getLogo(),
+                    'name'=> $property?->user?->name,
+                    'email'=>$property?->user?->email,
+                    'property_name'=>$property->title,
+                    'property_url'=> route('property', $property->slug),
+                );
+                dispatch(new \App\Jobs\PropertyEnquiryQueue($details));
+            }
+
         } else{
             Helper::toastMsg(false, "Opps! Some error occured.");
             return back()->withInput();

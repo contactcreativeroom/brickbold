@@ -740,7 +740,7 @@ a {
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
-a:hover, a:focus {
+a:hover {
   color: var(--Primary);
   outline: 0;
   -webkit-transition: all 0.3s ease;

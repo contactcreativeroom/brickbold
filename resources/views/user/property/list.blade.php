@@ -47,7 +47,7 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        <th class="width-unset">ID</th>
                                         <th>Listing</th>
                                         <th>Status</th>
                                         <th>Type</th>

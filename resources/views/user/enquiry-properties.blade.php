@@ -30,8 +30,8 @@
                                                 <tr class="file-delete">
                                                     <td>
                                                         <div class="listing-box">
-                                                            <div class="images">
-                                                                <img src="{{ App\Helper\Helper::getImage('storage/property/'.$row->property_id, $row?->property->image?->image) }}" alt="images" class="cover-img ht-125">
+                                                            <div class="images ht-125">
+                                                                <img src="{{ App\Helper\Helper::getImage('storage/property/'.$row->property_id, $row?->property->image?->image) }}" alt="images" class="cover-img">
                                                             </div>
                                                             <div class="content">
                                                                 <div class="title">

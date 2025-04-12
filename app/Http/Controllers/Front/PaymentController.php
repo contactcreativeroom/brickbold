@@ -26,6 +26,23 @@ class PaymentController extends Controller
     
     public function createOrder(Request $request)
     { 
+        if (!Auth::guard('user')->check()) {
+            Helper::toastMsg(false, "Please login first.");
+            return response()->json([ 
+                'error' => true,
+                'redirect_url' => route('login', ['redirect' => route('packages')]),
+                'message' => "Please login first.",
+            ]);
+        }
+        if(Helper::checkIfPackageAlreadyBuy($request->package_id)){
+            Helper::toastMsg(false, "You have already purchased this package. You can buy it again after the current one expires.");
+            return response()->json([ 
+                'error' => true,
+                'redirect_url' => route('packages'),
+                'message' => "You have already purchased this package. You can buy it again after the current one expires.",
+            ]);
+        }
+
         $api = new Api(config('services.razorpay.key'), config('services.razorpay.secret'));
         $package = Package::findOrFail($request->package_id);
         $amount = $package->grand_price * 100;
@@ -252,6 +269,10 @@ class PaymentController extends Controller
         $package = Package::find($packageId);
         if(!$package){
             Helper::toastMsg(false, "Package not found.");
+            return redirect()->route('packages'); 
+        }
+        if(Helper::checkIfPackageAlreadyBuy($packageId)){
+            Helper::toastMsg(false, "You have already purchased this package. You can buy it again after the current one expires.");
             return redirect()->route('packages'); 
         }
         return view($this->prefix.'.checkout',['row' => $package]);

@@ -292,6 +292,8 @@ $('#interestedForm').on('submit', function(e) {
     e.preventDefault();
     $('#interestedForm .is_error').text('');
     let formData = $(this).serialize();
+    let $submitButton = $('#interestedForm [type="submit"]');
+    $submitButton.prop('disabled', true);
 
     $.ajax({
         url: $(this).attr('action'),
@@ -332,6 +334,9 @@ $('#interestedForm').on('submit', function(e) {
             } else {
                 toastr.error("An error occurred. Please try again.", 'Error!');
             }
+        },
+        complete: function() {
+            $submitButton.prop('disabled', false); 
         }
     });
 });
@@ -474,6 +479,40 @@ document.addEventListener("DOMContentLoaded", function () {
             if (submitButton) { 
                 submitButton.disabled = true;
                 submitButton.innerText = "Processing..."; 
+            }
+        });
+    }
+});
+
+
+$('.delete-entity').click(function(e) {
+    e.preventDefault();
+    var en = $(this);
+    var entityId = en.data('entity-id');
+    var entityType = en.data('entity-type');
+    var entityTitle = en.data('entity-title');
+    var entityUrl = en.data('entity-url');
+    var csrfToken = $('meta[name="csrf-token"]').attr('content'); 
+    if (confirm('Are you sure you want to delete ' + entityTitle + '?')) {
+        $.ajax({
+            type: 'POST',
+            url: entityUrl, 
+            data: {
+                entity_id: entityId
+            },
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            },
+            success: function(response) {
+                if (response.status === 'success') {
+                    toastr.success(response.message, 'Successfully!');
+                    location.reload();
+                } else {
+                    toastr.error(response.message, 'Error!');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
             }
         });
     }
